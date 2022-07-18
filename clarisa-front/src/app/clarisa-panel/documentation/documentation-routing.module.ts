@@ -4,7 +4,7 @@ import { DocumentationComponent } from './documentation.component';
 
 const routes: Routes = [
   {
-    path:"documentation", component:DocumentationComponent
+    path:"", component:DocumentationComponent
   }
 ];
 

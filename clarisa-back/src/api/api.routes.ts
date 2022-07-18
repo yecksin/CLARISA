@@ -1,4 +1,3 @@
-import { Role } from './role/entities/role.entity';
 import { RoleModule } from './role/role.module';
 import { UserModule } from './user/user.module';
 

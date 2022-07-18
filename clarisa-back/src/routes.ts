@@ -4,7 +4,7 @@ import { apiRoutes } from './api/api.routes';
 
 export const routes: Routes = [
     {
-      path: '/api',
+      path: 'api',
       module: ApiModule,
       children:apiRoutes,
     },

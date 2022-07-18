@@ -10,6 +10,10 @@ const routes: Routes = [
     redirectTo:"landing-page",
     path:"",
     pathMatch:"full",
+  },
+  {
+    path:"clarisa-panel", 
+    loadChildren: () => import('./clarisa-panel/clarisa-panel.module').then((m) => m.ClarisaPanelModule),
   }
 ];
 

@@ -1,16 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './pages/public/login/login.component';
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent},
   {
-    path: 'home',
-    loadChildren: () => import('./pages/private/home/home.module').then(
-      (m) => m.HomeModule 
-    )
+    path:"landing-page", 
+    loadChildren: () => import('./landing-page/landing-page.module').then((m) => m.LandingPageModule),
   },
-  { path: '**', redirectTo: '/login'}
+  {
+    redirectTo:"landing-page",
+    path:"",
+    pathMatch:"full",
+  },
+  {
+    path:"clarisa-panel", 
+    loadChildren: () => import('./clarisa-panel/clarisa-panel.module').then((m) => m.ClarisaPanelModule),
+  }
 ];
 
 @NgModule({

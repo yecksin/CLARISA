@@ -1,9 +1,5 @@
-import {
-  Controller,
-  Get
-} from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { ApiService } from './api.service';
-
 
 @Controller()
 export class ApiController {
@@ -13,5 +9,4 @@ export class ApiController {
   findAll() {
     return this.apiService.findAll();
   }
-
 }

@@ -21,7 +21,7 @@ export class User {
   @Column()
   password: string;
 
-  @Column({type: 'tinyint'})
+  @Column({ type: 'tinyint' })
   is_cgiar_user: boolean;
 
   @Column()
@@ -36,18 +36,17 @@ export class User {
   @Column()
   modification_justification: string;
 
-  @Column({type: 'tinyint'})
+  @Column({ type: 'tinyint' })
   is_active: boolean;
 
   @Column()
   last_login: Date;
 
-  @Column({type: 'tinyint'})
+  @Column({ type: 'tinyint' })
   auto_save: boolean;
 
-  @Column({type: 'tinyint'})
+  @Column({ type: 'tinyint' })
   agree_terms: boolean;
-
 
   hashPassword(): void {
     const salt = bcrypt.genSaltSync(10);
@@ -62,5 +61,4 @@ export class User {
       return false;
     }
   }
-
 }

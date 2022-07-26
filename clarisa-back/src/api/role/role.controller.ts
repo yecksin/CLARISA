@@ -6,10 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller()
 export class RoleController {
@@ -20,6 +22,7 @@ export class RoleController {
     return this.roleService.create(createRoleDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.roleService.findAll();

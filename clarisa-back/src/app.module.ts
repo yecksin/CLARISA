@@ -5,6 +5,7 @@ import { ApiModule } from './api/api.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { routes } from './routes';
+import { AuthModule } from './auth/auth.module';
 
 import * as ormconfig from '../ormconfig';
 
@@ -17,6 +18,7 @@ import * as ormconfig from '../ormconfig';
     }),
     RouterModule.register(routes),
     ApiModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../../environments/environment';
+import { ManageApiService } from './services/manage-api.service';
+
 
 @Component({
   selector: 'app-manage',
@@ -8,9 +8,12 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./manage.component.scss']
 })
 export class ManageComponent implements OnInit {
-  constructor(private http: HttpClient) { }
+  constructor(private _manageApiService:ManageApiService) { }
 
   ngOnInit(): void {
+    this._manageApiService.getAllUser().subscribe(resp => {
+      console.log(resp);
+    });
   }
 
 }

@@ -6,6 +6,10 @@ import { jwtConstants } from './auth.constants';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
 import { LocalStrategy } from './local.strategy';
+import { BCryptPasswordEncoder } from './utils/BCryptPasswordEncoder';
+import { DBAuth } from './utils/DBAuth';
+import { LDAPAuth } from './utils/LDAPAuth';
+import { LegacyPasswordEncoder } from './utils/LegacyPasswordEncoder';
 
 @Module({
   imports:[
@@ -16,7 +20,15 @@ import { LocalStrategy } from './local.strategy';
       signOptions: { expiresIn: jwtConstants.jwtTime },
     }),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [
+    AuthService, 
+    LocalStrategy, 
+    JwtStrategy, 
+    LegacyPasswordEncoder, 
+    BCryptPasswordEncoder,
+    LDAPAuth,
+    DBAuth
+  ],
   exports: [AuthService]
 })
 export class AuthModule {}

@@ -1,7 +1,7 @@
 import { BaseAuthenticator } from "./interface/BaseAuthenticator";
 import ActiveDirectory from 'activedirectory';
 import config from "src/shared/config/config";
-import { BaseMessageDTO } from "./BaseErrorDTO";
+import { BaseMessageDTO } from "./BaseMessageDTO";
 
 export class LDAPAuth implements BaseAuthenticator {
     private ad = new ActiveDirectory(config.active_directory);

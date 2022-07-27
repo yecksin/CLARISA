@@ -2,7 +2,7 @@ import { Inject, Injectable } from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
 import { User } from "src/api/user/entities/user.entity";
 import { UserService } from "src/api/user/user.service";
-import { BaseMessageDTO } from "./BaseErrorDTO";
+import { BaseMessageDTO } from "./BaseMessageDTO";
 import { BCryptPasswordEncoder } from "./BCryptPasswordEncoder";
 import { BaseAuthenticator } from "./interface/BaseAuthenticator";
 import { BasePasswordEncoder } from "./interface/BasePasswordEncoder";

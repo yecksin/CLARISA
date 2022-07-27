@@ -47,18 +47,4 @@ export class User {
 
   @Column({ type: 'tinyint' })
   agree_terms: boolean;
-
-  hashPassword(): void {
-    const salt = bcrypt.genSaltSync(10);
-    this.password = bcrypt.hashSync(this.password, salt);
-  }
-
-  checkPassword(password: string): boolean {
-    try {
-      return bcrypt.compareSync(password, this.password);
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
-  }
 }

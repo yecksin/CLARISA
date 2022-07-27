@@ -33,6 +33,14 @@ export class UserService {
     return user;
   }
 
+  findOneByUsername(username:string): Promise<User> {
+    const user: Promise<User> = this.usersRepository.query(`
+      select u.* from users u where u.username = '${username}';
+    `);
+    
+    return user;
+  }
+
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
   }

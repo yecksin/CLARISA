@@ -25,8 +25,12 @@ export class UserService {
     return `This action returns a #${id} user`;
   }
 
-  findOneByEmail(email:string){
-    return `Email`;
+  findOneByEmail(email:string): Promise<User> {
+    const user: Promise<User> = this.usersRepository.query(`
+      select u.* from users u where u.email = '${email}';
+    `);
+    
+    return user;
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

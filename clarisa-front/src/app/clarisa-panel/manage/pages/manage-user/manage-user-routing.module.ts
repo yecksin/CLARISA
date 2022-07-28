@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ManageUserComponent } from './manage-user.component';
 
 
-const routes: Routes = [{
+const routes: Routes = [
+  {
   path:"", 
   component:ManageUserComponent,
 }

@@ -4,7 +4,14 @@ import { ManageComponent } from './manage.component';
 
 const routes: Routes = [
   {
-    path:"", component:ManageComponent
+    path:"", 
+    component:ManageComponent,
+    children:[
+      {
+        path:"manage-user",
+        loadChildren: () => import('./pages/manage-user/manage-user.module').then((m) => m.ManageUserModule),
+      },
+    ]
   }
 ];
 

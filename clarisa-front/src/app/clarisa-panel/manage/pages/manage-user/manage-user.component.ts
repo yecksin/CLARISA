@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ManageApiService } from '../../services/manage-api.service';
 
 @Component({
   selector: 'app-manage-user',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageUserComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _manageApiService:ManageApiService) { }
 
   ngOnInit(): void {
+    this._manageApiService.getAllUser().subscribe(resp => {
+      console.log(resp);
+    });
   }
 
 }

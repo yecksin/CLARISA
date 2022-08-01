@@ -13,8 +13,8 @@ export class UserService {
   ) {}
 
   findAll() {
-   // return this.usersRepository.find();
-   return 'test';
+    return this.usersRepository.find();
+    //return 'test';
   }
 
   findOne(id: number) {

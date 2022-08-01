@@ -6,10 +6,10 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class ManageApiService {
-  urlApi = environment.urlApi
+  urlApi = environment.apiUrl
   constructor(private http: HttpClient) { }
 
   getAllUser(){
-    return this.http.get(`${this.urlApi}user/`)
+    return this.http.get(`${this.urlApi}user`)
   }
 }

@@ -7,7 +7,7 @@ import { ManageComponent } from './manage.component';
 
 @NgModule({
   declarations: [
-    ManageComponent
+    ManageComponent,
   ],
   imports: [
     CommonModule,

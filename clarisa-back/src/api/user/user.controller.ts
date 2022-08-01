@@ -6,19 +6,18 @@ import {
   Patch,
   Param,
   Delete,
+  HttpException,
+  HttpStatus,
+  Res,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { Response } from 'express';
 
 @Controller()
 export class UserController {
   constructor(private readonly userService: UserService) {}
-
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
-  }
 
   @Get()
   findAll() {
@@ -26,13 +25,13 @@ export class UserController {
   }
 
   @Get('findByEmail/:email')
-  findByEmail(@Param('email') email: string) {
-    return this.userService.findOneByEmail(email); 
+  async findByEmail(@Param('email') email: string) {
+    return await this.userService.findOneByEmail(email); 
   }
 
   @Get('findByUsername/:username')
-  findByUsername(@Param('username') username: string) {
-    return this.userService.findOneByUsername(username); 
+  async findByUsername(@Param('username') username: string) {
+    return await this.userService.findOneByUsername(username); 
   }
 
   @Get(':id')
@@ -40,13 +39,13 @@ export class UserController {
     return this.userService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  @Patch('update')
+  async update(@Res() res: Response, @Body() updateUserDtoList: UpdateUserDto[]) {
+    try {
+      const result : any = await this.userService.update(updateUserDtoList);
+      return res.status(HttpStatus.OK).json(result);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    }
   }
 }

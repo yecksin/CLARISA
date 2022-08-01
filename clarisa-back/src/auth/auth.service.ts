@@ -2,7 +2,6 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/api/user/entities/user.entity';
 import { UserService } from 'src/api/user/user.service';
-import * as bcrypt from 'bcrypt';
 import { ModuleRef } from '@nestjs/core';
 import { BaseAuthenticator } from './utils/interface/BaseAuthenticator';
 import { LDAPAuth } from './utils/LDAPAuth';
@@ -21,7 +20,7 @@ export class AuthService {
     email = email.trim().toLowerCase();
     const user: User = await this.usersService.findOneByEmail(email)??await this.usersService.findOneByUsername(email);
     let authenticator : BaseAuthenticator;
-    console.log({ user });
+    //console.log({ user });
 
     // const user_Info = await user.userInfo;
 
@@ -29,8 +28,8 @@ export class AuthService {
     
     if (user) {
       authenticator = this.moduleRef.get(user.is_cgiar_user ? LDAPAuth : DBAuth);
-      let authResult : boolean | BaseMessageDTO = await authenticator.authenticate(email, pass);
-      if(typeof authResult === 'boolean'){
+      let authResult : User | BaseMessageDTO = await authenticator.authenticate(user.email, pass);
+      if('id' in authResult){
         console.log('epic', {user});
         return true;
       }

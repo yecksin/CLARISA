@@ -9,6 +9,6 @@ export class LegacyPasswordEncoder extends BasePasswordEncoder{
     }
 
     encode(incomingPassword: any): string {
-       return MD5(incomingPassword);
+       return MD5(incomingPassword).toString();
     }
 }

@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
@@ -22,15 +23,14 @@ export class RoleController {
     return this.roleService.create(createRoleDto);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.roleService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.roleService.findOne(+id);
+  @Get('get/:id')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.roleService.findOne(id);
   }
 
   @Patch(':id')

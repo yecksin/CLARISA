@@ -1,0 +1,24 @@
+const Json = {
+    sections:{
+        description:'lorem ipsum',
+        options:[
+            {
+                name:'A',
+            },
+            {
+                name:'B'
+            }
+        ]
+    },
+    navbar:{
+        logoSrc:'www...',
+        options:[
+            {
+                name:'Inicio'
+            },
+            {
+                name:'Nosotros'
+            }
+        ]
+    }
+}

@@ -4,7 +4,14 @@ import { LandingPageComponent } from './landing-page.component';
 
 const routes: Routes = [
   {
-    path:"",component:LandingPageComponent
+    path:"",
+    component:LandingPageComponent,
+    children:[
+      {
+        path:'home',
+        loadChildren : () => import('./pages/home/home.module').then((m) => m.HomeModule),
+      }
+    ]
   }
 ];
 

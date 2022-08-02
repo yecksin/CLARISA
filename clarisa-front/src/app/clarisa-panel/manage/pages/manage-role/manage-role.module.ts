@@ -7,7 +7,7 @@ import { ManageRoleComponent } from './manage-role.component';
 
 @NgModule({
   declarations: [
-    ManageRoleComponent
+    ManageRoleComponent,
   ],
   imports: [
     CommonModule,

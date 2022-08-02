@@ -1,6 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
-import * as bcrypt from 'bcryptjs';
-import { table } from 'console';
+import { Role } from 'src/api/role/entities/role.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
 
 @Entity('users')
 export class User {
@@ -56,4 +55,8 @@ export class User {
 
   @Column({ type: 'tinyint' })
   agree_terms: boolean;
+
+  @ManyToMany(() => Role, (role) => role.users)
+  @JoinTable()
+  roles : Role[]
 }

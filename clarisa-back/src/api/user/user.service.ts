@@ -12,10 +12,6 @@ export class UserService {
     private usersRepository: Repository<User>,
   ) {}
 
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
-  }
-
   findAll() {
     return this.usersRepository.find();
     //return 'test';
@@ -25,29 +21,19 @@ export class UserService {
     return `This action returns a #${id} user`;
   }
 
-  findOneByEmail(email:string): Promise<User> {
-    const user: Promise<User> = this.usersRepository.query(`
-      select u.* from users u where u.email = '${email}';
-    `);
-    
+  async findOneByEmail(email:string): Promise<User> {
+    const user: User = await this.usersRepository.findOneBy({email});
+    //TODO: borrar contraseña
     return user;
   }
 
-  findOneByUsername(username:string): Promise<User> {
-    const user: Promise<User> = this.usersRepository.query(`
-      select u.* from users u where u.username = '${username}';
-    `);
-    
+  async findOneByUsername(username:string): Promise<User> {
+    const user: User = await this.usersRepository.findOneBy({username});
+
     return user;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(updateUserDtoList: UpdateUserDto[]) {
+    return await this.usersRepository.save(updateUserDtoList);
   }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
-
-
 }

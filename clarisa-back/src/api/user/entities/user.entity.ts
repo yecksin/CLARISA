@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
+import { table } from 'console';
 
 @Entity('users')
 export class User {
@@ -24,14 +25,22 @@ export class User {
   @Column({ type: 'tinyint' })
   is_cgiar_user: boolean;
 
-  @Column()
-  created_by: number; //!Revisar relacion
+  @ManyToOne(() => User)
+  @JoinColumn({name: 'created_by'})
+  created_by_object: User;
+
+  @Column({type: 'bigint'})
+  created_by: number;
 
   @Column()
   active_since: Date;
 
-  @Column()
-  modified_by: number; //!Revisar relacion
+  @ManyToOne(() => User)
+  @JoinColumn({name: 'modified_by'})
+  modified_by_object: User;
+
+  @Column({type: 'bigint'})
+  modified_by: number;
 
   @Column()
   modification_justification: string;

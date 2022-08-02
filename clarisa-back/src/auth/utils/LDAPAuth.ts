@@ -2,11 +2,14 @@ import { BaseAuthenticator } from "./interface/BaseAuthenticator";
 import ActiveDirectory from 'activedirectory';
 import config from "src/shared/config/config";
 import { BaseMessageDTO } from "./BaseMessageDTO";
+import { Injectable } from "@nestjs/common";
+import { User } from "src/api/user/entities/user.entity";
 
+@Injectable()
 export class LDAPAuth implements BaseAuthenticator {
     private ad = new ActiveDirectory(config.active_directory);
 
-    authenticate(username: string, password: string): Promise <boolean | BaseMessageDTO> {
+    authenticate(username: string, password: string): Promise <User | BaseMessageDTO> {
         return new Promise((resolve, reject) => {
             // var userPrincipalName = 'j.cadavid@cgiar.org';
             // var username = 'CN=Juan,OU=Users,DC=CGIARAD,DC=ORG';

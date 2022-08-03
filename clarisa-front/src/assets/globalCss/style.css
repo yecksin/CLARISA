@@ -1594,7 +1594,7 @@ section.news {
 	z-index: -1;
 }
 .satisfied-wrapper {
-	background-image: url(https://placeholdit.imgix.net/~text?txtsize=50&bg=333&txtclr=cccccc&txt=1918%C3%97410&w=1918&h=410);
+	background-image: url(http://sbtechnosoft.com/grow-landscape/images/satisfied-bg.jpg);
 	background-position: center top;
 	background-size: cover;
 	float: left;
@@ -1612,6 +1612,7 @@ section.news {
 	color: #6bb600;
 }
 .satisfied-wrapper .counter {
+	margin-top: 10px;
 	border: dashed 1px #fff;
 	border-radius: 30px;
 	text-align: center;

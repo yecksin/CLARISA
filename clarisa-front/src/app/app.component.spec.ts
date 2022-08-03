@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'clarisa-frontend'`, () => {
+  it(`should have as title 'clarisa-front'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('clarisa-frontend');
+    expect(app.title).toEqual('clarisa-front');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('clarisa-frontend app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('clarisa-front app is running!');
   });
 });

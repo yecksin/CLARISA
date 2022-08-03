@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "clarisa-frontend": {
+    "clarisa-front": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/clarisa-frontend",
+            "outputPath": "dist/clarisa-front",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -31,11 +31,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/nebular-icons/scss/nebular-icons.scss",
-              "node_modules/@fortawesome/fontawesome-free/css/all.css",
-              "node_modules/@nebular/theme/styles/prebuilt/default.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -44,8 +40,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -76,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "clarisa-frontend:build:production"
+              "browserTarget": "clarisa-front:build:production"
             },
             "development": {
-              "browserTarget": "clarisa-frontend:build:development"
+              "browserTarget": "clarisa-front:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -87,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "clarisa-frontend:build"
+            "browserTarget": "clarisa-front:build"
           }
         },
         "test": {
@@ -103,11 +99,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/nebular-icons/scss/nebular-icons.scss",
-              "node_modules/@fortawesome/fontawesome-free/css/all.css",
-              "node_modules/@nebular/theme/styles/prebuilt/default.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -115,5 +107,7 @@
       }
     }
   },
-  "defaultProject": "clarisa-frontend"
+  "cli": {
+    "analytics": false
+  }
 }

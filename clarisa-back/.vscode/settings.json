@@ -1,5 +1,11 @@
 {
     "cSpell.words": [
-        "nestjs"
+        "activedirectory",
+        "bodyparser",
+        "cgiar",
+        "nestjs",
+        "ormconfig",
+        "tinyint",
+        "typeorm"
     ]
 }

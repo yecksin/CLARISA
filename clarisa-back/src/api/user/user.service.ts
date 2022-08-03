@@ -17,8 +17,23 @@ export class UserService {
     //return 'test';
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async getUsersPagination(offset?: number, limit: number = 10) {
+    const [items, count] = await this.usersRepository.findAndCount({
+      order: {
+        id: 'ASC'
+      },
+      skip: offset,
+      take: limit
+    });
+   
+    return {
+      items,
+      count
+    }
+  }
+
+  async findOne(id: number): Promise<User> {
+    return await this.usersRepository.findOneBy({id});
   }
 
   async findOneByEmail(email:string): Promise<User> {

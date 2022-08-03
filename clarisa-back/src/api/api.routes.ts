@@ -3,11 +3,11 @@ import { UserModule } from './user/user.module';
 
 export const apiRoutes = [
   {
-    path: 'user',
+    path: 'users',
     module: UserModule,
   },
   {
-    path: 'role',
+    path: 'roles',
     module: RoleModule,
   },
 ];

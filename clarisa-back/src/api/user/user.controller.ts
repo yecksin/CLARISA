@@ -19,6 +19,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Response } from 'express';
 import { PaginationParams } from 'src/shared/interfaces/pageable';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { User } from './entities/user.entity';
 
 @Controller()
 export class UserController {
@@ -49,11 +50,11 @@ export class UserController {
     return this.userService.getUsersPagination(offset, limit);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Patch('update')
   async update(@Res() res: Response, @Body() updateUserDtoList: UpdateUserDto[]) {
     try {
-      const result : any = await this.userService.update(updateUserDtoList);
+      const result : User[] = await this.userService.update(updateUserDtoList);
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

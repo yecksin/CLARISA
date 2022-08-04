@@ -10,6 +10,9 @@ import { CardIndicatorComponent } from './sections/indicators/components/card-in
 import { PartnersCollaboratorsComponent } from './sections/partners-collaborators/partners-collaborators.component';
 import { PublicationsComponent } from './sections/publications/publications.component';
 import { CardPublicationComponent } from './sections/publications/components/card-publication/card-publication.component';
+import { InfoDashboardsApiServicesComponent } from './sections/info-dashboards-api-services/info-dashboards-api-services.component';
+
+
 
 
 @NgModule({
@@ -21,7 +24,10 @@ import { CardPublicationComponent } from './sections/publications/components/car
     CardIndicatorComponent,
     PartnersCollaboratorsComponent,
     PublicationsComponent,
-    CardPublicationComponent
+    CardPublicationComponent,
+    InfoDashboardsApiServicesComponent,
+    
+    
   ],
   imports: [
     CommonModule,

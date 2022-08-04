@@ -155,6 +155,7 @@ section img {
 header {
 	width: 100%;
 	z-index: 99;
+
 }
 header.affix.fadeInDown {
 	animation-delay: 0s;
@@ -1061,6 +1062,7 @@ section.newsletter {
 */
 section.testimonials-wrapper {
 	padding-bottom: 71px;
+	background-color: #f8f8f8;
 }
 .testimonials-wrapper h3 {
 	color: #4f8700;

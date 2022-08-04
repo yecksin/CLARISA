@@ -36,19 +36,39 @@ export class UserService {
     return await this.usersRepository.findOneBy({id});
   }
 
-  async findOneByEmail(email:string): Promise<User> {
+  /**
+   * Finds an user by their email
+   * @param email the user's email
+   * @param isService true if this method is being invoked by a service, 
+   * false if it's being called from the auth module
+   * @returns an user or empty, if not found.
+   */
+  async findOneByEmail(email:string, isService: boolean = true): Promise<User> {
     const user: User = await this.usersRepository.findOneBy({email});
-    //TODO: borrar contraseña
+    if(isService){
+      delete user.password;
+    }
+
     return user;
   }
 
-  async findOneByUsername(username:string): Promise<User> {
+  /**
+   * Finds an user by their username
+   * @param username the user's username
+   * @param isService true if this method is being invoked by a service, 
+   * false if it's being called from the auth module
+   * @returns an user or empty, if not found.
+   */
+  async findOneByUsername(username:string, isService: boolean = false): Promise<User> {
     const user: User = await this.usersRepository.findOneBy({username});
+    if(isService){
+      delete user.password;
+    }
 
     return user;
   }
 
-  async update(updateUserDtoList: UpdateUserDto[]) {
+  async update(updateUserDtoList: UpdateUserDto[]) : Promise<User[]> {
     return await this.usersRepository.save(updateUserDtoList);
   }
 }

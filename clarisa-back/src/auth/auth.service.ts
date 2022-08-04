@@ -18,9 +18,9 @@ export class AuthService {
 
   async validateUser(email: string, pass: string) {
     email = email.trim().toLowerCase();
-    const user: User = await this.usersService.findOneByEmail(email)??await this.usersService.findOneByUsername(email);
+    const user: User = await this.usersService.findOneByEmail(email, false)??await this.usersService.findOneByUsername(email, false);
     let authenticator : BaseAuthenticator;
-    //console.log({ user });
+    console.log({ user });
 
     // const user_Info = await user.userInfo;
 
@@ -40,7 +40,7 @@ export class AuthService {
 
   async login(user: User) {
     // Add payload
-    console.log({user});
+    //console.log({user});
     
     const payload = { email: user.email, sub: user.id };
     return {access_token: this.jwtService.sign(payload)};

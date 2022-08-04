@@ -19,7 +19,7 @@ export class DBAuth implements BaseAuthenticator {
     constructor(private moduleRef: ModuleRef) { }
 
     authenticate(username: string, password: string): Promise<User | BaseMessageDTO> {
-        return this.usersService.findOneByEmail(username).then((user: User) => {
+        return this.usersService.findOneByEmail(username, false).then((user: User) => {
             const userPass: string = user.password;
             const errorDto: BaseMessageDTO = {
                 name: 'INVALID_CREDENTIALS',

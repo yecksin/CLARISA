@@ -12,10 +12,6 @@ export class RoleService {
     private rolesRepository: Repository<Role>,
   ) {}
 
-  create(createRoleDto: CreateRoleDto) {
-    return 'This action adds a new role';
-  }
-
   findAll() {
     return this.rolesRepository.find();
   }
@@ -28,7 +24,18 @@ export class RoleService {
     return `This action updates a #${id} role`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} role`;
+  async getRolesPagination(offset?: number, limit: number = 10) {
+    const [items, count] = await this.rolesRepository.findAndCount({
+      order: {
+        id: 'ASC'
+      },
+      skip: offset,
+      take: limit
+    });
+   
+    return {
+      items,
+      count
+    }
   }
 }

@@ -18,11 +18,6 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 
-  @Post()
-  create(@Body() createRoleDto: CreateRoleDto) {
-    return this.roleService.create(createRoleDto);
-  }
-
   @Get()
   findAll() {
     return this.roleService.findAll();
@@ -36,10 +31,5 @@ export class RoleController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateRoleDto: UpdateRoleDto) {
     return this.roleService.update(+id, updateRoleDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.roleService.remove(+id);
   }
 }

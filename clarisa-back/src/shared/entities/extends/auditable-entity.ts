@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
-export abstract class UpdatedCreatedAt {
+export abstract class AuditableEntity {
   @Column()
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
@@ -17,4 +17,8 @@ export abstract class UpdatedCreatedAt {
     nullable: true,
   })
   updated_at: Date;
+
+  @Column({ type: 'tinyint' })
+  is_active: boolean;
+
 }

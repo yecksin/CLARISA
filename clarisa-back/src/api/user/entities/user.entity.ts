@@ -1,8 +1,9 @@
 import { Role } from 'src/api/role/entities/role.entity';
+import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
 
 @Entity('users')
-export class User {
+export class User extends AuditableEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -31,9 +32,6 @@ export class User {
   @Column({type: 'bigint'})
   created_by: number;
 
-  @Column()
-  active_since: Date;
-
   @ManyToOne(() => User)
   @JoinColumn({name: 'modified_by'})
   modified_by_object: User;
@@ -43,9 +41,6 @@ export class User {
 
   @Column()
   modification_justification: string;
-
-  @Column({ type: 'tinyint' })
-  is_active: boolean;
 
   @Column()
   last_login: Date;

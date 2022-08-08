@@ -1,34 +1,39 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete,
+  HttpException,
+  HttpStatus,
+  Res,
+  Query, 
+  ParseIntPipe,
+  ParseBoolPipe} from '@nestjs/common';
 import { GlossaryService } from './glossary.service';
 import { CreateGlossaryDto } from './dto/create-glossary.dto';
 import { UpdateGlossaryDto } from './dto/update-glossary.dto';
+import { Glossary } from './entities/glossary.entity';
+import { Response } from 'express';
 
-@Controller('glossary')
+@Controller()
 export class GlossaryController {
   constructor(private readonly glossaryService: GlossaryService) {}
 
-  @Post()
-  create(@Body() createGlossaryDto: CreateGlossaryDto) {
-    return this.glossaryService.create(createGlossaryDto);
-  }
 
   @Get()
-  findAll() {
-    return this.glossaryService.findAll();
+  findAll(@Query() {active} : { active:boolean}) {
+    return this.glossaryService.findAll(active);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.glossaryService.findOne(+id);
+  @Get('findById/:id')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return await this.glossaryService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGlossaryDto: UpdateGlossaryDto) {
-    return this.glossaryService.update(+id, updateGlossaryDto);
+  @Patch('update')
+  async update(@Res() res: Response, @Body() updateGlossaryDto: UpdateGlossaryDto[]) {
+    try {
+      const result : Glossary[] = await this.glossaryService.update(updateGlossaryDto);
+      return res.status(HttpStatus.OK).json(result);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    }
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.glossaryService.remove(+id);
-  }
 }

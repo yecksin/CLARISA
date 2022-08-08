@@ -1,5 +1,6 @@
 import { RoleModule } from './role/role.module';
 import { UserModule } from './user/user.module';
+import { GlossaryModule } from './glossary/glossary.module';
 
 export const apiRoutes = [
   {
@@ -10,4 +11,9 @@ export const apiRoutes = [
     path: 'roles',
     module: RoleModule,
   },
+  {
+    path: 'glossary',
+    module: GlossaryModule,
+  }
+
 ];

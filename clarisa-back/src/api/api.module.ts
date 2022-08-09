@@ -7,6 +7,8 @@ import { ActionAreaModule } from './action-area/action-area.module';
 import { GlossaryModule } from './glossary/glossary.module';
 import { ImpactAreaModule } from './impact-area/impact-area.module';
 import { GlobalTargetsModule } from './global_targets/global_targets.module';
+import { StudyTypeModule } from './study-type/study-type.module';
+import { SdgModule } from './sdg/sdg.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -16,7 +18,9 @@ import { GlobalTargetsModule } from './global_targets/global_targets.module';
     ActionAreaModule, 
     GlossaryModule,
     ImpactAreaModule,
-    GlobalTargetsModule
+    GlobalTargetsModule,
+    StudyTypeModule,
+    SdgModule
   ],
 })
 export class ApiModule {}

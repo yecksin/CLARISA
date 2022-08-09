@@ -7,6 +7,7 @@ import { Response } from 'express';
 import { SdgTarget } from './entities/sdg-target.entity';
 
 @Controller()
+@UseInterceptors(ClassSerializerInterceptor)
 export class SdgTargetController {
   constructor(private readonly sdgTargetService: SdgTargetService) {}
 

@@ -6,6 +6,7 @@ import { GlobalTargetsModule } from './global_targets/global_targets.module';
 import { ImpactAreaModule } from './impact-area/impact-area.module';
 import { StudyTypeModule } from './study-type/study-type.module';
 import { SdgModule } from './sdg/sdg.module';
+import { SdgTargetModule } from './sdg-target/sdg-target.module';
 
 export const apiRoutes = [
   {
@@ -39,5 +40,9 @@ export const apiRoutes = [
   {
     path: 'sdgs',
     module: SdgModule,
+  },
+  {
+    path: 'sdg-targets',
+    module: SdgTargetModule,
   },
 ];

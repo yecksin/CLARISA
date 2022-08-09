@@ -9,6 +9,7 @@ import { ImpactAreaModule } from './impact-area/impact-area.module';
 import { GlobalTargetsModule } from './global_targets/global_targets.module';
 import { StudyTypeModule } from './study-type/study-type.module';
 import { SdgModule } from './sdg/sdg.module';
+import { SdgTargetModule } from './sdg-target/sdg-target.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -20,7 +21,8 @@ import { SdgModule } from './sdg/sdg.module';
     ImpactAreaModule,
     GlobalTargetsModule,
     StudyTypeModule,
-    SdgModule
+    SdgModule,
+    SdgTargetModule
   ],
 })
 export class ApiModule {}

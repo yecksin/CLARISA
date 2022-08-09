@@ -11,13 +11,13 @@ export class ActionAreaController {
   constructor(private readonly actionAreaService: ActionAreaService) {}
 
   @Get()
-  findAll(@Query('show') show : FindAllOptions) {
-    return this.actionAreaService.findAll(show);
+  async findAll(@Query('show') show : FindAllOptions) {
+    return await this.actionAreaService.findAll(show);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.actionAreaService.findOne(+id);
+  @Get('get/:id')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return await this.actionAreaService.findOne(id);
   }
 
   @Patch('update')

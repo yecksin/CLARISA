@@ -13,14 +13,13 @@ export class ActionAreaService {
     private actionAreasRepository: Repository<ActionArea>,
   ) {}
 
-  findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<ActionArea[]> {
-    console.log(option);
+  async findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<ActionArea[]> {
     switch(option){
       case FindAllOptions.SHOW_ALL:
-        return this.actionAreasRepository.find();
+        return await this.actionAreasRepository.find();
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
-        return this.actionAreasRepository.find({
+        return await this.actionAreasRepository.find({
           where: {
             is_active : option === FindAllOptions.SHOW_ONLY_ACTIVE
           }

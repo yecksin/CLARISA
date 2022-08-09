@@ -27,4 +27,8 @@ export class CreateUserDto {
   auto_save: boolean;
 
   agree_terms: boolean;
+
+  created_at: Date;
+
+  updated_at: Date;
 }

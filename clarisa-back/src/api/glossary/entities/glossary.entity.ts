@@ -1,7 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
+import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity';
 
 @Entity('glossary')
-export class Glossary {
+export class Glossary extends AuditableEntity{
     @PrimaryGeneratedColumn()
     id : number;
 
@@ -16,7 +17,4 @@ export class Glossary {
 
     @Column()
     active_since : Date;
-    
-    @Column({ type: 'tinyint' })
-    is_active : boolean;
 }

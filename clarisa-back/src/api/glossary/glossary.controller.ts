@@ -10,6 +10,7 @@ import { CreateGlossaryDto } from './dto/create-glossary.dto';
 import { UpdateGlossaryDto } from './dto/update-glossary.dto';
 import { Glossary } from './entities/glossary.entity';
 import { Response } from 'express';
+import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 
 @Controller()
 export class GlossaryController {
@@ -17,8 +18,8 @@ export class GlossaryController {
 
 
   @Get()
-  findAll(@Query() {active} : { active:boolean}) {
-    return this.glossaryService.findAll(active);
+  findAll(@Query('show') show : FindAllOptions) {
+    return this.glossaryService.findAll(show);
   }
 
   @Get('findById/:id')

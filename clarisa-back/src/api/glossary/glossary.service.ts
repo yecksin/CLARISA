@@ -4,6 +4,7 @@ import { UpdateGlossaryDto } from './dto/update-glossary.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Glossary } from './entities/glossary.entity';
+import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 @Injectable()
 export class GlossaryService {
   constructor(
@@ -11,12 +12,20 @@ export class GlossaryService {
     private glossaryRepository: Repository<Glossary>,
   ) {}
 
-  findAll(active: boolean = true) {
-    return this.glossaryRepository.find({
-      where: {
-        ...({is_active: active}),
-      }
-    });
+  findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<Glossary[]> {
+    switch(option){
+      case FindAllOptions.SHOW_ALL:
+        return this.glossaryRepository.find();
+      case FindAllOptions.SHOW_ONLY_ACTIVE:
+      case FindAllOptions.SHOW_ONLY_INACTIVE:
+        return this.glossaryRepository.find({
+          where: {
+            is_active : option === FindAllOptions.SHOW_ONLY_ACTIVE
+          }
+        });
+      default:
+        throw Error('?!');
+    }
   }
 
 

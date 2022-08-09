@@ -8,19 +8,21 @@ import {
   Delete,
   UseGuards,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 
 @Controller()
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 
   @Get()
-  findAll() {
-    return this.roleService.findAll();
+  findAll(@Query('show') show : FindAllOptions) {
+    return this.roleService.findAll(show);
   }
 
   @Get('get/:id')

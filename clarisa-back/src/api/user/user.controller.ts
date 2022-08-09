@@ -20,14 +20,15 @@ import { Response } from 'express';
 import { PaginationParams } from 'src/shared/interfaces/pageable';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { User } from './entities/user.entity';
+import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 
 @Controller()
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  async findAll(){
-    return await this.userService.findAll();
+  findAll(@Query('show') show : FindAllOptions) {
+    return this.userService.findAll(show);
   }
 
   @Get('findByEmail/:email')

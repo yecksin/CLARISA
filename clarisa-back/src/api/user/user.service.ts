@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
+import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 
 @Injectable()
 export class UserService {
@@ -12,9 +13,20 @@ export class UserService {
     private usersRepository: Repository<User>,
   ) {}
 
-  findAll() {
-    return this.usersRepository.find();
-    //return 'test';
+  findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<User[]> {
+    switch(option){
+      case FindAllOptions.SHOW_ALL:
+        return this.usersRepository.find();
+      case FindAllOptions.SHOW_ONLY_ACTIVE:
+      case FindAllOptions.SHOW_ONLY_INACTIVE:
+        return this.usersRepository.find({
+          where: {
+            is_active : option === FindAllOptions.SHOW_ONLY_ACTIVE
+          }
+        });
+      default:
+        throw Error('?!');
+    }
   }
 
   async getUsersPagination(offset?: number, limit: number = 10) {

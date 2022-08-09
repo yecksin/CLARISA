@@ -1,26 +1,54 @@
 import { Injectable } from '@nestjs/common';
 import { CreateGlossaryDto } from './dto/create-glossary.dto';
 import { UpdateGlossaryDto } from './dto/update-glossary.dto';
-
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Glossary } from './entities/glossary.entity';
+import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 @Injectable()
 export class GlossaryService {
-  create(createGlossaryDto: CreateGlossaryDto) {
-    return 'This action adds a new glossary';
+  constructor(
+    @InjectRepository(Glossary)
+    private glossaryRepository: Repository<Glossary>,
+  ) {}
+
+  findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<Glossary[]> {
+    switch(option){
+      case FindAllOptions.SHOW_ALL:
+        return this.glossaryRepository.find();
+      case FindAllOptions.SHOW_ONLY_ACTIVE:
+      case FindAllOptions.SHOW_ONLY_INACTIVE:
+        return this.glossaryRepository.find({
+          where: {
+            is_active : option === FindAllOptions.SHOW_ONLY_ACTIVE
+          }
+        });
+      default:
+        throw Error('?!');
+    }
   }
 
-  findAll() {
-    return `This action returns all glossary`;
-  }
 
   findOne(id: number) {
-    return `This action returns a #${id} glossary`;
+    return this.glossaryRepository.findOneBy({id});
   }
 
-  update(id: number, updateGlossaryDto: UpdateGlossaryDto) {
-    return `This action updates a #${id} glossary`;
+  async update(updateGlossary: UpdateGlossaryDto[]) : Promise<Glossary[]> {
+    return await this.glossaryRepository.save(updateGlossary);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} glossary`;
+  async getRolesPagination(offset?: number, limit: number = 10) {
+    const [items, count] = await this.glossaryRepository.findAndCount({
+      order: {
+        id: 'ASC'
+      },
+      skip: offset,
+      take: limit
+    });
+   
+    return {
+      items,
+      count
+    }
   }
 }

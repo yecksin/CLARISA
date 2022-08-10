@@ -10,6 +10,7 @@ import { GlobalTargetsModule } from './global_targets/global_targets.module';
 import { StudyTypeModule } from './study-type/study-type.module';
 import { SdgModule } from './sdg/sdg.module';
 import { SdgTargetModule } from './sdg-target/sdg-target.module';
+import { ProjectedBenefitProbabilityModule } from './projected-benefit-probability/projected-benefit-probability.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -22,7 +23,8 @@ import { SdgTargetModule } from './sdg-target/sdg-target.module';
     GlobalTargetsModule,
     StudyTypeModule,
     SdgModule,
-    SdgTargetModule
+    SdgTargetModule,
+    ProjectedBenefitProbabilityModule
   ],
 })
 export class ApiModule {}

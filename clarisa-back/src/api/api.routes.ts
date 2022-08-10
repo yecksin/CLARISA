@@ -11,6 +11,7 @@ import { ProjectedBenefitProbabilityModule } from './projected-benefit-probabili
 import { ProjectedBenefitModule } from './projected-benefit/projected-benefit.module';
 import { ActionAreaOutcomeModule } from './action-area-outcome/action-area-outcome.module';
 import { OutcomeIndicatorModule } from './outcome-indicator/outcome-indicator.module';
+import { ActionAreaOutcomeIndicatorModule } from './action-area-outcome-indicator/action-area-outcome-indicator.module';
 
 export const apiRoutes = [
   {
@@ -64,5 +65,9 @@ export const apiRoutes = [
   {
     path: 'outcome-indicators',
     module: OutcomeIndicatorModule,
+  },
+  {
+    path: 'action-area-outcome-indicators',
+    module: ActionAreaOutcomeIndicatorModule,
   },
 ];

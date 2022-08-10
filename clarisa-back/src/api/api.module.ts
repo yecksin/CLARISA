@@ -12,6 +12,7 @@ import { SdgModule } from './sdg/sdg.module';
 import { SdgTargetModule } from './sdg-target/sdg-target.module';
 import { ProjectedBenefitProbabilityModule } from './projected-benefit-probability/projected-benefit-probability.module';
 import { ProjectedBenefitModule } from './projected-benefit/projected-benefit.module';
+import { ActionAreaOutcomeModule } from './action-area-outcome/action-area-outcome.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -26,7 +27,8 @@ import { ProjectedBenefitModule } from './projected-benefit/projected-benefit.mo
     SdgModule,
     SdgTargetModule,
     ProjectedBenefitProbabilityModule,
-    ProjectedBenefitModule
+    ProjectedBenefitModule,
+    ActionAreaOutcomeModule
   ],
 })
 export class ApiModule {}

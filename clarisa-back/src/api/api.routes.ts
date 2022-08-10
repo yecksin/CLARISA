@@ -8,6 +8,10 @@ import { StudyTypeModule } from './study-type/study-type.module';
 import { SdgModule } from './sdg/sdg.module';
 import { SdgTargetModule } from './sdg-target/sdg-target.module';
 import { ProjectedBenefitProbabilityModule } from './projected-benefit-probability/projected-benefit-probability.module';
+import { ProjectedBenefitModule } from './projected-benefit/projected-benefit.module';
+import { ActionAreaOutcomeModule } from './action-area-outcome/action-area-outcome.module';
+import { OutcomeIndicatorModule } from './outcome-indicator/outcome-indicator.module';
+import { ActionAreaOutcomeIndicatorModule } from './action-area-outcome-indicator/action-area-outcome-indicator.module';
 
 export const apiRoutes = [
   {
@@ -49,5 +53,21 @@ export const apiRoutes = [
   {
     path: 'projected-benefit-probabilities',
     module: ProjectedBenefitProbabilityModule,
+  },
+  {
+    path: 'projected-benefits',
+    module: ProjectedBenefitModule,
+  },
+  {
+    path: 'action-area-outcomes',
+    module: ActionAreaOutcomeModule,
+  },
+  {
+    path: 'outcome-indicators',
+    module: OutcomeIndicatorModule,
+  },
+  {
+    path: 'action-area-outcome-indicators',
+    module: ActionAreaOutcomeIndicatorModule,
   },
 ];

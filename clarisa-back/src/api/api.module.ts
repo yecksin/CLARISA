@@ -11,6 +11,10 @@ import { StudyTypeModule } from './study-type/study-type.module';
 import { SdgModule } from './sdg/sdg.module';
 import { SdgTargetModule } from './sdg-target/sdg-target.module';
 import { ProjectedBenefitProbabilityModule } from './projected-benefit-probability/projected-benefit-probability.module';
+import { ProjectedBenefitModule } from './projected-benefit/projected-benefit.module';
+import { ActionAreaOutcomeModule } from './action-area-outcome/action-area-outcome.module';
+import { OutcomeIndicatorModule } from './outcome-indicator/outcome-indicator.module';
+import { ActionAreaOutcomeIndicatorModule } from './action-area-outcome-indicator/action-area-outcome-indicator.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -24,7 +28,11 @@ import { ProjectedBenefitProbabilityModule } from './projected-benefit-probabili
     StudyTypeModule,
     SdgModule,
     SdgTargetModule,
-    ProjectedBenefitProbabilityModule
+    ProjectedBenefitProbabilityModule,
+    ProjectedBenefitModule,
+    ActionAreaOutcomeModule,
+    OutcomeIndicatorModule,
+    ActionAreaOutcomeIndicatorModule
   ],
 })
 export class ApiModule {}

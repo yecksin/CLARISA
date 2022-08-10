@@ -5,7 +5,7 @@ import { RoleModule } from './role/role.module';
 import { UserModule } from './user/user.module';
 import { ActionAreaModule } from './action-area/action-area.module';
 import { GlossaryModule } from './glossary/glossary.module';
-import { GlobalTargetsModule } from './global_targets/global_targets.module';
+import { GlobalTargetsModule } from './global-targets/global-targets.module';
 
 @Module({
   controllers: [ApiController],

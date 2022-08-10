@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
-import { CreateGlobalTargetDto } from './dto/create-global_target.dto';
-import { UpdateGlobalTargetDto } from './dto/update-global_target.dto';
-import { GlobalTarget } from './entities/global_target.entity';
+import { CreateGlobalTargetDto } from './dto/create-global-target.dto';
+import { UpdateGlobalTargetDto } from './dto/update-global-target.dto';
+import { GlobalTarget } from './entities/global-target.entity';
 
 
 @Injectable()

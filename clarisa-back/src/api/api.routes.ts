@@ -2,7 +2,7 @@ import { ActionAreaModule } from './action-area/action-area.module';
 import { RoleModule } from './role/role.module';
 import { UserModule } from './user/user.module';
 import { GlossaryModule } from './glossary/glossary.module';
-import { GlobalTargetsModule } from './global_targets/global_targets.module';
+import { GlobalTargetsModule } from './global-targets/global-targets.module';
 
 export const apiRoutes = [
   {
@@ -22,7 +22,7 @@ export const apiRoutes = [
     module: GlossaryModule,
   },
   {
-    path: 'global_targets',
+    path: 'global-targets',
     module: GlobalTargetsModule,
   }
 

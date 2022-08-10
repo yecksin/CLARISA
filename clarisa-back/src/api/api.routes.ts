@@ -8,6 +8,7 @@ import { StudyTypeModule } from './study-type/study-type.module';
 import { SdgModule } from './sdg/sdg.module';
 import { SdgTargetModule } from './sdg-target/sdg-target.module';
 import { ProjectedBenefitProbabilityModule } from './projected-benefit-probability/projected-benefit-probability.module';
+import { ProjectedBenefitModule } from './projected-benefit/projected-benefit.module';
 
 export const apiRoutes = [
   {
@@ -49,5 +50,9 @@ export const apiRoutes = [
   {
     path: 'projected-benefit-probabilities',
     module: ProjectedBenefitProbabilityModule,
+  },
+  {
+    path: 'projected-benefits',
+    module: ProjectedBenefitModule,
   },
 ];

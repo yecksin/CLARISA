@@ -11,6 +11,7 @@ import { StudyTypeModule } from './study-type/study-type.module';
 import { SdgModule } from './sdg/sdg.module';
 import { SdgTargetModule } from './sdg-target/sdg-target.module';
 import { ProjectedBenefitProbabilityModule } from './projected-benefit-probability/projected-benefit-probability.module';
+import { ProjectedBenefitModule } from './projected-benefit/projected-benefit.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -24,7 +25,8 @@ import { ProjectedBenefitProbabilityModule } from './projected-benefit-probabili
     StudyTypeModule,
     SdgModule,
     SdgTargetModule,
-    ProjectedBenefitProbabilityModule
+    ProjectedBenefitProbabilityModule,
+    ProjectedBenefitModule
   ],
 })
 export class ApiModule {}

@@ -10,6 +10,7 @@ import { SdgTargetModule } from './sdg-target/sdg-target.module';
 import { ProjectedBenefitProbabilityModule } from './projected-benefit-probability/projected-benefit-probability.module';
 import { ProjectedBenefitModule } from './projected-benefit/projected-benefit.module';
 import { ActionAreaOutcomeModule } from './action-area-outcome/action-area-outcome.module';
+import { OutcomeIndicatorModule } from './outcome-indicator/outcome-indicator.module';
 
 export const apiRoutes = [
   {
@@ -59,5 +60,9 @@ export const apiRoutes = [
   {
     path: 'action-area-outcomes',
     module: ActionAreaOutcomeModule,
+  },
+  {
+    path: 'outcome-indicators',
+    module: OutcomeIndicatorModule,
   },
 ];

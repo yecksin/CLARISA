@@ -1,5 +1,6 @@
+import { ImpactAreaIndicator } from 'src/api/impact-area-indicators/entities/impact-area-indicator.entity';
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('projected-benefits')
 export class ProjectedBenefit extends AuditableEntity {
@@ -8,6 +9,10 @@ export class ProjectedBenefit extends AuditableEntity {
 
   @Column()
   impact_area_indicator_id: number;
+
+  @ManyToOne(() => ImpactAreaIndicator)
+  @JoinColumn({ name: 'impact_area_indicator_id' })
+  impact_area_indicator_object: ImpactAreaIndicator;
 
   @Column()
   description: string;

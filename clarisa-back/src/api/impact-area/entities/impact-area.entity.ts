@@ -1,5 +1,6 @@
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { ImpactAreaIndicator } from '../../impact-area-indicators/entities/impact-area-indicator.entity';
 
 @Entity('impact_areas')
 export class ImpactArea extends AuditableEntity {
@@ -14,4 +15,7 @@ export class ImpactArea extends AuditableEntity {
 
   @Column()
   financial_code: string;
+
+  @ManyToOne(() => ImpactAreaIndicator, (ImpactAreaIndicator) => ImpactAreaIndicator.impact_areas)
+  impact_area_indicators : ImpactAreaIndicator[];
 }

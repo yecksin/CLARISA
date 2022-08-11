@@ -10,6 +10,7 @@ import { GlobalTargetsModule } from './global-targets/global-targets.module';
 import { StudyTypeModule } from './study-type/study-type.module';
 import { SdgModule } from './sdg/sdg.module';
 import { SdgTargetModule } from './sdg-target/sdg-target.module';
+import { ImpactAreaIndicatorsModule } from './impact-area-indicators/impact-area-indicators.module';
 import { ProjectedBenefitProbabilityModule } from './projected-benefit-probability/projected-benefit-probability.module';
 import { ProjectedBenefitModule } from './projected-benefit/projected-benefit.module';
 import { ActionAreaOutcomeModule } from './action-area-outcome/action-area-outcome.module';
@@ -28,6 +29,7 @@ import { ActionAreaOutcomeIndicatorModule } from './action-area-outcome-indicato
     StudyTypeModule,
     SdgModule,
     SdgTargetModule,
+    ImpactAreaIndicatorsModule,
     ProjectedBenefitProbabilityModule,
     ProjectedBenefitModule,
     ActionAreaOutcomeModule,

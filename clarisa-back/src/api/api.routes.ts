@@ -7,6 +7,7 @@ import { ImpactAreaModule } from './impact-area/impact-area.module';
 import { StudyTypeModule } from './study-type/study-type.module';
 import { SdgModule } from './sdg/sdg.module';
 import { SdgTargetModule } from './sdg-target/sdg-target.module';
+import { ImpactAreaIndicatorsModule } from './impact-area-indicators/impact-area-indicators.module';
 import { ProjectedBenefitProbabilityModule } from './projected-benefit-probability/projected-benefit-probability.module';
 import { ProjectedBenefitModule } from './projected-benefit/projected-benefit.module';
 import { ActionAreaOutcomeModule } from './action-area-outcome/action-area-outcome.module';
@@ -49,6 +50,10 @@ export const apiRoutes = [
   {
     path: 'sdg-targets',
     module: SdgTargetModule,
+  },
+  {
+    path: 'impact-area-indicators',
+    module: ImpactAreaIndicatorsModule,
   },
   {
     path: 'projected-benefit-probabilities',

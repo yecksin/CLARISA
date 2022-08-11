@@ -6,7 +6,7 @@ import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { OutcomeIndicator } from './entities/outcome-indicator.entity';
 import { Response } from 'express';
 
-@Controller('outcome-indicator')
+@Controller()
 export class OutcomeIndicatorController {
   constructor(private readonly outcomeIndicatorService: OutcomeIndicatorService) {}
 

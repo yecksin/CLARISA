@@ -6,7 +6,7 @@ import { CreateActionAreaOutcomeDto } from './dto/create-action-area-outcome.dto
 import { UpdateActionAreaOutcomeDto } from './dto/update-action-area-outcome.dto';
 import { ActionAreaOutcome } from './entities/action-area-outcome.entity';
 
-@Controller('action-area-outcome')
+@Controller()
 export class ActionAreaOutcomeController {
   constructor(private readonly actionAreaOutcomeService: ActionAreaOutcomeService) {}
 

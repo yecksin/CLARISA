@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, Res, HttpStatus, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, Res, HttpStatus, HttpException, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
 import { Response } from 'express';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { ActionAreaOutcomeIndicatorService } from './action-area-outcome-indicator.service';
@@ -6,7 +6,8 @@ import { CreateActionAreaOutcomeIndicatorDto } from './dto/create-action-area-ou
 import { UpdateActionAreaOutcomeIndicatorDto } from './dto/update-action-area-outcome-indicator.dto';
 import { ActionAreaOutcomeIndicator } from './entities/action-area-outcome-indicator.entity';
 
-@Controller('action-area-outcome-indicator')
+@Controller()
+@UseInterceptors(ClassSerializerInterceptor)
 export class ActionAreaOutcomeIndicatorController {
   constructor(private readonly actionAreaOutcomeIndicatorService: ActionAreaOutcomeIndicatorService) {}
 

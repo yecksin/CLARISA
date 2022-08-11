@@ -10,6 +10,7 @@ import { GlobalTargetsModule } from './global-targets/global-targets.module';
 import { StudyTypeModule } from './study-type/study-type.module';
 import { SdgModule } from './sdg/sdg.module';
 import { SdgTargetModule } from './sdg-target/sdg-target.module';
+import { ImpactAreaIndicatorsModule } from './impact-area-indicators/impact-area-indicators.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -22,7 +23,8 @@ import { SdgTargetModule } from './sdg-target/sdg-target.module';
     GlobalTargetsModule,
     StudyTypeModule,
     SdgModule,
-    SdgTargetModule
+    SdgTargetModule,
+    ImpactAreaIndicatorsModule
   ],
 })
 export class ApiModule {}

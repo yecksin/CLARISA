@@ -1,3 +1,4 @@
+import { Exclude, Expose, Transform } from 'class-transformer';
 import { ActionAreaOutcome } from 'src/api/action-area-outcome/entities/action-area-outcome.entity';
 import { ActionArea } from 'src/api/action-area/entities/action-area.entity';
 import { OutcomeIndicator } from 'src/api/outcome-indicator/entities/outcome-indicator.entity';
@@ -6,27 +7,32 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 't
 
 @Entity('action_area_outcome_indicators')
 export class ActionAreaOutcomeIndicator extends AuditableEntity {
+  @Exclude()
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  action_area_outcome_id: number;
-
-  @Column()
-  outcome_indicator_id: number;
-
-  @Column()
-  action_area_id: number;
-
-  @ManyToOne(() => ActionAreaOutcome)
+  @ManyToOne(() => ActionAreaOutcome , {eager:true})
   @JoinColumn({ name: 'action_area_outcome_id' })
-  action_area_outcome_object: ActionAreaOutcome;
+  @Transform(({value}) => {
+    return value;
+  })
+  @Expose({name: 'outcomeId'})
+  action_area_outcome_id: ActionAreaOutcome;
 
-  @ManyToOne(() => OutcomeIndicator)
+  @ManyToOne(() => OutcomeIndicator, {eager:true})
   @JoinColumn({ name: 'outcome_indicator_id' })
-  outcome_indicator_object: OutcomeIndicator;
+  @Transform(({value}) => {
+    return value;
+  })
+  @Expose({name: 'outcomeIndicatorId'})
+  outcome_indicator_id: OutcomeIndicator;
 
-  @ManyToOne(() => ActionArea)
+  @ManyToOne(() => ActionArea, {eager:true})
   @JoinColumn({ name: 'action_area_id' })
-  action_area_object: ActionArea;
+  @Transform(({value}) => {
+    return value;
+  })
+  @Expose({name: 'ActionAreaName'})
+  action_area_name: ActionArea;
+
 }

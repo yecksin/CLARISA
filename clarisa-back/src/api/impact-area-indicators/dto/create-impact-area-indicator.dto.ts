@@ -8,7 +8,7 @@ export class CreateImpactAreaIndicatorDto extends AuditableDto{
 
   target_unit: string;
 
-  is_aplicable_projected_benefits: number;
+  is_aplicable_projected_benefits: boolean;
 
   smo_code: string;
 

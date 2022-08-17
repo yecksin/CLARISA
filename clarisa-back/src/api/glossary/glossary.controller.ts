@@ -4,7 +4,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete,
   Res,
   Query, 
   ParseIntPipe,
-  ParseBoolPipe} from '@nestjs/common';
+  ParseBoolPipe,
+  UseInterceptors,
+  ClassSerializerInterceptor} from '@nestjs/common';
 import { GlossaryService } from './glossary.service';
 import { CreateGlossaryDto } from './dto/create-glossary.dto';
 import { UpdateGlossaryDto } from './dto/update-glossary.dto';
@@ -13,6 +15,7 @@ import { Response } from 'express';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 
 @Controller()
+@UseInterceptors(ClassSerializerInterceptor)
 export class GlossaryController {
   constructor(private readonly glossaryService: GlossaryService) {}
 

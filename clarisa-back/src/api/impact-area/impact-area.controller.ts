@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, Res, HttpStatus, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, Res, HttpStatus, HttpException, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
 import { ImpactAreaService } from './impact-area.service';
 import { CreateImpactAreaDto } from './dto/create-impact-area.dto';
 import { UpdateImpactAreaDto } from './dto/update-impact-area.dto';
@@ -7,6 +7,7 @@ import { Response } from 'express';
 import { ImpactArea } from './entities/impact-area.entity';
 
 @Controller()
+@UseInterceptors(ClassSerializerInterceptor)
 export class ImpactAreaController {
   constructor(private readonly impactAreaService: ImpactAreaService) {}
 

@@ -9,6 +9,8 @@ import {
   UseGuards,
   ParseIntPipe,
   Query,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
@@ -17,6 +19,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 
 @Controller()
+@UseInterceptors(ClassSerializerInterceptor)
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, HttpStatus, HttpException, Res, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, HttpStatus, HttpException, Res, ParseIntPipe, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
 import { GlobalTargetsService } from './global-targets.service';
 import { CreateGlobalTargetDto } from './dto/create-global-target.dto';
 import { UpdateGlobalTargetDto } from './dto/update-global-target.dto';
@@ -7,6 +7,7 @@ import { Response } from 'express';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 
 @Controller()
+@UseInterceptors(ClassSerializerInterceptor)
 export class GlobalTargetsController {
   constructor(private readonly globalTargetsService: GlobalTargetsService) {}
 

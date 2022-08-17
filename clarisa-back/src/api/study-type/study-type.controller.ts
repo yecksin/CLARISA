@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, HttpStatus, Res, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, HttpStatus, Res, HttpException, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
 import { StudyTypeService } from './study-type.service';
 import { CreateStudyTypeDto } from './dto/create-study-type.dto';
 import { UpdateStudyTypeDto } from './dto/update-study-type.dto';
@@ -7,6 +7,7 @@ import { StudyType } from './entities/study-type.entity';
 import { Response } from 'express';
 
 @Controller()
+@UseInterceptors(ClassSerializerInterceptor)
 export class StudyTypeController {
   constructor(private readonly studyTypeService: StudyTypeService) {}
 

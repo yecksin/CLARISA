@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, Res, HttpStatus, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, Res, HttpStatus, HttpException, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
 import { SdgService } from './sdg.service';
 import { CreateSdgDto } from './dto/create-sdg.dto';
 import { UpdateSdgDto } from './dto/update-sdg.dto';
@@ -7,6 +7,7 @@ import { Sdg } from './entities/sdg.entity';
 import { Response } from 'express';
 
 @Controller()
+@UseInterceptors(ClassSerializerInterceptor)
 export class SdgController {
   constructor(private readonly sdgService: SdgService) {}
 

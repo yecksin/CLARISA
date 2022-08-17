@@ -12,6 +12,8 @@ import {
   Query,
   UseGuards,
   ParseIntPipe,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -23,6 +25,7 @@ import { User } from './entities/user.entity';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 
 @Controller()
+@UseInterceptors(ClassSerializerInterceptor)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

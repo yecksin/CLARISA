@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity';
+ import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 
 @Entity('glossary')
 export class Glossary extends AuditableEntity{

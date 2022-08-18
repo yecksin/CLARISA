@@ -1,5 +1,5 @@
 import { User } from 'src/api/user/entities/user.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity';
+ import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToMany, JoinTable } from 'typeorm';
 
 @Entity('roles')

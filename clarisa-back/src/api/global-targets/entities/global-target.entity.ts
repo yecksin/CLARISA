@@ -1,4 +1,4 @@
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity';
+ import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
 
 @Entity('global_targets')

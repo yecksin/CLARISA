@@ -1,5 +1,5 @@
 import { Sdg } from 'src/api/sdg/entities/sdg.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity';
+ import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Column,
   Entity,

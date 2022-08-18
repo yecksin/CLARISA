@@ -1,7 +1,7 @@
 import { ActionAreaOutcome } from 'src/api/action-area-outcome/entities/action-area-outcome.entity';
 import { ActionArea } from 'src/api/action-area/entities/action-area.entity';
 import { OutcomeIndicator } from 'src/api/outcome-indicator/entities/outcome-indicator.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity';
+ import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('action_area_outcome_indicators')

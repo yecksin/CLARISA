@@ -1,4 +1,4 @@
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity';
+ import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ImpactAreaIndicator } from '../../impact-area-indicators/entities/impact-area-indicator.entity';
 

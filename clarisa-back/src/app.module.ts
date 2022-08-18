@@ -6,13 +6,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { routes } from './routes';
 import { AuthModule } from './auth/auth.module';
+import { dataSourceOptions } from 'data-source-options';
 
-import * as ormconfig from '../ormconfig';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      ...ormconfig,
+      ...dataSourceOptions,
       keepConnectionAlive: true,
       autoLoadEntities: true,
     }),
@@ -23,4 +23,5 @@ import * as ormconfig from '../ormconfig';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+}

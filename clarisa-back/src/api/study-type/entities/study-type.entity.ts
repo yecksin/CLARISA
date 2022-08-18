@@ -1,11 +1,11 @@
 import { Expose } from 'class-transformer';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity';
+import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('study_types')
 export class StudyType extends AuditableEntity {
   @PrimaryGeneratedColumn()
-  @Expose({name:'code'})
+  @Expose({ name: 'code' })
   id: number;
 
   @Column()
@@ -14,6 +14,6 @@ export class StudyType extends AuditableEntity {
   @Column()
   description: string;
 
-  @Column({type: 'int', width: 2})
+  @Column({ type: 'int', width: 2 })
   norder: number;
 }

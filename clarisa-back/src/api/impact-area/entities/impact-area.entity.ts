@@ -1,7 +1,14 @@
 import { Expose } from 'class-transformer';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity';
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { ImpactAreaIndicator } from '../../impact-area-indicators/entities/impact-area-indicator.entity';
+import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('impact_areas')
 export class ImpactArea extends AuditableEntity {
@@ -15,8 +22,6 @@ export class ImpactArea extends AuditableEntity {
   description: string;
 
   @Column()
-  @Expose({name:'financialCode'})
+  @Expose({ name: 'financialCode' })
   financial_code: string;
-
-  
 }

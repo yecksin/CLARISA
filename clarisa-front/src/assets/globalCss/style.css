@@ -1452,7 +1452,7 @@ section.news {
 	z-index: -1;
 }
 .inner-banner {
-	background-image: url(https://placeholdit.imgix.net/~text?txtsize=50&bg=333&txtclr=cccccc&txt=1920%C3%97420&w=1920&h=420);
+	background-image: url('../images/geneticresources.jpg');
 	background-position: center center;
 	background-size: cover;
 	float: left;

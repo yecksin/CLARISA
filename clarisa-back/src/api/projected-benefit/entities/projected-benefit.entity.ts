@@ -2,7 +2,7 @@ import { ImpactAreaIndicator } from 'src/api/impact-area-indicators/entities/imp
  import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('projected-benefits')
+@Entity('projected_enefits')
 export class ProjectedBenefit extends AuditableEntity {
   @PrimaryGeneratedColumn()
   id: number;

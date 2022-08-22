@@ -1,10 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Query } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateImpactAreaIndicatorDto } from './dto/create-impact-area-indicator.dto';
 import { UpdateImpactAreaIndicatorDto } from './dto/update-impact-area-indicator.dto';
-import { Repository } from 'typeorm';
+import { getCustomRepository, Repository } from 'typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { ImpactAreaIndicator } from './entities/impact-area-indicator.entity';
+import { impactAreRepository } from './repositories/impact-area-indicators-repository'
+import { ImpactAreaIndicatorByImpactAreaDto } from './dto/impact-area-indicators-by-impact-are.dto';
 
 @Injectable()
 export class ImpactAreaIndicatorsService {
@@ -14,17 +16,14 @@ export class ImpactAreaIndicatorsService {
     private impactAreaIndicatorsRepository: Repository<ImpactAreaIndicator>,
   ) {}
   
-  async findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<ImpactAreaIndicator[]> {
+  async findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<ImpactAreaIndicatorByImpactAreaDto[]> {
+    const impactAreaRepo = impactAreRepository;
     switch (option) {
       case FindAllOptions.SHOW_ALL:
-        return await this.impactAreaIndicatorsRepository.find();
+        return await impactAreaRepo.impactAreaIndicatorsByImpactArea();
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
-        return await this.impactAreaIndicatorsRepository.find({
-          where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE
-          }
-        });
+        return await impactAreaRepo.impactAreaIndicatorsByImpactAreaIsActive(option);
       default:
         throw Error('?!');
     }

@@ -5,6 +5,8 @@ import { Repository } from 'typeorm';
 import { CreateActionAreaOutcomeIndicatorDto } from './dto/create-action-area-outcome-indicator.dto';
 import { UpdateActionAreaOutcomeIndicatorDto } from './dto/update-action-area-outcome-indicator.dto';
 import { ActionAreaOutcomeIndicator } from './entities/action-area-outcome-indicator.entity';
+import { actionAreaOutcomeIndicatorRequest } from './repositories/action-area-outcome-indicator-repository'
+import { ActionAreaOutcomeIndicatorRequestDto } from  './dto/action-area-outcome-indicator-request.dto'
 
 @Injectable()
 export class ActionAreaOutcomeIndicatorService {
@@ -13,19 +15,16 @@ export class ActionAreaOutcomeIndicatorService {
     private actionAreaOutcomeIndicatorsRepository: Repository<ActionAreaOutcomeIndicator>,
   ) {}
 
-  async findAll(
-    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
-  ): Promise<ActionAreaOutcomeIndicator[]> {
+  async findAll(option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,): Promise<ActionAreaOutcomeIndicatorRequestDto[]> {
+
+
     switch (option) {
       case FindAllOptions.SHOW_ALL:
-        return await this.actionAreaOutcomeIndicatorsRepository.find();
+        return await actionAreaOutcomeIndicatorRequest.actionAreaOutcomeIndicatorByAll();
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
-        return await this.actionAreaOutcomeIndicatorsRepository.find({
-          where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
-          },
-        });
+        return await actionAreaOutcomeIndicatorRequest.actionAreaOutcomeIndicatorByAllIsActive(option);
+          
       default:
         throw Error('?!');
     }

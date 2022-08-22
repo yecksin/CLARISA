@@ -6,7 +6,7 @@ import { Response } from 'express';
 import { Source } from './entities/source.entity';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 
-@Controller('sources')
+@Controller()
 export class SourcesController {
   constructor(private readonly sourcesService: SourcesService) {}
 

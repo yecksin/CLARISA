@@ -1,4 +1,6 @@
-export class CreateCountryDto {
+import { AuditableDto } from "src/shared/entities/dtos/auditable-dto";
+
+export class CreateCountryDto extends AuditableDto{
   name: string;
 
   iso_alpha_2: string;

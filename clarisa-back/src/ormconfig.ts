@@ -12,7 +12,8 @@ export const dataSource: DataSource = new DataSource({
     entities: [__dirname + 'api/**/*.entity{.ts,.js}', __dirname + 'auth/**/*.entity{.ts,.js}'],
     synchronize: false,
     migrationsRun: false,
-    logging: true,
+    bigNumberStrings: false,
+    logging: false,
     migrations: [__dirname + '/../migrations/*{.ts,.js}'],
     migrationsTableName:'migrations',
    /* cli: {

@@ -2,15 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
+import { CountryDto } from './dto/country.dto';
 import { CreateCountryDto } from './dto/create-country.dto';
 import { UpdateCountryDto } from './dto/update-country.dto';
 import { Country } from './entities/country.entity';
+import { CountryRepository } from './repositories/country.repository';
 
 @Injectable()
 export class CountryService {
   constructor(
-    @InjectRepository(Country)
-    private countriesRepository: Repository<Country>,
+    private countriesRepository: CountryRepository,
   ) {}
 
   async findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<Country[]> {
@@ -27,6 +28,12 @@ export class CountryService {
       default:
         throw Error('?!');
     }
+  }
+
+  async testingCountries(): Promise<CountryDto[]>{
+    /*let asd = await customCountryRepository.find();
+    console.log(asd);*/
+    return await this.countriesRepository.findAllCountries();
   }
 
   async findOne(id: number): Promise<Country> {

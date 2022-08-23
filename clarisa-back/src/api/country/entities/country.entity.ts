@@ -1,6 +1,8 @@
 import { Exclude } from "class-transformer";
+import { Geoposition } from "src/api/geoposition/entities/geoposition.entity";
+import { Region } from "src/api/region/entities/region.entity";
 import { AuditableEntity } from "src/shared/entities/extends/auditable-entity.entity";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('countries')
 export class Country extends AuditableEntity {
@@ -19,6 +21,14 @@ export class Country extends AuditableEntity {
   @Column()
   iso_numeric: number;
 
+  @ManyToOne(() => Geoposition)
+  @JoinColumn({name: 'geoposition_id'})
+  geoposition_object: Geoposition;
+
   @Column()
   geoposition_id: number;
+
+  @ManyToMany(() => Region)
+  @JoinTable({name: 'country_regions'})
+  regions : Region[];
 }

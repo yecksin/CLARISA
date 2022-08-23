@@ -13,7 +13,7 @@ export class CountryController {
 
   @Get()
   async findAll(@Query('show') show : FindAllOptions) {
-    return await this.countryService.findAll(show);
+    return await this.countryService.testingCountries();
   }
 
   @Get('get/:id')

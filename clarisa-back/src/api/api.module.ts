@@ -17,10 +17,10 @@ import { ActionAreaOutcomeModule } from './action-area-outcome/action-area-outco
 import { OutcomeIndicatorModule } from './outcome-indicator/outcome-indicator.module';
 import { ActionAreaOutcomeIndicatorModule } from './action-area-outcome-indicator/action-area-outcome-indicator.module';
 import { SourcesModule } from './sources/sources.module';
-import { CountryModule } from './country/country.module';
 import { GeopositionModule } from './geoposition/geoposition.module';
 import { RegionTypeModule } from './region-type/region-type.module';
 import { RegionModule } from './region/region.module';
+import { CountryModule } from './country/country.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],

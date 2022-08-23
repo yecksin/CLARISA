@@ -13,6 +13,8 @@ import { ProjectedBenefitModule } from './projected-benefit/projected-benefit.mo
 import { ActionAreaOutcomeModule } from './action-area-outcome/action-area-outcome.module';
 import { OutcomeIndicatorModule } from './outcome-indicator/outcome-indicator.module';
 import { ActionAreaOutcomeIndicatorModule } from './action-area-outcome-indicator/action-area-outcome-indicator.module';
+import { CountryModule } from './country/country.module';
+import { GeopositionModule } from './geoposition/geoposition.module';
 
 export const apiRoutes = [
   {
@@ -74,5 +76,13 @@ export const apiRoutes = [
   {
     path: 'action-area-outcome-indicators',
     module: ActionAreaOutcomeIndicatorModule,
+  },
+  {
+    path: 'countries',
+    module: CountryModule,
+  },
+  {
+    path: 'geopositions',
+    module: GeopositionModule,
   },
 ];

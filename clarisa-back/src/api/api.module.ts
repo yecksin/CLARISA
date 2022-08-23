@@ -20,6 +20,7 @@ import { SourcesModule } from './sources/sources.module';
 import { CountryModule } from './country/country.module';
 import { GeopositionModule } from './geoposition/geoposition.module';
 import { RegionTypeModule } from './region-type/region-type.module';
+import { RegionModule } from './region/region.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -42,7 +43,8 @@ import { RegionTypeModule } from './region-type/region-type.module';
     SourcesModule,
     CountryModule,
     GeopositionModule,
-    RegionTypeModule
+    RegionTypeModule,
+    RegionModule
   ],
 })
 export class ApiModule {}

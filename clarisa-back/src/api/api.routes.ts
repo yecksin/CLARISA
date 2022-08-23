@@ -17,6 +17,7 @@ import { CountryModule } from './country/country.module';
 import { GeopositionModule } from './geoposition/geoposition.module';
 import { SourcesModule } from './sources/sources.module';
 import { RegionTypeModule } from './region-type/region-type.module';
+import { RegionModule } from './region/region.module';
 
 
 export const apiRoutes = [
@@ -95,5 +96,9 @@ export const apiRoutes = [
   {
     path: 'region-types',
     module: RegionTypeModule,
+  },
+  {
+    path: 'regions',
+    module: RegionModule,
   },
 ];

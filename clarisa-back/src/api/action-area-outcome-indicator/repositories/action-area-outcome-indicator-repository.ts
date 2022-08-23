@@ -26,8 +26,8 @@ export  const actionAreaOutcomeIndicatorRequest = dataSource.getRepository(Actio
     },
 
     async actionAreaOutcomeIndicatorByAllIsActive(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE): Promise<ActionAreaOutcomeIndicatorRequestDto[]> {
-      var isAtiveOption = true;
-      if (option == 'inactive' ) isAtiveOption = false;
+      var isActiveOption = true;
+      if (option == 'inactive' ) isActiveOption = false;
 
       const impactAreaIndicatorsQuery = `
       SELECT aa.id AS 'actionAreaId', aa.name AS 'actionAreaName', aao.id AS 'outcomeId', 
@@ -41,7 +41,7 @@ export  const actionAreaOutcomeIndicatorRequest = dataSource.getRepository(Actio
 	        ON aai.action_area_id = aa.id
         LEFT JOIN outcome_indicators oi
 	        ON  aai.outcome_indicator_id = oi.id
-          WHERE aai.is_active = ${isAtiveOption}
+          WHERE aai.is_active = ${isActiveOption}
               `;
         
       const ImpactAreaIndicatorsbyImpactArea :ActionAreaOutcomeIndicatorRequestDto[]  = await this.query(impactAreaIndicatorsQuery);

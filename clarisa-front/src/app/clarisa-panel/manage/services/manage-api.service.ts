@@ -10,6 +10,6 @@ export class ManageApiService {
   constructor(private http: HttpClient) { }
 
   getAllUser(){
-    return this.http.get(`${this.urlApi}user`)
+    return this.http.get(`${this.urlApi}users`)
   }
 }

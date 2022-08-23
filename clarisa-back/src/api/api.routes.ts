@@ -15,6 +15,8 @@ import { OutcomeIndicatorModule } from './outcome-indicator/outcome-indicator.mo
 import { ActionAreaOutcomeIndicatorModule } from './action-area-outcome-indicator/action-area-outcome-indicator.module';
 import { CountryModule } from './country/country.module';
 import { GeopositionModule } from './geoposition/geoposition.module';
+import { SourcesModule } from './sources/sources.module';
+
 
 export const apiRoutes = [
   {
@@ -84,5 +86,9 @@ export const apiRoutes = [
   {
     path: 'geopositions',
     module: GeopositionModule,
+  }, 
+  {
+    path: 'sources',
+    module: SourcesModule,
   },
 ];

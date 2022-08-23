@@ -21,8 +21,8 @@ export  const impactAreRepository = dataSource.getRepository(ImpactAreaIndicator
     },
 
     async impactAreaIndicatorsByImpactAreaIsActive(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE): Promise<ImpactAreaIndicatorByImpactAreaDto[]> {
-      var isAtiveOption = true;
-      if (option == 'inactive' ) isAtiveOption = false;
+      var isActiveOption = true;
+      if (option == 'inactive' ) isActiveOption = false;
 
       const impactAreaIndicatorsQuery = `
       SELECT iai.id, iai.indicator_statement, iai.target_year, iai.target_unit, 
@@ -30,7 +30,7 @@ export  const impactAreRepository = dataSource.getRepository(ImpactAreaIndicator
         FROM impact_areas_indicators iai
    LEFT JOIN impact_areas ia
           ON iai.impact_areas_id = ia.id
-          WHERE iai.is_active = ${isAtiveOption}
+          WHERE iai.is_active = ${isActiveOption}
               `;
         
       const ImpactAreaIndicatorsbyImpactArea :ImpactAreaIndicatorByImpactAreaDto[]  = await this.query(impactAreaIndicatorsQuery);

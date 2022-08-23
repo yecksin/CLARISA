@@ -16,6 +16,7 @@ import { ActionAreaOutcomeIndicatorModule } from './action-area-outcome-indicato
 import { CountryModule } from './country/country.module';
 import { GeopositionModule } from './geoposition/geoposition.module';
 import { SourcesModule } from './sources/sources.module';
+import { RegionTypeModule } from './region-type/region-type.module';
 
 
 export const apiRoutes = [
@@ -90,5 +91,9 @@ export const apiRoutes = [
   {
     path: 'sources',
     module: SourcesModule,
+  },
+  {
+    path: 'region-types',
+    module: RegionTypeModule,
   },
 ];

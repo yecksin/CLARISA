@@ -19,6 +19,7 @@ import { ActionAreaOutcomeIndicatorModule } from './action-area-outcome-indicato
 import { SourcesModule } from './sources/sources.module';
 import { CountryModule } from './country/country.module';
 import { GeopositionModule } from './geoposition/geoposition.module';
+import { RegionTypeModule } from './region-type/region-type.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -40,7 +41,8 @@ import { GeopositionModule } from './geoposition/geoposition.module';
     ActionAreaOutcomeIndicatorModule,
     SourcesModule,
     CountryModule,
-    GeopositionModule
+    GeopositionModule,
+    RegionTypeModule
   ],
 })
 export class ApiModule {}

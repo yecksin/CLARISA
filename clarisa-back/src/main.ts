@@ -18,8 +18,7 @@ async function bootstrap() {
     })
     .catch((err) => {
       console.error('Error during Data Source initialization', err);
-    }
-  );
+    });
   await app.listen(3000);
 }
 bootstrap();

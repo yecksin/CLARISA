@@ -12,43 +12,44 @@ export class GlossaryService {
     private glossaryRepository: Repository<Glossary>,
   ) {}
 
-  findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<Glossary[]> {
-    switch(option){
+  findAll(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<Glossary[]> {
+    switch (option) {
       case FindAllOptions.SHOW_ALL:
         return this.glossaryRepository.find();
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return this.glossaryRepository.find({
           where: {
-            is_active : option === FindAllOptions.SHOW_ONLY_ACTIVE
-          }
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         });
       default:
         throw Error('?!');
     }
   }
 
-
   findOne(id: number) {
-    return this.glossaryRepository.findOneBy({id});
+    return this.glossaryRepository.findOneBy({ id });
   }
 
-  async update(updateGlossary: UpdateGlossaryDto[]) : Promise<Glossary[]> {
+  async update(updateGlossary: UpdateGlossaryDto[]): Promise<Glossary[]> {
     return await this.glossaryRepository.save(updateGlossary);
   }
 
   async getRolesPagination(offset?: number, limit: number = 10) {
     const [items, count] = await this.glossaryRepository.findAndCount({
       order: {
-        id: 'ASC'
+        id: 'ASC',
       },
       skip: offset,
-      take: limit
+      take: limit,
     });
-   
+
     return {
       items,
-      count
-    }
+      count,
+    };
   }
 }

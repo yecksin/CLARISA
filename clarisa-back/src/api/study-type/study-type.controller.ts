@@ -1,4 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, HttpStatus, Res, HttpException, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  ParseIntPipe,
+  HttpStatus,
+  Res,
+  HttpException,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import { StudyTypeService } from './study-type.service';
 import { CreateStudyTypeDto } from './dto/create-study-type.dto';
 import { UpdateStudyTypeDto } from './dto/update-study-type.dto';
@@ -12,7 +27,7 @@ export class StudyTypeController {
   constructor(private readonly studyTypeService: StudyTypeService) {}
 
   @Get()
-  async findAll(@Query('show') show : FindAllOptions) {
+  async findAll(@Query('show') show: FindAllOptions) {
     return await this.studyTypeService.findAll(show);
   }
 
@@ -22,9 +37,14 @@ export class StudyTypeController {
   }
 
   @Patch('update')
-  async update(@Res() res: Response, @Body() updateStudyTypeDtoList: UpdateStudyTypeDto[]) {
+  async update(
+    @Res() res: Response,
+    @Body() updateStudyTypeDtoList: UpdateStudyTypeDto[],
+  ) {
     try {
-      const result : StudyType[] = await this.studyTypeService.update(updateStudyTypeDtoList);
+      const result: StudyType[] = await this.studyTypeService.update(
+        updateStudyTypeDtoList,
+      );
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

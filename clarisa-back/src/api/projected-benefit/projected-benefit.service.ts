@@ -39,6 +39,8 @@ export class ProjectedBenefitService {
   }
 
   async update(updateProjectedBenefitDto: UpdateProjectedBenefitDto[]) {
-    return await this.projectedBenefitsRepository.save(updateProjectedBenefitDto);
+    return await this.projectedBenefitsRepository.save(
+      updateProjectedBenefitDto,
+    );
   }
 }

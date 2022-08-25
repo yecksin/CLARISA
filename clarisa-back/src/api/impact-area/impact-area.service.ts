@@ -13,7 +13,9 @@ export class ImpactAreaService {
     private impactAreasRepository: Repository<ImpactArea>,
   ) {}
 
-  async findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<ImpactArea[]> {
+  async findAll(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<ImpactArea[]> {
     switch (option) {
       case FindAllOptions.SHOW_ALL:
         return await this.impactAreasRepository.find();
@@ -21,18 +23,18 @@ export class ImpactAreaService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.impactAreasRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE
-          }
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         });
       default:
         throw Error('?!');
     }
   }
 
-  async findOne(id: number) : Promise<ImpactArea> {
+  async findOne(id: number): Promise<ImpactArea> {
     return await this.impactAreasRepository.findOneBy({
       id,
-      is_active : true
+      is_active: true,
     });
   }
 

@@ -11,7 +11,9 @@ describe('ProjectedBenefitController', () => {
       providers: [ProjectedBenefitService],
     }).compile();
 
-    controller = module.get<ProjectedBenefitController>(ProjectedBenefitController);
+    controller = module.get<ProjectedBenefitController>(
+      ProjectedBenefitController,
+    );
   });
 
   it('should be defined', () => {

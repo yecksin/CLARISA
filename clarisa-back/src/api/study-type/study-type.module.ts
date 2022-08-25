@@ -7,6 +7,6 @@ import { StudyType } from './entities/study-type.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([StudyType])],
   controllers: [StudyTypeController],
-  providers: [StudyTypeService]
+  providers: [StudyTypeService],
 })
 export class StudyTypeModule {}

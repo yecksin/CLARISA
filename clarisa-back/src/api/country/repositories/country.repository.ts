@@ -17,7 +17,7 @@ export class CountryRepository extends Repository<Country> {
     let countries: Country[] = await this.find();
     let countryDtos: CountryDto[];
     countries.forEach((c) => {
-    console.log(c);
+      console.log(c);
       let countryDto: CountryDto = new CountryDto();
 
       let region: Region = c.regions

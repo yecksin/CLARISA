@@ -1,14 +1,13 @@
 export class CreateRoleDto {
+  description: string;
 
-    description : string;
+  acronym: string;
 
-    acronym : string;
+  order: number;
 
-    order : number;
+  is_active: boolean;
 
-    is_active : boolean;
+  created_at: Date;
 
-    created_at: Date;
-
-    updated_at: Date;
+  updated_at: Date;
 }

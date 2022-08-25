@@ -7,6 +7,6 @@ import { OutcomeIndicator } from './entities/outcome-indicator.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([OutcomeIndicator])],
   controllers: [OutcomeIndicatorController],
-  providers: [OutcomeIndicatorService]
+  providers: [OutcomeIndicatorService],
 })
 export class OutcomeIndicatorModule {}

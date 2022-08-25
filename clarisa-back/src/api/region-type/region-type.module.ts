@@ -7,6 +7,6 @@ import { RegionType } from './entities/region-type.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([RegionType])],
   controllers: [RegionTypeController],
-  providers: [RegionTypeService]
+  providers: [RegionTypeService],
 })
 export class RegionTypeModule {}

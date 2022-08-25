@@ -19,7 +19,6 @@ import { SourcesModule } from './sources/sources.module';
 import { RegionTypeModule } from './region-type/region-type.module';
 import { RegionModule } from './region/region.module';
 
-
 export const apiRoutes = [
   {
     path: 'users',
@@ -88,7 +87,7 @@ export const apiRoutes = [
   {
     path: 'geopositions',
     module: GeopositionModule,
-  }, 
+  },
   {
     path: 'sources',
     module: SourcesModule,

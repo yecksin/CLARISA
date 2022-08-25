@@ -8,13 +8,14 @@ import { StudyType } from './entities/study-type.entity';
 
 @Injectable()
 export class StudyTypeService {
-  
   constructor(
     @InjectRepository(StudyType)
     private studyTypesRepository: Repository<StudyType>,
   ) {}
 
-  async findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<StudyType[]> {
+  async findAll(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<StudyType[]> {
     switch (option) {
       case FindAllOptions.SHOW_ALL:
         return await this.studyTypesRepository.find();
@@ -22,18 +23,18 @@ export class StudyTypeService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.studyTypesRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE
-          }
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         });
       default:
         throw Error('?!');
     }
   }
 
-  async findOne(id: number) : Promise<StudyType> {
+  async findOne(id: number): Promise<StudyType> {
     return await this.studyTypesRepository.findOneBy({
       id,
-      is_active : true
+      is_active: true,
     });
   }
 

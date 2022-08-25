@@ -8,6 +8,6 @@ import { CountryRepository } from './repositories/country.repository';
 @Module({
   imports: [TypeOrmModule.forFeature([Country])],
   controllers: [CountryController],
-  providers: [CountryService, CountryRepository]
+  providers: [CountryService, CountryRepository],
 })
 export class CountryModule {}

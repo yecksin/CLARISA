@@ -7,6 +7,6 @@ import { Geoposition } from './entities/geoposition.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([Geoposition])],
   controllers: [GeopositionController],
-  providers: [GeopositionService]
+  providers: [GeopositionService],
 })
 export class GeopositionModule {}

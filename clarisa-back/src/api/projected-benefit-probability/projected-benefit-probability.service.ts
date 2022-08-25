@@ -38,7 +38,11 @@ export class ProjectedBenefitProbabilityService {
     });
   }
 
-  async update(updateProjectedBenefitProbabilityDto: UpdateProjectedBenefitProbabilityDto[]) {
-    return await this.projectedBenefitProbabilitysRepository.save(updateProjectedBenefitProbabilityDto);
+  async update(
+    updateProjectedBenefitProbabilityDto: UpdateProjectedBenefitProbabilityDto[],
+  ) {
+    return await this.projectedBenefitProbabilitysRepository.save(
+      updateProjectedBenefitProbabilityDto,
+    );
   }
 }

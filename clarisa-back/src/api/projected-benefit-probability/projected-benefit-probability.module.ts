@@ -7,6 +7,6 @@ import { ProjectedBenefitProbability } from './entities/projected-benefit-probab
 @Module({
   imports: [TypeOrmModule.forFeature([ProjectedBenefitProbability])],
   controllers: [ProjectedBenefitProbabilityController],
-  providers: [ProjectedBenefitProbabilityService]
+  providers: [ProjectedBenefitProbabilityService],
 })
 export class ProjectedBenefitProbabilityModule {}

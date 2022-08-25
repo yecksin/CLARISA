@@ -1,4 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, Res, HttpStatus, HttpException, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  ParseIntPipe,
+  Res,
+  HttpStatus,
+  HttpException,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import { ProjectedBenefitProbabilityService } from './projected-benefit-probability.service';
 import { CreateProjectedBenefitProbabilityDto } from './dto/create-projected-benefit-probability.dto';
 import { UpdateProjectedBenefitProbabilityDto } from './dto/update-projected-benefit-probability.dto';
@@ -9,10 +24,12 @@ import { ProjectedBenefitProbability } from './entities/projected-benefit-probab
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
 export class ProjectedBenefitProbabilityController {
-  constructor(private readonly projectedBenefitProbabilityService: ProjectedBenefitProbabilityService) {}
+  constructor(
+    private readonly projectedBenefitProbabilityService: ProjectedBenefitProbabilityService,
+  ) {}
 
   @Get()
-  async findAll(@Query('show') show : FindAllOptions) {
+  async findAll(@Query('show') show: FindAllOptions) {
     return await this.projectedBenefitProbabilityService.findAll(show);
   }
 
@@ -22,9 +39,16 @@ export class ProjectedBenefitProbabilityController {
   }
 
   @Patch('update')
-  async update(@Res() res: Response, @Body() updateProjectedBenefitProbabilityDtoList: UpdateProjectedBenefitProbabilityDto[]) {
+  async update(
+    @Res() res: Response,
+    @Body()
+    updateProjectedBenefitProbabilityDtoList: UpdateProjectedBenefitProbabilityDto[],
+  ) {
     try {
-      const result : ProjectedBenefitProbability[] = await this.projectedBenefitProbabilityService.update(updateProjectedBenefitProbabilityDtoList);
+      const result: ProjectedBenefitProbability[] =
+        await this.projectedBenefitProbabilityService.update(
+          updateProjectedBenefitProbabilityDtoList,
+        );
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

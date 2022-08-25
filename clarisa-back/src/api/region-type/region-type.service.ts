@@ -13,7 +13,9 @@ export class RegionTypeService {
     private regionTypesRepository: Repository<RegionType>,
   ) {}
 
-  async findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<RegionType[]> {
+  async findAll(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<RegionType[]> {
     switch (option) {
       case FindAllOptions.SHOW_ALL:
         return await this.regionTypesRepository.find();
@@ -21,8 +23,8 @@ export class RegionTypeService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.regionTypesRepository.find({
           where: {
-            is_active : option === FindAllOptions.SHOW_ONLY_ACTIVE
-          }
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         });
       default:
         throw Error('?!');

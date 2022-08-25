@@ -1,6 +1,15 @@
 import { Role } from 'src/api/role/entities/role.entity';
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+  ManyToOne,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 
 @Entity('users')
 export class User extends AuditableEntity {
@@ -21,7 +30,7 @@ export class User extends AuditableEntity {
 
   @Column()
   password: string;
-  
+
   @Column({ type: 'tinyint' })
   is_cgiar_user: boolean;
 
@@ -33,5 +42,5 @@ export class User extends AuditableEntity {
 
   @ManyToMany(() => Role, (role) => role.users)
   @JoinTable()
-  roles : Role[]
+  roles: Role[];
 }

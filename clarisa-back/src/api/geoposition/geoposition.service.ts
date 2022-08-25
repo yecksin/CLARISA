@@ -13,7 +13,9 @@ export class GeopositionService {
     private geopositionsRepository: Repository<Geoposition>,
   ) {}
 
-  async findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<Geoposition[]> {
+  async findAll(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<Geoposition[]> {
     switch (option) {
       case FindAllOptions.SHOW_ALL:
         return await this.geopositionsRepository.find();
@@ -21,8 +23,8 @@ export class GeopositionService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.geopositionsRepository.find({
           where: {
-            is_active : option === FindAllOptions.SHOW_ONLY_ACTIVE
-          }
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         });
       default:
         throw Error('?!');

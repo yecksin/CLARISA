@@ -7,6 +7,6 @@ import { ImpactArea } from './entities/impact-area.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([ImpactArea])],
   controllers: [ImpactAreaController],
-  providers: [ImpactAreaService]
+  providers: [ImpactAreaService],
 })
 export class ImpactAreaModule {}

@@ -11,7 +11,9 @@ describe('ProjectedBenefitProbabilityController', () => {
       providers: [ProjectedBenefitProbabilityService],
     }).compile();
 
-    controller = module.get<ProjectedBenefitProbabilityController>(ProjectedBenefitProbabilityController);
+    controller = module.get<ProjectedBenefitProbabilityController>(
+      ProjectedBenefitProbabilityController,
+    );
   });
 
   it('should be defined', () => {

@@ -25,9 +25,9 @@ import { CountryModule } from './country/country.module';
   controllers: [ApiController],
   providers: [ApiService],
   imports: [
-    UserModule, 
-    RoleModule, 
-    ActionAreaModule, 
+    UserModule,
+    RoleModule,
+    ActionAreaModule,
     GlossaryModule,
     ImpactAreaModule,
     GlobalTargetsModule,
@@ -44,7 +44,7 @@ import { CountryModule } from './country/country.module';
     CountryModule,
     GeopositionModule,
     RegionTypeModule,
-    RegionModule
+    RegionModule,
   ],
 })
 export class ApiModule {}

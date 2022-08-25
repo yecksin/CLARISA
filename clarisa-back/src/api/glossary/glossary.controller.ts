@@ -1,12 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete,
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
   HttpException,
   HttpStatus,
   Res,
-  Query, 
+  Query,
   ParseIntPipe,
   ParseBoolPipe,
   UseInterceptors,
-  ClassSerializerInterceptor} from '@nestjs/common';
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import { GlossaryService } from './glossary.service';
 import { CreateGlossaryDto } from './dto/create-glossary.dto';
 import { UpdateGlossaryDto } from './dto/update-glossary.dto';
@@ -19,9 +27,8 @@ import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 export class GlossaryController {
   constructor(private readonly glossaryService: GlossaryService) {}
 
-
   @Get()
-  findAll(@Query('show') show : FindAllOptions) {
+  findAll(@Query('show') show: FindAllOptions) {
     return this.glossaryService.findAll(show);
   }
 
@@ -31,13 +38,17 @@ export class GlossaryController {
   }
 
   @Patch('update')
-  async update(@Res() res: Response, @Body() updateGlossaryDto: UpdateGlossaryDto[]) {
+  async update(
+    @Res() res: Response,
+    @Body() updateGlossaryDto: UpdateGlossaryDto[],
+  ) {
     try {
-      const result : Glossary[] = await this.glossaryService.update(updateGlossaryDto);
+      const result: Glossary[] = await this.glossaryService.update(
+        updateGlossaryDto,
+      );
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
   }
-
 }

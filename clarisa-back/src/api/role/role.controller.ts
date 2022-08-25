@@ -24,7 +24,7 @@ export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 
   @Get()
-  findAll(@Query('show') show : FindAllOptions) {
+  findAll(@Query('show') show: FindAllOptions) {
     return this.roleService.findAll(show);
   }
 

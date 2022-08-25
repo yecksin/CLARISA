@@ -1,8 +1,7 @@
 export class CreateSourceDto {
+  name: number;
 
-    name: number;
+  acronym: string;
 
-    acronym: string;
-
-    contact_point_id: string;
+  contact_point_id: string;
 }

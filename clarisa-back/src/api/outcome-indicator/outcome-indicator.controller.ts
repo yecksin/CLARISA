@@ -1,4 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Res, HttpStatus, HttpException, Query, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ParseIntPipe,
+  Res,
+  HttpStatus,
+  HttpException,
+  Query,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import { OutcomeIndicatorService } from './outcome-indicator.service';
 import { CreateOutcomeIndicatorDto } from './dto/create-outcome-indicator.dto';
 import { UpdateOutcomeIndicatorDto } from './dto/update-outcome-indicator.dto';
@@ -9,10 +24,12 @@ import { Response } from 'express';
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
 export class OutcomeIndicatorController {
-  constructor(private readonly outcomeIndicatorService: OutcomeIndicatorService) {}
+  constructor(
+    private readonly outcomeIndicatorService: OutcomeIndicatorService,
+  ) {}
 
   @Get()
-  async findAll(@Query('show') show : FindAllOptions) {
+  async findAll(@Query('show') show: FindAllOptions) {
     return await this.outcomeIndicatorService.findAll(show);
   }
 
@@ -22,9 +39,15 @@ export class OutcomeIndicatorController {
   }
 
   @Patch('update')
-  async update(@Res() res: Response, @Body() updateOutcomeIndicatorDtoList: UpdateOutcomeIndicatorDto[]) {
+  async update(
+    @Res() res: Response,
+    @Body() updateOutcomeIndicatorDtoList: UpdateOutcomeIndicatorDto[],
+  ) {
     try {
-      const result : OutcomeIndicator[] = await this.outcomeIndicatorService.update(updateOutcomeIndicatorDtoList);
+      const result: OutcomeIndicator[] =
+        await this.outcomeIndicatorService.update(
+          updateOutcomeIndicatorDtoList,
+        );
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

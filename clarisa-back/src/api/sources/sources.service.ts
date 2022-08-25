@@ -10,11 +10,12 @@ import { Source } from './entities/source.entity';
 export class SourcesService {
   constructor(
     @InjectRepository(Source)
-        private sourceRepository: Repository<Source>,
-  ) {
-  }
+    private sourceRepository: Repository<Source>,
+  ) {}
 
-  async findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<Source[]> {
+  async findAll(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<Source[]> {
     switch (option) {
       case FindAllOptions.SHOW_ALL:
         return await this.sourceRepository.find();
@@ -22,23 +23,22 @@ export class SourcesService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.sourceRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE
-          }
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         });
       default:
         throw Error('?!');
     }
   }
 
-  async findOne(id: number) : Promise<Source> {
+  async findOne(id: number): Promise<Source> {
     return await this.sourceRepository.findOneBy({
       id,
-      is_active : true
+      is_active: true,
     });
   }
 
   async update(updateSourceDto: UpdateSourceDto[]) {
     return await this.sourceRepository.save(updateSourceDto);
   }
-
 }

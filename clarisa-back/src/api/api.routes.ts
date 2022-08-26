@@ -20,6 +20,7 @@ import { RegionTypeModule } from './region-type/region-type.module';
 import { RegionModule } from './region/region.module';
 import { DepthDescriptionModule } from './depth-description/depth-description.module';
 import { ProjectedBenefitDepthModule } from './projected-benefit-depth/projected-benefit-depth.module';
+import { ProjectedBenefitWeightDescriptionModule } from './projected-benefit-weight-description/projected-benefit-weight-description.module';
 
 
 export const apiRoutes = [
@@ -110,5 +111,9 @@ export const apiRoutes = [
   {
     path: 'projected-benefit-depth',
     module: ProjectedBenefitDepthModule,
+  },
+  {
+    path: 'projected-benefit-weight-description',
+    module: ProjectedBenefitWeightDescriptionModule,
   },
 ];

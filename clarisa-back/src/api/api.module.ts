@@ -23,6 +23,7 @@ import { RegionModule } from './region/region.module';
 import { CountryModule } from './country/country.module';
 import { DepthDescriptionModule } from './depth-description/depth-description.module';
 import { ProjectedBenefitDepthModule } from './projected-benefit-depth/projected-benefit-depth.module';
+import { ProjectedBenefitWeightDescriptionModule } from './projected-benefit-weight-description/projected-benefit-weight-description.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -48,7 +49,8 @@ import { ProjectedBenefitDepthModule } from './projected-benefit-depth/projected
     RegionTypeModule,
     RegionModule,
     DepthDescriptionModule,
-    ProjectedBenefitDepthModule
+    ProjectedBenefitDepthModule,
+    ProjectedBenefitWeightDescriptionModule
   ],
 })
 export class ApiModule {}

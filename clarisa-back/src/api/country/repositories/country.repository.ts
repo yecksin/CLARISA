@@ -18,12 +18,19 @@ export class CountryRepository extends Repository<Country> {
     let countryDtos: CountryDto[] = [];
 
     await Promise.all(countries.map(async (c) => {
-      let countryRegions = await c.regions;
-      let region: Region = countryRegions
-      .filter((r) => r.region_type_id === 1)
-      .pop();
-      let parentRegion : Region = await region?.parent_object;
-      //console.log({parentRegion});
+      let region : Region = await this.query(`
+        select r.* from regions r
+        join country_regions cr on cr.region_id = r.id
+        join countries c on cr.country_id = c.id
+        where c.id = ? and r.region_type_id = 2;
+      `, [c.id]);
+      region = ((<unknown>region) as Region[]).length === 1 ? region[0] : undefined;
+
+      let parentRegion : Region = await this.query(`
+        select r.* from regions r
+        where r.id = ?;
+      `, [(region?.parent_id)??0]);
+      parentRegion = ((<unknown>parentRegion) as Region[]).length === 1 ? parentRegion[0] : undefined;
       
       let countryDto: CountryDto = new CountryDto();
       let regionDto: RegionDto = null;
@@ -49,7 +56,6 @@ export class CountryRepository extends Repository<Country> {
       countryDto.regionDTO = regionDto;
 
       countryDtos.push(countryDto);
-      
     }));
 
     return countryDtos;

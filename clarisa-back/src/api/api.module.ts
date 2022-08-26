@@ -22,6 +22,7 @@ import { RegionTypeModule } from './region-type/region-type.module';
 import { RegionModule } from './region/region.module';
 import { CountryModule } from './country/country.module';
 import { DepthDescriptionModule } from './depth-description/depth-description.module';
+import { ProjectedBenefitDepthModule } from './projected-benefit-depth/projected-benefit-depth.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -46,7 +47,8 @@ import { DepthDescriptionModule } from './depth-description/depth-description.mo
     GeopositionModule,
     RegionTypeModule,
     RegionModule,
-    DepthDescriptionModule
+    DepthDescriptionModule,
+    ProjectedBenefitDepthModule
   ],
 })
 export class ApiModule {}

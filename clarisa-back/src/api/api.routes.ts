@@ -19,6 +19,7 @@ import { SourcesModule } from './sources/sources.module';
 import { RegionTypeModule } from './region-type/region-type.module';
 import { RegionModule } from './region/region.module';
 import { DepthDescriptionModule } from './depth-description/depth-description.module';
+import { ProjectedBenefitDepthModule } from './projected-benefit-depth/projected-benefit-depth.module';
 
 
 export const apiRoutes = [
@@ -105,5 +106,9 @@ export const apiRoutes = [
   {
     path: 'depth-description',
     module: DepthDescriptionModule,
+  },
+  {
+    path: 'projected-benefit-depth',
+    module: ProjectedBenefitDepthModule,
   },
 ];

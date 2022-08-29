@@ -20,15 +20,21 @@ import { UpdateRegionDto } from './dto/update-region.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { Region } from './entities/region.entity';
+import { RegionTypeEnum } from 'src/shared/entities/enums/region-types';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
 export class RegionController {
   constructor(private readonly regionService: RegionService) {}
 
-  @Get()
-  async findAll(@Query('show') show: FindAllOptions) {
-    return await this.regionService.findAll(show);
+  @Get('un-regions')
+  async findAllUNRegions(@Query('show') show: FindAllOptions) {
+    return await this.regionService.findAll(RegionTypeEnum.UN_REGION, show);
+  }
+
+  @Get('one-cgiar-regions')
+  async findAllCGIARRegions(@Query('show') show: FindAllOptions) {
+    return await this.regionService.findAll(RegionTypeEnum.CGIAR_REGION, show);
   }
 
   @Get('get/:id')

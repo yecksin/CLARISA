@@ -28,7 +28,7 @@ export class CountryController {
 
   @Get()
   async findAll(@Query('show') show: FindAllOptions) {
-    return await this.countryService.testingCountries();
+    return await this.countryService.findAll(show);
   }
 
   @Get('get/:id')

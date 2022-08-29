@@ -3,6 +3,7 @@ import { ParentRegionDto } from 'src/api/region/dto/parent-region.dto';
 import { RegionDto } from 'src/api/region/dto/region.dto';
 import { Region } from 'src/api/region/entities/region.entity';
 import { dataSource } from 'src/ormconfig';
+import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { DataSource, Repository } from 'typeorm';
 import { CountryDto } from '../dto/country.dto';
 import { Country } from '../entities/country.entity';
@@ -13,8 +14,14 @@ export class CountryRepository extends Repository<Country> {
     super(Country, dataSource.createEntityManager());
   }
 
-  async findAllCountries(): Promise<CountryDto[]> {
-    let countries: Country[] = await this.find();
+  async findAllCountries(
+      option: FindAllOptions
+    ): Promise<CountryDto[]> {
+    let countries: Country[] = await this.find(option !== FindAllOptions.SHOW_ALL ? {
+      where: {
+        is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+      },
+    } : undefined);
     let countryDtos: CountryDto[] = [];
 
     await Promise.all(countries.map(async (c) => {

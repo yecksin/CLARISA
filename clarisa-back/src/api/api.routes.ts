@@ -21,6 +21,7 @@ import { RegionModule } from './region/region.module';
 import { BusinessCategoryModule } from './business-category/business-category.module';
 import { TechnicalFieldModule } from './technical-field/technical-field.module';
 import { InnovationTypeModule } from './innovation-type/innovation-type.module';
+import { GovernanceTypeModule } from './governance-type/governance-type.module';
 
 export const apiRoutes = [
   {
@@ -114,5 +115,9 @@ export const apiRoutes = [
   {
     path: 'innovation-types',
     module: InnovationTypeModule,
+  },
+  {
+    path: 'governance-types',
+    module: GovernanceTypeModule,
   },
 ];

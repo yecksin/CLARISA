@@ -19,6 +19,7 @@ import { SourcesModule } from './sources/sources.module';
 import { RegionTypeModule } from './region-type/region-type.module';
 import { RegionModule } from './region/region.module';
 import { BusinessCategoryModule } from './business-category/business-category.module';
+import { TechnicalFieldModule } from './technical-field/technical-field.module';
 
 export const apiRoutes = [
   {
@@ -104,5 +105,9 @@ export const apiRoutes = [
   {
     path: 'business-categories',
     module: BusinessCategoryModule,
+  },
+  {
+    path: 'technical-fields',
+    module: TechnicalFieldModule,
   },
 ];

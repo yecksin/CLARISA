@@ -24,6 +24,7 @@ import { ProjectedBenefitWeightDescriptionModule } from './projected-benefit-wei
 import { ProjectedBenefitWeightingModule } from './projected-benefit-weighting/projected-benefit-weighting.module';
 import { GeneralAcronymModule } from './general-acronym/general-acronym.module';
 import { InnovationReadinessLevelModule } from './innovation-readiness-level/innovation-readiness-level.module';
+import { InvestmentTypeModule } from './investment-type/investment-type.module';
 
 
 export const apiRoutes = [
@@ -130,5 +131,9 @@ export const apiRoutes = [
   {
     path: 'innovation-readiness-levels',
     module: InnovationReadinessLevelModule,
+  },
+  {
+    path: 'investment-type',
+    module: InvestmentTypeModule,
   },
 ];

@@ -27,6 +27,7 @@ import { ProjectedBenefitWeightDescriptionModule } from './projected-benefit-wei
 import { ProjectedBenefitWeightingModule } from './projected-benefit-weighting/projected-benefit-weighting.module';
 import { GeneralAcronymModule } from './general-acronym/general-acronym.module';
 import { InnovationReadinessLevelModule } from './innovation-readiness-level/innovation-readiness-level.module';
+import { InvestmentTypeModule } from './investment-type/investment-type.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -56,7 +57,8 @@ import { InnovationReadinessLevelModule } from './innovation-readiness-level/inn
     ProjectedBenefitWeightDescriptionModule,
     ProjectedBenefitWeightingModule,
     GeneralAcronymModule,
-    InnovationReadinessLevelModule
+    InnovationReadinessLevelModule,
+    InvestmentTypeModule
   ],
 })
 export class ApiModule {}

@@ -32,6 +32,7 @@ import { InnovationUseLevelModule } from './innovation-use-level/innovation-use-
 import { CgiarEntityModule } from './cgiar-entity/cgiar-entity.module';
 import { CgiarEntityTypeModule } from './cgiar-entity-type/cgiar-entity-type.module';
 import { SdgIndicatorModule } from './sdg-indicator/sdg-indicator.module';
+import { OneCgiarUserModule } from './one-cgiar-user/one-cgiar-user.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -66,7 +67,8 @@ import { SdgIndicatorModule } from './sdg-indicator/sdg-indicator.module';
     InnovationUseLevelModule,
     CgiarEntityModule,
     CgiarEntityTypeModule,
-    SdgIndicatorModule
+    SdgIndicatorModule,
+    OneCgiarUserModule
   ],
 })
 export class ApiModule {}

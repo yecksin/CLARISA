@@ -31,6 +31,7 @@ import { InvestmentTypeModule } from './investment-type/investment-type.module';
 import { InnovationUseLevelModule } from './innovation-use-level/innovation-use-level.module';
 import { CgiarEntityModule } from './cgiar-entity/cgiar-entity.module';
 import { CgiarEntityTypeModule } from './cgiar-entity-type/cgiar-entity-type.module';
+import { SdgIndicatorModule } from './sdg-indicator/sdg-indicator.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -64,7 +65,8 @@ import { CgiarEntityTypeModule } from './cgiar-entity-type/cgiar-entity-type.mod
     InvestmentTypeModule,
     InnovationUseLevelModule,
     CgiarEntityModule,
-    CgiarEntityTypeModule
+    CgiarEntityTypeModule,
+    SdgIndicatorModule
   ],
 })
 export class ApiModule {}

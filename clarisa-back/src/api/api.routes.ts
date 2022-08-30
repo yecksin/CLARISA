@@ -28,6 +28,7 @@ import { InvestmentTypeModule } from './investment-type/investment-type.module';
 import { InnovationUseLevelModule } from './innovation-use-level/innovation-use-level.module';
 import { CgiarEntityModule } from './cgiar-entity/cgiar-entity.module';
 import { CgiarEntityTypeModule } from './cgiar-entity-type/cgiar-entity-type.module';
+import { SdgIndicatorModule } from './sdg-indicator/sdg-indicator.module';
 
 
 export const apiRoutes = [
@@ -150,5 +151,9 @@ export const apiRoutes = [
   {
     path: 'cgiar-entity-type',
     module: CgiarEntityTypeModule,
+  },
+  {
+    path: 'allSDGIndicators',
+    module: SdgIndicatorModule,
   },
 ];

@@ -23,6 +23,7 @@ import { ProjectedBenefitDepthModule } from './projected-benefit-depth/projected
 import { ProjectedBenefitWeightDescriptionModule } from './projected-benefit-weight-description/projected-benefit-weight-description.module';
 import { ProjectedBenefitWeightingModule } from './projected-benefit-weighting/projected-benefit-weighting.module';
 import { GeneralAcronymModule } from './general-acronym/general-acronym.module';
+import { InnovationReadinessLevelModule } from './innovation-readiness-level/innovation-readiness-level.module';
 
 
 export const apiRoutes = [
@@ -125,5 +126,9 @@ export const apiRoutes = [
   {
     path: 'acronyms',
     module: GeneralAcronymModule,
+  },
+  {
+    path: 'innovation-readiness-levels',
+    module: InnovationReadinessLevelModule,
   },
 ];

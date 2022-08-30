@@ -33,6 +33,7 @@ import { CgiarEntityModule } from './cgiar-entity/cgiar-entity.module';
 import { CgiarEntityTypeModule } from './cgiar-entity-type/cgiar-entity-type.module';
 import { SdgIndicatorModule } from './sdg-indicator/sdg-indicator.module';
 import { OneCgiarUserModule } from './one-cgiar-user/one-cgiar-user.module';
+import { BeneficiarieModule } from './beneficiarie/beneficiarie.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -68,7 +69,8 @@ import { OneCgiarUserModule } from './one-cgiar-user/one-cgiar-user.module';
     CgiarEntityModule,
     CgiarEntityTypeModule,
     SdgIndicatorModule,
-    OneCgiarUserModule
+    OneCgiarUserModule,
+    BeneficiarieModule
   ],
 })
 export class ApiModule {}

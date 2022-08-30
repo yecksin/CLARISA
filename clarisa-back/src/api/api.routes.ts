@@ -30,6 +30,7 @@ import { CgiarEntityModule } from './cgiar-entity/cgiar-entity.module';
 import { CgiarEntityTypeModule } from './cgiar-entity-type/cgiar-entity-type.module';
 import { SdgIndicatorModule } from './sdg-indicator/sdg-indicator.module';
 import { OneCgiarUserModule } from './one-cgiar-user/one-cgiar-user.module';
+import { BeneficiarieModule } from './beneficiarie/beneficiarie.module';
 
 
 export const apiRoutes = [
@@ -157,5 +158,9 @@ export const apiRoutes = [
     path: 'oc-users',
     module: OneCgiarUserModule,
   },
+  {
+    path: 'beneficiaries',
+    module: BeneficiarieModule,
+  }
 
 ];

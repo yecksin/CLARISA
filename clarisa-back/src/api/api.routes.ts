@@ -22,6 +22,7 @@ import { DepthDescriptionModule } from './depth-description/depth-description.mo
 import { ProjectedBenefitDepthModule } from './projected-benefit-depth/projected-benefit-depth.module';
 import { ProjectedBenefitWeightDescriptionModule } from './projected-benefit-weight-description/projected-benefit-weight-description.module';
 import { ProjectedBenefitWeightingModule } from './projected-benefit-weighting/projected-benefit-weighting.module';
+import { GeneralAcronymModule } from './general-acronym/general-acronym.module';
 
 
 export const apiRoutes = [
@@ -120,5 +121,9 @@ export const apiRoutes = [
   {
     path: 'projected-benefit-weighting',
     module: ProjectedBenefitWeightingModule,
+  },
+  {
+    path: 'acronyms',
+    module: GeneralAcronymModule,
   },
 ];

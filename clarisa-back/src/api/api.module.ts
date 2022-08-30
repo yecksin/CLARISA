@@ -21,6 +21,7 @@ import { GeopositionModule } from './geoposition/geoposition.module';
 import { RegionTypeModule } from './region-type/region-type.module';
 import { RegionModule } from './region/region.module';
 import { CountryModule } from './country/country.module';
+import { BusinessCategoryModule } from './business-category/business-category.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -45,6 +46,7 @@ import { CountryModule } from './country/country.module';
     GeopositionModule,
     RegionTypeModule,
     RegionModule,
+    BusinessCategoryModule,
   ],
 })
 export class ApiModule {}

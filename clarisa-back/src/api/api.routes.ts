@@ -22,6 +22,7 @@ import { BusinessCategoryModule } from './business-category/business-category.mo
 import { TechnicalFieldModule } from './technical-field/technical-field.module';
 import { InnovationTypeModule } from './innovation-type/innovation-type.module';
 import { GovernanceTypeModule } from './governance-type/governance-type.module';
+import { EnvironmentalBenefitModule } from './environmental-benefit/environmental-benefit.module';
 
 export const apiRoutes = [
   {
@@ -119,5 +120,9 @@ export const apiRoutes = [
   {
     path: 'governance-types',
     module: GovernanceTypeModule,
+  },
+  {
+    path: 'environmental-benefits',
+    module: EnvironmentalBenefitModule,
   },
 ];

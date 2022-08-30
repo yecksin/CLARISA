@@ -20,6 +20,7 @@ import { RegionTypeModule } from './region-type/region-type.module';
 import { RegionModule } from './region/region.module';
 import { BusinessCategoryModule } from './business-category/business-category.module';
 import { TechnicalFieldModule } from './technical-field/technical-field.module';
+import { InnovationTypeModule } from './innovation-type/innovation-type.module';
 
 export const apiRoutes = [
   {
@@ -109,5 +110,9 @@ export const apiRoutes = [
   {
     path: 'technical-fields',
     module: TechnicalFieldModule,
+  },
+  {
+    path: 'innovation-types',
+    module: InnovationTypeModule,
   },
 ];

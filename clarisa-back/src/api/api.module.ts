@@ -23,6 +23,7 @@ import { RegionModule } from './region/region.module';
 import { CountryModule } from './country/country.module';
 import { BusinessCategoryModule } from './business-category/business-category.module';
 import { TechnicalFieldModule } from './technical-field/technical-field.module';
+import { InnovationTypeModule } from './innovation-type/innovation-type.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -49,6 +50,7 @@ import { TechnicalFieldModule } from './technical-field/technical-field.module';
     RegionModule,
     BusinessCategoryModule,
     TechnicalFieldModule,
+    InnovationTypeModule,
   ],
 })
 export class ApiModule {}

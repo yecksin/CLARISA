@@ -26,6 +26,7 @@ import { GeneralAcronymModule } from './general-acronym/general-acronym.module';
 import { InnovationReadinessLevelModule } from './innovation-readiness-level/innovation-readiness-level.module';
 import { InvestmentTypeModule } from './investment-type/investment-type.module';
 import { InnovationUseLevelModule } from './innovation-use-level/innovation-use-level.module';
+import { CgiarEntityModule } from './cgiar-entity/cgiar-entity.module';
 
 
 export const apiRoutes = [
@@ -140,5 +141,9 @@ export const apiRoutes = [
   {
     path: 'innovation-use-levels',
     module: InnovationUseLevelModule,
+  },
+  {
+    path: 'cgiar-entities',
+    module: CgiarEntityModule,
   },
 ];

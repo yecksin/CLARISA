@@ -29,6 +29,7 @@ import { GeneralAcronymModule } from './general-acronym/general-acronym.module';
 import { InnovationReadinessLevelModule } from './innovation-readiness-level/innovation-readiness-level.module';
 import { InvestmentTypeModule } from './investment-type/investment-type.module';
 import { InnovationUseLevelModule } from './innovation-use-level/innovation-use-level.module';
+import { CgiarEntityModule } from './cgiar-entity/cgiar-entity.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -60,7 +61,8 @@ import { InnovationUseLevelModule } from './innovation-use-level/innovation-use-
     GeneralAcronymModule,
     InnovationReadinessLevelModule,
     InvestmentTypeModule,
-    InnovationUseLevelModule
+    InnovationUseLevelModule,
+    CgiarEntityModule
   ],
 })
 export class ApiModule {}

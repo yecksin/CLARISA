@@ -30,6 +30,7 @@ import { InnovationReadinessLevelModule } from './innovation-readiness-level/inn
 import { InvestmentTypeModule } from './investment-type/investment-type.module';
 import { InnovationUseLevelModule } from './innovation-use-level/innovation-use-level.module';
 import { CgiarEntityModule } from './cgiar-entity/cgiar-entity.module';
+import { CgiarEntityTypeModule } from './cgiar-entity-type/cgiar-entity-type.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -62,7 +63,8 @@ import { CgiarEntityModule } from './cgiar-entity/cgiar-entity.module';
     InnovationReadinessLevelModule,
     InvestmentTypeModule,
     InnovationUseLevelModule,
-    CgiarEntityModule
+    CgiarEntityModule,
+    CgiarEntityTypeModule
   ],
 })
 export class ApiModule {}

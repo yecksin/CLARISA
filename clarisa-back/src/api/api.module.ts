@@ -26,6 +26,7 @@ import { TechnicalFieldModule } from './technical-field/technical-field.module';
 import { InnovationTypeModule } from './innovation-type/innovation-type.module';
 import { GovernanceTypeModule } from './governance-type/governance-type.module';
 import { EnvironmentalBenefitModule } from './environmental-benefit/environmental-benefit.module';
+import { TechnologyDevelopmentStageModule } from './technology-development-stage/technology-development-stage.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -55,6 +56,7 @@ import { EnvironmentalBenefitModule } from './environmental-benefit/environmenta
     InnovationTypeModule,
     GovernanceTypeModule,
     EnvironmentalBenefitModule,
+    TechnologyDevelopmentStageModule,
   ],
 })
 export class ApiModule {}

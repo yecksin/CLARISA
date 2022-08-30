@@ -23,6 +23,7 @@ import { TechnicalFieldModule } from './technical-field/technical-field.module';
 import { InnovationTypeModule } from './innovation-type/innovation-type.module';
 import { GovernanceTypeModule } from './governance-type/governance-type.module';
 import { EnvironmentalBenefitModule } from './environmental-benefit/environmental-benefit.module';
+import { TechnologyDevelopmentStageModule } from './technology-development-stage/technology-development-stage.module';
 
 export const apiRoutes = [
   {
@@ -124,5 +125,9 @@ export const apiRoutes = [
   {
     path: 'environmental-benefits',
     module: EnvironmentalBenefitModule,
+  },
+  {
+    path: 'technology-development-stages',
+    module: TechnologyDevelopmentStageModule,
   },
 ];

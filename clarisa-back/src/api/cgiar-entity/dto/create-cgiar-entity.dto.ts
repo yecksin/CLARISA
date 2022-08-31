@@ -8,5 +8,4 @@ export class CreateCgiarEntityDto {
 
     financialCode: string;
 
-    global_unit_type_id: string;
 }

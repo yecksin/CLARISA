@@ -1,5 +1,6 @@
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { CgiarEntityType } from '../../cgiar-entity-type/entities/cgiar-entity-type.entity';
 
 @Entity('global_units')
 export class CgiarEntity {
@@ -18,8 +19,9 @@ export class CgiarEntity {
     @Column()
     financial_code: string;
 
-    @Column()
-    global_unit_type_id: string;
+    @ManyToOne(() => CgiarEntityType, {eager:true})
+    @JoinColumn({ name: 'global_unit_type_id' })
+    cgiarEntityTypeDTO: CgiarEntityType;
 
     @Column()
     is_active: number;

@@ -4,6 +4,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity('global_unit_types')
 export class CgiarEntityType {
     @PrimaryGeneratedColumn()
+    @Expose({name:'code'})
     id: number;
 
     @Column()

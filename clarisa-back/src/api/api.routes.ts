@@ -161,6 +161,10 @@ export const apiRoutes = [
   {
     path: 'beneficiaries',
     module: BeneficiarieModule,
+  },
+  {
+    path: 'allSDGIndicators',
+    module: SdgIndicatorModule,
   }
 
 ];

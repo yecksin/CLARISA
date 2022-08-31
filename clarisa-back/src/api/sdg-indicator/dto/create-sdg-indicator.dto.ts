@@ -5,5 +5,4 @@ export class CreateSdgIndicatorDto {
 
     sdg_indicator: string;
 
-    sdg_target_id: number;
 }

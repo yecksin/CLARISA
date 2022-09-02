@@ -115,7 +115,7 @@ export const apiRoutes = [
     module: RegionModule,
   },
   {
-    path: 'depth-description',
+    path: 'depthScales',
     module: DepthDescriptionModule,
   },
   {
@@ -123,7 +123,7 @@ export const apiRoutes = [
     module: ProjectedBenefitDepthModule,
   },
   {
-    path: 'projected-benefit-weight-description',
+    path: 'depthDescriptions',
     module: ProjectedBenefitWeightDescriptionModule,
   },
   {

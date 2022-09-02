@@ -13,4 +13,5 @@ export class CgiarEntityType {
     @Column()
     @Exclude()
     is_active: number;
+
 }

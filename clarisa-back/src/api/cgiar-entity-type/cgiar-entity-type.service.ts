@@ -23,7 +23,7 @@ export class CgiarEntityTypeService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.cgiarEntityTypeRepository.find({
           where: {
-            is_active : estado
+            is_active : estado,
           }
         });
       default:

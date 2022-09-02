@@ -25,6 +25,7 @@ import { GovernanceTypeModule } from './governance-type/governance-type.module';
 import { EnvironmentalBenefitModule } from './environmental-benefit/environmental-benefit.module';
 import { TechnologyDevelopmentStageModule } from './technology-development-stage/technology-development-stage.module';
 import { WorkpackageModule } from './workpackage/workpackage.module';
+import { InitiativeModule } from './initiative/initiative.module';
 
 export const apiRoutes = [
   {
@@ -134,5 +135,9 @@ export const apiRoutes = [
   {
     path: 'workpackages',
     module: WorkpackageModule,
+  },
+  {
+    path: 'initiatives',
+    module: InitiativeModule,
   },
 ];

@@ -22,6 +22,7 @@ export class InitiativeRepository extends Repository<Initiative> {
         case FindAllOptions.SHOW_ONLY_ACTIVE:
         case FindAllOptions.SHOW_ONLY_INACTIVE:
             isActiveCondition = `stis.is_active = ${option === FindAllOptions.SHOW_ONLY_ACTIVE ? 1:0} and`;
+            break;
     }
 
     const initiativeQuery: string = `

@@ -1,34 +1,45 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, Res, HttpStatus, HttpException } from '@nestjs/common';
 import { WorkpackageService } from './workpackage.service';
 import { CreateWorkpackageDto } from './dto/create-workpackage.dto';
 import { UpdateWorkpackageDto } from './dto/update-workpackage.dto';
+import { WorkpackageRepository } from './repositories/workpackage.repository';
+import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
+import { Response } from 'express';
+import { Workpackage } from './entities/workpackage.entity';
 
-@Controller('workpackage')
+@Controller()
+@UseInterceptors(ClassSerializerInterceptor)
 export class WorkpackageController {
-  constructor(private readonly workpackageService: WorkpackageService) {}
-
-  @Post()
-  create(@Body() createWorkpackageDto: CreateWorkpackageDto) {
-    return this.workpackageService.create(createWorkpackageDto);
-  }
+  constructor(
+    private readonly workpackageService: WorkpackageService,
+  ) {}
 
   @Get()
-  findAll() {
-    return this.workpackageService.findAll();
+  async findAll(
+    @Query('workpackages') showWorkpackages: FindAllOptions,
+    @Query('initiatives') showInitiatives: FindAllOptions,
+    ) {
+    return await this.workpackageService.findAll(showWorkpackages, showInitiatives);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.workpackageService.findOne(+id);
+  @Get('get/:id')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return await this.workpackageService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWorkpackageDto: UpdateWorkpackageDto) {
-    return this.workpackageService.update(+id, updateWorkpackageDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.workpackageService.remove(+id);
+  @Patch('update')
+  async update(
+    @Res() res: Response,
+    @Body() updateInitiativeDtoList: UpdateWorkpackageDto[],
+  ) {
+    try {
+      const result: Workpackage[] =
+        await this.workpackageService.update(
+          updateInitiativeDtoList,
+        );
+      return res.status(HttpStatus.OK).json(result);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    }
   }
 }

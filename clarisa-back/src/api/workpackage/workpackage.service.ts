@@ -1,26 +1,42 @@
 import { Injectable } from '@nestjs/common';
+import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { CreateWorkpackageDto } from './dto/create-workpackage.dto';
 import { UpdateWorkpackageDto } from './dto/update-workpackage.dto';
+import { WorkpackageDto } from './dto/workpackage.dto';
+import { Workpackage } from './entities/workpackage.entity';
+import { WorkpackageRepository } from './repositories/workpackage.repository';
 
 @Injectable()
 export class WorkpackageService {
-  create(createWorkpackageDto: CreateWorkpackageDto) {
-    return 'This action adds a new workpackage';
+  constructor(
+    private workpackageRepository: WorkpackageRepository,
+  ) {}
+
+  async findAll(
+    showWorkpackages: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+    showInitiatives: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<WorkpackageDto[]> {
+    if(!(Object.values<string>(FindAllOptions).includes(showWorkpackages))){
+      throw Error('?!');
+    }
+
+    if(!(Object.values<string>(FindAllOptions).includes(showInitiatives))){
+      throw Error('?!');
+    }
+
+    return this.workpackageRepository.findAllWorkpackages(showWorkpackages, showInitiatives);
   }
 
-  findAll() {
-    return `This action returns all workpackage`;
+  async findOne(id: number): Promise<Workpackage> {
+    return await this.workpackageRepository.findOneBy({
+      id,
+      is_active: true,
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} workpackage`;
-  }
-
-  update(id: number, updateWorkpackageDto: UpdateWorkpackageDto) {
-    return `This action updates a #${id} workpackage`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} workpackage`;
+  async update(updateInitiativeDto: UpdateWorkpackageDto[]) {
+    return await this.workpackageRepository.save(
+      updateInitiativeDto,
+    );
   }
 }

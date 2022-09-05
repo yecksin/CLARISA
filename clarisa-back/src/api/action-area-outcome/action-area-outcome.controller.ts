@@ -1,4 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, Res, HttpStatus, HttpException, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  ParseIntPipe,
+  Res,
+  HttpStatus,
+  HttpException,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { ActionAreaOutcomeService } from './action-area-outcome.service';
@@ -9,10 +24,12 @@ import { ActionAreaOutcome } from './entities/action-area-outcome.entity';
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
 export class ActionAreaOutcomeController {
-  constructor(private readonly actionAreaOutcomeService: ActionAreaOutcomeService) {}
+  constructor(
+    private readonly actionAreaOutcomeService: ActionAreaOutcomeService,
+  ) {}
 
   @Get()
-  async findAll(@Query('show') show : FindAllOptions) {
+  async findAll(@Query('show') show: FindAllOptions) {
     return await this.actionAreaOutcomeService.findAll(show);
   }
 
@@ -22,9 +39,15 @@ export class ActionAreaOutcomeController {
   }
 
   @Patch('update')
-  async update(@Res() res: Response, @Body() updateActionAreaOutcomeDtoList: UpdateActionAreaOutcomeDto[]) {
+  async update(
+    @Res() res: Response,
+    @Body() updateActionAreaOutcomeDtoList: UpdateActionAreaOutcomeDto[],
+  ) {
     try {
-      const result : ActionAreaOutcome[] = await this.actionAreaOutcomeService.update(updateActionAreaOutcomeDtoList);
+      const result: ActionAreaOutcome[] =
+        await this.actionAreaOutcomeService.update(
+          updateActionAreaOutcomeDtoList,
+        );
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

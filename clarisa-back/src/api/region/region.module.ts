@@ -3,10 +3,11 @@ import { RegionService } from './region.service';
 import { RegionController } from './region.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Region } from './entities/region.entity';
+import { RegionRepository } from './repositories/region.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Region])],
   controllers: [RegionController],
-  providers: [RegionService]
+  providers: [RegionService, RegionRepository],
 })
 export class RegionModule {}

@@ -1,12 +1,11 @@
 export class CreateGlobalTargetDto {
+  impact_areas_id: number;
 
-    impact_areas_id : number;
+  global_target: string;
 
-    global_target: string;
+  is_active: boolean;
 
-    is_active : boolean;
+  created_at: Date;
 
-    created_at: Date;
-
-    updated_at: Date;
+  updated_at: Date;
 }

@@ -39,6 +39,8 @@ export class ActionAreaOutcomeService {
   }
 
   async update(updateActionAreaOutcomeDto: UpdateActionAreaOutcomeDto[]) {
-    return await this.actionAreaOutcomesRepository.save(updateActionAreaOutcomeDto);
+    return await this.actionAreaOutcomesRepository.save(
+      updateActionAreaOutcomeDto,
+    );
   }
 }

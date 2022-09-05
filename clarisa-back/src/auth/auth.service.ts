@@ -13,36 +13,46 @@ export class AuthService {
   constructor(
     private usersService: UserService,
     private jwtService: JwtService,
-    private moduleRef: ModuleRef
-  ) { }
+    private moduleRef: ModuleRef,
+  ) {}
 
   async validateUser(email: string, pass: string) {
     email = email.trim().toLowerCase();
-    const user: User = await this.usersService.findOneByEmail(email, false)??await this.usersService.findOneByUsername(email, false);
-    let authenticator : BaseAuthenticator;
+    const user: User =
+      (await this.usersService.findOneByEmail(email, false)) ??
+      (await this.usersService.findOneByUsername(email, false));
+    let authenticator: BaseAuthenticator;
     console.log({ user });
 
     // const user_Info = await user.userInfo;
 
     // console.log({user_Info});
-    
+
     if (user) {
-      authenticator = this.moduleRef.get(user.is_cgiar_user ? LDAPAuth : DBAuth);
-      let authResult : User | BaseMessageDTO = await authenticator.authenticate(user.email, pass);
-      if('id' in authResult){
-        console.log('epic', {user});
+      authenticator = this.moduleRef.get(
+        user.is_cgiar_user ? LDAPAuth : DBAuth,
+      );
+      let authResult: User | BaseMessageDTO = await authenticator.authenticate(
+        user.email,
+        pass,
+      );
+      if ('id' in authResult) {
+        console.log('epic', { user });
         return true;
       }
     } else {
-      throw new HttpException('Credenciales inválidas. Por favor revisa e inténtalo de nuevo.', HttpStatus.UNAUTHORIZED);
+      throw new HttpException(
+        'Credenciales inválidas. Por favor revisa e inténtalo de nuevo.',
+        HttpStatus.UNAUTHORIZED,
+      );
     }
   }
 
   async login(user: User) {
     // Add payload
     //console.log({user});
-    
+
     const payload = { email: user.email, sub: user.id };
-    return {access_token: this.jwtService.sign(payload)};
+    return { access_token: this.jwtService.sign(payload) };
   }
 }

@@ -2,7 +2,7 @@ import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.en
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('geopositions')
-export class Geoposition extends AuditableEntity{
+export class Geoposition extends AuditableEntity {
   @PrimaryGeneratedColumn()
   id: number;
 

@@ -1,6 +1,6 @@
 import { Expose, Transform } from 'class-transformer';
 import { Sdg } from 'src/api/sdg/entities/sdg.entity';
- import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
+import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Column,
   Entity,
@@ -15,24 +15,23 @@ export class SdgTarget extends AuditableEntity {
   id: number;
 
   @Column('varchar', { length: 5 })
-  @Expose({name:'sdgTargetCode'})
+  @Expose({ name: 'sdgTargetCode' })
   sdg_target_code: string;
 
   @Column()
-  @Expose({name:'sdgTarget'})
+  @Expose({ name: 'sdgTarget' })
   sdg_target: string;
 
-
-  @ManyToOne(() => Sdg, {eager:true})
+  @ManyToOne(() => Sdg, { eager: true })
   @JoinColumn({ name: 'sdg_id' })
-  @Transform(({value}) => {
+  @Transform(({ value }) => {
     return {
-      usndCode : value.id,
+      usndCode: value.id,
       shortName: value.short_name,
       fullName: value.full_name,
-      financialCode: value.financial_code
-    }
+      financialCode: value.financial_code,
+    };
   })
-  @Expose({name:'sdg'})
+  @Expose({ name: 'sdg' })
   sdg_object: Sdg;
 }

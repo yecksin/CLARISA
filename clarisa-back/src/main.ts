@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import * as bodyparser from 'body-parser';
 import { AppModule } from './app.module';
 import { dataSource } from './ormconfig';
+import { env } from 'process';
 import 'dotenv/config';
 
 async function bootstrap() {
@@ -18,8 +19,7 @@ async function bootstrap() {
     })
     .catch((err) => {
       console.error('Error during Data Source initialization', err);
-    }
-  );
-  await app.listen(3000);
+    });
+  await app.listen(env.APP_PORT);
 }
 bootstrap();

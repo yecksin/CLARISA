@@ -11,7 +11,9 @@ describe('OutcomeIndicatorController', () => {
       providers: [OutcomeIndicatorService],
     }).compile();
 
-    controller = module.get<OutcomeIndicatorController>(OutcomeIndicatorController);
+    controller = module.get<OutcomeIndicatorController>(
+      OutcomeIndicatorController,
+    );
   });
 
   it('should be defined', () => {

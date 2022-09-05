@@ -1,14 +1,13 @@
 export class CreateActionAreaDto {
+  smo_code: string;
 
-    smo_code : string;
+  name: string;
 
-    name : string;
+  description: string;
 
-    description : string;
+  is_active: boolean;
 
-    is_active: boolean;
+  created_at: Date;
 
-    created_at: Date;
-
-    updated_at: Date;
+  updated_at: Date;
 }

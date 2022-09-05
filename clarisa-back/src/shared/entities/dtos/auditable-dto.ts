@@ -1,4 +1,4 @@
-export abstract class AuditableDto{
+export abstract class AuditableDto {
   created_at: Date;
 
   updated_at: Date;

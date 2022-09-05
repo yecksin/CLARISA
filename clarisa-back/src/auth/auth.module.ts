@@ -13,8 +13,8 @@ import { LDAPAuth } from './utils/LDAPAuth';
 import { LegacyPasswordEncoder } from './utils/LegacyPasswordEncoder';
 
 @Module({
-  controllers:[AuthController],
-  imports:[
+  controllers: [AuthController],
+  imports: [
     UserModule,
     PassportModule,
     JwtModule.register({
@@ -23,14 +23,14 @@ import { LegacyPasswordEncoder } from './utils/LegacyPasswordEncoder';
     }),
   ],
   providers: [
-    AuthService, 
-    LocalStrategy, 
-    JwtStrategy, 
-    LegacyPasswordEncoder, 
+    AuthService,
+    LocalStrategy,
+    JwtStrategy,
+    LegacyPasswordEncoder,
     BCryptPasswordEncoder,
     LDAPAuth,
-    DBAuth
+    DBAuth,
   ],
-  exports: [AuthService]
+  exports: [AuthService],
 })
 export class AuthModule {}

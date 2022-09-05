@@ -1,8 +1,16 @@
-import { Exclude } from "class-transformer";
-import { Geoposition } from "src/api/geoposition/entities/geoposition.entity";
-import { Region } from "src/api/region/entities/region.entity";
-import { AuditableEntity } from "src/shared/entities/extends/auditable-entity.entity";
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Exclude } from 'class-transformer';
+import { Geoposition } from 'src/api/geoposition/entities/geoposition.entity';
+import { Region } from 'src/api/region/entities/region.entity';
+import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('countries')
 export class Country extends AuditableEntity {
@@ -22,13 +30,23 @@ export class Country extends AuditableEntity {
   iso_numeric: number;
 
   @ManyToOne(() => Geoposition)
-  @JoinColumn({name: 'geoposition_id'})
-  geoposition_object: Geoposition;
+  @JoinColumn({ name: 'geoposition_id' })
+  geoposition_object: Promise<Geoposition>;
 
   @Column()
   geoposition_id: number;
 
-  @ManyToMany(() => Region)
-  @JoinTable({name: 'country_regions'})
-  regions : Region[];
+  @ManyToMany(() => Region, region => region.countries)
+  @JoinTable({
+    name: 'country_regions',
+    joinColumn: {
+      name: 'country_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'region_id',
+      referencedColumnName: 'id',
+    },
+  })
+  regions: Promise<Region[]>;
 }

@@ -9,7 +9,9 @@ describe('ProjectedBenefitProbabilityService', () => {
       providers: [ProjectedBenefitProbabilityService],
     }).compile();
 
-    service = module.get<ProjectedBenefitProbabilityService>(ProjectedBenefitProbabilityService);
+    service = module.get<ProjectedBenefitProbabilityService>(
+      ProjectedBenefitProbabilityService,
+    );
   });
 
   it('should be defined', () => {

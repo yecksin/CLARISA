@@ -13,16 +13,18 @@ export class RoleService {
     private rolesRepository: Repository<Role>,
   ) {}
 
-  findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<Role[]> {
-    switch(option){
+  findAll(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<Role[]> {
+    switch (option) {
       case FindAllOptions.SHOW_ALL:
         return this.rolesRepository.find();
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return this.rolesRepository.find({
           where: {
-            is_active : option === FindAllOptions.SHOW_ONLY_ACTIVE
-          }
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         });
       default:
         throw Error('?!');
@@ -30,7 +32,7 @@ export class RoleService {
   }
 
   findOne(id: number) {
-    return this.rolesRepository.findOneBy({id});
+    return this.rolesRepository.findOneBy({ id });
   }
 
   update(id: number, updateRoleDto: UpdateRoleDto) {
@@ -40,15 +42,15 @@ export class RoleService {
   async getRolesPagination(offset?: number, limit: number = 10) {
     const [items, count] = await this.rolesRepository.findAndCount({
       order: {
-        id: 'ASC'
+        id: 'ASC',
       },
       skip: offset,
-      take: limit
+      take: limit,
     });
-   
+
     return {
       items,
-      count
-    }
+      count,
+    };
   }
 }

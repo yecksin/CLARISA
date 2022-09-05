@@ -7,6 +7,6 @@ import { SdgTarget } from './entities/sdg-target.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([SdgTarget])],
   controllers: [SdgTargetController],
-  providers: [SdgTargetService]
+  providers: [SdgTargetService],
 })
 export class SdgTargetModule {}

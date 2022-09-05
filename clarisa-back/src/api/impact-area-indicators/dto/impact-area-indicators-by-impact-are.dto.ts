@@ -1,21 +1,17 @@
-
-
 export class ImpactAreaIndicatorByImpactAreaDto {
+  id: number;
 
-    id:number
+  indicator_statement: string;
 
-    indicator_statement: string
+  target_year: number;
 
-    target_year: number
-    
-    target_unit: string
+  target_unit: string;
 
-    is_aplicable_projected_benefits: boolean
+  is_aplicable_projected_benefits: boolean;
 
-    smo_code: string
+  smo_code: string;
 
-    id_impact_area: number
+  id_impact_area: number;
 
-    name:string
-
+  name: string;
 }

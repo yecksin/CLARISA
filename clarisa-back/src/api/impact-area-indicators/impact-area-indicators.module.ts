@@ -4,10 +4,9 @@ import { ImpactAreaIndicatorsController } from './impact-area-indicators.control
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ImpactAreaIndicator } from './entities/impact-area-indicator.entity';
 
-
 @Module({
   imports: [TypeOrmModule.forFeature([ImpactAreaIndicator])],
   controllers: [ImpactAreaIndicatorsController],
-  providers: [ImpactAreaIndicatorsService]
+  providers: [ImpactAreaIndicatorsService],
 })
 export class ImpactAreaIndicatorsModule {}

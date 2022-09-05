@@ -39,6 +39,8 @@ export class OutcomeIndicatorService {
   }
 
   async update(updateOutcomeIndicatorDto: UpdateOutcomeIndicatorDto[]) {
-    return await this.outcomeIndicatorsRepository.save(updateOutcomeIndicatorDto);
+    return await this.outcomeIndicatorsRepository.save(
+      updateOutcomeIndicatorDto,
+    );
   }
 }

@@ -1,4 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, HttpStatus, Res, HttpException, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  ParseIntPipe,
+  HttpStatus,
+  Res,
+  HttpException,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import { ImpactAreaIndicatorsService } from './impact-area-indicators.service';
 import { CreateImpactAreaIndicatorDto } from './dto/create-impact-area-indicator.dto';
 import { UpdateImpactAreaIndicatorDto } from './dto/update-impact-area-indicator.dto';
@@ -7,14 +22,15 @@ import { ImpactAreaIndicator } from './entities/impact-area-indicator.entity';
 import { Response } from 'express';
 import { ImpactAreaIndicatorByImpactAreaDto } from './dto/impact-area-indicators-by-impact-are.dto';
 
-
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
 export class ImpactAreaIndicatorsController {
-  constructor(private readonly impactAreaIndicatorsService: ImpactAreaIndicatorsService) {}
+  constructor(
+    private readonly impactAreaIndicatorsService: ImpactAreaIndicatorsService,
+  ) {}
 
   @Get()
-  async findAll(@Query('show') show : FindAllOptions) {
+  async findAll(@Query('show') show: FindAllOptions) {
     return await this.impactAreaIndicatorsService.findAll(show);
   }
 
@@ -24,9 +40,15 @@ export class ImpactAreaIndicatorsController {
   }
 
   @Patch('update')
-  async update(@Res() res: Response, @Body() updateImpactAreaIndicator: UpdateImpactAreaIndicatorDto[]) {
+  async update(
+    @Res() res: Response,
+    @Body() updateImpactAreaIndicator: UpdateImpactAreaIndicatorDto[],
+  ) {
     try {
-      const result : ImpactAreaIndicator[] = await this.impactAreaIndicatorsService.update(updateImpactAreaIndicator);
+      const result: ImpactAreaIndicator[] =
+        await this.impactAreaIndicatorsService.update(
+          updateImpactAreaIndicator,
+        );
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

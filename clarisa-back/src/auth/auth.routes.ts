@@ -4,5 +4,5 @@ export const authRoutes = [
   {
     path: '',
     module: AuthModule,
-  }
+  },
 ];

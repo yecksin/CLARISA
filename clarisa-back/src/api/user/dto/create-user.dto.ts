@@ -1,7 +1,6 @@
 export class CreateUserDto {
-    
   first_name: string;
-  
+
   last_name: string;
 
   username: string;
@@ -17,7 +16,7 @@ export class CreateUserDto {
   agree_terms: boolean;
 
   created_at: Date;
-  
+
   updated_at: Date;
 
   is_active: boolean;

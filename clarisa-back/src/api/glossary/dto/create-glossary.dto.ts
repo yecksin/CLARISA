@@ -1,16 +1,15 @@
 export class CreateGlossaryDto {
+  applicationName: string;
 
-    applicationName : string;
+  title: string;
 
-    title : string;
+  definition: string;
 
-    definition: string;
+  active_since: Date;
 
-    active_since : Date;
-    
-    is_active : boolean;
+  is_active: boolean;
 
-    created_at: Date;
+  created_at: Date;
 
-    updated_at: Date;
+  updated_at: Date;
 }

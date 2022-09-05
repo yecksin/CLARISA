@@ -54,13 +54,14 @@ import { ActionAreaOutcomeIndicator } from '../entities/action-area-outcome-indi
 );
 */
 @Injectable()
-export class ActionAreaOutcomeIndicatorRepository extends Repository<ActionAreaOutcomeIndicator>{
+export class ActionAreaOutcomeIndicatorRepository extends Repository<ActionAreaOutcomeIndicator> {
   constructor(private dataSource: DataSource) {
     super(ActionAreaOutcomeIndicator, dataSource.createEntityManager());
   }
 
-  async actionAreaOutcomeIndicatorByAll(): Promise<ActionAreaOutcomeIndicatorRequestDto[]> {
-    
+  async actionAreaOutcomeIndicatorByAll(): Promise<
+    ActionAreaOutcomeIndicatorRequestDto[]
+  > {
     const impactAreaIndicatorsQuery = `
       SELECT aa.id AS 'actionAreaId', aa.name AS 'actionAreaName', aao.id AS 'outcomeId', 
         aao.smo_code AS 'outcomeSMOcode', aao.outcome_statement AS 'outcomeStatement', 
@@ -73,15 +74,18 @@ export class ActionAreaOutcomeIndicatorRepository extends Repository<ActionAreaO
       LEFT JOIN outcome_indicators oi
         ON  aai.outcome_indicator_id = oi.id;
             `;
-      
-    const ImpactAreaIndicatorsbyImpactArea :ActionAreaOutcomeIndicatorRequestDto[]  = await this.query(impactAreaIndicatorsQuery);
-    
+
+    const ImpactAreaIndicatorsbyImpactArea: ActionAreaOutcomeIndicatorRequestDto[] =
+      await this.query(impactAreaIndicatorsQuery);
+
     return ImpactAreaIndicatorsbyImpactArea;
   }
 
-  async actionAreaOutcomeIndicatorByAllIsActive(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE): Promise<ActionAreaOutcomeIndicatorRequestDto[]> {
+  async actionAreaOutcomeIndicatorByAllIsActive(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<ActionAreaOutcomeIndicatorRequestDto[]> {
     var isActiveOption = true;
-    if (option == 'inactive' ) isActiveOption = false;
+    if (option == 'inactive') isActiveOption = false;
 
     const impactAreaIndicatorsQuery = `
     SELECT aa.id AS 'actionAreaId', aa.name AS 'actionAreaName', aao.id AS 'outcomeId', 
@@ -97,9 +101,10 @@ export class ActionAreaOutcomeIndicatorRepository extends Repository<ActionAreaO
         ON  aai.outcome_indicator_id = oi.id
         WHERE aai.is_active = ${isActiveOption}
             `;
-      
-    const ImpactAreaIndicatorsbyImpactArea :ActionAreaOutcomeIndicatorRequestDto[]  = await this.query(impactAreaIndicatorsQuery);
-    
+
+    const ImpactAreaIndicatorsbyImpactArea: ActionAreaOutcomeIndicatorRequestDto[] =
+      await this.query(impactAreaIndicatorsQuery);
+
     return ImpactAreaIndicatorsbyImpactArea;
   }
 }

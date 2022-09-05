@@ -1,4 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, Res, HttpStatus, HttpException, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  ParseIntPipe,
+  Res,
+  HttpStatus,
+  HttpException,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import { GeopositionService } from './geoposition.service';
 import { CreateGeopositionDto } from './dto/create-geoposition.dto';
 import { UpdateGeopositionDto } from './dto/update-geoposition.dto';
@@ -12,7 +27,7 @@ export class GeopositionController {
   constructor(private readonly geopositionService: GeopositionService) {}
 
   @Get()
-  async findAll(@Query('show') show : FindAllOptions) {
+  async findAll(@Query('show') show: FindAllOptions) {
     return await this.geopositionService.findAll(show);
   }
 
@@ -22,9 +37,14 @@ export class GeopositionController {
   }
 
   @Patch('update')
-  async update(@Res() res: Response, @Body() updateGeopositionDtoList: UpdateGeopositionDto[]) {
+  async update(
+    @Res() res: Response,
+    @Body() updateGeopositionDtoList: UpdateGeopositionDto[],
+  ) {
     try {
-      const result : Geoposition[] = await this.geopositionService.update(updateGeopositionDtoList);
+      const result: Geoposition[] = await this.geopositionService.update(
+        updateGeopositionDtoList,
+      );
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

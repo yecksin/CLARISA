@@ -8,13 +8,14 @@ import { Sdg } from './entities/sdg.entity';
 
 @Injectable()
 export class SdgService {
-  
   constructor(
     @InjectRepository(Sdg)
     private sdgsRepository: Repository<Sdg>,
   ) {}
 
-  async findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<Sdg[]> {
+  async findAll(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<Sdg[]> {
     switch (option) {
       case FindAllOptions.SHOW_ALL:
         return await this.sdgsRepository.find();
@@ -22,18 +23,18 @@ export class SdgService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.sdgsRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE
-          }
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         });
       default:
         throw Error('?!');
     }
   }
 
-  async findOne(id: number) : Promise<Sdg> {
+  async findOne(id: number): Promise<Sdg> {
     return await this.sdgsRepository.findOneBy({
       id,
-      is_active : true
+      is_active: true,
     });
   }
 

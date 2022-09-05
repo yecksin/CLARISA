@@ -1,5 +1,5 @@
 export interface BaseMessageDTO {
-    name : string;
-    description : string;
-    httpCode : number;
+  name: string;
+  description: string;
+  httpCode: number;
 }

@@ -1,3 +1,1 @@
-export class CreateActionAreaOutcomeIndicatorDto {
-
-}
+export class CreateActionAreaOutcomeIndicatorDto {}

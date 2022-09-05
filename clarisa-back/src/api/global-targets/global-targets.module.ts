@@ -7,6 +7,6 @@ import { GlobalTarget } from './entities/global-target.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([GlobalTarget])],
   controllers: [GlobalTargetsController],
-  providers: [GlobalTargetsService]
+  providers: [GlobalTargetsService],
 })
 export class GlobalTargetsModule {}

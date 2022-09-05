@@ -32,7 +32,6 @@ import { SdgIndicatorModule } from './sdg-indicator/sdg-indicator.module';
 import { OneCgiarUserModule } from './one-cgiar-user/one-cgiar-user.module';
 import { BeneficiarieModule } from './beneficiarie/beneficiarie.module';
 
-
 export const apiRoutes = [
   {
     path: 'users',
@@ -101,7 +100,7 @@ export const apiRoutes = [
   {
     path: 'geopositions',
     module: GeopositionModule,
-  }, 
+  },
   {
     path: 'sources',
     module: SourcesModule,

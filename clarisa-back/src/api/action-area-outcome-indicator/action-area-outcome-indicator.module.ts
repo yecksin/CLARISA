@@ -8,6 +8,9 @@ import { ActionAreaOutcomeIndicatorRepository } from './repositories/action-area
 @Module({
   imports: [TypeOrmModule.forFeature([ActionAreaOutcomeIndicator])],
   controllers: [ActionAreaOutcomeIndicatorController],
-  providers: [ActionAreaOutcomeIndicatorService, ActionAreaOutcomeIndicatorRepository]
+  providers: [
+    ActionAreaOutcomeIndicatorService,
+    ActionAreaOutcomeIndicatorRepository,
+  ],
 })
 export class ActionAreaOutcomeIndicatorModule {}

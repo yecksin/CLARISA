@@ -38,9 +38,9 @@ import { BeneficiarieModule } from './beneficiarie/beneficiarie.module';
   controllers: [ApiController],
   providers: [ApiService],
   imports: [
-    UserModule, 
-    RoleModule, 
-    ActionAreaModule, 
+    UserModule,
+    RoleModule,
+    ActionAreaModule,
     GlossaryModule,
     ImpactAreaModule,
     GlobalTargetsModule,
@@ -70,7 +70,7 @@ import { BeneficiarieModule } from './beneficiarie/beneficiarie.module';
     CgiarEntityTypeModule,
     SdgIndicatorModule,
     OneCgiarUserModule,
-    BeneficiarieModule
+    BeneficiarieModule,
   ],
 })
 export class ApiModule {}

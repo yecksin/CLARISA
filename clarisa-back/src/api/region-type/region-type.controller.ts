@@ -1,4 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, Res, HttpStatus, HttpException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+  Query,
+  ParseIntPipe,
+  Res,
+  HttpStatus,
+  HttpException,
+} from '@nestjs/common';
 import { RegionTypeService } from './region-type.service';
 import { CreateRegionTypeDto } from './dto/create-region-type.dto';
 import { UpdateRegionTypeDto } from './dto/update-region-type.dto';
@@ -12,7 +27,7 @@ export class RegionTypeController {
   constructor(private readonly regionTypeService: RegionTypeService) {}
 
   @Get()
-  async findAll(@Query('show') show : FindAllOptions) {
+  async findAll(@Query('show') show: FindAllOptions) {
     return await this.regionTypeService.findAll(show);
   }
 
@@ -22,9 +37,14 @@ export class RegionTypeController {
   }
 
   @Patch('update')
-  async update(@Res() res: Response, @Body() updateRegionTypeDtoList: UpdateRegionTypeDto[]) {
+  async update(
+    @Res() res: Response,
+    @Body() updateRegionTypeDtoList: UpdateRegionTypeDto[],
+  ) {
     try {
-      const result : RegionType[] = await this.regionTypeService.update(updateRegionTypeDtoList);
+      const result: RegionType[] = await this.regionTypeService.update(
+        updateRegionTypeDtoList,
+      );
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

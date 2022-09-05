@@ -9,10 +9,10 @@ export const routes: Routes = [
     path: 'api',
     module: ApiModule,
     children: apiRoutes,
-  },{
+  },
+  {
     path: 'auth',
     module: AuthModule,
     children: authRoutes,
-  }
+  },
 ];
-

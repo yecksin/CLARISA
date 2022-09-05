@@ -1,10 +1,12 @@
-import { Exclude } from "class-transformer";
+import { Exclude, Expose } from "class-transformer";
+import { hasUncaughtExceptionCaptureCallback } from "process";
 import { AuditableEntity } from "src/shared/entities/extends/auditable-entity.entity";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('innovation_types')
 export class InnovationType extends AuditableEntity {
     @PrimaryGeneratedColumn()
+    @Expose({name: 'code'})
     id: number;
   
     @Column()

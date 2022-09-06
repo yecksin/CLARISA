@@ -1,11 +1,10 @@
-import { Expose } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('study_types')
 export class StudyType extends AuditableEntity {
   @PrimaryGeneratedColumn()
-  @Expose({ name: 'code' })
   id: number;
 
   @Column()
@@ -14,6 +13,7 @@ export class StudyType extends AuditableEntity {
   @Column()
   description: string;
 
+  @Exclude({ toPlainOnly: true })
   @Column({ type: 'int', width: 2 })
   norder: number;
 }

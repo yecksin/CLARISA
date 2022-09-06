@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page.component';
-import { DashboardsModule } from './pages/dashboards/dashboards.module';
-import { ApiServicesModule } from './pages/api-services/api-services.module';
+
 
 const routes: Routes = [
   {
@@ -25,6 +24,10 @@ const routes: Routes = [
       {
         path:'api-services',
         loadChildren : () => import('./pages/api-services/api-services.module').then((m) => m.ApiServicesModule),
+      },
+      {
+        path:'faq',
+        loadChildren : () => import('./pages/faq/faq.module').then((m) => m.FaqModule),
       },
     ]
   }

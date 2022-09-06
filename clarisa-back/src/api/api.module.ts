@@ -21,6 +21,19 @@ import { GeopositionModule } from './geoposition/geoposition.module';
 import { RegionTypeModule } from './region-type/region-type.module';
 import { RegionModule } from './region/region.module';
 import { CountryModule } from './country/country.module';
+import { DepthDescriptionModule } from './depth-description/depth-description.module';
+import { ProjectedBenefitDepthModule } from './projected-benefit-depth/projected-benefit-depth.module';
+import { ProjectedBenefitWeightDescriptionModule } from './projected-benefit-weight-description/projected-benefit-weight-description.module';
+import { ProjectedBenefitWeightingModule } from './projected-benefit-weighting/projected-benefit-weighting.module';
+import { GeneralAcronymModule } from './general-acronym/general-acronym.module';
+import { InnovationReadinessLevelModule } from './innovation-readiness-level/innovation-readiness-level.module';
+import { InvestmentTypeModule } from './investment-type/investment-type.module';
+import { InnovationUseLevelModule } from './innovation-use-level/innovation-use-level.module';
+import { CgiarEntityModule } from './cgiar-entity/cgiar-entity.module';
+import { CgiarEntityTypeModule } from './cgiar-entity-type/cgiar-entity-type.module';
+import { SdgIndicatorModule } from './sdg-indicator/sdg-indicator.module';
+import { OneCgiarUserModule } from './one-cgiar-user/one-cgiar-user.module';
+import { BeneficiarieModule } from './beneficiarie/beneficiarie.module';
 import { BusinessCategoryModule } from './business-category/business-category.module';
 import { TechnicalFieldModule } from './technical-field/technical-field.module';
 import { InnovationTypeModule } from './innovation-type/innovation-type.module';
@@ -53,6 +66,19 @@ import { InitiativeModule } from './initiative/initiative.module';
     GeopositionModule,
     RegionTypeModule,
     RegionModule,
+    DepthDescriptionModule,
+    ProjectedBenefitDepthModule,
+    ProjectedBenefitWeightDescriptionModule,
+    ProjectedBenefitWeightingModule,
+    GeneralAcronymModule,
+    InnovationReadinessLevelModule,
+    InvestmentTypeModule,
+    InnovationUseLevelModule,
+    CgiarEntityModule,
+    CgiarEntityTypeModule,
+    SdgIndicatorModule,
+    OneCgiarUserModule,
+    BeneficiarieModule,
     BusinessCategoryModule,
     TechnicalFieldModule,
     InnovationTypeModule,

@@ -42,6 +42,7 @@ import { EnvironmentalBenefitModule } from './environmental-benefit/environmenta
 import { TechnologyDevelopmentStageModule } from './technology-development-stage/technology-development-stage.module';
 import { WorkpackageModule } from './workpackage/workpackage.module';
 import { InitiativeModule } from './initiative/initiative.module';
+import { AccountTypeModule } from './account-type/account-type.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -87,6 +88,7 @@ import { InitiativeModule } from './initiative/initiative.module';
     TechnologyDevelopmentStageModule,
     WorkpackageModule,
     InitiativeModule,
+    AccountTypeModule,
   ],
 })
 export class ApiModule {}

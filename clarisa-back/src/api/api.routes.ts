@@ -39,6 +39,7 @@ import { EnvironmentalBenefitModule } from './environmental-benefit/environmenta
 import { TechnologyDevelopmentStageModule } from './technology-development-stage/technology-development-stage.module';
 import { WorkpackageModule } from './workpackage/workpackage.module';
 import { InitiativeModule } from './initiative/initiative.module';
+import { AccountTypeModule } from './account-type/account-type.module';
 
 export const apiRoutes = [
   {
@@ -158,7 +159,7 @@ export const apiRoutes = [
     module: CgiarEntityModule,
   },
   {
-    path: 'cgiar-entity-type',
+    path: 'cgiar-entity-types',
     module: CgiarEntityTypeModule,
   },
   {
@@ -204,5 +205,9 @@ export const apiRoutes = [
   {
     path: 'initiatives',
     module: InitiativeModule,
+  },
+  {
+    path: 'account-types',
+    module: AccountTypeModule,
   },
 ];

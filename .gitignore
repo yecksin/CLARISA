@@ -109,3 +109,5 @@ dist
 ormconfig.ts
 
 .vscode/
+
+clarisa-back/package-lock.json

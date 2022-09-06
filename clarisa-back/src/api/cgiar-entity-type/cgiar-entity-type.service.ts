@@ -14,8 +14,6 @@ export class CgiarEntityTypeService {
   ) {}
 
   async findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<CgiarEntityType[]> {
-    var estado = 1
-    if (option == FindAllOptions.SHOW_ONLY_INACTIVE) estado = 0
     switch(option){
       case FindAllOptions.SHOW_ALL:
         return await this.cgiarEntityTypeRepository.find();
@@ -23,7 +21,7 @@ export class CgiarEntityTypeService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.cgiarEntityTypeRepository.find({
           where: {
-            is_active : estado,
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
           }
         });
       default:
@@ -34,7 +32,7 @@ export class CgiarEntityTypeService {
   async findOne(id: number): Promise<CgiarEntityType> {
     return await this.cgiarEntityTypeRepository.findOneBy({
       id,
-      is_active : 1
+      is_active : true
     });
   }
 

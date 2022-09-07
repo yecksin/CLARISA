@@ -1,6 +1,13 @@
 import { Exclude, Expose, Transform } from 'class-transformer';
+import { Account } from 'src/api/account/entities/account.entity';
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('account_types')
 export class AccountType extends AuditableEntity {
@@ -14,6 +21,9 @@ export class AccountType extends AuditableEntity {
   @Column()
   @Exclude()
   acronym: string;
+
+  @OneToMany(() => Account, (at) => at.account_type)
+  accounts: Promise<Account[]>;
 
   @Expose({ name: 'name' })
   get composedName(): string {

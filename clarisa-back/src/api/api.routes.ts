@@ -41,6 +41,7 @@ import { WorkpackageModule } from './workpackage/workpackage.module';
 import { InitiativeModule } from './initiative/initiative.module';
 import { AccountTypeModule } from './account-type/account-type.module';
 import { AccountModule } from './account/account.module';
+import { ScienceGroupModule } from './science-group/science-group.module';
 
 export const apiRoutes = [
   {
@@ -214,5 +215,9 @@ export const apiRoutes = [
   {
     path: 'accounts',
     module: AccountModule,
+  },
+  {
+    path: 'science-groups',
+    module: ScienceGroupModule,
   },
 ];

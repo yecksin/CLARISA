@@ -44,6 +44,7 @@ import { WorkpackageModule } from './workpackage/workpackage.module';
 import { InitiativeModule } from './initiative/initiative.module';
 import { AccountTypeModule } from './account-type/account-type.module';
 import { AccountModule } from './account/account.module';
+import { ScienceGroupModule } from './science-group/science-group.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -91,6 +92,7 @@ import { AccountModule } from './account/account.module';
     InitiativeModule,
     AccountTypeModule,
     AccountModule,
+    ScienceGroupModule,
   ],
 })
 export class ApiModule {}

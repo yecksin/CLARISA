@@ -34,6 +34,10 @@ export class RoleService {
     return this.rolesRepository.findOneBy({ id });
   }
 
+  update(id: number, updateRoleDto: UpdateRoleDto) {
+    return `This action updates a #${id} role`;
+  }
+
   async getRolesPagination(offset?: number, limit: number = 10) {
     const [items, count] = await this.rolesRepository.findAndCount({
       order: {

@@ -15,7 +15,6 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { GovernanceTypeService } from './governance-type.service';
-import { CreateGovernanceTypeDto } from './dto/create-governance-type.dto';
 import { UpdateGovernanceTypeDto } from './dto/update-governance-type.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';

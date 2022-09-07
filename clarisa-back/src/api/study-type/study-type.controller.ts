@@ -1,11 +1,9 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   Query,
   ParseIntPipe,
   HttpStatus,
@@ -15,7 +13,6 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { StudyTypeService } from './study-type.service';
-import { CreateStudyTypeDto } from './dto/create-study-type.dto';
 import { UpdateStudyTypeDto } from './dto/update-study-type.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { StudyType } from './entities/study-type.entity';

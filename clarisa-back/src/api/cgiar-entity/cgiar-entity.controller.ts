@@ -15,7 +15,6 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { CgiarEntityService } from './cgiar-entity.service';
-import { CreateCgiarEntityDto } from './dto/create-cgiar-entity.dto';
 import { UpdateCgiarEntityDto } from './dto/update-cgiar-entity.dto';
 import { Response } from 'express';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';

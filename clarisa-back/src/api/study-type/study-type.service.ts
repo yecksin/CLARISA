@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
-import { CreateStudyTypeDto } from './dto/create-study-type.dto';
 import { UpdateStudyTypeDto } from './dto/update-study-type.dto';
 import { StudyType } from './entities/study-type.entity';
 

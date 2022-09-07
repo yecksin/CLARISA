@@ -15,7 +15,6 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { InvestmentTypeService } from './investment-type.service';
-import { CreateInvestmentTypeDto } from './dto/create-investment-type.dto';
 import { UpdateInvestmentTypeDto } from './dto/update-investment-type.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';

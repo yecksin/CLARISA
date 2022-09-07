@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
-import { CreateGovernanceTypeDto } from './dto/create-governance-type.dto';
 import { UpdateGovernanceTypeDto } from './dto/update-governance-type.dto';
 import { GovernanceType } from './entities/governance-type.entity';
 

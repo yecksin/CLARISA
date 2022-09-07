@@ -15,7 +15,6 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { GeneralAcronymService } from './general-acronym.service';
-import { CreateGeneralAcronymDto } from './dto/create-general-acronym.dto';
 import { UpdateGeneralAcronymDto } from './dto/update-general-acronym.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';

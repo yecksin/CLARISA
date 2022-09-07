@@ -1,9 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { RegionTypeEnum } from 'src/shared/entities/enums/region-types';
-import { Repository } from 'typeorm';
-import { CreateRegionDto } from './dto/create-region.dto';
 import { RegionDto } from './dto/region.dto';
 import { UpdateRegionDto } from './dto/update-region.dto';
 import { Region } from './entities/region.entity';

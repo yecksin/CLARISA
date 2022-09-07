@@ -3,10 +3,6 @@ import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.en
 import {
   Column,
   Entity,
-  JoinTable,
-  ManyToMany,
-  ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 

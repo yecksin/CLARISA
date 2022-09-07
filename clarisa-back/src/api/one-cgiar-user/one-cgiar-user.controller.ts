@@ -15,7 +15,6 @@ import {
   Res,
 } from '@nestjs/common';
 import { OneCgiarUserService } from './one-cgiar-user.service';
-import { CreateOneCgiarUserDto } from './dto/create-one-cgiar-user.dto';
 import { UpdateOneCgiarUserDto } from './dto/update-one-cgiar-user.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { OneCgiarUser } from './entities/one-cgiar-user.entity';

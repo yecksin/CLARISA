@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
-import { CreateImpactAreaDto } from './dto/create-impact-area.dto';
 import { UpdateImpactAreaDto } from './dto/update-impact-area.dto';
 import { ImpactArea } from './entities/impact-area.entity';
 

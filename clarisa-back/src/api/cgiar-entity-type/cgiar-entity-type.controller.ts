@@ -16,7 +16,6 @@ import {
 } from '@nestjs/common';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { CgiarEntityTypeService } from './cgiar-entity-type.service';
-import { CreateCgiarEntityTypeDto } from './dto/create-cgiar-entity-type.dto';
 import { UpdateCgiarEntityTypeDto } from './dto/update-cgiar-entity-type.dto';
 import { CgiarEntityType } from './entities/cgiar-entity-type.entity';
 import { Response } from 'express';

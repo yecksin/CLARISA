@@ -15,7 +15,6 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { InnovationReadinessLevelService } from './innovation-readiness-level.service';
-import { CreateInnovationReadinessLevelDto } from './dto/create-innovation-readiness-level.dto';
 import { UpdateInnovationReadinessLevelDto } from './dto/update-innovation-readiness-level.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';

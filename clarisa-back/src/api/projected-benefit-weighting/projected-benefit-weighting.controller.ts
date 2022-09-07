@@ -15,7 +15,6 @@ import {
   Query,
 } from '@nestjs/common';
 import { ProjectedBenefitWeightingService } from './projected-benefit-weighting.service';
-import { CreateProjectedBenefitWeightingDto } from './dto/create-projected-benefit-weighting.dto';
 import { UpdateProjectedBenefitWeightingDto } from './dto/update-projected-benefit-weighting.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';

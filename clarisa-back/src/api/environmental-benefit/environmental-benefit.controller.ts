@@ -15,7 +15,6 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { EnvironmentalBenefitService } from './environmental-benefit.service';
-import { CreateEnvironmentalBenefitDto } from './dto/create-environmental-benefit.dto';
 import { UpdateEnvironmentalBenefitDto } from './dto/update-environmental-benefit.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';

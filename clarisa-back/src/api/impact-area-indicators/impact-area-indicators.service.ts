@@ -1,8 +1,7 @@
-import { Injectable, Query } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateImpactAreaIndicatorDto } from './dto/create-impact-area-indicator.dto';
 import { UpdateImpactAreaIndicatorDto } from './dto/update-impact-area-indicator.dto';
-import { getCustomRepository, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { ImpactAreaIndicator } from './entities/impact-area-indicator.entity';
 import { impactAreRepository } from './repositories/impact-area-indicators-repository';

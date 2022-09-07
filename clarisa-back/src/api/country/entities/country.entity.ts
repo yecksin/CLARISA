@@ -1,4 +1,3 @@
-import { Exclude } from 'class-transformer';
 import { Geoposition } from 'src/api/geoposition/entities/geoposition.entity';
 import { Region } from 'src/api/region/entities/region.entity';
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';

@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
-import { CreateOutcomeIndicatorDto } from './dto/create-outcome-indicator.dto';
 import { UpdateOutcomeIndicatorDto } from './dto/update-outcome-indicator.dto';
 import { OutcomeIndicator } from './entities/outcome-indicator.entity';
 

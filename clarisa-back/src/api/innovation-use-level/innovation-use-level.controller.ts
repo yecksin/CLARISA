@@ -15,7 +15,6 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { InnovationUseLevelService } from './innovation-use-level.service';
-import { CreateInnovationUseLevelDto } from './dto/create-innovation-use-level.dto';
 import { UpdateInnovationUseLevelDto } from './dto/update-innovation-use-level.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { InnovationUseLevel } from './entities/innovation-use-level.entity';

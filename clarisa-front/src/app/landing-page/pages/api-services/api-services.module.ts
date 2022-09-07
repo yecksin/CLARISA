@@ -5,13 +5,15 @@ import { ApiServicesRoutingModule } from './api-services-routing.module';
 import { ApiServicesComponent } from './api-services.component';
 import { ContentDashboardComponent } from './sections/content-dashboard/content-dashboard.component';
 import { BannerComponent } from './sections/banner/banner.component';
+import { ServiceClarisaComponent } from './sections/service-clarisa/service-clarisa.component';
 
 
 @NgModule({
   declarations: [
     ApiServicesComponent,
     ContentDashboardComponent,
-    BannerComponent
+    BannerComponent,
+    ServiceClarisaComponent
   ],
   imports: [
     CommonModule,

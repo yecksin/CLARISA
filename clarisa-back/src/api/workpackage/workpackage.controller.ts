@@ -15,9 +15,7 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { WorkpackageService } from './workpackage.service';
-import { CreateWorkpackageDto } from './dto/create-workpackage.dto';
 import { UpdateWorkpackageDto } from './dto/update-workpackage.dto';
-import { WorkpackageRepository } from './repositories/workpackage.repository';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { Workpackage } from './entities/workpackage.entity';

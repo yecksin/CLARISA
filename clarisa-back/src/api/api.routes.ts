@@ -42,6 +42,7 @@ import { InitiativeModule } from './initiative/initiative.module';
 import { AccountTypeModule } from './account-type/account-type.module';
 import { AccountModule } from './account/account.module';
 import { ScienceGroupModule } from './science-group/science-group.module';
+import { UnitModule } from './unit/unit.module';
 
 export const apiRoutes = [
   {
@@ -219,5 +220,9 @@ export const apiRoutes = [
   {
     path: 'science-groups',
     module: ScienceGroupModule,
+  },
+  {
+    path: 'units',
+    module: UnitModule,
   },
 ];

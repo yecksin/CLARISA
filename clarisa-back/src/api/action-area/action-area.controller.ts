@@ -1,13 +1,10 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   Query,
-  ParseEnumPipe,
   Res,
   HttpStatus,
   HttpException,

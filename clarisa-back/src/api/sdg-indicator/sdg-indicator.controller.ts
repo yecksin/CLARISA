@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, HttpStatus, HttpException, Res } from '@nestjs/common';
+import { Controller, Get,  Body, Patch, Param,  UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, HttpStatus, HttpException, Res } from '@nestjs/common';
 import { SdgIndicatorService } from './sdg-indicator.service';
 import { UpdateSdgIndicatorDto } from './dto/update-sdg-indicator.dto';
 import { Response } from 'express';

@@ -1,11 +1,9 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   UseInterceptors,
   ClassSerializerInterceptor,
   Query,
@@ -15,7 +13,6 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { RegionTypeService } from './region-type.service';
-import { CreateRegionTypeDto } from './dto/create-region-type.dto';
 import { UpdateRegionTypeDto } from './dto/update-region-type.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';

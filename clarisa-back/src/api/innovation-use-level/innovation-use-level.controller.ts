@@ -1,6 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, Res, HttpStatus, HttpException } from '@nestjs/common';
+import { Controller, Get, Body, Patch, Param,  UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, Res, HttpStatus, HttpException } from '@nestjs/common';
 import { InnovationUseLevelService } from './innovation-use-level.service';
-import { CreateInnovationUseLevelDto } from './dto/create-innovation-use-level.dto';
 import { UpdateInnovationUseLevelDto } from './dto/update-innovation-use-level.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { InnovationUseLevel } from './entities/innovation-use-level.entity';

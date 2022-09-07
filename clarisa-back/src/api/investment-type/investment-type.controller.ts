@@ -1,6 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, UseInterceptors, ClassSerializerInterceptor, Res, HttpStatus, HttpException } from '@nestjs/common';
+import { Controller, Get,  Body, Patch, Param,  Query, ParseIntPipe, UseInterceptors, ClassSerializerInterceptor, Res, HttpStatus, HttpException } from '@nestjs/common';
 import { InvestmentTypeService } from './investment-type.service';
-import { CreateInvestmentTypeDto } from './dto/create-investment-type.dto';
 import { UpdateInvestmentTypeDto } from './dto/update-investment-type.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';

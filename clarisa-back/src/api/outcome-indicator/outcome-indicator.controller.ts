@@ -1,11 +1,9 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   ParseIntPipe,
   Res,
   HttpStatus,
@@ -15,7 +13,6 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { OutcomeIndicatorService } from './outcome-indicator.service';
-import { CreateOutcomeIndicatorDto } from './dto/create-outcome-indicator.dto';
 import { UpdateOutcomeIndicatorDto } from './dto/update-outcome-indicator.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { OutcomeIndicator } from './entities/outcome-indicator.entity';

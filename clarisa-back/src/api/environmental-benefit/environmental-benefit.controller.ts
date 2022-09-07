@@ -1,6 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, Res, HttpStatus, HttpException } from '@nestjs/common';
+import { Controller, Get,  Body, Patch, Param,  UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, Res, HttpStatus, HttpException } from '@nestjs/common';
 import { EnvironmentalBenefitService } from './environmental-benefit.service';
-import { CreateEnvironmentalBenefitDto } from './dto/create-environmental-benefit.dto';
 import { UpdateEnvironmentalBenefitDto } from './dto/update-environmental-benefit.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';

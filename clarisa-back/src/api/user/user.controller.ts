@@ -1,26 +1,21 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   HttpException,
   HttpStatus,
   Res,
   Query,
-  UseGuards,
   ParseIntPipe,
   UseInterceptors,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Response } from 'express';
 import { PaginationParams } from 'src/shared/interfaces/pageable';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { User } from './entities/user.entity';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 

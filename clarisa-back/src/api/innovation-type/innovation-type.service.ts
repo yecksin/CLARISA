@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { InnovationTypeEnum } from 'src/shared/entities/enums/innovation-types';
 import { FindOptionsWhere, Repository } from 'typeorm';
-import { CreateInnovationTypeDto } from './dto/create-innovation-type.dto';
 import { UpdateInnovationTypeDto } from './dto/update-innovation-type.dto';
 import { InnovationType } from './entities/innovation-type.entity';
 

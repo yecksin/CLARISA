@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
-import { CreateTechnicalFieldDto } from './dto/create-technical-field.dto';
 import { UpdateTechnicalFieldDto } from './dto/update-technical-field.dto';
 import { TechnicalField } from './entities/technical-field.entity';
 

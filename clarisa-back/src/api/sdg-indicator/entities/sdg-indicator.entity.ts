@@ -1,6 +1,6 @@
 import { Expose } from 'class-transformer';
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { SdgTarget } from '../../sdg-target/entities/sdg-target.entity';
 
 @Entity('sustainable_development_goal_indicators')

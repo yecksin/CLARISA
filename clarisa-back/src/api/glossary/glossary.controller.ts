@@ -1,17 +1,14 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   HttpException,
   HttpStatus,
   Res,
   Query,
   ParseIntPipe,
-  ParseBoolPipe,
   UseInterceptors,
   ClassSerializerInterceptor,
 } from '@nestjs/common';

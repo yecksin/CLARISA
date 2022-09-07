@@ -1,11 +1,9 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   Query,
   ParseIntPipe,
   HttpStatus,
@@ -15,7 +13,6 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { ImpactAreaIndicatorsService } from './impact-area-indicators.service';
-import { CreateImpactAreaIndicatorDto } from './dto/create-impact-area-indicator.dto';
 import { UpdateImpactAreaIndicatorDto } from './dto/update-impact-area-indicator.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { ImpactAreaIndicator } from './entities/impact-area-indicator.entity';

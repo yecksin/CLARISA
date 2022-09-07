@@ -1,4 +1,3 @@
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { CgiarEntityType } from '../../cgiar-entity-type/entities/cgiar-entity-type.entity';
 

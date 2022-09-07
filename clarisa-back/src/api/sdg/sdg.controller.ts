@@ -1,11 +1,9 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   Query,
   ParseIntPipe,
   Res,
@@ -15,7 +13,6 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { SdgService } from './sdg.service';
-import { CreateSdgDto } from './dto/create-sdg.dto';
 import { UpdateSdgDto } from './dto/update-sdg.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Sdg } from './entities/sdg.entity';

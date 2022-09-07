@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
-import { CreateBusinessCategoryDto } from './dto/create-business-category.dto';
 import { UpdateBusinessCategoryDto } from './dto/update-business-category.dto';
 import { BusinessCategory } from './entities/business-category.entity';
 

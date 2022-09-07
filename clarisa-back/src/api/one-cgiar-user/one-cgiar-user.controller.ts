@@ -1,6 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, HttpStatus, HttpException, Res } from '@nestjs/common';
+import { Controller, Get,  Body, Patch, Param,  UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, HttpStatus, HttpException, Res } from '@nestjs/common';
 import { OneCgiarUserService } from './one-cgiar-user.service';
-import { CreateOneCgiarUserDto } from './dto/create-one-cgiar-user.dto';
 import { UpdateOneCgiarUserDto } from './dto/update-one-cgiar-user.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { OneCgiarUser } from './entities/one-cgiar-user.entity';

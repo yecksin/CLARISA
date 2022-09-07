@@ -31,7 +31,8 @@ import { InfoDashboardsApiServicesComponent } from './sections/info-dashboards-a
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    
   ]
 })
 export class HomeModule { }

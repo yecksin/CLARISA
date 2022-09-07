@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, Res, HttpException, HttpStatus, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
+import { Controller, Get, Body, Patch, Param, Query, ParseIntPipe, Res, HttpException, HttpStatus,
+  UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
 import { CgiarEntityService } from './cgiar-entity.service';
-import { CreateCgiarEntityDto } from './dto/create-cgiar-entity.dto';
 import { UpdateCgiarEntityDto } from './dto/update-cgiar-entity.dto';
 import { Response } from 'express';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';

@@ -4,10 +4,7 @@ import {
   Column,
   Entity,
   JoinColumn,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { ImpactArea } from '../../impact-area/entities/impact-area.entity';

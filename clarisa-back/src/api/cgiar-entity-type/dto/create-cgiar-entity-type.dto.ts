@@ -1,5 +1,5 @@
-export class CreateCgiarEntityTypeDto {
-    name: string;
+import { AuditableDto } from "src/shared/entities/dtos/auditable-dto";
 
-    is_active: number;
+export class CreateCgiarEntityTypeDto extends AuditableDto{
+    name: string;
 }

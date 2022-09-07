@@ -1,11 +1,9 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   Query,
   ParseIntPipe,
   Res,
@@ -15,7 +13,6 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { GeopositionService } from './geoposition.service';
-import { CreateGeopositionDto } from './dto/create-geoposition.dto';
 import { UpdateGeopositionDto } from './dto/update-geoposition.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';

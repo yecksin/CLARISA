@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
-import { CreateSdgDto } from './dto/create-sdg.dto';
 import { UpdateSdgDto } from './dto/update-sdg.dto';
 import { Sdg } from './entities/sdg.entity';
 

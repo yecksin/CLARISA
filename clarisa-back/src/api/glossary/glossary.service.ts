@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CreateGlossaryDto } from './dto/create-glossary.dto';
 import { UpdateGlossaryDto } from './dto/update-glossary.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

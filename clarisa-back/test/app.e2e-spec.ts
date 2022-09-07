@@ -4,10 +4,9 @@ import request from 'supertest';
 import { testModule, usePipes } from './test.module';
 
 describe('AppController (e2e)', () => {
-  //let app = 'http://localhost:3000';
   let app: INestApplication;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const moduleFixture: TestingModule = await testModule.compile();
 
     app = moduleFixture.createNestApplication();
@@ -15,39 +14,26 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  /*  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
-  });*/
-
   it('/api/sdgs (GET)', () => {
     return request(app.getHttpServer())
       .get('/api/sdgs')
       .then((res) => {
-        console.log(res.body);
         expect(res.status).toBe(200);
-        expect(res.body).toStrictEqual([]);
+        expect(res.body).toBeInstanceOf(Array);
       });
   });
 
-  it('/api/regions/get/1 (GET)', () => {
+/*  it('/api/regions/get/1 (GET)', () => {
     return request(app.getHttpServer())
       .get('/api/regions/get/' + 1)
-      .then((res) => {
-        console.log(res.body);
-        expect(res.status).toBe(200);
-        expect(res.body).toStrictEqual({
-          id: 1,
-          iso_numeric: 1,
-          name: 'Central and West Asia and North Africa',
-          acronym: 'CWANA',
-          region_type_id: 1,
-          parent_id: null,
-        });
+      .expect(200)
+      .expect((res) => {
+        const data = res.body
+        expect(data).toHaveProperty("id");
+        expect(data).toHaveProperty("iso_numeric");
+        expect(data).toHaveProperty("name");
       });
-  });
+  });*/
 
   afterAll(async () => {
     await app.close();

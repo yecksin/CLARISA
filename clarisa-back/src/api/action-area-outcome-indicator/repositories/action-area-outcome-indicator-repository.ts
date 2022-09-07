@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { dataSource } from 'src/ormconfig';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { DataSource, Repository } from 'typeorm';
 import { ActionAreaOutcomeIndicatorRequestDto } from '../dto/action-area-outcome-indicator-request.dto';

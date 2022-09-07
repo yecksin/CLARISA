@@ -1,13 +1,10 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   Query,
-  ParseEnumPipe,
   Res,
   HttpStatus,
   HttpException,
@@ -18,7 +15,6 @@ import {
 import { Response } from 'express';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { ActionAreaService } from './action-area.service';
-import { CreateActionAreaDto } from './dto/create-action-area.dto';
 import { UpdateActionAreaDto } from './dto/update-action-area.dto';
 import { ActionArea } from './entities/action-area.entity';
 

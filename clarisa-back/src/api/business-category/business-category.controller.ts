@@ -1,8 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, Res, HttpStatus, HttpException } from '@nestjs/common';
+import { Controller, Get,  Body, Patch, Param,  UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, Res, HttpStatus, HttpException } from '@nestjs/common';
 import { Response } from 'express';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { BusinessCategoryService } from './business-category.service';
-import { CreateBusinessCategoryDto } from './dto/create-business-category.dto';
 import { UpdateBusinessCategoryDto } from './dto/update-business-category.dto';
 import { BusinessCategory } from './entities/business-category.entity';
 

@@ -1,11 +1,9 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   UseInterceptors,
   ClassSerializerInterceptor,
   Query,
@@ -17,7 +15,6 @@ import {
 import { Response } from 'express';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { CountryService } from './country.service';
-import { CreateCountryDto } from './dto/create-country.dto';
 import { UpdateCountryDto } from './dto/update-country.dto';
 import { Country } from './entities/country.entity';
 

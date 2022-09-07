@@ -1,6 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, Res, HttpStatus, HttpException } from '@nestjs/common';
+import { Controller, Get, Body, Patch, Param, UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, Res, HttpStatus, HttpException } from '@nestjs/common';
 import { GovernanceTypeService } from './governance-type.service';
-import { CreateGovernanceTypeDto } from './dto/create-governance-type.dto';
 import { UpdateGovernanceTypeDto } from './dto/update-governance-type.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';

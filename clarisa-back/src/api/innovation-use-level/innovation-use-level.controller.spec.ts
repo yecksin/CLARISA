@@ -11,7 +11,9 @@ describe('InnovationUseLevelController', () => {
       providers: [InnovationUseLevelService],
     }).compile();
 
-    controller = module.get<InnovationUseLevelController>(InnovationUseLevelController);
+    controller = module.get<InnovationUseLevelController>(
+      InnovationUseLevelController,
+    );
   });
 
   it('should be defined', () => {

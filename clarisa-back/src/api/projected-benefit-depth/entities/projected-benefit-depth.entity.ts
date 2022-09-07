@@ -12,12 +12,12 @@ import {
 
 @Entity('projected_benefits_depths')
 export class ProjectedBenefitDepth extends AuditableEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    projected_benefits_id: number;
+  @Column()
+  projected_benefits_id: number;
 
-    @Column()
-    depth_description_id: number;
+  @Column()
+  depth_description_id: number;
 }

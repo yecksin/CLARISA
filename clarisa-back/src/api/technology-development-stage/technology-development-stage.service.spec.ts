@@ -9,7 +9,9 @@ describe('TechnologyDevelopmentStageService', () => {
       providers: [TechnologyDevelopmentStageService],
     }).compile();
 
-    service = module.get<TechnologyDevelopmentStageService>(TechnologyDevelopmentStageService);
+    service = module.get<TechnologyDevelopmentStageService>(
+      TechnologyDevelopmentStageService,
+    );
   });
 
   it('should be defined', () => {

@@ -7,6 +7,6 @@ import { TechnicalField } from './entities/technical-field.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([TechnicalField])],
   controllers: [TechnicalFieldController],
-  providers: [TechnicalFieldService]
+  providers: [TechnicalFieldService],
 })
 export class TechnicalFieldModule {}

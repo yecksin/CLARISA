@@ -13,7 +13,9 @@ export class ProjectedBenefitWeightDescriptionService {
     private projectedBenefitWeightDescriptionRepository: Repository<ProjectedBenefitWeightDescription>,
   ) {}
 
-  async findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<ProjectedBenefitWeightDescription[]> {
+  async findAll(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<ProjectedBenefitWeightDescription[]> {
     switch (option) {
       case FindAllOptions.SHOW_ALL:
         return await this.projectedBenefitWeightDescriptionRepository.find();
@@ -21,22 +23,26 @@ export class ProjectedBenefitWeightDescriptionService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.projectedBenefitWeightDescriptionRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE
-          }
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         });
       default:
         throw Error('?!');
     }
   }
 
-  async findOne(id: number) : Promise<ProjectedBenefitWeightDescription> {
+  async findOne(id: number): Promise<ProjectedBenefitWeightDescription> {
     return await this.projectedBenefitWeightDescriptionRepository.findOneBy({
       id,
-      is_active : true
+      is_active: true,
     });
   }
 
-  async update(updateProjectedBenefitWeightDescriptionDto: UpdateProjectedBenefitWeightDescriptionDto[]) {
-    return await this.projectedBenefitWeightDescriptionRepository.save(updateProjectedBenefitWeightDescriptionDto);
+  async update(
+    updateProjectedBenefitWeightDescriptionDto: UpdateProjectedBenefitWeightDescriptionDto[],
+  ) {
+    return await this.projectedBenefitWeightDescriptionRepository.save(
+      updateProjectedBenefitWeightDescriptionDto,
+    );
   }
 }

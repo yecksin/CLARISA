@@ -1,4 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, Res, HttpStatus, HttpException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+  Query,
+  ParseIntPipe,
+  Res,
+  HttpStatus,
+  HttpException,
+} from '@nestjs/common';
 import { TechnologyDevelopmentStageService } from './technology-development-stage.service';
 import { CreateTechnologyDevelopmentStageDto } from './dto/create-technology-development-stage.dto';
 import { UpdateTechnologyDevelopmentStageDto } from './dto/update-technology-development-stage.dto';
@@ -26,7 +41,8 @@ export class TechnologyDevelopmentStageController {
   @Patch('update')
   async update(
     @Res() res: Response,
-    @Body() updateTechnologyDevelopmentStageDtoList: UpdateTechnologyDevelopmentStageDto[],
+    @Body()
+    updateTechnologyDevelopmentStageDtoList: UpdateTechnologyDevelopmentStageDto[],
   ) {
     try {
       const result: TechnologyDevelopmentStage[] =
@@ -39,4 +55,3 @@ export class TechnologyDevelopmentStageController {
     }
   }
 }
-

@@ -12,8 +12,10 @@ import { CountryRepository } from './repositories/country.repository';
 export class CountryService {
   constructor(private countriesRepository: CountryRepository) {}
 
-  async findAll(option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE): Promise<CountryDto[]> {
-    if(!(Object.values<string>(FindAllOptions).includes(option))){
+  async findAll(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<CountryDto[]> {
+    if (!Object.values<string>(FindAllOptions).includes(option)) {
       throw Error('?!');
     }
 

@@ -12,16 +12,18 @@ export class InnovationUseLevelService {
     private innovationUseLevelRepository: Repository<InnovationUseLevel>,
   ) {}
 
-  async findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<InnovationUseLevel[]> {
-    switch(option){
+  async findAll(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<InnovationUseLevel[]> {
+    switch (option) {
       case FindAllOptions.SHOW_ALL:
         return await this.innovationUseLevelRepository.find();
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.innovationUseLevelRepository.find({
           where: {
-            is_active : option === FindAllOptions.SHOW_ONLY_ACTIVE
-          }
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         });
       default:
         throw Error('?!');
@@ -31,11 +33,15 @@ export class InnovationUseLevelService {
   async findOne(id: number): Promise<InnovationUseLevel> {
     return await this.innovationUseLevelRepository.findOneBy({
       id,
-      is_active : true
+      is_active: true,
     });
   }
 
-  async update(updateInnovationUseLevelDtoList: UpdateInnovationUseLevelDto[]) : Promise<InnovationUseLevel[]> {
-    return await this.innovationUseLevelRepository.save(updateInnovationUseLevelDtoList);
+  async update(
+    updateInnovationUseLevelDtoList: UpdateInnovationUseLevelDto[],
+  ): Promise<InnovationUseLevel[]> {
+    return await this.innovationUseLevelRepository.save(
+      updateInnovationUseLevelDtoList,
+    );
   }
 }

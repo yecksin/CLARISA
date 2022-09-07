@@ -36,7 +36,7 @@ export class Country extends AuditableEntity {
   @Column()
   geoposition_id: number;
 
-  @ManyToMany(() => Region, region => region.countries)
+  @ManyToMany(() => Region, (region) => region.countries)
   @JoinTable({
     name: 'country_regions',
     joinColumn: {

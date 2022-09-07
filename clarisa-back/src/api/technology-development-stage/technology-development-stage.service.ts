@@ -38,7 +38,9 @@ export class TechnologyDevelopmentStageService {
     });
   }
 
-  async update(updateTechnologyDevelopmentStageDto: UpdateTechnologyDevelopmentStageDto[]) {
+  async update(
+    updateTechnologyDevelopmentStageDto: UpdateTechnologyDevelopmentStageDto[],
+  ) {
     return await this.technologyDevelopmentStagesRepository.save(
       updateTechnologyDevelopmentStageDto,
     );

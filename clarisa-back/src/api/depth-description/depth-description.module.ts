@@ -7,6 +7,6 @@ import { DepthDescription } from './entities/depth-description.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([DepthDescription])],
   controllers: [DepthDescriptionController],
-  providers: [DepthDescriptionService]
+  providers: [DepthDescriptionService],
 })
 export class DepthDescriptionModule {}

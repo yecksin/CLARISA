@@ -39,8 +39,6 @@ export class GovernanceTypeService {
   }
 
   async update(updateGovernanceTypeDto: UpdateGovernanceTypeDto[]) {
-    return await this.governanceTypesRepository.save(
-      updateGovernanceTypeDto,
-    );
+    return await this.governanceTypesRepository.save(updateGovernanceTypeDto);
   }
 }

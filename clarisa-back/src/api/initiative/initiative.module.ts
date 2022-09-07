@@ -8,6 +8,6 @@ import { InitiativeRepository } from './repositories/initiative.repository';
 @Module({
   imports: [TypeOrmModule.forFeature([Initiative])],
   controllers: [InitiativeController],
-  providers: [InitiativeService, InitiativeRepository]
+  providers: [InitiativeService, InitiativeRepository],
 })
 export class InitiativeModule {}

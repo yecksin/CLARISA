@@ -1,4 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, Res, HttpStatus, HttpException, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  ParseIntPipe,
+  Res,
+  HttpStatus,
+  HttpException,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import { GeneralAcronymService } from './general-acronym.service';
 import { CreateGeneralAcronymDto } from './dto/create-general-acronym.dto';
 import { UpdateGeneralAcronymDto } from './dto/update-general-acronym.dto';
@@ -12,7 +27,7 @@ export class GeneralAcronymController {
   constructor(private readonly generalAcronymService: GeneralAcronymService) {}
 
   @Get()
-  async findAll(@Query('show') show : FindAllOptions) {
+  async findAll(@Query('show') show: FindAllOptions) {
     return await this.generalAcronymService.findAll(show);
   }
 
@@ -22,13 +37,17 @@ export class GeneralAcronymController {
   }
 
   @Patch('update')
-  async update(@Res() res: Response, @Body() updateGeneralAcronymDtoList: UpdateGeneralAcronymDto[]) {
+  async update(
+    @Res() res: Response,
+    @Body() updateGeneralAcronymDtoList: UpdateGeneralAcronymDto[],
+  ) {
     try {
-      const result : GeneralAcronym[] = await this.generalAcronymService.update(updateGeneralAcronymDtoList);
+      const result: GeneralAcronym[] = await this.generalAcronymService.update(
+        updateGeneralAcronymDtoList,
+      );
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
   }
-
 }

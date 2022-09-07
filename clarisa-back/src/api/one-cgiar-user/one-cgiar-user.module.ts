@@ -7,6 +7,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [TypeOrmModule.forFeature([OneCgiarUser])],
   controllers: [OneCgiarUserController],
-  providers: [OneCgiarUserService]
+  providers: [OneCgiarUserService],
 })
 export class OneCgiarUserModule {}

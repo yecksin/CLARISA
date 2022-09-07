@@ -9,7 +9,9 @@ describe('ProjectedBenefitWeightDescriptionService', () => {
       providers: [ProjectedBenefitWeightDescriptionService],
     }).compile();
 
-    service = module.get<ProjectedBenefitWeightDescriptionService>(ProjectedBenefitWeightDescriptionService);
+    service = module.get<ProjectedBenefitWeightDescriptionService>(
+      ProjectedBenefitWeightDescriptionService,
+    );
   });
 
   it('should be defined', () => {

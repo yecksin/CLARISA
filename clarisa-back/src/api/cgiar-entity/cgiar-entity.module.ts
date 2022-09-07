@@ -7,6 +7,6 @@ import { CgiarEntity } from './entities/cgiar-entity.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([CgiarEntity])],
   controllers: [CgiarEntityController],
-  providers: [CgiarEntityService]
+  providers: [CgiarEntityService],
 })
 export class CgiarEntityModule {}

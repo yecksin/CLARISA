@@ -11,7 +11,9 @@ describe('DepthDescriptionController', () => {
       providers: [DepthDescriptionService],
     }).compile();
 
-    controller = module.get<DepthDescriptionController>(DepthDescriptionController);
+    controller = module.get<DepthDescriptionController>(
+      DepthDescriptionController,
+    );
   });
 
   it('should be defined', () => {

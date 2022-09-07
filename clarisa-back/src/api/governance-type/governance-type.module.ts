@@ -7,6 +7,6 @@ import { GovernanceType } from './entities/governance-type.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([GovernanceType])],
   controllers: [GovernanceTypeController],
-  providers: [GovernanceTypeService]
+  providers: [GovernanceTypeService],
 })
 export class GovernanceTypeModule {}

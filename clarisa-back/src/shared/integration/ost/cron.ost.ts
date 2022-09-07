@@ -1,10 +1,10 @@
-import { Cron, CronExpression } from "@nestjs/schedule";
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { Injectable, Logger } from '@nestjs/common';
-import { ApiOST } from "./api.ost";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Workpackage } from "src/api/workpackage/entities/workpackage.entity";
-import { Repository } from "typeorm";
-import { WorkpackageOSTDto } from "./dto/workpackage.ost.dto";
+import { ApiOST } from './api.ost';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Workpackage } from 'src/api/workpackage/entities/workpackage.entity';
+import { Repository } from 'typeorm';
+import { WorkpackageOSTDto } from './dto/workpackage.ost.dto';
 
 @Injectable()
 export class CronOST {

@@ -9,7 +9,9 @@ describe('EnvironmentalBenefitService', () => {
       providers: [EnvironmentalBenefitService],
     }).compile();
 
-    service = module.get<EnvironmentalBenefitService>(EnvironmentalBenefitService);
+    service = module.get<EnvironmentalBenefitService>(
+      EnvironmentalBenefitService,
+    );
   });
 
   it('should be defined', () => {

@@ -21,7 +21,7 @@ import { IntegrationModule } from './shared/integration/integration.module';
     RouterModule.register(routes),
     ApiModule,
     AuthModule,
-    IntegrationModule
+    IntegrationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

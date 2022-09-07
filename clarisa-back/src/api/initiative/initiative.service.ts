@@ -10,14 +10,12 @@ import { InitiativeRepository } from './repositories/initiative.repository';
 
 @Injectable()
 export class InitiativeService {
-  constructor(
-    private initiativesRepository: InitiativeRepository,
-  ) {}
+  constructor(private initiativesRepository: InitiativeRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<InitiativeDto[]> {
-    if(!(Object.values<string>(FindAllOptions).includes(option))){
+    if (!Object.values<string>(FindAllOptions).includes(option)) {
       throw Error('?!');
     }
 
@@ -32,8 +30,6 @@ export class InitiativeService {
   }
 
   async update(updateInitiativeDto: UpdateInitiativeDto[]) {
-    return await this.initiativesRepository.save(
-      updateInitiativeDto,
-    );
+    return await this.initiativesRepository.save(updateInitiativeDto);
   }
 }

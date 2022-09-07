@@ -11,7 +11,9 @@ describe('ProjectedBenefitWeightingController', () => {
       providers: [ProjectedBenefitWeightingService],
     }).compile();
 
-    controller = module.get<ProjectedBenefitWeightingController>(ProjectedBenefitWeightingController);
+    controller = module.get<ProjectedBenefitWeightingController>(
+      ProjectedBenefitWeightingController,
+    );
   });
 
   it('should be defined', () => {

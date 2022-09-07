@@ -12,7 +12,7 @@ export class InitiativeDto {
   name: string;
 
   /**
-   * The initiative short name 
+   * The initiative short name
    */
   short_name: string;
 

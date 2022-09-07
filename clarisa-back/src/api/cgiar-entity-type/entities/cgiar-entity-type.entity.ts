@@ -3,11 +3,11 @@ import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.en
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('global_unit_types')
-export class CgiarEntityType extends AuditableEntity{
-    @PrimaryGeneratedColumn()
-    @Expose({name:'code'})
-    id: number;
+export class CgiarEntityType extends AuditableEntity {
+  @PrimaryGeneratedColumn()
+  @Expose({ name: 'code' })
+  id: number;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 }

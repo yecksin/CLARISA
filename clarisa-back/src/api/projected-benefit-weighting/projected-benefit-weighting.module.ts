@@ -7,6 +7,6 @@ import { ProjectedBenefitWeighting } from './entities/projected-benefit-weightin
 @Module({
   imports: [TypeOrmModule.forFeature([ProjectedBenefitWeighting])],
   controllers: [ProjectedBenefitWeightingController],
-  providers: [ProjectedBenefitWeightingService]
+  providers: [ProjectedBenefitWeightingService],
 })
 export class ProjectedBenefitWeightingModule {}

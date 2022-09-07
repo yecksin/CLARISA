@@ -1,4 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, HttpStatus, HttpException, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+  Query,
+  ParseIntPipe,
+  HttpStatus,
+  HttpException,
+  Res,
+} from '@nestjs/common';
 import { SdgIndicatorService } from './sdg-indicator.service';
 import { UpdateSdgIndicatorDto } from './dto/update-sdg-indicator.dto';
 import { Response } from 'express';
@@ -11,7 +26,7 @@ export class SdgIndicatorController {
   constructor(private readonly sdgIndicatorService: SdgIndicatorService) {}
 
   @Get()
-  async findAll(@Query('show') show : FindAllOptions) {
+  async findAll(@Query('show') show: FindAllOptions) {
     return await this.sdgIndicatorService.findAll(show);
   }
 
@@ -21,9 +36,14 @@ export class SdgIndicatorController {
   }
 
   @Patch('update')
-  async update(@Res() res: Response, @Body() updateSdgIndicatorDtoList: UpdateSdgIndicatorDto[]) {
+  async update(
+    @Res() res: Response,
+    @Body() updateSdgIndicatorDtoList: UpdateSdgIndicatorDto[],
+  ) {
     try {
-      const result : SdgIndicator[] = await this.sdgIndicatorService.update(updateSdgIndicatorDtoList);
+      const result: SdgIndicator[] = await this.sdgIndicatorService.update(
+        updateSdgIndicatorDtoList,
+      );
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

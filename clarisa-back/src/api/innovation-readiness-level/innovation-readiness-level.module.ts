@@ -7,6 +7,6 @@ import { InnovationReadinessLevel } from './entities/innovation-readiness-level.
 @Module({
   imports: [TypeOrmModule.forFeature([InnovationReadinessLevel])],
   controllers: [InnovationReadinessLevelController],
-  providers: [InnovationReadinessLevelService]
+  providers: [InnovationReadinessLevelService],
 })
 export class InnovationReadinessLevelModule {}

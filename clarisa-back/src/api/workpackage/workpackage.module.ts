@@ -8,6 +8,6 @@ import { WorkpackageRepository } from './repositories/workpackage.repository';
 @Module({
   imports: [TypeOrmModule.forFeature([Workpackage])],
   controllers: [WorkpackageController],
-  providers: [WorkpackageService, WorkpackageRepository]
+  providers: [WorkpackageService, WorkpackageRepository],
 })
 export class WorkpackageModule {}

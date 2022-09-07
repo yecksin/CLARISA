@@ -2,7 +2,7 @@ import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.en
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('submission_tool_initiatives')
-export class Workpackage extends AuditableEntity{
+export class Workpackage extends AuditableEntity {
   @PrimaryGeneratedColumn()
   id: number;
 

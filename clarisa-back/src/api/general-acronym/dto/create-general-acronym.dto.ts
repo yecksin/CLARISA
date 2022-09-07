@@ -1,6 +1,5 @@
 export class CreateGeneralAcronymDto {
+  acronym: string;
 
-    acronym: string;
-
-    description: string;
+  description: string;
 }

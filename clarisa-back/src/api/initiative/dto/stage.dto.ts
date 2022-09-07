@@ -2,7 +2,7 @@ export class StageDto {
   /**
    * The initiative by stage initiative id
    */
-  id : string;
+  id: string;
   /**
    * The initiative by stage id
    */

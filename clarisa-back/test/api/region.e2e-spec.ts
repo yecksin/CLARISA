@@ -18,10 +18,10 @@ describe('Region (e2e)', () => {
       .get('/api/regions/get/' + 1)
       .expect(200)
       .expect((res) => {
-        const data = res.body
-        expect(data).toHaveProperty("id");
-        expect(data).toHaveProperty("iso_numeric");
-        expect(data).toHaveProperty("name");
+        const data = res.body;
+        expect(data).toHaveProperty('id');
+        expect(data).toHaveProperty('iso_numeric');
+        expect(data).toHaveProperty('name');
       });
   });
 

@@ -7,6 +7,6 @@ import { TechnologyDevelopmentStage } from './entities/technology-development-st
 @Module({
   imports: [TypeOrmModule.forFeature([TechnologyDevelopmentStage])],
   controllers: [TechnologyDevelopmentStageController],
-  providers: [TechnologyDevelopmentStageService]
+  providers: [TechnologyDevelopmentStageService],
 })
 export class TechnologyDevelopmentStageModule {}

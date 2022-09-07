@@ -1,4 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, Res, HttpStatus, HttpException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+  Query,
+  ParseIntPipe,
+  Res,
+  HttpStatus,
+  HttpException,
+} from '@nestjs/common';
 import { InnovationTypeService } from './innovation-type.service';
 import { CreateInnovationTypeDto } from './dto/create-innovation-type.dto';
 import { UpdateInnovationTypeDto } from './dto/update-innovation-type.dto';
@@ -10,9 +25,7 @@ import { InnovationType } from './entities/innovation-type.entity';
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
 export class InnovationTypeController {
-  constructor(
-    private readonly innovationTypeService: InnovationTypeService,
-  ) {}
+  constructor(private readonly innovationTypeService: InnovationTypeService) {}
 
   @Get()
   async findAll(
@@ -33,10 +46,9 @@ export class InnovationTypeController {
     @Body() updateInnovationTypeDtoList: UpdateInnovationTypeDto[],
   ) {
     try {
-      const result: InnovationType[] =
-        await this.innovationTypeService.update(
-          updateInnovationTypeDtoList,
-        );
+      const result: InnovationType[] = await this.innovationTypeService.update(
+        updateInnovationTypeDtoList,
+      );
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

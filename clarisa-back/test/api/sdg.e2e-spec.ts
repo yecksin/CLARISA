@@ -18,10 +18,10 @@ describe('Sdg (e2e)', () => {
       .get('/api/sdgs/get/' + 1)
       .expect(200)
       .expect((res) => {
-        const data = res.body
-        expect(data).toHaveProperty("id");
-        expect(data).toHaveProperty("smo_code");
-        expect(data).toHaveProperty("short_name");
+        const data = res.body;
+        expect(data).toHaveProperty('id');
+        expect(data).toHaveProperty('smo_code');
+        expect(data).toHaveProperty('short_name');
       });
   });
 

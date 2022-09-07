@@ -7,6 +7,6 @@ import { GeneralAcronym } from './entities/general-acronym.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([GeneralAcronym])],
   controllers: [GeneralAcronymController],
-  providers: [GeneralAcronymService]
+  providers: [GeneralAcronymService],
 })
 export class GeneralAcronymModule {}

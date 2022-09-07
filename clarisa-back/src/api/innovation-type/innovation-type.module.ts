@@ -7,6 +7,6 @@ import { InnovationType } from './entities/innovation-type.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([InnovationType])],
   controllers: [InnovationTypeController],
-  providers: [InnovationTypeService]
+  providers: [InnovationTypeService],
 })
 export class InnovationTypeModule {}

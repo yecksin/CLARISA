@@ -12,16 +12,18 @@ export class InnovationReadinessLevelService {
     private innovationReadinessLevelRepository: Repository<InnovationReadinessLevel>,
   ) {}
 
-  async findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<InnovationReadinessLevel[]> {
-    switch(option){
+  async findAll(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<InnovationReadinessLevel[]> {
+    switch (option) {
       case FindAllOptions.SHOW_ALL:
         return await this.innovationReadinessLevelRepository.find();
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.innovationReadinessLevelRepository.find({
           where: {
-            is_active : option === FindAllOptions.SHOW_ONLY_ACTIVE
-          }
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         });
       default:
         throw Error('?!');
@@ -31,11 +33,15 @@ export class InnovationReadinessLevelService {
   async findOne(id: number): Promise<InnovationReadinessLevel> {
     return await this.innovationReadinessLevelRepository.findOneBy({
       id,
-      is_active : true
+      is_active: true,
     });
   }
 
-  async update(updateInnovationReadinessLevelDtoList: UpdateInnovationReadinessLevelDto[]) : Promise<InnovationReadinessLevel[]> {
-    return await this.innovationReadinessLevelRepository.save(updateInnovationReadinessLevelDtoList);
+  async update(
+    updateInnovationReadinessLevelDtoList: UpdateInnovationReadinessLevelDto[],
+  ): Promise<InnovationReadinessLevel[]> {
+    return await this.innovationReadinessLevelRepository.save(
+      updateInnovationReadinessLevelDtoList,
+    );
   }
 }

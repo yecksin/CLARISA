@@ -22,12 +22,14 @@ export class CgiarEntityTypeService {
     CgiarEntityTypeEnum.ONE_CGIAR_PLATFORM,
   ];
 
-  private readonly whereClause : FindOptionsWhere<CgiarEntityType> = {
+  private readonly whereClause: FindOptionsWhere<CgiarEntityType> = {
     id: In(this.defaultTypes),
-  }
+  };
 
-  async findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<CgiarEntityType[]> {
-    switch(option){
+  async findAll(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<CgiarEntityType[]> {
+    switch (option) {
       case FindAllOptions.SHOW_ALL:
         return await this.cgiarEntityTypeRepository.find({
           where: this.whereClause,
@@ -38,7 +40,7 @@ export class CgiarEntityTypeService {
           where: {
             ...this.whereClause,
             is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
-          }
+          },
         });
       default:
         throw Error('?!');
@@ -48,11 +50,15 @@ export class CgiarEntityTypeService {
   async findOne(id: number): Promise<CgiarEntityType> {
     return await this.cgiarEntityTypeRepository.findOneBy({
       id,
-      is_active : true
+      is_active: true,
     });
   }
 
-  async update(updateCgiarEntityTypeDtoList: UpdateCgiarEntityTypeDto[]) : Promise<CgiarEntityType[]> {
-    return await this.cgiarEntityTypeRepository.save(updateCgiarEntityTypeDtoList);
+  async update(
+    updateCgiarEntityTypeDtoList: UpdateCgiarEntityTypeDto[],
+  ): Promise<CgiarEntityType[]> {
+    return await this.cgiarEntityTypeRepository.save(
+      updateCgiarEntityTypeDtoList,
+    );
   }
 }

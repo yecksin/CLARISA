@@ -14,10 +14,10 @@ export class RegionService {
   constructor(private regionsRepository: RegionRepository) {}
 
   async findAll(
-    regionType: RegionTypeEnum, 
-    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE
+    regionType: RegionTypeEnum,
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<RegionDto[]> {
-    if(!(Object.values<string>(FindAllOptions).includes(option))){
+    if (!Object.values<string>(FindAllOptions).includes(option)) {
       throw Error('?!');
     }
 

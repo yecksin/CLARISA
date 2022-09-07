@@ -7,6 +7,6 @@ import { InnovationUseLevel } from './entities/innovation-use-level.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([InnovationUseLevel])],
   controllers: [InnovationUseLevelController],
-  providers: [InnovationUseLevelService]
+  providers: [InnovationUseLevelService],
 })
 export class InnovationUseLevelModule {}

@@ -7,6 +7,6 @@ import { ProjectedBenefitWeightDescription } from './entities/projected-benefit-
 @Module({
   imports: [TypeOrmModule.forFeature([ProjectedBenefitWeightDescription])],
   controllers: [ProjectedBenefitWeightDescriptionController],
-  providers: [ProjectedBenefitWeightDescriptionService]
+  providers: [ProjectedBenefitWeightDescriptionService],
 })
 export class ProjectedBenefitWeightDescriptionModule {}

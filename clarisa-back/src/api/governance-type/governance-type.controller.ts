@@ -1,4 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, Res, HttpStatus, HttpException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+  Query,
+  ParseIntPipe,
+  Res,
+  HttpStatus,
+  HttpException,
+} from '@nestjs/common';
 import { GovernanceTypeService } from './governance-type.service';
 import { CreateGovernanceTypeDto } from './dto/create-governance-type.dto';
 import { UpdateGovernanceTypeDto } from './dto/update-governance-type.dto';
@@ -9,9 +24,7 @@ import { GovernanceType } from './entities/governance-type.entity';
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
 export class GovernanceTypeController {
-  constructor(
-    private readonly governanceTypeService: GovernanceTypeService,
-  ) {}
+  constructor(private readonly governanceTypeService: GovernanceTypeService) {}
 
   @Get()
   async findAll(@Query('show') show: FindAllOptions) {
@@ -29,10 +42,9 @@ export class GovernanceTypeController {
     @Body() updateGovernanceTypeDtoList: UpdateGovernanceTypeDto[],
   ) {
     try {
-      const result: GovernanceType[] =
-        await this.governanceTypeService.update(
-          updateGovernanceTypeDtoList,
-        );
+      const result: GovernanceType[] = await this.governanceTypeService.update(
+        updateGovernanceTypeDtoList,
+      );
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

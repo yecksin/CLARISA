@@ -15,14 +15,16 @@ export class InitiativeRepository extends Repository<Initiative> {
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<InitiativeDto[]> {
     let isActiveCondition: string = '';
-    switch(option){
-        case FindAllOptions.SHOW_ALL:
-            //do nothing. we will be showing everything, so no condition is needed;
-            break;
-        case FindAllOptions.SHOW_ONLY_ACTIVE:
-        case FindAllOptions.SHOW_ONLY_INACTIVE:
-            isActiveCondition = `stis.is_active = ${option === FindAllOptions.SHOW_ONLY_ACTIVE ? 1:0} and`;
-            break;
+    switch (option) {
+      case FindAllOptions.SHOW_ALL:
+        //do nothing. we will be showing everything, so no condition is needed;
+        break;
+      case FindAllOptions.SHOW_ONLY_ACTIVE:
+      case FindAllOptions.SHOW_ONLY_INACTIVE:
+        isActiveCondition = `stis.is_active = ${
+          option === FindAllOptions.SHOW_ONLY_ACTIVE ? 1 : 0
+        } and`;
+        break;
     }
 
     const initiativeQuery: string = `
@@ -52,10 +54,15 @@ export class InitiativeRepository extends Repository<Initiative> {
 
     const initiatives: InitiativeDto[] = await this.query(initiativeQuery);
 
-    await Promise.all(initiatives.map(async (i) => {
-        let initiativeStages: StageDto[] = await this.query(initiativeStagesQuery, [i.id]);
+    await Promise.all(
+      initiatives.map(async (i) => {
+        let initiativeStages: StageDto[] = await this.query(
+          initiativeStagesQuery,
+          [i.id],
+        );
         i.stages = initiativeStages;
-    }));
+      }),
+    );
 
     return initiatives;
   }

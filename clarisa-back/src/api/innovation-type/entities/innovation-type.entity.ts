@@ -1,25 +1,25 @@
-import { Exclude, Expose } from "class-transformer";
-import { hasUncaughtExceptionCaptureCallback } from "process";
-import { AuditableEntity } from "src/shared/entities/extends/auditable-entity.entity";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Exclude, Expose } from 'class-transformer';
+import { hasUncaughtExceptionCaptureCallback } from 'process';
+import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('innovation_types')
 export class InnovationType extends AuditableEntity {
-    @PrimaryGeneratedColumn()
-    @Expose({name: 'code'})
-    id: number;
-  
-    @Column()
-    name: string;
+  @PrimaryGeneratedColumn()
+  @Expose({ name: 'code' })
+  id: number;
 
-    @Column()
-    definition: string;
+  @Column()
+  name: string;
 
-    @Column({ type: 'tinyint' })
-    @Exclude()
-    is_onecgiar: boolean;
-    
-    @Exclude()
-    @Column({ type: 'tinyint' })
-    is_marlo: boolean;
+  @Column()
+  definition: string;
+
+  @Column({ type: 'tinyint' })
+  @Exclude()
+  is_onecgiar: boolean;
+
+  @Exclude()
+  @Column({ type: 'tinyint' })
+  is_marlo: boolean;
 }

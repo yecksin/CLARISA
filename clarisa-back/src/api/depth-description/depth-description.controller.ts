@@ -1,4 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, Res, HttpStatus, HttpException, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  ParseIntPipe,
+  Res,
+  HttpStatus,
+  HttpException,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { DepthDescriptionService } from './depth-description.service';
 import { UpdateDepthDescriptionDto } from './dto/update-depth-description.dto';
@@ -8,10 +23,12 @@ import { Response } from 'express';
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
 export class DepthDescriptionController {
-  constructor(private readonly depthDescriptionService: DepthDescriptionService) {}
+  constructor(
+    private readonly depthDescriptionService: DepthDescriptionService,
+  ) {}
 
   @Get()
-  async findAll(@Query('show') show : FindAllOptions) {
+  async findAll(@Query('show') show: FindAllOptions) {
     return await this.depthDescriptionService.findAll(show);
   }
 
@@ -21,9 +38,15 @@ export class DepthDescriptionController {
   }
 
   @Patch('update')
-  async update(@Res() res: Response, @Body() updateDepthDescriptionDtoList: UpdateDepthDescriptionDto[]) {
+  async update(
+    @Res() res: Response,
+    @Body() updateDepthDescriptionDtoList: UpdateDepthDescriptionDto[],
+  ) {
     try {
-      const result : DepthDescription[] = await this.depthDescriptionService.update(updateDepthDescriptionDtoList);
+      const result: DepthDescription[] =
+        await this.depthDescriptionService.update(
+          updateDepthDescriptionDtoList,
+        );
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

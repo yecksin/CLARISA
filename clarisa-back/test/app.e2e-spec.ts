@@ -23,7 +23,7 @@ describe('AppController (e2e)', () => {
       });
   });
 
-/*  it('/api/regions/get/1 (GET)', () => {
+  /*  it('/api/regions/get/1 (GET)', () => {
     return request(app.getHttpServer())
       .get('/api/regions/get/' + 1)
       .expect(200)

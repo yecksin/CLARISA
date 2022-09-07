@@ -39,8 +39,6 @@ export class TechnicalFieldService {
   }
 
   async update(updateTechnicalFieldDto: UpdateTechnicalFieldDto[]) {
-    return await this.technicalFieldsRepository.save(
-      updateTechnicalFieldDto,
-    );
+    return await this.technicalFieldsRepository.save(updateTechnicalFieldDto);
   }
 }

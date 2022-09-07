@@ -11,7 +11,9 @@ describe('InnovationReadinessLevelController', () => {
       providers: [InnovationReadinessLevelService],
     }).compile();
 
-    controller = module.get<InnovationReadinessLevelController>(InnovationReadinessLevelController);
+    controller = module.get<InnovationReadinessLevelController>(
+      InnovationReadinessLevelController,
+    );
   });
 
   it('should be defined', () => {

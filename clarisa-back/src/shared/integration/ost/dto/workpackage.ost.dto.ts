@@ -11,7 +11,6 @@ export class WorkpackageOSTDto {
   initiative_status: number;
 }
 
-
 /*export class WorkpackageOSTDto {
     initiative_id: number;
     initiative_offical_code: string;

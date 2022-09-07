@@ -12,7 +12,9 @@ export class DepthDescriptionService {
     private depthDescriptionRepository: Repository<DepthDescription>,
   ) {}
 
-  async findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<DepthDescription[]> {
+  async findAll(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<DepthDescription[]> {
     switch (option) {
       case FindAllOptions.SHOW_ALL:
         return await this.depthDescriptionRepository.find();
@@ -20,22 +22,24 @@ export class DepthDescriptionService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.depthDescriptionRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE
-          }
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         });
       default:
         throw Error('?!');
     }
   }
 
-  async findOne(id: number) : Promise<DepthDescription> {
+  async findOne(id: number): Promise<DepthDescription> {
     return await this.depthDescriptionRepository.findOneBy({
       id,
-      is_active : true
+      is_active: true,
     });
   }
 
   async update(updateDepthDescriptionDto: UpdateDepthDescriptionDto[]) {
-    return await this.depthDescriptionRepository.save(updateDepthDescriptionDto);
+    return await this.depthDescriptionRepository.save(
+      updateDepthDescriptionDto,
+    );
   }
 }

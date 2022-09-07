@@ -5,16 +5,16 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 export class InitiativeStage extends AuditableEntity {
   @PrimaryGeneratedColumn()
   id: number;
-  
+
   @Column()
   initiative_id: number;
 
   @Column()
   stage_id: number;
-  
+
   @Column()
   status: string;
-  
+
   @Column({ type: 'tinyint' })
   is_global_dimension: boolean;
 

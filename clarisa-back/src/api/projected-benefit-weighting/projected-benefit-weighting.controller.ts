@@ -1,4 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, ClassSerializerInterceptor, ParseIntPipe, HttpException, HttpStatus, Res, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+  ParseIntPipe,
+  HttpException,
+  HttpStatus,
+  Res,
+  Query,
+} from '@nestjs/common';
 import { ProjectedBenefitWeightingService } from './projected-benefit-weighting.service';
 import { CreateProjectedBenefitWeightingDto } from './dto/create-projected-benefit-weighting.dto';
 import { UpdateProjectedBenefitWeightingDto } from './dto/update-projected-benefit-weighting.dto';
@@ -9,10 +24,12 @@ import { ProjectedBenefitWeighting } from './entities/projected-benefit-weightin
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
 export class ProjectedBenefitWeightingController {
-  constructor(private readonly projectedBenefitWeightingService: ProjectedBenefitWeightingService) {}
+  constructor(
+    private readonly projectedBenefitWeightingService: ProjectedBenefitWeightingService,
+  ) {}
 
   @Get()
-  async findAll(@Query('show') show : FindAllOptions) {
+  async findAll(@Query('show') show: FindAllOptions) {
     return await this.projectedBenefitWeightingService.findAll(show);
   }
 
@@ -22,9 +39,16 @@ export class ProjectedBenefitWeightingController {
   }
 
   @Patch('update')
-  async update(@Res() res: Response, @Body() updateProjectedBenefitWeightingDtoList: UpdateProjectedBenefitWeightingDto[]) {
+  async update(
+    @Res() res: Response,
+    @Body()
+    updateProjectedBenefitWeightingDtoList: UpdateProjectedBenefitWeightingDto[],
+  ) {
     try {
-      const result : ProjectedBenefitWeighting[] = await this.projectedBenefitWeightingService.update(updateProjectedBenefitWeightingDtoList);
+      const result: ProjectedBenefitWeighting[] =
+        await this.projectedBenefitWeightingService.update(
+          updateProjectedBenefitWeightingDtoList,
+        );
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

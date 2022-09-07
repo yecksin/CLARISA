@@ -1,3 +1,3 @@
 export class CreateInnovationUseLevelDto {
-    name: string;
+  name: string;
 }

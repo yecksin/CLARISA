@@ -16,25 +16,25 @@ export class InnovationTypeService {
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
-    type: InnovationTypeEnum = InnovationTypeEnum.CGIAR
+    type: InnovationTypeEnum = InnovationTypeEnum.CGIAR,
   ): Promise<InnovationType[]> {
     let whereClause: FindOptionsWhere<InnovationType> = {};
 
-    switch(type){
+    switch (type) {
       case InnovationTypeEnum.ALL:
         // do nothing. no extra conditions needed
         break;
       case InnovationTypeEnum.CGIAR:
         whereClause = {
           ...whereClause,
-          is_onecgiar: true
-        }
+          is_onecgiar: true,
+        };
         break;
       case InnovationTypeEnum.LEGACY:
         whereClause = {
           ...whereClause,
-          is_marlo: true
-        }
+          is_marlo: true,
+        };
         break;
       default:
         throw Error('?!');
@@ -43,16 +43,16 @@ export class InnovationTypeService {
     switch (option) {
       case FindAllOptions.SHOW_ALL:
         return await this.innovationTypesRepository.find({
-          where: whereClause
+          where: whereClause,
         });
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
           ...whereClause,
           is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
-        }
+        };
         return await this.innovationTypesRepository.find({
-          where: whereClause
+          where: whereClause,
         });
       default:
         throw Error('?!');
@@ -67,8 +67,6 @@ export class InnovationTypeService {
   }
 
   async update(updateInnovationTypeDto: UpdateInnovationTypeDto[]) {
-    return await this.innovationTypesRepository.save(
-      updateInnovationTypeDto,
-    );
+    return await this.innovationTypesRepository.save(updateInnovationTypeDto);
   }
 }

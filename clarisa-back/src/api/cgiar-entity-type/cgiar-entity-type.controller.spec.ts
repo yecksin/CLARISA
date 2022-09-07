@@ -11,7 +11,9 @@ describe('CgiarEntityTypeController', () => {
       providers: [CgiarEntityTypeService],
     }).compile();
 
-    controller = module.get<CgiarEntityTypeController>(CgiarEntityTypeController);
+    controller = module.get<CgiarEntityTypeController>(
+      CgiarEntityTypeController,
+    );
   });
 
   it('should be defined', () => {

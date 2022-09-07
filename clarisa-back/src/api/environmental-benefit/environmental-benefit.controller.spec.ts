@@ -11,7 +11,9 @@ describe('EnvironmentalBenefitController', () => {
       providers: [EnvironmentalBenefitService],
     }).compile();
 
-    controller = module.get<EnvironmentalBenefitController>(EnvironmentalBenefitController);
+    controller = module.get<EnvironmentalBenefitController>(
+      EnvironmentalBenefitController,
+    );
   });
 
   it('should be defined', () => {

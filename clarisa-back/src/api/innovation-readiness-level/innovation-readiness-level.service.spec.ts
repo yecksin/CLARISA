@@ -9,7 +9,9 @@ describe('InnovationReadinessLevelService', () => {
       providers: [InnovationReadinessLevelService],
     }).compile();
 
-    service = module.get<InnovationReadinessLevelService>(InnovationReadinessLevelService);
+    service = module.get<InnovationReadinessLevelService>(
+      InnovationReadinessLevelService,
+    );
   });
 
   it('should be defined', () => {

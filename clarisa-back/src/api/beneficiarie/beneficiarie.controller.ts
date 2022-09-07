@@ -1,4 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, ClassSerializerInterceptor, Query, ParseIntPipe, Res, HttpStatus, HttpException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+  Query,
+  ParseIntPipe,
+  Res,
+  HttpStatus,
+  HttpException,
+} from '@nestjs/common';
 import { BeneficiarieService } from './beneficiarie.service';
 import { UpdateBeneficiarieDto } from './dto/update-beneficiarie.dto';
 import { Response } from 'express';
@@ -11,7 +26,7 @@ export class BeneficiarieController {
   constructor(private readonly beneficiarieService: BeneficiarieService) {}
 
   @Get()
-  async findAll(@Query('show') show : FindAllOptions) {
+  async findAll(@Query('show') show: FindAllOptions) {
     return await this.beneficiarieService.findAll(show);
   }
 
@@ -21,9 +36,14 @@ export class BeneficiarieController {
   }
 
   @Patch('update')
-  async update(@Res() res: Response, @Body() updateBeneficiarieDtoList: UpdateBeneficiarieDto[]) {
+  async update(
+    @Res() res: Response,
+    @Body() updateBeneficiarieDtoList: UpdateBeneficiarieDto[],
+  ) {
     try {
-      const result : Beneficiarie[] = await this.beneficiarieService.update(updateBeneficiarieDtoList);
+      const result: Beneficiarie[] = await this.beneficiarieService.update(
+        updateBeneficiarieDtoList,
+      );
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

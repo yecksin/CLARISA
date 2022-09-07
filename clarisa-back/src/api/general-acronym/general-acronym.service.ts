@@ -12,16 +12,18 @@ export class GeneralAcronymService {
     private generalAcronimRepository: Repository<GeneralAcronym>,
   ) {}
 
-  async findAll(option : FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE) : Promise<GeneralAcronym[]> {
-    switch(option){
+  async findAll(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<GeneralAcronym[]> {
+    switch (option) {
       case FindAllOptions.SHOW_ALL:
         return await this.generalAcronimRepository.find();
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.generalAcronimRepository.find({
           where: {
-            is_active : option === FindAllOptions.SHOW_ONLY_ACTIVE
-          }
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         });
       default:
         throw Error('?!');
@@ -31,11 +33,13 @@ export class GeneralAcronymService {
   async findOne(id: number): Promise<GeneralAcronym> {
     return await this.generalAcronimRepository.findOneBy({
       id,
-      is_active : true
+      is_active: true,
     });
   }
 
-  async update(updateGeneralDtoList: UpdateGeneralAcronymDto[]) : Promise<GeneralAcronym[]> {
+  async update(
+    updateGeneralDtoList: UpdateGeneralAcronymDto[],
+  ): Promise<GeneralAcronym[]> {
     return await this.generalAcronimRepository.save(updateGeneralDtoList);
   }
 }

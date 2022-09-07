@@ -11,7 +11,9 @@ describe('TechnologyDevelopmentStageController', () => {
       providers: [TechnologyDevelopmentStageService],
     }).compile();
 
-    controller = module.get<TechnologyDevelopmentStageController>(TechnologyDevelopmentStageController);
+    controller = module.get<TechnologyDevelopmentStageController>(
+      TechnologyDevelopmentStageController,
+    );
   });
 
   it('should be defined', () => {

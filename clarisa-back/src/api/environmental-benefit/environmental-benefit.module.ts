@@ -7,6 +7,6 @@ import { EnvironmentalBenefit } from './entities/environmental-benefit.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([EnvironmentalBenefit])],
   controllers: [EnvironmentalBenefitController],
-  providers: [EnvironmentalBenefitService]
+  providers: [EnvironmentalBenefitService],
 })
 export class EnvironmentalBenefitModule {}

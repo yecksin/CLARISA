@@ -8,23 +8,24 @@ import { WorkpackageRepository } from './repositories/workpackage.repository';
 
 @Injectable()
 export class WorkpackageService {
-  constructor(
-    private workpackageRepository: WorkpackageRepository,
-  ) {}
+  constructor(private workpackageRepository: WorkpackageRepository) {}
 
   async findAll(
     showWorkpackages: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
     showInitiatives: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<WorkpackageDto[]> {
-    if(!(Object.values<string>(FindAllOptions).includes(showWorkpackages))){
+    if (!Object.values<string>(FindAllOptions).includes(showWorkpackages)) {
       throw Error('?!');
     }
 
-    if(!(Object.values<string>(FindAllOptions).includes(showInitiatives))){
+    if (!Object.values<string>(FindAllOptions).includes(showInitiatives)) {
       throw Error('?!');
     }
 
-    return this.workpackageRepository.findAllWorkpackages(showWorkpackages, showInitiatives);
+    return this.workpackageRepository.findAllWorkpackages(
+      showWorkpackages,
+      showInitiatives,
+    );
   }
 
   async findOne(id: number): Promise<Workpackage> {
@@ -35,8 +36,6 @@ export class WorkpackageService {
   }
 
   async update(updateInitiativeDto: UpdateWorkpackageDto[]) {
-    return await this.workpackageRepository.save(
-      updateInitiativeDto,
-    );
+    return await this.workpackageRepository.save(updateInitiativeDto);
   }
 }

@@ -13,7 +13,6 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { GlossaryService } from './glossary.service';
-import { CreateGlossaryDto } from './dto/create-glossary.dto';
 import { UpdateGlossaryDto } from './dto/update-glossary.dto';
 import { Glossary } from './entities/glossary.entity';
 import { Response } from 'express';

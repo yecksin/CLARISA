@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { ParentRegionDto } from 'src/api/region/dto/parent-region.dto';
 import { RegionDto } from 'src/api/region/dto/region.dto';
 import { Region } from 'src/api/region/entities/region.entity';
-import { dataSource } from 'src/ormconfig';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { DataSource, Repository } from 'typeorm';
 import { CountryDto } from '../dto/country.dto';

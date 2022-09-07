@@ -2,12 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CgiarEntityTypeEnum } from 'src/shared/entities/enums/cgiar-entity-types';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
-<<<<<<< HEAD
-import { Repository } from 'typeorm';
-=======
 import { FindOperator, FindOptionsOrder, FindOptionsWhere, In, Repository } from 'typeorm';
 import { CreateCgiarEntityDto } from './dto/create-cgiar-entity.dto';
->>>>>>> 8819a532fad200c04331388108185252fa4b1d7a
 import { UpdateCgiarEntityDto } from './dto/update-cgiar-entity.dto';
 import { CgiarEntity } from './entities/cgiar-entity.entity';
 

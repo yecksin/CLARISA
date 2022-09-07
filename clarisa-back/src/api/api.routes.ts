@@ -40,6 +40,7 @@ import { TechnologyDevelopmentStageModule } from './technology-development-stage
 import { WorkpackageModule } from './workpackage/workpackage.module';
 import { InitiativeModule } from './initiative/initiative.module';
 import { AccountTypeModule } from './account-type/account-type.module';
+import { AccountModule } from './account/account.module';
 
 export const apiRoutes = [
   {
@@ -209,5 +210,9 @@ export const apiRoutes = [
   {
     path: 'account-types',
     module: AccountTypeModule,
+  },
+  {
+    path: 'accounts',
+    module: AccountModule,
   },
 ];

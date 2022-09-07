@@ -43,6 +43,7 @@ import { TechnologyDevelopmentStageModule } from './technology-development-stage
 import { WorkpackageModule } from './workpackage/workpackage.module';
 import { InitiativeModule } from './initiative/initiative.module';
 import { AccountTypeModule } from './account-type/account-type.module';
+import { AccountModule } from './account/account.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -89,6 +90,7 @@ import { AccountTypeModule } from './account-type/account-type.module';
     WorkpackageModule,
     InitiativeModule,
     AccountTypeModule,
+    AccountModule,
   ],
 })
 export class ApiModule {}

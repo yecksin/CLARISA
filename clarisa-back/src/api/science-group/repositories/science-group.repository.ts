@@ -34,7 +34,7 @@ export class ScienceGroupRepository extends Repository<ScienceGroup> {
     await Promise.all(
       scienceGroups.map(async (sc) => {
         let scienceGroupDto: ScienceGroupDto = new ScienceGroupDto();
-        scienceGroupDto.code = sc.id;
+        scienceGroupDto.code = String(sc.id);
         scienceGroupDto.description = sc.description;
         scienceGroupDto.financialCode = sc.financial_code;
         scienceGroupDto.parent = sc.parent_id

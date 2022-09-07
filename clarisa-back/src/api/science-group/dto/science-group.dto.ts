@@ -1,8 +1,6 @@
-import { ScienceGroupSimpleDto } from './science-group-simple.dto';
+import { BasicDto } from 'src/shared/entities/dtos/basic-dto';
 
-export class ScienceGroupDto {
-  code: number;
+export class ScienceGroupDto extends BasicDto {
   financialCode: string;
-  description: string;
-  parent: ScienceGroupSimpleDto;
+  parent: BasicDto;
 }

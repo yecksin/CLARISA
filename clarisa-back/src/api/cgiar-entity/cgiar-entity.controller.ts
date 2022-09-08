@@ -1,5 +1,17 @@
-import { Controller, Get, Body, Patch, Param, Query, ParseIntPipe, Res, HttpException, HttpStatus,
-  UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Body,
+  Patch,
+  Param,
+  Query,
+  ParseIntPipe,
+  Res,
+  HttpException,
+  HttpStatus,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import { CgiarEntityService } from './cgiar-entity.service';
 import { UpdateCgiarEntityDto } from './dto/update-cgiar-entity.dto';
 import { Response } from 'express';
@@ -12,7 +24,7 @@ export class CgiarEntityController {
   constructor(private readonly cgiarEntityService: CgiarEntityService) {}
 
   @Get()
-  async findAll(@Query('show') show : FindAllOptions) {
+  async findAll(@Query('show') show: FindAllOptions) {
     return await this.cgiarEntityService.findAll(show);
   }
 
@@ -22,9 +34,14 @@ export class CgiarEntityController {
   }
 
   @Patch('update')
-  async update(@Res() res: Response, @Body() updateCgiarEntityDtoList: UpdateCgiarEntityDto[]) {
+  async update(
+    @Res() res: Response,
+    @Body() updateCgiarEntityDtoList: UpdateCgiarEntityDto[],
+  ) {
     try {
-      const result : CgiarEntity[] = await this.cgiarEntityService.update(updateCgiarEntityDtoList);
+      const result: CgiarEntity[] = await this.cgiarEntityService.update(
+        updateCgiarEntityDtoList,
+      );
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

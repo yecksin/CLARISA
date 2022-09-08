@@ -18,8 +18,4 @@ export class Glossary extends AuditableEntity {
 
   @Column()
   definition: string;
-
-  @Exclude({ toPlainOnly: true })
-  @Column()
-  active_since: Date;
 }

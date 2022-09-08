@@ -28,7 +28,7 @@ export class GlobalTargetsController {
     return this.globalTargetsService.findAll(show);
   }
 
-  @Get('findById/:id')
+  @Get('get/:id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.globalTargetsService.findOne(id);
   }

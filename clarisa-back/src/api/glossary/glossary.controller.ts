@@ -28,7 +28,7 @@ export class GlossaryController {
     return this.glossaryService.findAll(show);
   }
 
-  @Get('findById/:id')
+  @Get('get/:id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
     return await this.glossaryService.findOne(id);
   }

@@ -1,11 +1,6 @@
 import { User } from 'src/api/user/entities/user.entity';
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToMany,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 
 @Entity('roles')
 export class Role extends AuditableEntity {
@@ -22,7 +17,7 @@ export class Role extends AuditableEntity {
   order: number;
 
   @Column()
-  global_unit_id: number; //TODO to be reviewed
+  source_id: number;
 
   @ManyToMany(() => User, (user) => user.roles)
   users: User[];

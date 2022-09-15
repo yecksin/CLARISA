@@ -16,7 +16,7 @@ describe('Countries (e2e)', () => {
   //It is tested to return a 200 since it is the get all
   it('/api/countries (GET)', () => {
     return request(app.getHttpServer()).get('/api/countries').expect(200);
-  });
+  }, 30000);
 
   //The endpoint is used to search by id, a valid id is sent to it.
   it('/api/countries/get/1 (GET)', () => {
@@ -25,18 +25,19 @@ describe('Countries (e2e)', () => {
       .expect(200)
       .expect((res) => {
         const data = res.body;
-        expect(data).toHaveProperty('code');
-        expect(data).toHaveProperty('isoAlpha2');
-        expect(data).toHaveProperty('isoAlpha3');
+        expect(data).toHaveProperty('id');
         expect(data).toHaveProperty('name');
-        expect(data).toHaveProperty('regionDTO');
+        expect(data).toHaveProperty('iso_alpha_2');
+        expect(data).toHaveProperty('iso_alpha_3');
+        expect(data).toHaveProperty('iso_numeric');
+        expect(data).toHaveProperty('geoposition_id');
       });
   });
 
   //The endpoint is used to search by id, an invalid id is sent to it.
   it('/api/countries/get/a (GET)', () => {
     return request(app.getHttpServer())
-      .get('/api/beneficiaries/get/' + 'a')
+      .get('/api/countries/get/' + 'a')
       .expect(400);
   });
 

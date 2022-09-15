@@ -17,8 +17,7 @@ describe('Action area outcome indicators (e2e)', () => {
   it('/api/action-area-outcome-indicators (GET)', () => {
     return request(app.getHttpServer())
       .get('/api/action-area-outcome-indicators')
-      .expect(200)
-      
+      .expect(200);
   });
 
   //The endpoint is used to search by id, a valid id is sent to it.
@@ -27,16 +26,11 @@ describe('Action area outcome indicators (e2e)', () => {
       .get('/api/action-area-outcome-indicators/get/' + 1)
       .expect(200)
       .expect((res) => {
-        const data = res.body
-        expect(data).toHaveProperty("actionAreaId");
-        expect(data).toHaveProperty("acactionAreaNameronym");
-        expect(data).toHaveProperty("outcomeId");
-        expect(data).toHaveProperty("outcomeSMOcode");
-        expect(data).toHaveProperty("outcomeStatement");
-        expect(data).toHaveProperty("outcomeIndicatorId");
-        expect(data).toHaveProperty("outcomeIndicatorsSMOcode");
-        expect(data).toHaveProperty("outcomeIndicatorStatement");
-
+        const data = res.body;
+        expect(data).toHaveProperty('id');
+        expect(data).toHaveProperty('action_area_outcome_id');
+        expect(data).toHaveProperty('outcome_indicator_id');
+        expect(data).toHaveProperty('action_area_id');
       });
   });
 
@@ -44,7 +38,7 @@ describe('Action area outcome indicators (e2e)', () => {
   it('/api/action-area-outcome-indicators/get/a (GET)', () => {
     return request(app.getHttpServer())
       .get('/api/action-area-outcome-indicators/get/' + 'a')
-      .expect(400)
+      .expect(400);
   });
 
   afterAll(async () => {

@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { testModule, usePipes } from '../test.module';
 
-describe('Impact area indicators (e2e)', () => {
+describe('Impact Area indicators (e2e)', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
@@ -27,14 +27,14 @@ describe('Impact area indicators (e2e)', () => {
       .expect(200)
       .expect((res) => {
         const data = res.body;
-        expect(data).toHaveProperty('id');
-        expect(data).toHaveProperty('indicator_statement');
-        expect(data).toHaveProperty('target_year');
-        expect(data).toHaveProperty('target_unit');
-        expect(data).toHaveProperty('is_aplicable_projected_benefits');
-        expect(data).toHaveProperty('smo_code');
-        expect(data).toHaveProperty('impact_area_id');
-        expect(data).toHaveProperty('name');
+        expect(data).toHaveProperty('indicatorId');
+        expect(data).toHaveProperty('indicatorStatement');
+        expect(data).toHaveProperty('targetYear');
+        expect(data).toHaveProperty('targetUnit');
+        expect(data).toHaveProperty('value');
+        expect(data).toHaveProperty('isAplicableProjectedBenefits');
+        expect(data).toHaveProperty('impactAreaId');
+        expect(data).toHaveProperty('impactAreaName');
       });
   });
 

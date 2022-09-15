@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import { ImpactArea } from '../../impact-area/entities/impact-area.entity';
 
-@Entity('impact_areas_indicators')
+@Entity('impact_area_indicators')
 export class ImpactAreaIndicator extends AuditableEntity {
   @Type(() => Number)
   @PrimaryGeneratedColumn()

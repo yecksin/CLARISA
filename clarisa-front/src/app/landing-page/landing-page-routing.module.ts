@@ -29,6 +29,10 @@ const routes: Routes = [
         path:'faq',
         loadChildren : () => import('./pages/faq/faq.module').then((m) => m.FaqModule),
       },
+      {
+        path:'institutionsRequestBi',
+        loadChildren : () => import('./pages/institutions-request-bi/institutions-request-bi.module').then((m) => m.InstitutionsRequestBIModule),
+      },
     ]
   }
 ];

@@ -16,7 +16,7 @@ describe('Workpackages (e2e)', () => {
   //It is tested to return a 200 since it is the get all
   it('/api/workpackages (GET)', () => {
     return request(app.getHttpServer()).get('/api/workpackages').expect(200);
-  });
+  }, 30000);
 
   //The endpoint is used to search by id, a valid id is sent to it.
   it('/api/workpackages/get/1 (GET)', () => {

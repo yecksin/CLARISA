@@ -4,26 +4,24 @@ import { UpdateImpactAreaIndicatorDto } from './dto/update-impact-area-indicator
 import { Repository } from 'typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { ImpactAreaIndicator } from './entities/impact-area-indicator.entity';
-import { impactAreRepository } from './repositories/impact-area-indicators-repository';
 import { ImpactAreaIndicatorByImpactAreaDto } from './dto/impact-area-indicators-by-impact-are.dto';
+import { ImpactAreaIndicatorRepository } from './repositories/impact-area-indicators-repository';
 
 @Injectable()
 export class ImpactAreaIndicatorsService {
   constructor(
-    @InjectRepository(ImpactAreaIndicator)
-    private impactAreaIndicatorsRepository: Repository<ImpactAreaIndicator>,
+    private impactAreaIndicatorsRepository: ImpactAreaIndicatorRepository,
   ) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<ImpactAreaIndicatorByImpactAreaDto[]> {
-    const impactAreaRepo = impactAreRepository;
     switch (option) {
       case FindAllOptions.SHOW_ALL:
-        return await impactAreaRepo.impactAreaIndicatorsByImpactArea();
+        return await this.impactAreaIndicatorsRepository.impactAreaIndicatorsByImpactArea();
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
-        return await impactAreaRepo.impactAreaIndicatorsByImpactAreaIsActive(
+        return await this.impactAreaIndicatorsRepository.impactAreaIndicatorsByImpactAreaIsActive(
           option,
         );
       default:

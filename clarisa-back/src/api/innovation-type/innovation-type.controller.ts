@@ -17,7 +17,7 @@ import {
 import { InnovationTypeService } from './innovation-type.service';
 import { UpdateInnovationTypeDto } from './dto/update-innovation-type.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
-import { InnovationTypeEnum } from 'src/shared/entities/enums/innovation-types';
+import { IndicatorTypeEnum } from 'src/shared/entities/enums/indicator-types';
 import { Response } from 'express';
 import { InnovationType } from './entities/innovation-type.entity';
 
@@ -29,7 +29,7 @@ export class InnovationTypeController {
   @Get()
   async findAll(
     @Query('show') show: FindAllOptions,
-    @Query('type') type: InnovationTypeEnum,
+    @Query('type') type: IndicatorTypeEnum,
   ) {
     return await this.innovationTypeService.findAll(show, type);
   }

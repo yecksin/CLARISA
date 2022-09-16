@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
-import { InnovationTypeEnum } from 'src/shared/entities/enums/innovation-types';
+import { IndicatorTypeEnum } from 'src/shared/entities/enums/indicator-types';
 import { FindOptionsWhere, Repository } from 'typeorm';
 import { UpdateInnovationTypeDto } from './dto/update-innovation-type.dto';
 import { InnovationType } from './entities/innovation-type.entity';
@@ -15,21 +15,21 @@ export class InnovationTypeService {
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
-    type: InnovationTypeEnum = InnovationTypeEnum.CGIAR,
+    type: IndicatorTypeEnum = IndicatorTypeEnum.CGIAR,
   ): Promise<InnovationType[]> {
     let whereClause: FindOptionsWhere<InnovationType> = {};
 
     switch (type) {
-      case InnovationTypeEnum.ALL:
+      case IndicatorTypeEnum.ALL:
         // do nothing. no extra conditions needed
         break;
-      case InnovationTypeEnum.CGIAR:
+      case IndicatorTypeEnum.CGIAR:
         whereClause = {
           ...whereClause,
           is_onecgiar: true,
         };
         break;
-      case InnovationTypeEnum.LEGACY:
+      case IndicatorTypeEnum.LEGACY:
         whereClause = {
           ...whereClause,
           is_marlo: true,

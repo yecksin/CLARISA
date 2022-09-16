@@ -46,6 +46,8 @@ import { AccountTypeModule } from './account-type/account-type.module';
 import { AccountModule } from './account/account.module';
 import { ScienceGroupModule } from './science-group/science-group.module';
 import { UnitModule } from './unit/unit.module';
+import { AdministrativeScaleModule } from './administrative-scale/administrative-scale.module';
+import { GeographicScopeModule } from './geographic-scope/geographic-scope.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -95,6 +97,8 @@ import { UnitModule } from './unit/unit.module';
     AccountModule,
     ScienceGroupModule,
     UnitModule,
+    AdministrativeScaleModule,
+    GeographicScopeModule,
   ],
 })
 export class ApiModule {}

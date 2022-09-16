@@ -43,6 +43,8 @@ import { AccountTypeModule } from './account-type/account-type.module';
 import { AccountModule } from './account/account.module';
 import { ScienceGroupModule } from './science-group/science-group.module';
 import { UnitModule } from './unit/unit.module';
+import { AdministrativeScaleModule } from './administrative-scale/administrative-scale.module';
+import { GeographicScopeModule } from './geographic-scope/geographic-scope.module';
 
 export const apiRoutes = [
   {
@@ -224,5 +226,13 @@ export const apiRoutes = [
   {
     path: 'units',
     module: UnitModule,
+  },
+  {
+    path: 'administrative-scales',
+    module: AdministrativeScaleModule,
+  },
+  {
+    path: 'geographic-scopes',
+    module: GeographicScopeModule,
   },
 ];

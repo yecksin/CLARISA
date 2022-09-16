@@ -13,6 +13,20 @@ describe('Region (e2e)', () => {
     await app.init();
   });
 
+  //It is tested to return a 200 since it is the get all
+  it('/api/regions/un-regions (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/api/regions/un-regions')
+      .expect(200);
+  });
+
+  it('/api/regions/one-cgiar-regions (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/api/regions/one-cgiar-regions')
+      .expect(200);
+  });
+
+  //The endpoint is used to search by id, a valid id is sent to it.
   it('/api/regions/get/1 (GET)', () => {
     return request(app.getHttpServer())
       .get('/api/regions/get/' + 1)
@@ -22,7 +36,17 @@ describe('Region (e2e)', () => {
         expect(data).toHaveProperty('id');
         expect(data).toHaveProperty('iso_numeric');
         expect(data).toHaveProperty('name');
+        expect(data).toHaveProperty('acronym');
+        expect(data).toHaveProperty('region_type_id');
+        expect(data).toHaveProperty('parent_id');
       });
+  });
+
+  //The endpoint is used to search by id, an invalid id is sent to it.
+  it('/api/regions/get/a (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/api/regions/get/' + 'a')
+      .expect(400);
   });
 
   afterAll(async () => {

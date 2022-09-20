@@ -6,19 +6,22 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { routes } from './routes';
 import { AuthModule } from './auth/auth.module';
-
-import * as ormconfig from '../ormconfig';
+import { dataSource } from './ormconfig';
+import { ScheduleModule } from '@nestjs/schedule';
+import { IntegrationModule } from './shared/integration/integration.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      ...ormconfig,
+      ...dataSource.options,
       keepConnectionAlive: true,
       autoLoadEntities: true,
     }),
+    ScheduleModule.forRoot(),
     RouterModule.register(routes),
     ApiModule,
     AuthModule,
+    IntegrationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

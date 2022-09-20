@@ -1,0 +1,11 @@
+@media (min-width: 1200px) {
+    
+    .service{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .item{
+        width: 500px;
+    }
+}

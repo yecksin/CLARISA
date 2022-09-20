@@ -104,3 +104,10 @@ dist
 .tern-port
 
 .env
+
+#Typeorm
+ormconfig.ts
+
+.vscode/
+
+clarisa-back/package-lock.json

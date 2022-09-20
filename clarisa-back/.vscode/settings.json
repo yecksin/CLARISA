@@ -3,8 +3,11 @@
         "activedirectory",
         "bodyparser",
         "cgiar",
+        "clarisa",
+        "exceljs",
         "nestjs",
         "ormconfig",
+        "sdgs",
         "tinyint",
         "typeorm"
     ]

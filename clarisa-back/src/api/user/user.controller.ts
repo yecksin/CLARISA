@@ -1,42 +1,42 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   HttpException,
   HttpStatus,
   Res,
   Query,
-  UseGuards,
   ParseIntPipe,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Response } from 'express';
 import { PaginationParams } from 'src/shared/interfaces/pageable';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { User } from './entities/user.entity';
+import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 
 @Controller()
+@UseInterceptors(ClassSerializerInterceptor)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  async findAll(){
-    return await this.userService.findAll();
+  findAll(@Query('show') show: FindAllOptions) {
+    return this.userService.findAll(show);
   }
 
   @Get('findByEmail/:email')
   async findByEmail(@Param('email') email: string) {
-    return await this.userService.findOneByEmail(email); 
+    return await this.userService.findOneByEmail(email);
   }
 
   @Get('findByUsername/:username')
   async findByUsername(@Param('username') username: string) {
-    return await this.userService.findOneByUsername(username); 
+    return await this.userService.findOneByUsername(username);
   }
 
   @Get('get/:id')
@@ -49,11 +49,14 @@ export class UserController {
     return this.userService.getUsersPagination(offset, limit);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Patch('update')
-  async update(@Res() res: Response, @Body() updateUserDtoList: UpdateUserDto[]) {
+  async update(
+    @Res() res: Response,
+    @Body() updateUserDtoList: UpdateUserDto[],
+  ) {
     try {
-      const result : any = await this.userService.update(updateUserDtoList);
+      const result: User[] = await this.userService.update(updateUserDtoList);
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

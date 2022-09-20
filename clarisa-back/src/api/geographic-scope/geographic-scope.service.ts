@@ -3,21 +3,22 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { IndicatorTypeEnum } from 'src/shared/entities/enums/indicator-types';
 import { FindOptionsWhere, Repository } from 'typeorm';
-import { UpdateInnovationTypeDto } from './dto/update-innovation-type.dto';
-import { InnovationType } from './entities/innovation-type.entity';
+import { CreateGeographicScopeDto } from './dto/create-geographic-scope.dto';
+import { UpdateGeographicScopeDto } from './dto/update-geographic-scope.dto';
+import { GeographicScope } from './entities/geographic-scope.entity';
 
 @Injectable()
-export class InnovationTypeService {
+export class GeographicScopeService {
   constructor(
-    @InjectRepository(InnovationType)
-    private innovationTypesRepository: Repository<InnovationType>,
+    @InjectRepository(GeographicScope)
+    private geographicScopesRepository: Repository<GeographicScope>,
   ) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
     type: IndicatorTypeEnum = IndicatorTypeEnum.CGIAR,
-  ): Promise<InnovationType[]> {
-    let whereClause: FindOptionsWhere<InnovationType> = {};
+  ): Promise<GeographicScope[]> {
+    let whereClause: FindOptionsWhere<GeographicScope> = {};
 
     switch (type) {
       case IndicatorTypeEnum.ALL:
@@ -32,7 +33,7 @@ export class InnovationTypeService {
       case IndicatorTypeEnum.LEGACY:
         whereClause = {
           ...whereClause,
-          is_marlo: true,
+          is_legacy: true,
         };
         break;
       default:
@@ -41,7 +42,7 @@ export class InnovationTypeService {
 
     switch (option) {
       case FindAllOptions.SHOW_ALL:
-        return await this.innovationTypesRepository.find({
+        return await this.geographicScopesRepository.find({
           where: whereClause,
         });
       case FindAllOptions.SHOW_ONLY_ACTIVE:
@@ -50,7 +51,7 @@ export class InnovationTypeService {
           ...whereClause,
           is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
         };
-        return await this.innovationTypesRepository.find({
+        return await this.geographicScopesRepository.find({
           where: whereClause,
         });
       default:
@@ -58,14 +59,14 @@ export class InnovationTypeService {
     }
   }
 
-  async findOne(id: number): Promise<InnovationType> {
-    return await this.innovationTypesRepository.findOneBy({
+  async findOne(id: number): Promise<GeographicScope> {
+    return await this.geographicScopesRepository.findOneBy({
       id,
       is_active: true,
     });
   }
 
-  async update(updateInnovationTypeDto: UpdateInnovationTypeDto[]) {
-    return await this.innovationTypesRepository.save(updateInnovationTypeDto);
+  async update(updateGeographicScopeDto: UpdateGeographicScopeDto[]) {
+    return await this.geographicScopesRepository.save(updateGeographicScopeDto);
   }
 }

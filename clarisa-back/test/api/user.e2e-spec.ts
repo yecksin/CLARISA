@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { testModule, usePipes } from '../test.module';
 
-describe('Region (e2e)', () => {
+describe('User (e2e)', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
@@ -14,38 +14,33 @@ describe('Region (e2e)', () => {
   });
 
   //It is tested to return a 200 since it is the get all
-  it('/api/regions/un-regions (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/api/regions/un-regions')
-      .expect(200);
-  });
-
-  it('/api/regions/one-cgiar-regions (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/api/regions/one-cgiar-regions')
-      .expect(200);
+  it('/api/users (GET)', () => {
+    return request(app.getHttpServer()).get('/api/users').expect(200);
   });
 
   //The endpoint is used to search by id, a valid id is sent to it.
-  it('/api/regions/get/1 (GET)', () => {
+  it('/api/users/get/1 (GET)', () => {
     return request(app.getHttpServer())
-      .get('/api/regions/get/' + 1)
+      .get('/api/users/get/' + 1)
       .expect(200)
       .expect((res) => {
         const data = res.body;
         expect(data).toHaveProperty('id');
-        expect(data).toHaveProperty('iso_numeric');
-        expect(data).toHaveProperty('name');
-        expect(data).toHaveProperty('acronym');
-        expect(data).toHaveProperty('region_type_id');
-        expect(data).toHaveProperty('parent_id');
+        expect(data).toHaveProperty('first_name');
+        expect(data).toHaveProperty('last_name');
+        expect(data).toHaveProperty('username');
+        expect(data).toHaveProperty('email');
+        expect(data).toHaveProperty('password');
+        expect(data).toHaveProperty('is_cgiar_user');
+        expect(data).toHaveProperty('last_login');
+        expect(data).toHaveProperty('agree_terms');
       });
   });
 
   //The endpoint is used to search by id, an invalid id is sent to it.
-  it('/api/regions/get/a (GET)', () => {
+  it('/api/users/get/a (GET)', () => {
     return request(app.getHttpServer())
-      .get('/api/regions/get/' + 'a')
+      .get('/api/users/get/' + 'a')
       .expect(400);
   });
 

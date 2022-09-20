@@ -14,40 +14,42 @@ import {
   HttpStatus,
   HttpException,
 } from '@nestjs/common';
-import { InnovationTypeService } from './innovation-type.service';
-import { UpdateInnovationTypeDto } from './dto/update-innovation-type.dto';
+import { GeographicScopeService } from './geographic-scope.service';
+import { CreateGeographicScopeDto } from './dto/create-geographic-scope.dto';
+import { UpdateGeographicScopeDto } from './dto/update-geographic-scope.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { IndicatorTypeEnum } from 'src/shared/entities/enums/indicator-types';
 import { Response } from 'express';
-import { InnovationType } from './entities/innovation-type.entity';
+import { GeographicScope } from './entities/geographic-scope.entity';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
-export class InnovationTypeController {
-  constructor(private readonly innovationTypeService: InnovationTypeService) {}
+export class GeographicScopeController {
+  constructor(
+    private readonly geographicScopeService: GeographicScopeService,
+  ) {}
 
   @Get()
   async findAll(
     @Query('show') show: FindAllOptions,
     @Query('type') type: IndicatorTypeEnum,
   ) {
-    return await this.innovationTypeService.findAll(show, type);
+    return await this.geographicScopeService.findAll(show, type);
   }
 
   @Get('get/:id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
-    return await this.innovationTypeService.findOne(id);
+    return await this.geographicScopeService.findOne(id);
   }
 
   @Patch('update')
   async update(
     @Res() res: Response,
-    @Body() updateInnovationTypeDtoList: UpdateInnovationTypeDto[],
+    @Body() updateGeographicScopeDtoList: UpdateGeographicScopeDto[],
   ) {
     try {
-      const result: InnovationType[] = await this.innovationTypeService.update(
-        updateInnovationTypeDtoList,
-      );
+      const result: GeographicScope[] =
+        await this.geographicScopeService.update(updateGeographicScopeDtoList);
       return res.status(HttpStatus.OK).json(result);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

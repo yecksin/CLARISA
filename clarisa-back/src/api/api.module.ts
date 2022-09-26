@@ -50,6 +50,7 @@ import { AdministrativeScaleModule } from './administrative-scale/administrative
 import { GeographicScopeModule } from './geographic-scope/geographic-scope.module';
 import { HomepageClarisaCategoryModule } from './homepage-clarisa-category/homepage-clarisa-category.module';
 import { HomepageClarisaEndpointModule } from './homepage-clarisa-endpoint/homepage-clarisa-endpoint.module';
+import { HomepageClarisaCategoryEndpointModule } from './homepage-clarisa-category-endpoint/homepage-clarisa-category-endpoint.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -103,6 +104,7 @@ import { HomepageClarisaEndpointModule } from './homepage-clarisa-endpoint/homep
     GeographicScopeModule,
     HomepageClarisaCategoryModule,
     HomepageClarisaEndpointModule,
+    HomepageClarisaCategoryEndpointModule,
   ],
 })
 export class ApiModule {}

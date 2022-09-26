@@ -27,13 +27,14 @@ export class HomepageClarisaCategoryEndpointRepository extends Repository<Homepa
       await this.categoryRepository.find({
         where: {
           parent_id: parent_category_id ? parent_category_id : IsNull(),
+          is_active: true,
         },
       });
 
     const endpointsQuery: string = `
-        select hce.name, hce.description, hce.route, hce.http_method, hce.request_json, hce.response_json from hp_clarisa_endpoints hce 
-        join hp_clarisa_category_endpoints hcce on hcce.endpoint_id = hce.id 
-        where hcce.category_id = ?
+        select hce.id, hce.name, hce.description, hce.route, hce.http_method, hce.request_json, hce.response_json from hp_clarisa_endpoints hce 
+        join hp_clarisa_category_endpoints hcce on hcce.endpoint_id = hce.id and hcce.is_active = 1
+        where hcce.category_id = ? and hce.is_active = 1
         order by hce.id;
     `;
 
@@ -43,6 +44,7 @@ export class HomepageClarisaCategoryEndpointRepository extends Repository<Homepa
       categories.map(async (c) => {
         let category: CategoryEndpointDto = new CategoryEndpointDto();
 
+        category.id = c.id;
         category.name = c.name;
         category.description = c.description;
 

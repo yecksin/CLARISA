@@ -19,4 +19,8 @@ export class ApiOST extends BaseApi {
   getWorkpackages() {
     return this.getRequest('previews/packages');
   }
+
+  getEndOfIniciative() {
+    return this.getRequest('stages-control/proposal/eoi/all/initiatives');
+  }
 }

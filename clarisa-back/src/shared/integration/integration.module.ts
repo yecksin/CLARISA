@@ -8,5 +8,6 @@ import { CronOST } from './ost/cron.ost';
 @Module({
   imports: [HttpModule, TypeOrmModule.forFeature([Workpackage])],
   providers: [CronOST, ApiOST],
+  exports: [ApiOST, HttpModule],
 })
 export class IntegrationModule {}

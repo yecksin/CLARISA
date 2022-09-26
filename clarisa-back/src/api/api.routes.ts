@@ -45,6 +45,7 @@ import { ScienceGroupModule } from './science-group/science-group.module';
 import { UnitModule } from './unit/unit.module';
 import { AdministrativeScaleModule } from './administrative-scale/administrative-scale.module';
 import { GeographicScopeModule } from './geographic-scope/geographic-scope.module';
+import { EndOfInitiativeOutcomesModule } from './end-of-initiative-outcomes/end-of-initiative-outcomes.module';
 
 export const apiRoutes = [
   {
@@ -234,5 +235,9 @@ export const apiRoutes = [
   {
     path: 'geographic-scopes',
     module: GeographicScopeModule,
+  },
+  {
+    path: 'end-of-initiative-outcomes',
+    module: EndOfInitiativeOutcomesModule,
   },
 ];

@@ -45,6 +45,9 @@ import { ScienceGroupModule } from './science-group/science-group.module';
 import { UnitModule } from './unit/unit.module';
 import { AdministrativeScaleModule } from './administrative-scale/administrative-scale.module';
 import { GeographicScopeModule } from './geographic-scope/geographic-scope.module';
+import { HomepageClarisaCategoryModule } from './homepage-clarisa-category/homepage-clarisa-category.module';
+import { HomepageClarisaEndpointModule } from './homepage-clarisa-endpoint/homepage-clarisa-endpoint.module';
+import { HomepageClarisaCategoryEndpointModule } from './homepage-clarisa-category-endpoint/homepage-clarisa-category-endpoint.module';
 
 export const apiRoutes = [
   {
@@ -234,5 +237,17 @@ export const apiRoutes = [
   {
     path: 'geographic-scopes',
     module: GeographicScopeModule,
+  },
+  {
+    path: 'hp-clarisa-categories',
+    module: HomepageClarisaCategoryModule,
+  },
+  {
+    path: 'hp-clarisa-endpoints',
+    module: HomepageClarisaEndpointModule,
+  },
+  {
+    path: 'hp-clarisa-category-endpoints',
+    module: HomepageClarisaCategoryEndpointModule,
   },
 ];

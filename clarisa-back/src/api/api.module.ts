@@ -48,6 +48,7 @@ import { ScienceGroupModule } from './science-group/science-group.module';
 import { UnitModule } from './unit/unit.module';
 import { AdministrativeScaleModule } from './administrative-scale/administrative-scale.module';
 import { GeographicScopeModule } from './geographic-scope/geographic-scope.module';
+import { HomepageClarisaCategoryModule } from './homepage-clarisa-category/homepage-clarisa-category.module';
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -99,6 +100,7 @@ import { GeographicScopeModule } from './geographic-scope/geographic-scope.modul
     UnitModule,
     AdministrativeScaleModule,
     GeographicScopeModule,
+    HomepageClarisaCategoryModule,
   ],
 })
 export class ApiModule {}

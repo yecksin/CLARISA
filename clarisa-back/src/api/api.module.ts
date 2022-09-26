@@ -48,9 +48,15 @@ import { ScienceGroupModule } from './science-group/science-group.module';
 import { UnitModule } from './unit/unit.module';
 import { AdministrativeScaleModule } from './administrative-scale/administrative-scale.module';
 import { GeographicScopeModule } from './geographic-scope/geographic-scope.module';
+<<<<<<< HEAD
 import { HomepageClarisaCategoryModule } from './homepage-clarisa-category/homepage-clarisa-category.module';
 import { HomepageClarisaEndpointModule } from './homepage-clarisa-endpoint/homepage-clarisa-endpoint.module';
 import { HomepageClarisaCategoryEndpointModule } from './homepage-clarisa-category-endpoint/homepage-clarisa-category-endpoint.module';
+=======
+import { EndOfInitiativeOutcomesModule } from './end-of-initiative-outcomes/end-of-initiative-outcomes.module';
+import { IntegrationModule } from 'src/shared/integration/integration.module';
+
+>>>>>>> dev-Jdmunog
 @Module({
   controllers: [ApiController],
   providers: [ApiService],
@@ -102,9 +108,14 @@ import { HomepageClarisaCategoryEndpointModule } from './homepage-clarisa-catego
     UnitModule,
     AdministrativeScaleModule,
     GeographicScopeModule,
+<<<<<<< HEAD
     HomepageClarisaCategoryModule,
     HomepageClarisaEndpointModule,
     HomepageClarisaCategoryEndpointModule,
+=======
+    EndOfInitiativeOutcomesModule,
+    IntegrationModule,
+>>>>>>> dev-Jdmunog
   ],
 })
 export class ApiModule {}

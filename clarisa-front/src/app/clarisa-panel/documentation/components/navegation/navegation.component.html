@@ -1,0 +1,36 @@
+<div class="nav-bar">
+  <div class="image">
+    <img
+      src="../../assets/images/CGIAR.png"
+      style="width: 100px; height: 50px"
+      alt=""
+    />
+  </div>
+  <div class="horizontal-menu">
+    <ul>
+      <li><a href="index.html" style="color: white;">HOME</a></li>
+      <li class="open-1" id="open-1">
+        DASHBOARDS <i class="fa fa-caret-down"></i>
+        <ul id="open-11" class="pru">
+          <li ><a style="color: white;" [routerLink]="['../../../landing-page/dashboards']">Introduction</a></li>
+          <li ><a style="color: white;" [routerLink]="['../../../landing-page/institutionsRequestBi']">Institucion Request BI</a></li>
+        </ul>
+      </li>
+      <li class="open-1" id="open-2">
+        API SERVICES <i class="fa fa-caret-down"></i>
+        <ul id="open-21" class="pru">
+          <li><a style="color: white;" [routerLink]="['../../../landing-page/api-services']" >Introduction</a></li>
+          <li><a style="color: white;" [routerLink]="['../../../clarisa-panel/documentation/One CGIAR Control List']" (click)="reload()"> One CGIAR Control List</a></li>
+          <li><a style="color: white;" [routerLink]="['../../../clarisa-panel/documentation/One CGIAR Operation']" (click)="reload()">  One CGIAR Operation</a></li>
+        </ul>
+      </li>
+      <li class="open-1" id="open-3">
+        HELP <i class="fa fa-caret-down"></i>
+        <ul id="open-31" class="pru">
+            <li><a style="color: white;" [routerLink]="['../../../landing-page/faq']" >FAQ</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

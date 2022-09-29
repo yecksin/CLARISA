@@ -2,26 +2,29 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClarisaPanelComponent } from './clarisa-panel.component';
 
-
 const routes: Routes = [
   {
-    path:"", 
-    component:ClarisaPanelComponent,
-    children:[
+    path: '',
+    component: ClarisaPanelComponent,
+    children: [
       {
-        path:"documentation",
-        loadChildren: () => import('./documentation/documentation.module').then((m) => m.DocumentationModule),
+        path: 'documentation/:parameter',
+        loadChildren: () =>
+          import('./documentation/documentation.module').then(
+            (m) => m.DocumentationModule
+          ),
       },
       {
-        path:"manage",
-        loadChildren: () => import('./manage/manage.module').then((m) => m.ManageModule),
-      }
-    ]
-  }
+        path: 'manage',
+        loadChildren: () =>
+          import('./manage/manage.module').then((m) => m.ManageModule),
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ClarisaPanelRoutingModule { }
+export class ClarisaPanelRoutingModule {}

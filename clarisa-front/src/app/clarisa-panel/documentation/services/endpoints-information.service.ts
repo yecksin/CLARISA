@@ -5,11 +5,11 @@ import { environment } from '../../../../environments/envitonments';
 @Injectable({
   providedIn: 'root',
 })
-export class ManageApiService {
+export class EndpointsInformationService {
   urlApi = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
-  getAllUser() {
-    return this.http.get(`${this.urlApi}users`);
+  getAllEndpoints() {
+    return this.http.get(`${this.urlApi}hp-clarisa-category-endpoints`);
   }
 }

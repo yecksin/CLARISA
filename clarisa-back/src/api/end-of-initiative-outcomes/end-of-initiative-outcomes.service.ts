@@ -1,15 +1,18 @@
 import { Injectable } from '@nestjs/common';
+import { ApiOST } from 'src/shared/integration/ost/api.ost';
+import { firstValueFrom } from 'rxjs';
 import { CreateEndOfInitiativeOutcomeDto } from './dto/create-end-of-initiative-outcome.dto';
 import { UpdateEndOfInitiativeOutcomeDto } from './dto/update-end-of-initiative-outcome.dto';
-import { EndOfInitiativeOutcomeRepository } from './repositories/end-of-initiative-outcome.repository';
 
 @Injectable()
 export class EndOfInitiativeOutcomesService {
-  constructor(
-    private initiativesRepository: EndOfInitiativeOutcomeRepository,
-  ) {}
+  constructor(private apiOst: ApiOST) {}
 
-  findAll() {
-    return this.initiativesRepository.findAllEndOfInitiativeOutcome();
+  async findAll() {
+    let response: any = await firstValueFrom(this.apiOst.getEndOfIniciative());
+
+    response = response?.data?.response?.eoi_outcome_by_initiatives ?? [];
+
+    return response;
   }
 }

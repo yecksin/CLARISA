@@ -36,6 +36,8 @@ export class CronOST {
     this.logger.debug('workpackages');
   }
 
+  // every sunday at 4 am
+  @Cron('* * 4 * * 0')
   public async cronInitiativeRelatedData() {
     let oldInitiativesDb: Initiative[] = await this.initiativeRepository.find();
     let updatedInitiativesDb: Initiative[] = [];

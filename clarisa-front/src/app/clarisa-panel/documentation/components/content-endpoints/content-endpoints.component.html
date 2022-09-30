@@ -1,0 +1,220 @@
+<div class="col-sm-12" style="margin-top: 50px;">
+  <div class="light-bg">
+    <h2><span style="color: #6bb601" *ngIf="metaData != undefined ; else elseBlock">{{metaData.name}}</span></h2>
+    <ng-template #elseBlock> Lack of information</ng-template>
+    <br>
+    <h3>Summary:</h3>
+    <p>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae deserunt cumque explicabo, ullam dolores modi magnam molestias nam, praesentium soluta earum. Nulla fugiat asperiores, optio tempore sint minima amet dolores?
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, nisi deleniti! Iste officiis molestiae architecto numquam laudantium quaerat blanditiis ex accusantium. Atque iusto deleniti id voluptate delectus cupiditate voluptas saepe?
+    </p>
+
+    <div class="inner-wrapper faq">
+      <div class="row" style="background-color: #f6f7f8">
+        <div
+          class="col-sm-12"
+          style="background-color: #f6f7f8; margin-top: -50px; padding: 20px"
+        >
+          <div
+            class="panel-group collaps"
+            id="accordion"
+            role="tablist"
+            aria-multiselectable="true"
+          >
+            <div class="panel panel-default" *ngFor="let item of metaData.endpoints; let i = index ">
+              <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                  <a
+                    class="collapsed"
+                    role="button"
+                    data-toggle="collapse"
+                    data-parent="#accordion"
+                    href="#collapse{{i + 1}}"
+                    aria-expanded="false"
+                    ><span
+                      ><button
+                        style="
+                          border: 0;
+                          background-color: white;
+                          color: black;
+                          width: 60px;
+                          height: 30px;
+                          border-radius: 10px;
+                        "
+                      >
+                        {{item.http_method}}
+                      </button></span
+                    >
+                    <span style="font-size: 20px; font-weight: border"
+                      >{{item.route}}</span
+                    >
+                  </a>
+                </h4>
+              </div>
+              <div
+                id="collapse{{i+1}}"
+                class="panel-collapse collapse"
+                role="tabpanel"
+                aria-labelledby="headingTwo"
+                aria-expanded="false"
+                style="height: 0px"
+              >
+                <div class="panel-body">
+                  <h3>Functionality</h3>
+                  <p>
+                    {{item.description}}
+                  </p>
+                  <br />
+                  <h3>Parameters</h3>
+                  <p>
+                    No parameters
+                  </p>
+                  <br>
+                  <h3>Request URL:</h3>
+                  <span
+                    style="
+                      background-color: black;
+                      font-size: 20px;
+                      color: white;
+                      width: 500px;
+                    "
+                    >https://clarisa.cgiar.org/{{item.route}}</span
+                  >
+                  <br>
+                  <br>
+
+                  <h3>Response data:</h3>
+                  <div
+                      style="
+                        background-color: #615f5f;
+                        height: 40px;
+                        font-size: 20px;
+                        padding: 10px;
+                        border-radius: 10px 10px 0px 0px;
+                      "
+                    >
+                      <h3 style="font-size: 20px; color: white">
+                        State code:
+                        <span style="color: rgb(100, 250, 41)">200</span>:
+                        <span style="color: #4fc3e2">OK</span>
+                      </h3>
+                    </div>
+                    <pre
+                      style="font-size: 16px"
+                    ><code >{{returnResponseJson(item.response_json)}}</code></pre>
+                    <div
+                      style="
+                        font-size: 20px;
+                        padding: 10px;
+                        border-radius: 0px 0px 10px 10px;
+                        display: flex;
+                        justify-content: center;
+                      "
+                    >
+                      <button
+                        style="
+                          width: 500px;
+                          background-color: #6bb600;
+                          font-size: 18px;
+                          color: white;
+                          font-weight: bolder;
+                        "
+                        type="button"
+                        class="btn btn-roundcorner"
+                      >
+                        Display control list
+                      </button>
+                    </div>
+                  <div class="col-sm-3 offset-top-30">
+                    <div class="light-bg">
+                      <div
+                        style="
+                          background-color: #615f5f;
+                          height: 40px;
+                          font-size: 20px;
+                          padding: 10px;
+                          border-radius: 10px 10px 0px 0px;
+                        "
+                      >
+                        <h3 style="font-size: 20px; color: white">
+                          State code:
+                          <span style="color: red">400</span>
+                        </h3>
+                      </div>
+                      <pre
+                        style="font-size: 20px; background-color: black;"
+                      ><code ><span style="color: red">Bad Request</span></code></pre>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 offset-top-30">
+                    <div class="light-bg">
+                      <div
+                        style="
+                          background-color: #615f5f;
+                          height: 40px;
+                          font-size: 20px;
+                          padding: 10px;
+                          border-radius: 10px 10px 0px 0px;
+                        "
+                      >
+                        <h3 style="font-size: 20px; color: white">
+                          State code:
+                          <span style="color: red">401</span>
+                        </h3>
+                      </div>
+                      <pre
+                        style="font-size: 20px; background-color: black;"
+                      ><code ><span style="color: red">Unauthorized</span></code></pre>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 offset-top-30">
+                    <div class="light-bg">
+                      <div
+                        style="
+                          background-color: #615f5f;
+                          height: 40px;
+                          font-size: 20px;
+                          padding: 10px;
+                          border-radius: 10px 10px 0px 0px;
+                        "
+                      >
+                        <h3 style="font-size: 20px; color: white">
+                          State code:
+                          <span style="color: red">403</span>
+                        </h3>
+                      </div>
+                      <pre
+                        style="font-size: 20px; background-color: black;"
+                      ><code ><span style="color: red">Forbidden</span></code></pre>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 offset-top-30">
+                    <div class="light-bg">
+                      <div
+                        style="
+                          background-color: #615f5f;
+                          height: 40px;
+                          font-size: 20px;
+                          padding: 10px;
+                          border-radius: 10px 10px 0px 0px;
+                        "
+                      >
+                        <h3 style="font-size: 20px; color: white">
+                          State code:
+                          <span style="color: red">404</span>
+                        </h3>
+                      </div>
+                      <pre
+                        style="font-size: 20px; background-color: black;"
+                      ><code ><span style="color: red">Not Found</span></code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

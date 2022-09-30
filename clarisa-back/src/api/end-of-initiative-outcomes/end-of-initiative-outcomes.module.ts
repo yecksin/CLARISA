@@ -10,6 +10,7 @@ import { IntegrationModule } from 'src/shared/integration/integration.module';
 
 @Module({
   imports: [
+    HttpModule,
     TypeOrmModule.forFeature([EndOfInitiativeOutcome]),
     IntegrationModule,
   ],

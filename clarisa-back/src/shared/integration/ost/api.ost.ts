@@ -34,4 +34,8 @@ export class ApiOST extends BaseApi {
   getStages() {
     return this.getRequest('initiatives/stages');
   }
+
+  getEndOfIniciative() {
+    return this.getRequest('stages-control/proposal/eoi/all/initiatives');
+  }
 }

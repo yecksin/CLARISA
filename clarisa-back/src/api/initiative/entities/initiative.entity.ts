@@ -1,5 +1,6 @@
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { InitiativeStage } from './initiative-status.entity';
 
 @Entity('submission_tool_initiatives')
 export class Initiative extends AuditableEntity {
@@ -14,4 +15,6 @@ export class Initiative extends AuditableEntity {
 
   @Column()
   official_code: string;
+
+  initiativeStages: InitiativeStage[];
 }

@@ -1,4 +1,4 @@
-export class WorkpackageOSTDto {
+export class WorkpackageOstDto {
   wp_id: number;
   name: string;
   initiative_id: number;

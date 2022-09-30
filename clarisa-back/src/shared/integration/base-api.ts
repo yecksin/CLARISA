@@ -1,18 +1,29 @@
 import { HttpService } from '@nestjs/axios';
 import { Observable } from 'rxjs';
 import { AxiosResponse } from 'axios';
+import { Logger } from '@nestjs/common';
+import axios from 'axios';
 
 export abstract class BaseApi {
-  protected _externalAppEndpoint: string;
-  protected _httpService: HttpService;
-  protected _user: string;
-  protected _pass: string;
+  protected externalAppEndpoint: string;
+  protected httpService: HttpService;
+  protected user: string;
+  protected pass: string;
+  protected logger: Logger;
 
   protected getRequest<T = any>(
     endpoint: string,
   ): Observable<AxiosResponse<T, any>> {
-    return this._httpService.get(`${this._externalAppEndpoint}/${endpoint}`, {
-      auth: { username: this._user, password: this._pass },
-    });
+    try {
+      return this.httpService.get(`${this.externalAppEndpoint}/${endpoint}`, {
+        auth: { username: this.user, password: this.pass },
+      });
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        this.logger.error(`axios error: ${e.message}`);
+      } else {
+        this.logger.error(`unexpected error: ${e.message}`);
+      }
+    }
   }
 }

@@ -1,0 +1,9 @@
+export default {
+  jwtSecret: 'ourSecret',
+  jwtTocSecret: 'theirSecret',
+  active_directory: {
+    url: 'example://abc.com',
+    baseDN: 'OUR=ORGS',
+    domain: 'our.domain',
+  },
+};

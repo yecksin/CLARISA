@@ -9,6 +9,7 @@ import {
   InitiativeResponse,
 } from './dto/initivative.ost.dto';
 import { ResponseOstDto } from './dto/response.ost.dto';
+import { WorkpackageResponse } from './dto/workpackage.ost.dto';
 
 @Injectable()
 export class ApiOST extends BaseApi {
@@ -21,7 +22,9 @@ export class ApiOST extends BaseApi {
     this.logger = new Logger(BaseApi.name);
   }
 
-  getWorkpackages() {
+  getWorkpackages(): Observable<
+    AxiosResponse<ResponseOstDto<WorkpackageResponse>>
+  > {
     return this.getRequest('previews/packages');
   }
 

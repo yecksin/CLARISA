@@ -1,5 +1,8 @@
+import { InitiativeStage } from 'src/api/initiative/entities/initiative-status.entity';
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { WorkpackageCountry } from './workpackage-country.entity';
+import { WorkpackageRegion } from './workpackage-region.entity';
 
 @Entity('submission_tool_work_packages')
 export class Workpackage extends AuditableEntity {
@@ -26,4 +29,10 @@ export class Workpackage extends AuditableEntity {
 
   @Column()
   wp_official_code: number;
+
+  initiative_stage: InitiativeStage;
+
+  countries: WorkpackageCountry[];
+
+  regions: WorkpackageRegion[];
 }

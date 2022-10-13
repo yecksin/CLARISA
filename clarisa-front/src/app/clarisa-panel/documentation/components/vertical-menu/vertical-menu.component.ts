@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-vertical-menu',
   templateUrl: './vertical-menu.component.html',
@@ -13,7 +13,7 @@ export class VerticalMenuComponent implements OnInit {
   ngOnInit(): void {}
 
   abrir(id: any) {
-    const box = document.getElementById(id);
+    const box = document.getElementById(id + 1);
     if (box != null) {
       if (box.style.display == 'block') {
         box.style.display = 'none';

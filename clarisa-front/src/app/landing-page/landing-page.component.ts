@@ -22,6 +22,7 @@ export class LandingPageComponent implements OnInit {
   urlAditionalTwo = `./assets/owl-carousel/css/owl.theme.css`;
   urlAditionalThree = `./assets/css/ionicons.min.css`;
   urlAditinalFour = `./assets/css/magnific-popup.css`;
+  estado = true;
   constructor() {}
 
   ngOnInit(): void {
@@ -33,5 +34,8 @@ export class LandingPageComponent implements OnInit {
     this.changesAditionalTwo.setAttribute('href', this.urlAditionalTwo);
     this.changesAditionalThree.setAttribute('href', this.urlAditionalThree);
     this.changesAditinalFour.setAttribute('href', this.urlAditinalFour);
+    setTimeout(() => {
+      this.estado = false;
+    }, 500);
   }
 }

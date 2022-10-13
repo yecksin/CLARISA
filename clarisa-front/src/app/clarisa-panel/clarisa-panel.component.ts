@@ -20,6 +20,7 @@ export class ClarisaPanelComponent implements OnInit {
   urlAditional = `./assets/css/dark-style.css`;
   urlAditionalTwo = `./assets/css/transparent-style.css`;
   urlAditionalThree = `./assets/css/skin-modes.css`;
+  estado = true;
   constructor() {}
 
   ngOnInit(): void {
@@ -30,5 +31,8 @@ export class ClarisaPanelComponent implements OnInit {
     this.changesAditional.setAttribute('href', this.urlAditional);
     this.changesAditionalTwo.setAttribute('href', this.urlAditionalTwo);
     this.changesAditionalThree.setAttribute('href', this.urlAditionalThree);
+    setTimeout(() => {
+      this.estado = false;
+    }, 500);
   }
 }

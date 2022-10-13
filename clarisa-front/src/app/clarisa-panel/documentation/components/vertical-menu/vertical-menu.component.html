@@ -37,8 +37,9 @@
       <ul class="side-menu" style="color: #0065bd">
         <li
           class="slide"
-          (click)="abrir(item.name)"
           *ngFor="let item of subCategories.subcategories"
+          id="{{ item.name }}"
+          (click)="abrir(item.name)"
         >
           <a
             class="side-menu__item"
@@ -47,8 +48,9 @@
             ><span class="side-menu__label"> {{ item.name }}</span
             ><i class="angle fe fe-chevron-right"></i
           ></a>
-          <ul class="slide-menu" id="{{ item.name }}">
+          <ul class="slide-menu pruba" id="{{ item.name + 1 }}">
             <li
+              id="none"
               *ngFor="let items of item.endpoints"
               (click)="clickme({ categoria: item.name, endpoint: items.name })"
             >

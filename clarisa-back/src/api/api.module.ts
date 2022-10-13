@@ -53,6 +53,7 @@ import { HomepageClarisaEndpointModule } from './homepage-clarisa-endpoint/homep
 import { HomepageClarisaCategoryEndpointModule } from './homepage-clarisa-category-endpoint/homepage-clarisa-category-endpoint.module';
 import { EndOfInitiativeOutcomesModule } from './end-of-initiative-outcomes/end-of-initiative-outcomes.module';
 import { IntegrationModule } from 'src/shared/integration/integration.module';
+import { MisModule } from './mis/mis.module';
 
 @Module({
   controllers: [ApiController],
@@ -110,6 +111,7 @@ import { IntegrationModule } from 'src/shared/integration/integration.module';
     HomepageClarisaCategoryEndpointModule,
     EndOfInitiativeOutcomesModule,
     IntegrationModule,
+    MisModule,
   ],
 })
 export class ApiModule {}

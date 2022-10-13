@@ -1,90 +1,50 @@
+<!-- Inner Wrapper Start -->
+
 <div class="inner-wrapper faq">
-    <div class="container">
-        <h1>Access</h1>
-      <div class="panel-group collaps" id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="panel panel-default">
-          <div class="panel-heading" role="tab" id="headingOne">
-            <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse0" aria-expanded="true" class=""> <span>01.</span> How do I access the API? </a> </h4>
-          </div>
-          <div id="collapse0" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
-            <div class="panel-body">CLARISA information is available to the public through our web 
-                portal https://clarisa.cgiar.org. It is also available to the public via API. However, 
-                to connect using your own application (through API), the endpoint locations are as per 
-                the API documentation under the “Services” menu at the top of this page. API access requires
-                a valid username/password combination which is available upon request. Requests are to be 
-                submitted via email to planningandreporting@cgiar.org.  </div>
-          </div>
+  <div class="container">
+    <div
+      class="panel-group collaps"
+      id="accordion"
+      role="tablist"
+      aria-multiselectable="true"
+    >
+      <h2>{{ metaDataFaq.nameSection }}</h2>
+      <div
+        class="panel panel-default"
+        *ngFor="let item of metaDataFaq.questions; let i = index"
+      >
+        <div class="panel-heading" role="tab" id="headingTwo">
+          <h4 class="panel-title">
+            <a
+              class="collapsed"
+              role="button"
+              data-toggle="collapse"
+              data-parent="#accordion"
+              href="#collapse{{ item.id }}"
+              aria-expanded="false"
+            >
+              <span style="font-size: 20px; font-weight: border">{{
+                item.nameQuestion
+              }}</span>
+            </a>
+          </h4>
         </div>
-        <div class="panel panel-default">
-          <div class="panel-heading" role="tab" id="headingTwo">
-            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false"><span>02.</span> Where is the API documentation? </a> </h4>
-          </div>
-          <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false" style="height: 0px;">
-            <div class="panel-body"> The documentation on API access is tailored for both technical and non-technical users. 
-                                    It is divided into two main sections and is located under the “Services” menu at the top of this page. </div>
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading" role="tab" id="headingThree">
-            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false"><span>03.</span> How do I get API credentials? </a> </h4>
-          </div>
-          <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false" style="height: 0px;">
-            <div class="panel-body"> Getting credentials to access the API is freely available upon request. 
-                Requests are to be submitted via email. In your request, kindly mention the lists you are 
-                interested in, why and how often you anticipate calling the APIs. The details requested are purely for resource planning. </div>
+        <div
+          id="collapse{{ item.id }}"
+          class="panel-collapse collapse"
+          role="tabpanel"
+          aria-labelledby="headingTwo"
+          aria-expanded="false"
+          style="height: 0px"
+        >
+          <div class="panel-body">
+            <p>
+              {{ item.answer }}
+            </p>
           </div>
         </div>
       </div>
     </div>
   </div>
-<!-- End first FAQ-->
-
-<div class="inner-wrapper faq" style="margin-top: -100px;">
-    <div class="container">
-        <h1>Technology</h1>
-      <div class="panel-group collaps">
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingFour">
-              <h4 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="false"><span>01.</span> Is there an alternative technology eg SOAP/XML to access the data? </a> </h4>
-            </div>
-            <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour" aria-expanded="false">
-              <div class="panel-body"> No, CLARISA only works as using JSON/REST technology. </div>
-            </div>
-          </div>
-      </div>
-    </div>
-  </div>
-
-<!-- End SECOND FAQ-->
-
-<div class="inner-wrapper faq" style="margin-top: -100px;">
-    <div class="container">
-        <h1>Data</h1>
-      <div class="panel-group collaps" id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingFive">
-              <h4 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="false"><span>01.</span> How often is the data updated? </a> </h4>
-            </div>
-            <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive" aria-expanded="false">
-              <div class="panel-body"> Each data set is updated at a different frequency as it becomes available. This ranges from as long as annually to some as often as daily. </div>
-            </div>
-          </div>
-          <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingSix">
-              <h4 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse5" aria-expanded="false"><span>02.</span> How do I upload my data onto this API? </a> </h4>
-            </div>
-            <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix" aria-expanded="false">
-              <div class="panel-body"> This API is not open to the public for updating. However, this can be discussed based on the data you have and its implication on maintenance. Please get in touch with us on planningandreporting@cgiar.org for further discussion. </div>
-            </div>
-          </div>
-          <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingSeven">
-              <h4 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse6" aria-expanded="false"><span>03.</span> Can I be notified whenever there is an update of data? </a> </h4>
-            </div>
-            <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven" aria-expanded="false">
-              <div class="panel-body"> At the moment only updates of a critical nature may be alerted via email. </div>
-            </div>
-          </div>
-      </div>
-    </div>
-  </div>
+</div>
+<!-- Inner Wrapper End -->

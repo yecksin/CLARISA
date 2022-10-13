@@ -17,7 +17,7 @@ export class Role extends AuditableEntity {
   order: number;
 
   @Column()
-  source_id: number;
+  mis_id: number;
 
   @ManyToMany(() => User, (user) => user.roles)
   users: User[];

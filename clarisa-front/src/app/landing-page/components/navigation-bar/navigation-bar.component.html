@@ -92,39 +92,25 @@
                         <li>
                           <a [routerLink]="['api-services']">Introduction</a>
                         </li>
+
                         <li>
-                          <a href="" style="pointer-events: none"
-                            ><i class="fa fa-wrench" aria-hidden="true"></i>
-                            Annual Report API Reference</a
+                          <a
+                            [routerLink]="[
+                              '../clarisa-panel/documentation',
+                              'One CGIAR Control List'
+                            ]"
                           >
-                        </li>
-                        <li>
-                          <a [routerLink]="[
-                          '../clarisa-panel/documentation',
-                          'One CGIAR Control List'
-                        ]"  
-                            >
                             One CGIAR Control List</a
                           >
                         </li>
                         <li>
-                          <a [routerLink]="[
-                          '../clarisa-panel/documentation',
-                          'One CGIAR Operation'
-                        ]" 
-                            >
-                            One CGIAR Operation</a
-                          >
-                        </li>
-                        <li>
                           <a
-                            
+                            [routerLink]="[
+                              '../clarisa-panel/documentation',
+                              'One CGIAR Operation'
+                            ]"
                           >
-                          <i
-                              class="fa fa-exclamation-triangle"
-                              aria-hidden="true"
-                            ></i>
-                            Additional Services</a
+                            One CGIAR Operation</a
                           >
                         </li>
                       </ul>
@@ -156,8 +142,6 @@
                 </div>
               </nav>
             </div>
-
-
           </div>
         </div>
       </div>

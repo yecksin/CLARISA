@@ -1,0 +1,140 @@
+<!-- app-Header -->
+<div class="app-header header sticky" style="background-color: #7ab800">
+  <div class="container-fluid main-container">
+    <div class="d-flex">
+      <a
+        aria-label="Hide Sidebar"
+        class="app-sidebar__toggle"
+        data-bs-toggle="sidebar"
+        href="javascript:void(0)"
+        style="color: white"
+      ></a>
+      <!-- sidebar-toggle-->
+
+      <!-- LOGO -->
+
+      <div class="d-flex order-lg-2 ms-auto header-right-icons">
+        <!-- SEARCH -->
+        <button
+          class="navbar-toggler navresponsive-toggler d-lg-none ms-auto"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent-4"
+          aria-controls="navbarSupportedContent-4"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          id="icon-nav-v"
+        >
+          <span
+            class="navbar-toggler-icon fe fe-more-vertical"
+            style="color: white"
+          ></span>
+        </button>
+        <div class="navbar navbar-collapse responsive-navbar p-0">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+            <div class="d-flex order-lg-2" style="background-color: #7ab800">
+              <div class="d-flex country">
+                <a
+                  class="nav-link icon text-center"
+                  [routerLink]="['../../../landing-page/home']"
+                >
+                  <i class="fe fe-home"></i
+                  ><span class="fs-16 ms-2 d-none d-xl-block">Home</span>
+                </a>
+              </div>
+
+              <div class="dropdown d-flex notifications">
+                <a class="nav-link icon text-center" data-bs-toggle="dropdown">
+                  <i class="fa fa-area-chart"></i
+                  ><span class="fs-16 ms-2 d-none d-xl-block">Dashboards</span>
+                </a>
+                <div
+                  class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"
+                >
+                  <div class="dropdown-divider m-0"></div>
+
+                  <a
+                    class="dropdown-item"
+                    [routerLink]="['../../../landing-page/dashboards']"
+                  >
+                    Introduction
+                  </a>
+                  <a
+                    class="dropdown-item"
+                    [routerLink]="[
+                      '../../../landing-page/institutionsRequestBi'
+                    ]"
+                  >
+                    Institutions Request BI
+                  </a>
+                </div>
+              </div>
+
+              <div class="dropdown d-flex notifications">
+                <a class="nav-link icon text-center" data-bs-toggle="dropdown">
+                  <i class="fa fa-globe"></i
+                  ><span class="fs-16 ms-2 d-none d-xl-block"
+                    >API Services</span
+                  >
+                </a>
+                <div
+                  class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"
+                >
+                  <div class="dropdown-divider m-0"></div>
+
+                  <a
+                    class="dropdown-item"
+                    [routerLink]="['../../../landing-page/api-services']"
+                  >
+                    Introduction
+                  </a>
+                  <a
+                    class="dropdown-item"
+                    [routerLink]="['../../../landing-page/api-services']"
+                  >
+                    One CGIAR Control Lists
+                  </a>
+                  <a
+                    class="dropdown-item"
+                    [routerLink]="['../../../landing-page/api-services']"
+                  >
+                    One CGIAR Operation
+                  </a>
+                </div>
+              </div>
+
+              <div class="dropdown d-flex notifications">
+                <a class="nav-link icon text-center" data-bs-toggle="dropdown">
+                  <i class="fa fa-info-circle"></i
+                  ><span class="fs-16 ms-2 d-none d-xl-block">Help</span>
+                </a>
+                <div
+                  class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"
+                >
+                  <div class="dropdown-divider m-0"></div>
+
+                  <a
+                    class="dropdown-item"
+                    [routerLink]="['../../../landing-page/faq']"
+                  >
+                    FAQ
+                  </a>
+                  <a
+                    class="dropdown-item"
+                    [routerLink]="['../../../landing-page/faq']"
+                  >
+                    Contact us
+                  </a>
+                </div>
+              </div>
+
+              <!-- MESSAGE-BOX -->
+              <!-- SIDE-MENU -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /app-Header -->

@@ -1,29 +1,26 @@
-export class WorkpackageOSTDto {
-  wp_id: number;
-  name: string;
+import { WorkpackageCountryOstDto } from './workpackage-country.ost.dto';
+import { WorkpackageRegionOstDto } from './workpackage-region.ost.dto';
+
+export class WorkpackageOstDto {
   initiative_id: number;
-  initiative_offical_code: string;
+  init_official_code: string;
   stage_id: number;
-  results: unknown;
+  wp_id: number;
+  wp_official_code: number;
+  active: number;
+  name: string;
+  results: string;
   pathway_content: string;
+  is_global: number;
+  initvStgId: number;
+  created_at: Date;
+  updated_at: Date;
   acronym: string;
-  wp_official_code: string;
   initiative_status: number;
+  regions: WorkpackageRegionOstDto[];
+  countries: WorkpackageCountryOstDto[];
 }
 
-/*export class WorkpackageOSTDto {
-    initiative_id: number;
-    initiative_offical_code: string;
-    stage_id: number;
-    initiative_status: number;
-    wp_official_code: string;
-    wp_internal_id: number;
-    wp_name: string;
-    wp_acronym: string;
-    wp_results: string;
-    wp_pathway_content: string;
-    wp_is_global: number;
-    regions: [];
-    countries: [];
-    wp_status: number;
-}*/
+export type WorkpackageResponse = {
+  workpackages: WorkpackageOstDto[];
+};

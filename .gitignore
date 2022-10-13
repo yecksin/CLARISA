@@ -111,3 +111,4 @@ ormconfig.ts
 .vscode/
 
 clarisa-back/package-lock.json
+clarisa-back/src/shared/config/config.ts

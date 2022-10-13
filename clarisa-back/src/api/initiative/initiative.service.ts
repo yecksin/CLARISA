@@ -26,6 +26,13 @@ export class InitiativeService {
     });
   }
 
+  async findOneByOfficialCode(official_code: string): Promise<Initiative> {
+    return await this.initiativesRepository.findOneBy({
+      official_code,
+      is_active: true,
+    });
+  }
+
   async update(updateInitiativeDto: UpdateInitiativeDto[]) {
     return await this.initiativesRepository.save(updateInitiativeDto);
   }

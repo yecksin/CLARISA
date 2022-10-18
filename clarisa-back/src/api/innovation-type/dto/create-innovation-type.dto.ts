@@ -5,7 +5,5 @@ export class CreateInnovationTypeDto extends AuditableDto {
 
   definition: string;
 
-  is_onecgiar: boolean;
-
-  is_marlo: boolean;
+  source_id: number;
 }

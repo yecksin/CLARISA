@@ -51,6 +51,7 @@ import { HomepageClarisaCategoryEndpointModule } from './homepage-clarisa-catego
 import { EndOfInitiativeOutcomesModule } from './end-of-initiative-outcomes/end-of-initiative-outcomes.module';
 import { MisModule } from './mis/mis.module';
 import { InnovationCharacteristicModule } from './innovation-characteristic/innovation-characteristic.module';
+import { PolicyStageModule } from './policy-stage/policy-stage.module';
 
 export const apiRoutes = [
   {
@@ -264,5 +265,9 @@ export const apiRoutes = [
   {
     path: 'innovation-characteristics',
     module: InnovationCharacteristicModule,
+  },
+  {
+    path: 'policy-stages',
+    module: PolicyStageModule,
   },
 ];

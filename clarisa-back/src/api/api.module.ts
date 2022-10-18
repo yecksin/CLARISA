@@ -55,6 +55,7 @@ import { EndOfInitiativeOutcomesModule } from './end-of-initiative-outcomes/end-
 import { IntegrationModule } from 'src/shared/integration/integration.module';
 import { MisModule } from './mis/mis.module';
 import { InnovationCharacteristicModule } from './innovation-characteristic/innovation-characteristic.module';
+import { PolicyStageModule } from './policy-stage/policy-stage.module';
 
 @Module({
   controllers: [ApiController],
@@ -114,6 +115,7 @@ import { InnovationCharacteristicModule } from './innovation-characteristic/inno
     IntegrationModule,
     MisModule,
     InnovationCharacteristicModule,
+    PolicyStageModule,
   ],
 })
 export class ApiModule {}

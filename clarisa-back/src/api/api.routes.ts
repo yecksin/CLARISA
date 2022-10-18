@@ -50,6 +50,7 @@ import { HomepageClarisaEndpointModule } from './homepage-clarisa-endpoint/homep
 import { HomepageClarisaCategoryEndpointModule } from './homepage-clarisa-category-endpoint/homepage-clarisa-category-endpoint.module';
 import { EndOfInitiativeOutcomesModule } from './end-of-initiative-outcomes/end-of-initiative-outcomes.module';
 import { MisModule } from './mis/mis.module';
+import { InnovationCharacteristicModule } from './innovation-characteristic/innovation-characteristic.module';
 
 export const apiRoutes = [
   {
@@ -259,5 +260,9 @@ export const apiRoutes = [
   {
     path: 'mises',
     module: MisModule,
+  },
+  {
+    path: 'innovation-characteristics',
+    module: InnovationCharacteristicModule,
   },
 ];

@@ -54,6 +54,7 @@ import { HomepageClarisaCategoryEndpointModule } from './homepage-clarisa-catego
 import { EndOfInitiativeOutcomesModule } from './end-of-initiative-outcomes/end-of-initiative-outcomes.module';
 import { IntegrationModule } from 'src/shared/integration/integration.module';
 import { MisModule } from './mis/mis.module';
+import { InnovationCharacteristicModule } from './innovation-characteristic/innovation-characteristic.module';
 
 @Module({
   controllers: [ApiController],
@@ -112,6 +113,7 @@ import { MisModule } from './mis/mis.module';
     EndOfInitiativeOutcomesModule,
     IntegrationModule,
     MisModule,
+    InnovationCharacteristicModule,
   ],
 })
 export class ApiModule {}

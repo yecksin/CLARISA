@@ -5,21 +5,24 @@ export const questionData = [
     questions: [
       {
         id: 1,
-        nameQuestion: 'How do I access the API?',
+        nameQuestion:
+          "01. How do I access CLARISA's Application Programming Interfaces (APIs)?",
         answer:
-          'CLARISA information is available to the public through our web portal https://clarisa.cgiar.org. It is also available to the public via API. However, to connect using your own application (through API), the endpoint locations are as per the API documentation under the “Services” menu at the top of this page. API access requires a valid username/password combination which is available upon request. Requests are to be submitted via email to planningandreporting@cgiar.org.',
+          "CLARISA information is publicly available on the web portal https://clarisa.cgiar.org. Users can also retrieve this information through Application Programming Interfaces (APIs). Access to CLARISA's API is free of charge. To connect using your application, please consult the endpoint locations under the API documentation 'Services' menu at the top of this page. API access requires a valid username and password combination available upon request. Users can submit their requests by sending an email to ClarisaSupport@cgiar.org. ",
       },
       {
         id: 2,
-        nameQuestion: 'Where is the API documentation?',
+        nameQuestion:
+          "02. Where is the CLARISA's Application Programming Interfaces (APIs) documentation?  ",
         answer:
-          'The documentation on API access is tailored for both technical and non-technical users. It is divided into two main sections and is located under the “Services” menu at the top of this page.',
+          "The documentation on CLARISA's Application Programming Interfaces (APIs) is available on the 'Services' menu at the top of this page. This section provides a description to guide both technical and non-technical users. ",
       },
       {
         id: 3,
-        nameQuestion: 'How do I get API credentials?',
+        nameQuestion:
+          "03. How do I get CLARISA's Application Programming Interfaces (APIs) credentials?",
         answer:
-          'Getting credentials to access the API is freely available upon request. Requests are to be submitted via email. In your request, kindly mention the lists you are interested in, why and how often you anticipate calling the APIs. The details requested are purely for resource planning.',
+          "Users can submit their requests to access CLARISA's Application Programming Interfaces (APIs) via email (ClarisaSupport@cgiar.org). In the email, users should mention the lists they are interested in, explain the request, and specify how often they anticipate consuming the APIs. These details requested are purely for resource planning.  ",
       },
     ],
   },
@@ -30,8 +33,8 @@ export const questionData = [
       {
         id: 4,
         nameQuestion:
-          'Is there an alternative technology eg SOAP/XML to access the data?',
-        answer: 'No, CLARISA only works as using JSON/REST technology.',
+          "01. Is there an alternative technology (e.g., SOAP/XML) to access CLARISA's data? ",
+        answer: 'No, CLARISA only works using JSON/REST technology. ',
       },
     ],
   },
@@ -41,21 +44,30 @@ export const questionData = [
     questions: [
       {
         id: 5,
-        nameQuestion: 'How often is the data updated?',
+        nameQuestion: '01. How often is the data updated?  ',
         answer:
-          'Each data set is updated at a different frequency as it becomes available. This ranges from as long as annually to some as often as daily.',
+          'Each dataset is updated at a different frequency and as soon as it becomes available, ranging from a daily to an annual basis.',
       },
       {
         id: 6,
-        nameQuestion: 'How do I upload my data onto this API?',
+        nameQuestion:
+          "02. How do I upload my data onto CLARISA's Application Programming Interfaces (APIs)?  ",
         answer:
-          'This API is not open to the public for updating. However, this can be discussed based on the data you have and its implication on maintenance. Please get in touch with us on planningandreporting@cgiar.org for further discussion.',
+          "CLARISA's Application Programming Interfaces (APIs) are not open to updates from the public. However, collaborations may be considered based on the data users' interest to contribute and on the possible implications for maintenance. Please get in touch with the CLARISA team by sending an email to  ClarisaSupport@cgiar.org.  ",
       },
       {
         id: 7,
-        nameQuestion: 'Can I be notified whenever there is an update of data?',
+        nameQuestion:
+          '03. Can I be notified whenever there is a data update in CLARISA?',
         answer:
-          'At the moment only updates of a critical nature may be alerted via email.',
+          'At the moment, only updates of a critical nature may be alerted via email. To be notified of such updates, please register using the form. ',
+      },
+      {
+        id: 8,
+        nameQuestion:
+          "04. Is it possible to download CLARISA's control lists? ",
+        answer:
+          "Yes. Users can freely download CLARISA's control lists by accessing the 'Services' section on the top right of the page. Each list can be downloaded separately and is available in DOC and PDF formats.",
       },
     ],
   },

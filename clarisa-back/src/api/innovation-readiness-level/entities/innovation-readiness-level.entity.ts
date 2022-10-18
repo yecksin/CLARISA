@@ -8,4 +8,7 @@ export class InnovationReadinessLevel extends AuditableEntity {
 
   @Column()
   name: string;
+
+  @Column()
+  source_id: number;
 }

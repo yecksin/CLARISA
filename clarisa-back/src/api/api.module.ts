@@ -56,6 +56,7 @@ import { IntegrationModule } from 'src/shared/integration/integration.module';
 import { MisModule } from './mis/mis.module';
 import { InnovationCharacteristicModule } from './innovation-characteristic/innovation-characteristic.module';
 import { PolicyStageModule } from './policy-stage/policy-stage.module';
+import { InstitutionTypeModule } from './institution-type/institution-type.module';
 
 @Module({
   controllers: [ApiController],
@@ -116,6 +117,7 @@ import { PolicyStageModule } from './policy-stage/policy-stage.module';
     MisModule,
     InnovationCharacteristicModule,
     PolicyStageModule,
+    InstitutionTypeModule,
   ],
 })
 export class ApiModule {}

@@ -7,6 +7,7 @@ export class SourceOption {
     4,
     'innovation-catalog',
   );
+  public static readonly IATI = new SourceOption(5, 'iati');
 
   private constructor(
     public readonly source_id: number,

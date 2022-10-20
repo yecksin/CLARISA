@@ -1,3 +1,4 @@
+import { InstitutionDictionary } from 'src/api/institution-dictionary/entities/institution-dictionary.entity';
 import { InstitutionType } from 'src/api/institution-type/entities/institution-type.entity';
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
@@ -36,4 +37,7 @@ export class Institution extends AuditableEntity {
   @ManyToOne(() => InstitutionType, (it) => it.institutions)
   @JoinColumn({ name: 'institution_type_id' })
   institution_type_object: InstitutionType;
+
+  @OneToMany(() => InstitutionDictionary, (id) => id.institution_object)
+  institution_dictionary_entries: InstitutionDictionary[];
 }

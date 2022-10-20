@@ -53,6 +53,7 @@ import { MisModule } from './mis/mis.module';
 import { InnovationCharacteristicModule } from './innovation-characteristic/innovation-characteristic.module';
 import { PolicyStageModule } from './policy-stage/policy-stage.module';
 import { InstitutionTypeModule } from './institution-type/institution-type.module';
+import { InstitutionModule } from './institution/institution.module';
 
 export const apiRoutes = [
   {
@@ -274,5 +275,9 @@ export const apiRoutes = [
   {
     path: 'institution-types',
     module: InstitutionTypeModule,
+  },
+  {
+    path: 'institutions',
+    module: InstitutionModule,
   },
 ];

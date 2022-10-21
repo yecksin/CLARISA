@@ -162,7 +162,7 @@ export const apiRoutes = [
     module: InnovationReadinessLevelModule,
   },
   {
-    path: 'investment-type',
+    path: 'investment-types',
     module: InvestmentTypeModule,
   },
   {

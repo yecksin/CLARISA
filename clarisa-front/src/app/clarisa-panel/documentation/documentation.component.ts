@@ -13,6 +13,7 @@ export class DocumentationComponent implements OnInit {
   endpointsFilterInformation: any;
   categoriaSelection: any;
   typeInformation: any;
+  informationEndpoint: any;
   constructor(
     private rutaActiva: ActivatedRoute,
     private _manageApiService: EndpointsInformationService
@@ -47,6 +48,11 @@ export class DocumentationComponent implements OnInit {
         if (obj.name == e.endpoint) return obj;
       });
       this.typeInformation = 'endpoint';
+      this._manageApiService
+        .getAnyEndpoint(this.categoriaSelection.route)
+        .subscribe((resp) => {
+          this.informationEndpoint = resp;
+        });
     }
   }
 }

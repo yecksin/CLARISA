@@ -1,0 +1,357 @@
+<div class="main-content app-content mt-0">
+  <div class="side-app">
+    <!-- CONTAINER -->
+    <div class="main-container container-fluid">
+      <!-- PAGE-HEADER -->
+      <div class="page-header">
+        <h1 class="page-title"></h1>
+        <div>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)"></a></li>
+            <li class="breadcrumb-item active" aria-current="page"></li>
+          </ol>
+        </div>
+      </div>
+      <!-- PAGE-HEADER END -->
+      <!-- Row -->
+      <div class="row" *ngIf="information != undefined">
+        <div class="col-md-12 col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title" style="color: #0065bd; font-size: 25px">
+                {{ information.name }}
+              </h3>
+            </div>
+            <div class="card-body">
+              <div class="expanel expanel-default">
+                <div class="expanel-body" style="background-color: #f0f0f0">
+                  <h3>Summary:</h3>
+                  <p>
+                    {{ information.description }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="card-body"
+        *ngIf="information.hasOwnProperty('route') == true"
+        style="margin-top: -50px"
+      >
+        <div class="expanel expanel-default">
+          <div class="expanel-body">
+            <!-- ROW-2 OPEN -->
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="panel-group1" id="accordion1">
+                      <div class="panel panel-default mb-4" style="border: 0">
+                        <div
+                          class="panel-heading1"
+                          style="background-color: white"
+                        >
+                          <h4 class="panel-title1">
+                            <a
+                              style="
+                                font-size: 20px;
+                                color: black;
+                                background-color: #ebf4d9;
+                                border-radius: 30px;
+                                border: 1px solid #7ab800;
+                              "
+                              class="accordion-toggle collapsed"
+                              data-bs-toggle="collapse"
+                              data-bs-parent="#accordion"
+                              href="#collapseFour"
+                              aria-expanded="false"
+                              ><button
+                                style="
+                                  background-color: #7ab800;
+                                  border: 0;
+                                  width: 50px;
+                                  height: 30px;
+                                  border-radius: 30px;
+                                "
+                              >
+                                GET
+                              </button>
+                              {{ information.route }}</a
+                            >
+                          </h4>
+                        </div>
+                        <div
+                          id="collapseFour"
+                          class="panel-collapse collapse"
+                          role="tabpanel"
+                          aria-expanded="false"
+                        >
+                          <div class="panel-body">
+                            <h3>Functionality</h3>
+                            <p style="font-size: 15px">
+                              {{ information.description }}
+                            </p>
+                            <h3>Parameters</h3>
+                            <div style="display: flex">
+                              <div>
+                                <p style="font-size: 15px">No parameters</p>
+                              </div>
+                            </div>
+                            <br />
+                            <h3>Request URL:</h3>
+                            <span
+                              style="
+                                background-color: black;
+                                font-size: 20px;
+                                color: white;
+                                width: 500px;
+                              "
+                              >https://clarisa.cgiar.org/{{
+                                information.route
+                              }}</span
+                            >
+                            <div class="row">
+                              <div class="col-md-12 col-lg-12">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <div class="row">
+                                      <div class="col-lg-12">
+                                        <div class="expanel expanel-default">
+                                          <div
+                                            class="expanel-heading"
+                                            style="background-color: #808080"
+                                          >
+                                            <h4
+                                              style="
+                                                color: white;
+                                                font-weight: 500;
+                                              "
+                                            >
+                                              State code: 200: OK
+                                            </h4>
+                                          </div>
+                                          <div
+                                            class="expanel-body"
+                                            style="
+                                              background-color: #1e1e1e;
+                                              border-radius: 0 0 10px 10px;
+                                            "
+                                          >
+                                            <pre
+                                              style="
+                                                background-color: #1e1e1e;
+                                                font-weight: 500;
+                                                font-size: 15px;
+                                              "
+                                            ><code style="color: white; ">{{convertJson()}}</code></pre>
+                                          </div>
+                                          <div
+                                            class="card-footer"
+                                            style="
+                                              display: flex;
+                                              justify-content: center;
+                                            "
+                                          >
+                                            <button
+                                              class="btn btn-green bg-green-gradient mt-3"
+                                              style="
+                                                width: 50vw;
+                                                height: 50px;
+                                                font-size: 18px;
+                                              "
+                                              data-bs-toggle="modal"
+                                              data-bs-target="#largemodal"
+                                            >
+                                              Display control list
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-lg-3">
+                                  <div class="expanel expanel-default">
+                                    <div
+                                      class="expanel-heading"
+                                      style="background-color: #808080"
+                                    >
+                                      <h4
+                                        style="color: white; font-weight: 500"
+                                      >
+                                        State code: 400
+                                      </h4>
+                                    </div>
+                                    <div
+                                      class="expanel-body"
+                                      style="
+                                        background-color: #1e1e1e;
+                                        border-radius: 0 0 10px 10px;
+                                      "
+                                    >
+                                      <pre
+                                        style="
+                                          background-color: #1e1e1e;
+                                          font-weight: 500;
+                                          font-size: 15px;
+                                        "
+                                      ><code style="color: white; ">Bad Request</code></pre>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-3">
+                                  <div class="expanel expanel-default">
+                                    <div
+                                      class="expanel-heading"
+                                      style="background-color: #808080"
+                                    >
+                                      <h4
+                                        style="color: white; font-weight: 500"
+                                      >
+                                        State code: 401
+                                      </h4>
+                                    </div>
+                                    <div
+                                      class="expanel-body"
+                                      style="
+                                        background-color: #1e1e1e;
+                                        border-radius: 0 0 10px 10px;
+                                      "
+                                    >
+                                      <pre
+                                        style="
+                                          background-color: #1e1e1e;
+                                          font-weight: 500;
+                                          font-size: 15px;
+                                        "
+                                      ><code style="color: white; ">Unauthorized</code></pre>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-3">
+                                  <div class="expanel expanel-default">
+                                    <div
+                                      class="expanel-heading"
+                                      style="background-color: #808080"
+                                    >
+                                      <h4
+                                        style="color: white; font-weight: 500"
+                                      >
+                                        State code: 403
+                                      </h4>
+                                    </div>
+                                    <div
+                                      class="expanel-body"
+                                      style="
+                                        background-color: #1e1e1e;
+                                        border-radius: 0 0 10px 10px;
+                                      "
+                                    >
+                                      <pre
+                                        style="
+                                          background-color: #1e1e1e;
+                                          font-weight: 500;
+                                          font-size: 15px;
+                                        "
+                                      ><code style="color: white; ">Forbidden</code></pre>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-3">
+                                  <div class="expanel expanel-default">
+                                    <div
+                                      class="expanel-heading"
+                                      style="background-color: #808080"
+                                    >
+                                      <h4
+                                        style="color: white; font-weight: 500"
+                                      >
+                                        State code: 404
+                                      </h4>
+                                    </div>
+                                    <div
+                                      class="expanel-body"
+                                      style="
+                                        background-color: #1e1e1e;
+                                        border-radius: 0 0 10px 10px;
+                                      "
+                                    >
+                                      <pre
+                                        style="
+                                          background-color: #1e1e1e;
+                                          font-weight: 500;
+                                          font-size: 15px;
+                                        "
+                                      ><code style="color: white; ">Not Found</code></pre>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- COL-END -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Row -->
+    </div>
+    <!-- CONTAINER CLOSED -->
+  </div>
+</div>
+
+<div class="modal fade" id="largemodal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row row-sm">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table
+                    id="file-datatable"
+                    class="table table-bordered text-nowrap key-buttons border-bottom"
+                  >
+                    <thead>
+                      <tr>
+                        <th class="border-bottom-0">Code</th>
+                        <th class="border-bottom-0">Name</th>
+                        <th class="border-bottom-0">Acronym</th>
+                        <th class="border-bottom-0">CGIAR Entity</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>CENTER-01</td>
+                        <td>Africa Rice Center</td>
+                        <td>AfricaRice</td>
+                        <td>Code: 4 - Name: Center</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

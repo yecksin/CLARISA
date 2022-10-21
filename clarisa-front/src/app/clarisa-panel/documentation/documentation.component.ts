@@ -12,6 +12,7 @@ export class DocumentationComponent implements OnInit {
   endPointsInformation: any = [];
   endpointsFilterInformation: any;
   categoriaSelection: any;
+  typeInformation: any;
   constructor(
     private rutaActiva: ActivatedRoute,
     private _manageApiService: EndpointsInformationService
@@ -20,18 +21,32 @@ export class DocumentationComponent implements OnInit {
   ngOnInit(): void {
     this.rutaActiva.snapshot.params['parameter'];
     this.endPointsInformation = endpointsInfo;
-    this.endPointsInformation.find((x:any) => {
-      if(x.name == this.rutaActiva.snapshot.params['parameter']){
+    this.endPointsInformation.find((x: any) => {
+      if (x.name == this.rutaActiva.snapshot.params['parameter']) {
         this.endpointsFilterInformation = x;
       }
-    })
+    });
   }
   getMensaje(e: any) {
-    
-    this.categoriaSelection = this.endpointsFilterInformation.subcategories.find((object: any) => {
-      if (object.name == e) return object;
-    });
-    
+    if (typeof e === 'string') {
+      this.categoriaSelection =
+        this.endpointsFilterInformation.subcategories.find((object: any) => {
+          if (object.name == e) return object;
+        });
+      this.typeInformation = 'subCategorie';
+    }
+    if (typeof e === 'object') {
+      this.categoriaSelection = undefined;
+      let informationEnd: any;
+      informationEnd = this.endpointsFilterInformation.subcategories.find(
+        (object: any) => {
+          if (object.name == e.categoria) return object;
+        }
+      );
+      this.categoriaSelection = informationEnd.endpoints.find((obj: any) => {
+        if (obj.name == e.endpoint) return obj;
+      });
+      this.typeInformation = 'endpoint';
+    }
   }
-
 }

@@ -1,9 +1,10 @@
-<app-navegation></app-navegation>
-<div class="contenedor">
-  <app-navegation-vertical
-  (information)="getMensaje($event)"
-    [subCategories]="endpointsFilterInformation"
-  ></app-navegation-vertical>
-  <app-content-endpoints [metaData]="categoriaSelection" [infoCategories]="{name:endpointsFilterInformation.name, desp:endpointsFilterInformation.description }" ></app-content-endpoints>
+<div class="page" style="background-color: white">
+  <div class="page-main">
+    <app-horizontal-menu></app-horizontal-menu>
+    <app-vertical-menu
+      (information)="getMensaje($event)"
+      [subCategories]="endpointsFilterInformation"
+    ></app-vertical-menu>
+    <app-content [information]="categoriaSelection"></app-content>
+  </div>
 </div>
-

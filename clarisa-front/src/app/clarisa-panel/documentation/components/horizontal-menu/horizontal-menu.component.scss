@@ -1,0 +1,14 @@
+.d-flex a {
+    color: white;
+    font-weight: 600;
+}
+.dropdown-menu {
+    background-color: #7ab800;
+}
+
+@media (min-width: 992px) {
+    .app-sidebar__toggle{
+        display: none;
+        visibility: hidden;
+    }
+}

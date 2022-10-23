@@ -43,7 +43,6 @@
         "
         style="margin-top: -50px"
       >
-        {{ iniciativeEndInformation() }}
         <div class="expanel expanel-default">
           <div class="expanel-body">
             <!-- ROW-2 OPEN -->
@@ -149,7 +148,7 @@
                                                 font-weight: 500;
                                                 font-size: 15px;
                                               "
-                                            ><code style="color: white; ">{{convertJson()}}</code></pre>
+                                            ><code style="color: white; ">{{returnResponseJson()}}</code></pre>
                                           </div>
                                           <div
                                             class="card-footer"
@@ -317,7 +316,15 @@
   </div>
 </div>
 
-<div class="modal fade" id="largemodal" tabindex="-1" role="dialog">
+<div
+  class="modal fade"
+  id="largemodal"
+  tabindex="-1"
+  role="dialog"
+  *ngIf="
+    information != undefined && information.hasOwnProperty('route') == true
+  "
+>
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-body">
@@ -327,76 +334,43 @@
               <div class="card-body">
                 <div class="table-responsive">
                   <div class="card">
-                    <h5>Single Column</h5>
                     <p-table
-                      #dt2
-                      [columns]="arrayColumns"
+                      [columns]="iniciativeEndInformation()"
                       [value]="informationTable"
-                      [paginator]="true"
-                      [rows]="5"
-                      [showCurrentPageReport]="true"
-                      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                      [rowsPerPageOptions]="[5, 10, 25]"
-                      [globalFilterFields]="['term', 'definition']"
+                      responsiveLayout="scroll"
                     >
-                      <ng-template pTemplate="caption">
-                        <div class="flex">
-                          <span class="p-input-icon-left ml-auto">
-                            <i class="pi pi-search"></i>
-                            <input
-                              pInputText
-                              type="text"
-                              (input)="
-                                dt2.filterGlobal(
-                                  $any($event.target).value,
-                                  'contains'
-                                )
-                              "
-                              placeholder="Search keyword"
-                            />
-                            <button
-                              type="button"
-                              pButton
-                              pRipple
-                              icon="pi pi-file-excel"
-                              (click)="exportExcel()"
-                              class="p-button-success mr-2"
-                              pTooltip="XLS"
-                              tooltipPosition="bottom"
-                            ></button>
-                            <button
-                              type="button"
-                              pButton
-                              pRipple
-                              icon="pi pi-file-pdf"
-                              (click)="exportPdf()"
-                              class="p-button-warning mr-2"
-                              pTooltip="PDF"
-                              tooltipPosition="bottom"
-                            ></button>
-                          </span>
-                        </div>
-                      </ng-template>
                       <ng-template pTemplate="header" let-columns>
                         <tr>
-                          <th
-                            *ngFor="let cols of columns"
-                            pSortableColumn="{{ cols }}"
-                          >
-                            {{ cols }}
-                            <p-sortIcon field="{{ cols }}"></p-sortIcon>
+                          <th *ngFor="let col of columns">
+                            {{ col[0] }}
                           </th>
                         </tr>
                       </ng-template>
                       <ng-template
                         pTemplate="body"
-                        let-product
                         let-rowData
                         let-columns="columns"
                       >
                         <tr>
-                          <td *ngFor="let col of keysTable">
-                            {{ rowData[col] }}
+                          <td *ngFor="let cols of columns">
+                            <span [ngSwitch]="cols[2]">
+                              <span *ngSwitchCase="'field'">
+                                {{ rowData[cols[1]] }}
+                              </span>
+                              <span *ngSwitchCase="'object'">
+                                <span *ngFor="let i of cols[3]">
+                                  {{ i[0] }} :
+                                  {{ rowData[cols[1]][i[1]] }}</span
+                                >
+                              </span>
+                              <span *ngSwitchCase="'list'">
+                                <span *ngFor="let i of cols[3]">
+                                  <span *ngFor="let k of rowData[cols[1]]"
+                                    >{{ k[i[1]] }},</span
+                                  ></span
+                                >
+                              </span>
+                            </span>
                           </td>
                         </tr>
                       </ng-template>

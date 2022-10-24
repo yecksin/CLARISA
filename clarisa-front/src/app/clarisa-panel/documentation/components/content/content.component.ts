@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { EndpointsInformationService } from '../../services/endpoints-information.service';
 import { PrimeNGConfig, SortEvent } from 'primeng/api';
 import jsPDF from 'jspdf';
@@ -13,22 +13,78 @@ import { Table } from 'primeng/table';
 })
 export class ContentComponent implements OnInit {
   @Input() information: any;
-  @Input() informationTable: any;
+  @Input() urlParams: any;
   arrayColumns = [];
   keysTable = [];
   responseJsonPrint: any;
+  informationPrint: any;
+  informationEndpoint: any;
+  findColumns: string[] = [];
+  first = 0;
+
+  rows = 10;
   constructor(private _manageApiService: EndpointsInformationService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.information);
+  }
+
+  ngOnChanges(paramsUrl: SimpleChanges) {
+    console.log(paramsUrl['urlParams'].currentValue.namesubcategory);
+
+    if (Object.keys(this.urlParams).length == 2) {
+      let variableAux = paramsUrl['urlParams'].currentValue.namesubcategory
+        .split('_')
+        .join(' ');
+      this.information.subcategories.find((x: any) => {
+        if (variableAux != undefined) {
+          if (x.name == variableAux) {
+            this.informationPrint = x;
+          }
+        }
+      });
+    }
+    if (Object.keys(this.urlParams).length == 3) {
+      let variableAux = paramsUrl['urlParams'].currentValue.namesubcategory
+        .split('_')
+        .join(' ');
+      let variableAuxi = paramsUrl['urlParams'].currentValue.nameEndpoint
+        .split('_')
+        .join(' ');
+      this.information.subcategories.find((x: any) => {
+        if (variableAux != undefined) {
+          if (x.name == variableAux) {
+            this.informationPrint = x;
+          }
+        }
+      });
+      this.informationPrint.endpoints.find((x: any) => {
+        if (variableAux != undefined) {
+          if (x.name == variableAuxi) {
+            this.informationPrint = x;
+          }
+        }
+      });
+      this._manageApiService
+        .getAnyEndpoint(this.informationPrint.route)
+        .subscribe((resp) => {
+          this.informationEndpoint = resp;
+        });
+    }
+  }
 
   iniciativeEndInformation() {
-    var auxVariable = JSON.parse(this.information.response_json);
+    var auxVariable = JSON.parse(this.informationPrint.response_json);
     this.arrayColumns = this.columnsTable(auxVariable.properties);
+    this.findColumns = [];
+    for (let i of this.arrayColumns) {
+      this.findColumns.push(i[1]);
+    }
     return this.arrayColumns;
   }
 
   returnResponseJson() {
-    var auxVariable = JSON.parse(this.information.response_json);
+    var auxVariable = JSON.parse(this.informationPrint.response_json);
     this.responseJsonPrint = this.response_json(
       auxVariable.properties,
       auxVariable.object_type,
@@ -148,5 +204,64 @@ export class ContentComponent implements OnInit {
       }
     }
     return columns;
+  }
+
+  exportPdf() {
+    let information = [];
+    let d = new Date();
+    for (let k of this.informationEndpoint) {
+      information.push(Object.values(k));
+    }
+    const doc = new jsPDF();
+    autoTable(doc, {
+      head: [this.arrayColumns],
+      body: information,
+      didDrawPage: (dataArg) => {
+        doc.text('PAGE', dataArg.settings.margin.left, 10);
+      },
+    });
+    doc.save(
+      'clarisa ' +
+        this.informationPrint.name +
+        d.getFullYear() +
+        (d.getMonth() + 1) +
+        d.getDate() +
+        d.getHours() +
+        d.getMinutes() +
+        '.pdf'
+    );
+  }
+
+  exportExcel() {
+    import('xlsx').then((xlsx) => {
+      const worksheet = xlsx.utils.json_to_sheet(this.informationEndpoint);
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      this.saveAsExcelFile(excelBuffer, 'Clarisa ');
+    });
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let d = new Date();
+    let EXCEL_TYPE =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE,
+    });
+    FileSaver.saveAs(
+      data,
+      fileName +
+        this.informationPrint.name +
+        d.getFullYear() +
+        (d.getMonth() + 1) +
+        d.getDate() +
+        d.getHours() +
+        d.getMinutes() +
+        EXCEL_EXTENSION
+    );
   }
 }

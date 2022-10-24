@@ -14,7 +14,10 @@
       </div>
       <!-- PAGE-HEADER END -->
       <!-- Row -->
-      <div class="row" *ngIf="information != undefined">
+      <div
+        class="row"
+        *ngIf="urlParams.hasOwnProperty('namesubcategory') == false"
+      >
         <div class="col-md-12 col-lg-12">
           <div class="card">
             <div class="card-header">
@@ -35,11 +38,32 @@
           </div>
         </div>
       </div>
+      <div class="row" *ngIf="urlParams.hasOwnProperty('namesubcategory')">
+        <div class="col-md-12 col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title" style="color: #0065bd; font-size: 25px">
+                {{ informationPrint.name }}
+              </h3>
+            </div>
+            <div class="card-body">
+              <div class="expanel expanel-default">
+                <div class="expanel-body" style="background-color: #f0f0f0">
+                  <h3>Summary:</h3>
+                  <p>
+                    {{ informationPrint.description }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div
         class="card-body"
         *ngIf="
-          information != undefined &&
-          information.hasOwnProperty('route') == true
+          informationPrint != undefined &&
+          informationPrint.hasOwnProperty('route') == true
         "
         style="margin-top: -50px"
       >
@@ -81,7 +105,7 @@
                               >
                                 GET
                               </button>
-                              {{ information.route }}</a
+                              {{ informationPrint.route }}</a
                             >
                           </h4>
                         </div>
@@ -94,7 +118,7 @@
                           <div class="panel-body">
                             <h3>Functionality</h3>
                             <p style="font-size: 15px">
-                              {{ information.description }}
+                              {{ informationPrint.description }}
                             </p>
                             <h3>Parameters</h3>
                             <div style="display: flex">
@@ -112,7 +136,7 @@
                                 width: 500px;
                               "
                               >https://clarisa.cgiar.org/{{
-                                information.route
+                                informationPrint.route
                               }}</span
                             >
                             <div class="row">
@@ -165,7 +189,7 @@
                                                 font-size: 18px;
                                               "
                                               data-bs-toggle="modal"
-                                              data-bs-target="#largemodal"
+                                              data-bs-target="#extralargemodal"
                                             >
                                               Display control list
                                             </button>
@@ -318,74 +342,143 @@
 
 <div
   class="modal fade"
-  id="largemodal"
+  id="extralargemodal"
   tabindex="-1"
   role="dialog"
   *ngIf="
-    information != undefined && information.hasOwnProperty('route') == true
+    informationPrint != undefined &&
+    informationPrint.hasOwnProperty('route') == true
   "
 >
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <div class="row row-sm">
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="card-body">
-                <div class="table-responsive">
-                  <div class="card">
-                    <p-table
-                      [columns]="iniciativeEndInformation()"
-                      [value]="informationTable"
-                      responsiveLayout="scroll"
-                    >
-                      <ng-template pTemplate="header" let-columns>
-                        <tr>
-                          <th *ngFor="let col of columns">
-                            {{ col[0] }}
-                          </th>
-                        </tr>
-                      </ng-template>
-                      <ng-template
-                        pTemplate="body"
-                        let-rowData
-                        let-columns="columns"
-                      >
-                        <tr>
-                          <td *ngFor="let cols of columns">
-                            <span [ngSwitch]="cols[2]">
-                              <span *ngSwitchCase="'field'">
-                                {{ rowData[cols[1]] }}
-                              </span>
-                              <span *ngSwitchCase="'object'">
-                                <span *ngFor="let i of cols[3]">
-                                  {{ i[0] }} :
-                                  {{ rowData[cols[1]][i[1]] }}</span
-                                >
-                              </span>
-                              <span *ngSwitchCase="'list'">
-                                <span *ngFor="let i of cols[3]">
-                                  <span *ngFor="let k of rowData[cols[1]]"
-                                    >{{ k[i[1]] }},</span
-                                  ></span
-                                >
-                              </span>
-                            </span>
-                          </td>
-                        </tr>
-                      </ng-template>
-                    </p-table>
-                  </div>
+        <div class="card">
+          <p-table
+            #dt1
+            [columns]="iniciativeEndInformation()"
+            [value]="informationEndpoint"
+            responsiveLayout="scroll"
+            [paginator]="true"
+            [rows]="10"
+            [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="[10, 25, 50]"
+            [globalFilterFields]="findColumns"
+          >
+            <ng-template
+              pTemplate="caption"
+              [ngStyle]="{ 'background-color': 'red' }"
+            >
+              <div class="flex" style="display: flex; flex-direction: row">
+                <div style="width: 50%">
+                  <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+
+                    <input
+                      pInputText
+                      type="text"
+                      (input)="
+                        dt1.filterGlobal($any($event.target).value, 'contains')
+                      "
+                      style="border-radius: 50px"
+                      placeholder="Search"
+                    />
+                  </span>
+                </div>
+                <div
+                  style="
+                    width: 50%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-end;
+                  "
+                >
+                  <button
+                    type="button"
+                    pButton
+                    pRipple
+                    icon="pi pi-file"
+                    (click)="dt1.exportCSV()"
+                    class="mr-2"
+                    pTooltip="CSV"
+                    tooltipPosition="bottom"
+                    style="margin-left: 20px"
+                  ></button>
+                  <button
+                    type="button"
+                    pButton
+                    pRipple
+                    icon="pi pi-file-excel"
+                    (click)="exportExcel()"
+                    class="p-button-success mr-2"
+                    pTooltip="XLS"
+                    tooltipPosition="bottom"
+                    style="margin-left: 20px"
+                  ></button>
+                  <button
+                    type="button"
+                    pButton
+                    pRipple
+                    icon="pi pi-file-pdf"
+                    (click)="exportPdf()"
+                    class="p-button-warning mr-2"
+                    pTooltip="PDF"
+                    tooltipPosition="bottom"
+                    style="margin-left: 20px"
+                  ></button>
                 </div>
               </div>
-            </div>
-          </div>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th
+                  *ngFor="let col of columns"
+                  pSortableColumn="{{ col[1] }}"
+                  style="
+                    font-size: 15px;
+                    background-color: #739600;
+                    color: white;
+                  "
+                >
+                  {{ col[0] }}
+                  <p-sortIcon field="{{ col[1] }}"></p-sortIcon>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr>
+                <td *ngFor="let cols of columns">
+                  <span [ngSwitch]="cols[2]">
+                    <span *ngSwitchCase="'field'">
+                      {{ rowData[cols[1]] }}
+                    </span>
+                    <span *ngSwitchCase="'object'">
+                      <span *ngFor="let i of cols[3]">
+                        {{ i[0] }} : {{ rowData[cols[1]][i[1]] }}</span
+                      >
+                    </span>
+                    <span *ngSwitchCase="'list'">
+                      <span *ngFor="let i of cols[3]">
+                        <span *ngFor="let k of rowData[cols[1]]"
+                          >{{ k[i[1]] }},</span
+                        ></span
+                      >
+                    </span>
+                  </span>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
         </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" data-bs-dismiss="modal">
-            Close
-          </button>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn"
+          style="background-color: #808080; color: white"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
       </div>
     </div>
   </div>

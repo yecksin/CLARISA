@@ -6,14 +6,14 @@
         <img src="" class="header-brand-img desktop-logo" alt="logo" />
         <img src="" class="header-brand-img toggle-logo" alt="logo" />
         <img
-          src="../assets/images/CGIAR.png"
-          style="width: 107px; height: 30px"
+          src="../assets/images/image.png"
           class="header-brand-img light-logo"
+          style="margin-top: 20px"
           alt="logo"
         />
         <img
-          src="../assets/images/CGIAR.png"
-          style="width: 100px; height: 50px"
+          src="../assets/images/image.png"
+          style="margin-top: 20px"
           class="header-brand-img light-logo1"
           alt="logo"
         />
@@ -38,8 +38,9 @@
         <li
           class="slide"
           *ngFor="let item of subCategories.subcategories"
-          id="{{ item.name }}"
-          (click)="abrir(item.name)"
+          routerLink="/clarisa-panel/documentation/{{
+            subCategories.name.split(' ').join('_')
+          }}/{{ item.name.split(' ').join('_') }}"
         >
           <a
             class="side-menu__item"
@@ -48,11 +49,18 @@
             ><span class="side-menu__label"> {{ item.name }}</span
             ><i class="angle fe fe-chevron-right"></i
           ></a>
-          <ul class="slide-menu pruba" id="{{ item.name + 1 }}">
+          <ul
+            class="slide-menu categoriesNoActive"
+            id="{{ item.name.split(' ').join('_') }}"
+          >
             <li
               id="none"
               *ngFor="let items of item.endpoints"
-              (click)="clickme({ categoria: item.name, endpoint: items.name })"
+              routerLink="/clarisa-panel/documentation/{{
+                subCategories.name.split(' ').join('_')
+              }}/{{ item.name.split(' ').join('_') }}/{{
+                items.name.split(' ').join('_')
+              }}"
             >
               <a
                 class="slide-item"
@@ -64,19 +72,6 @@
           </ul>
         </li>
       </ul>
-      <div class="slide-right" id="slide-right">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="#7b8191"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"
-          />
-        </svg>
-      </div>
     </div>
   </div>
   <!--/APP-SIDEBAR-->

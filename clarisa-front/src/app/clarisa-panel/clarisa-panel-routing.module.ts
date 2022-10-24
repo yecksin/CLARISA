@@ -8,7 +8,21 @@ const routes: Routes = [
     component: ClarisaPanelComponent,
     children: [
       {
-        path: 'documentation/:parameter',
+        path: 'documentation/:nameCategory',
+        loadChildren: () =>
+          import('./documentation/documentation.module').then(
+            (m) => m.DocumentationModule
+          ),
+      },
+      {
+        path: 'documentation/:nameCategory/:namesubcategory',
+        loadChildren: () =>
+          import('./documentation/documentation.module').then(
+            (m) => m.DocumentationModule
+          ),
+      },
+      {
+        path: 'documentation/:nameCategory/:namesubcategory/:nameEndpoint',
         loadChildren: () =>
           import('./documentation/documentation.module').then(
             (m) => m.DocumentationModule

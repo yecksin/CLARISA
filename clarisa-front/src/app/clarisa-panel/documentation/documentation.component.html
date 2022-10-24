@@ -2,12 +2,12 @@
   <div class="page-main">
     <app-horizontal-menu></app-horizontal-menu>
     <app-vertical-menu
-      (information)="getMensaje($event)"
+      [urlParams]="_servicesUrl.getParams()"
       [subCategories]="endpointsFilterInformation"
     ></app-vertical-menu>
     <app-content
-      [information]="categoriaSelection"
-      [informationTable]="informationEndpoint"
+      [information]="endpointsFilterInformation"
+      [urlParams]="_servicesUrl.getParams()"
     ></app-content>
   </div>
 </div>

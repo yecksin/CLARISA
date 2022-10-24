@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import * as $ from 'jquery';
 @Component({
   selector: 'app-vertical-menu',
@@ -7,25 +14,17 @@ import * as $ from 'jquery';
 })
 export class VerticalMenuComponent implements OnInit {
   @Input() subCategories: any;
-  @Output() information = new EventEmitter();
+  @Input() urlParams: any;
   constructor() {}
 
   ngOnInit(): void {}
 
-  abrir(id: any) {
-    const box = document.getElementById(id + 1);
-    if (box != null) {
-      if (box.style.display == 'block') {
-        box.style.display = 'none';
-      } else {
-        box.style.display = 'block';
-        this.information.emit(id);
-      }
-
-      console.log(box.style.display);
-    }
-  }
-  clickme(menssage: any) {
-    this.information.emit(menssage);
+  ngOnChanges(paramsUrl: SimpleChanges) {
+    console.log(paramsUrl['urlParams'].currentValue.namesubcategory);
+    let idUl = '#' + paramsUrl['urlParams'].currentValue.namesubcategory;
+    $(document).ready(function () {
+      $('.categoriesNoActive').addClass('hide').removeClass('visible');
+      $(idUl).addClass('visible').removeClass('hide');
+    });
   }
 }

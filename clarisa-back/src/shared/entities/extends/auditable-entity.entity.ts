@@ -1,4 +1,5 @@
 import { Exclude } from 'class-transformer';
+import { User } from 'src/api/user/entities/user.entity';
 import { Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 export abstract class AuditableEntity {
@@ -6,6 +7,10 @@ export abstract class AuditableEntity {
   @Column()
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
+
+  @Exclude({ toPlainOnly: true })
+  @Column()
+  created_by: number;
 
   @Exclude({ toPlainOnly: true })
   @Column()
@@ -20,6 +25,14 @@ export abstract class AuditableEntity {
     nullable: true,
   })
   updated_at: Date;
+
+  @Exclude({ toPlainOnly: true })
+  @Column()
+  updated_by: number;
+
+  @Exclude({ toPlainOnly: true })
+  @Column({ type: 'text' })
+  modification_justification: string;
 
   @Exclude({ toPlainOnly: true })
   @Column({ type: 'tinyint' })

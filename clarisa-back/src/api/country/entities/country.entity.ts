@@ -1,4 +1,5 @@
 import { Geoposition } from 'src/api/geoposition/entities/geoposition.entity';
+import { InstitutionLocation } from 'src/api/institution/entities/institution-location.entity';
 import { Region } from 'src/api/region/entities/region.entity';
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
@@ -8,6 +9,7 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -48,4 +50,7 @@ export class Country extends AuditableEntity {
     },
   })
   regions: Promise<Region[]>;
+
+  @OneToMany(() => InstitutionLocation, (il) => il.country_object)
+  institution_locations: Promise<InstitutionLocation[]>;
 }

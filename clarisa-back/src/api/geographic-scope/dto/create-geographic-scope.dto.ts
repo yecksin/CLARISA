@@ -7,7 +7,5 @@ export class CreateGeographicScopeDto extends AuditableDto {
 
   definition: string;
 
-  is_onecgiar: boolean;
-
-  is_legacy: boolean;
+  source_id: number;
 }

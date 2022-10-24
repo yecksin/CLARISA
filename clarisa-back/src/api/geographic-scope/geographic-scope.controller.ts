@@ -18,7 +18,7 @@ import { GeographicScopeService } from './geographic-scope.service';
 import { CreateGeographicScopeDto } from './dto/create-geographic-scope.dto';
 import { UpdateGeographicScopeDto } from './dto/update-geographic-scope.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
-import { IndicatorTypeEnum } from 'src/shared/entities/enums/indicator-types';
+import { SourceOption } from 'src/shared/entities/enums/source-options';
 import { Response } from 'express';
 import { GeographicScope } from './entities/geographic-scope.entity';
 
@@ -32,7 +32,7 @@ export class GeographicScopeController {
   @Get()
   async findAll(
     @Query('show') show: FindAllOptions,
-    @Query('type') type: IndicatorTypeEnum,
+    @Query('type') type: string,
   ) {
     return await this.geographicScopeService.findAll(show, type);
   }

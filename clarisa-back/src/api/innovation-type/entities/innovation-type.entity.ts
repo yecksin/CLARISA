@@ -14,11 +14,6 @@ export class InnovationType extends AuditableEntity {
   @Column()
   definition: string;
 
-  @Column({ type: 'tinyint' })
-  @Exclude()
-  is_onecgiar: boolean;
-
-  @Exclude()
-  @Column({ type: 'tinyint' })
-  is_marlo: boolean;
+  @Column()
+  source_id: number;
 }

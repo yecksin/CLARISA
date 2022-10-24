@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
-import { Repository } from 'typeorm';
+import { SourceOption } from 'src/shared/entities/enums/source-options';
+import { FindOptionsWhere, Repository } from 'typeorm';
 import { UpdateInnovationReadinessLevelDto } from './dto/update-innovation-readiness-level.dto';
 import { InnovationReadinessLevel } from './entities/innovation-readiness-level.entity';
 
@@ -14,16 +15,40 @@ export class InnovationReadinessLevelService {
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+    type: string = SourceOption.CGIAR.path,
   ): Promise<InnovationReadinessLevel[]> {
+    let whereClause: FindOptionsWhere<InnovationReadinessLevel> = {};
+    const incomingType = SourceOption.getfromPath(type);
+
+    switch (type) {
+      case SourceOption.ALL.path:
+        // do nothing. no extra conditions needed
+        break;
+      case SourceOption.CGIAR.path:
+      case SourceOption.LEGACY.path:
+      case SourceOption.INNOVATION_CATALOG.path:
+        whereClause = {
+          ...whereClause,
+          source_id: incomingType.source_id,
+        };
+        break;
+      default:
+        throw Error('?!');
+    }
+
     switch (option) {
       case FindAllOptions.SHOW_ALL:
-        return await this.innovationReadinessLevelRepository.find();
+        return await this.innovationReadinessLevelRepository.find({
+          where: whereClause,
+        });
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
+        whereClause = {
+          ...whereClause,
+          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+        };
         return await this.innovationReadinessLevelRepository.find({
-          where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
-          },
+          where: whereClause,
         });
       default:
         throw Error('?!');

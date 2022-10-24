@@ -22,7 +22,6 @@ export class AuthService {
       (await this.usersService.findOneByEmail(email, false)) ??
       (await this.usersService.findOneByUsername(email, false));
     let authenticator: BaseAuthenticator;
-    console.log({ user });
 
     // const user_Info = await user.userInfo;
 
@@ -32,12 +31,9 @@ export class AuthService {
       authenticator = this.moduleRef.get(
         user.is_cgiar_user ? LDAPAuth : DBAuth,
       );
-      let authResult: User | BaseMessageDTO = await authenticator.authenticate(
-        user.email,
-        pass,
-      );
-      if ('id' in authResult) {
-        console.log('epic', { user });
+      let authResult: boolean | BaseMessageDTO =
+        await authenticator.authenticate(user.email, pass);
+      if (authResult.constructor.name === Boolean.name) {
         return true;
       }
     } else {

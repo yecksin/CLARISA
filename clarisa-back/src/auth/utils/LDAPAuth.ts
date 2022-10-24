@@ -12,7 +12,7 @@ export class LDAPAuth implements BaseAuthenticator {
   authenticate(
     username: string,
     password: string,
-  ): Promise<User | BaseMessageDTO> {
+  ): Promise<boolean | BaseMessageDTO> {
     return new Promise((resolve, reject) => {
       // var userPrincipalName = 'j.cadavid@cgiar.org';
       // var username = 'CN=Juan,OU=Users,DC=CGIARAD,DC=ORG';

@@ -5,5 +5,5 @@ export interface BaseAuthenticator {
   authenticate(
     username: string,
     password: string,
-  ): Promise<User | BaseMessageDTO>;
+  ): Promise<boolean | BaseMessageDTO>;
 }

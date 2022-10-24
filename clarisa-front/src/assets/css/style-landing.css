@@ -388,7 +388,7 @@ header.affix .top-wrapper {
 ================================================
 */
 .logo-wrapper {
-	background: #6bb601;
+	background: white;
 	position: relative;
 	width: 100%;
 	z-index: 9;
@@ -434,10 +434,10 @@ header.affix .affix-logo {
 	display: none;
 }
 .navbar-default .navbar-nav > li > a {
-	color: #dcffaa;
+	color: #7ab800;
 	font-size: 14px;
 	text-transform: uppercase;
-	font-weight: 600;
+	font-weight: 800;
 }
 .navbar-default .navbar-nav > li > a > i {
 	font-size: 12px;
@@ -451,7 +451,7 @@ header.affix .affix-logo {
 	padding-right: 0;
 }
 .navbar-default .navbar-nav.nav li:hover > a, .navbar-default .navbar-nav li.active > a:hover, .navbar-default .navbar-nav li.active > a:focus, .navbar-default .navbar-nav li.active > a, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover, .navbar-default .nav .open > a, .navbar-default .nav .open > a:focus, .navbar-default .nav .open > a:hover, .side-nav li > a:focus {
-	color: #fff;
+	color: #7ab800;
 	background-color: inherit;
 }
 .navbar-default ul.nav.navbar-nav li ul li {
@@ -481,7 +481,7 @@ header.affix .affix-logo {
 	border: none;
 }
 .dropdown-menu > li > a {
-	color: #fff;
+	color: #7ab800;
 	margin: 0;
 	padding: 10px 20px;
 	font-size: 14px;
@@ -498,7 +498,7 @@ header.affix .affix-logo {
 	text-transform: uppercase;
 	border-radius: 0;
 	border: none;
-	background: #6bb601;
+	background: white;
 }
 .dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
 	text-decoration: none;
@@ -574,7 +574,7 @@ header.affix .affix-logo {
 }
 .search #search-form #search {
 	background-color: #fff;
-	color: #333;
+	color: #7ab800;
 	height: 50px;
 	padding: 0 40px 0 25px;
 	transition: all 0.3s ease 0s;
@@ -1157,11 +1157,11 @@ section.testimonials-wrapper {
 	border-radius: 50%;
 }
 .testimonials-wrapper .carousel-indicators li.active:before {
-	background: #6bb600;
+	background: #ffc84f;
 }
 .testimonials-wrapper .carousel-indicators .active {
 	background: none;
-	border: solid 1px #6bb600;
+	border: solid 1px #ffc84f;
 	width: 18px;
 	height: 18px;
 }
@@ -1589,7 +1589,7 @@ section.news {
 	border: none;
 }
 .inner-wrapper .classic-tab-panel .img-border {
-	border: solid 3px #6bb600;
+	border: solid 3px #ffc84f;
 	margin: 0 40px 20px 0;
 }
 .inner-wrapper .classic-tab-panel .img-border .tes-img {
@@ -1618,14 +1618,15 @@ section.news {
 	z-index: -1;
 }
 .satisfied-wrapper {
-	background-image: url(../images/fontIndicartors.jpg);
-	background-position: center top;
+	background-image: url(../images/Image-CGIAR.jpg);
+	background-position: center;
 	background-size: cover;
 	float: left;
 	padding: 55px 0;
 	position: relative;
 	width: 100%;
 	z-index: 2;
+	
 }
 .satisfied-wrapper h2 {
 	color: #fff;

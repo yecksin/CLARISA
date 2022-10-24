@@ -39,7 +39,8 @@ export class CronOST {
     private readonly workpackageRegionRepository: Repository<WorkpackageRegion>,
   ) {}
 
-  @Cron(CronExpression.EVERY_5_MINUTES)
+  //TODO: uncoment when ost updates their endpoint to include regions/countries
+  //@Cron(CronExpression.EVERY_5_MINUTES)
   public async cronWorkpackageRelatedData() {
     const workpackagesRequest = await firstValueFrom(
       this.api.getWorkpackages(),

@@ -9,6 +9,8 @@ import {
   HttpException,
   Query,
   ParseIntPipe,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { SourcesService } from './sources.service';
 import { UpdateSourceDto } from './dto/update-source.dto';
@@ -17,6 +19,7 @@ import { Source } from './entities/source.entity';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 
 @Controller()
+@UseInterceptors(ClassSerializerInterceptor)
 export class SourcesController {
   constructor(private readonly sourcesService: SourcesService) {}
 

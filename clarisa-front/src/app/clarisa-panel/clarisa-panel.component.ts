@@ -33,6 +33,6 @@ export class ClarisaPanelComponent implements OnInit {
     this.changesAditionalThree.setAttribute('href', this.urlAditionalThree);
     setTimeout(() => {
       this.estado = false;
-    }, 500);
+    }, 1000);
   }
 }

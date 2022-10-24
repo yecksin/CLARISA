@@ -28,8 +28,11 @@ export class InnovationReadinessLevelController {
   ) {}
 
   @Get()
-  async findAll(@Query('show') show: FindAllOptions) {
-    return await this.innovationReadinessLevelService.findAll(show);
+  async findAll(
+    @Query('show') show: FindAllOptions,
+    @Query('type') type: string,
+  ) {
+    return await this.innovationReadinessLevelService.findAll(show, type);
   }
 
   @Get('get/:id')

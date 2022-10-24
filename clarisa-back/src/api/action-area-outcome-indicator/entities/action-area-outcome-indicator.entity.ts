@@ -24,4 +24,20 @@ export class ActionAreaOutcomeIndicator extends AuditableEntity {
 
   @Column()
   action_area_id: number;
+
+  //relations
+  @ManyToOne(
+    () => ActionAreaOutcome,
+    (aao) => aao.action_area_outcome_indicators,
+  )
+  @JoinColumn({ name: 'action_area_outcome_id' })
+  action_area_outcome_object: ActionAreaOutcome;
+
+  @ManyToOne(() => OutcomeIndicator, (oi) => oi.action_area_outcome_indicators)
+  @JoinColumn({ name: 'outcome_indicator_id' })
+  outcome_indicator_object: OutcomeIndicator;
+
+  @ManyToOne(() => ActionArea, (aao) => aao.action_area_outcome_indicators)
+  @JoinColumn({ name: 'action_area_id' })
+  action_area_object: ActionArea;
 }

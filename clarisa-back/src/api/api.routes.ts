@@ -49,6 +49,12 @@ import { HomepageClarisaCategoryModule } from './homepage-clarisa-category/homep
 import { HomepageClarisaEndpointModule } from './homepage-clarisa-endpoint/homepage-clarisa-endpoint.module';
 import { HomepageClarisaCategoryEndpointModule } from './homepage-clarisa-category-endpoint/homepage-clarisa-category-endpoint.module';
 import { EndOfInitiativeOutcomesModule } from './end-of-initiative-outcomes/end-of-initiative-outcomes.module';
+import { MisModule } from './mis/mis.module';
+import { InnovationCharacteristicModule } from './innovation-characteristic/innovation-characteristic.module';
+import { PolicyStageModule } from './policy-stage/policy-stage.module';
+import { InstitutionTypeModule } from './institution-type/institution-type.module';
+import { InstitutionModule } from './institution/institution.module';
+import { InstitutionDictionaryModule } from './institution-dictionary/institution-dictionary.module';
 
 export const apiRoutes = [
   {
@@ -156,7 +162,7 @@ export const apiRoutes = [
     module: InnovationReadinessLevelModule,
   },
   {
-    path: 'investment-type',
+    path: 'investment-types',
     module: InvestmentTypeModule,
   },
   {
@@ -254,5 +260,29 @@ export const apiRoutes = [
   {
     path: 'end-of-initiative-outcomes',
     module: EndOfInitiativeOutcomesModule,
+  },
+  {
+    path: 'mises',
+    module: MisModule,
+  },
+  {
+    path: 'innovation-characteristics',
+    module: InnovationCharacteristicModule,
+  },
+  {
+    path: 'policy-stages',
+    module: PolicyStageModule,
+  },
+  {
+    path: 'institution-types',
+    module: InstitutionTypeModule,
+  },
+  {
+    path: 'institutions',
+    module: InstitutionModule,
+  },
+  {
+    path: 'institution-dictionary',
+    module: InstitutionDictionaryModule,
   },
 ];

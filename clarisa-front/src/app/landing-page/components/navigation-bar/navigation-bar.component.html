@@ -7,7 +7,14 @@
         <div class="col-sm-12 col-md-3 hidden-xs">
           <div class="logo">
             <a href="index.html"
-              ><img src="assets/images/image.png" alt="Grow Landscape"
+              ><img
+                src="assets/images/CGIAR_Fondo_verde.png"
+                alt="Grow Landscape"
+                style="
+                  width: 120px;
+                  height: 120px;
+                  border-radius: 0 0 10px 10px;
+                "
             /></a>
           </div>
           <div class="affix-logo">
@@ -56,7 +63,7 @@
                   id="bs-example-navbar-collapse-1"
                 >
                   <ul class="nav navbar-nav" style="margin-left: 30px">
-                    <li class="active"><a href="index.html">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li class="dropdown">
                       <a
                         href="javascript:void(0)"
@@ -86,45 +93,31 @@
                         role="button"
                         aria-haspopup="true"
                         aria-expanded="false"
-                        >API Services <i class="fa fa-caret-down"></i
+                        >Services <i class="fa fa-caret-down"></i
                       ></a>
                       <ul class="dropdown-menu">
                         <li>
                           <a [routerLink]="['api-services']">Introduction</a>
                         </li>
+
                         <li>
-                          <a href="" style="pointer-events: none"
-                            ><i class="fa fa-wrench" aria-hidden="true"></i>
-                            Annual Report API Reference</a
+                          <a
+                            [routerLink]="[
+                              '../clarisa-panel/documentation',
+                              'One_CGIAR_Control_List'
+                            ]"
                           >
-                        </li>
-                        <li>
-                          <a [routerLink]="[
-                          '../clarisa-panel/documentation',
-                          'One CGIAR Control List'
-                        ]"  
-                            >
                             One CGIAR Control List</a
                           >
                         </li>
                         <li>
-                          <a [routerLink]="[
-                          '../clarisa-panel/documentation',
-                          'One CGIAR Operation'
-                        ]" 
-                            >
-                            One CGIAR Operation</a
-                          >
-                        </li>
-                        <li>
                           <a
-                            
+                            [routerLink]="[
+                              '../clarisa-panel/documentation',
+                              'One_CGIAR_Operation'
+                            ]"
                           >
-                          <i
-                              class="fa fa-exclamation-triangle"
-                              aria-hidden="true"
-                            ></i>
-                            Additional Services</a
+                            One CGIAR Operation</a
                           >
                         </li>
                       </ul>
@@ -142,13 +135,7 @@
                       <ul class="dropdown-menu">
                         <li><a [routerLink]="['faq']">FAQ List</a></li>
                         <li>
-                          <a href="" style="pointer-events: none"
-                            ><i
-                              class="fa fa-exclamation-triangle"
-                              aria-hidden="true"
-                            ></i>
-                            Contact US</a
-                          >
+                          <a [routerLink]="['contact-us']"> Contact US</a>
                         </li>
                       </ul>
                     </li>
@@ -156,8 +143,6 @@
                 </div>
               </nav>
             </div>
-
-
           </div>
         </div>
       </div>

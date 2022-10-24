@@ -53,6 +53,12 @@ import { HomepageClarisaEndpointModule } from './homepage-clarisa-endpoint/homep
 import { HomepageClarisaCategoryEndpointModule } from './homepage-clarisa-category-endpoint/homepage-clarisa-category-endpoint.module';
 import { EndOfInitiativeOutcomesModule } from './end-of-initiative-outcomes/end-of-initiative-outcomes.module';
 import { IntegrationModule } from 'src/shared/integration/integration.module';
+import { MisModule } from './mis/mis.module';
+import { InnovationCharacteristicModule } from './innovation-characteristic/innovation-characteristic.module';
+import { PolicyStageModule } from './policy-stage/policy-stage.module';
+import { InstitutionTypeModule } from './institution-type/institution-type.module';
+import { InstitutionModule } from './institution/institution.module';
+import { InstitutionDictionaryModule } from './institution-dictionary/institution-dictionary.module';
 
 @Module({
   controllers: [ApiController],
@@ -110,6 +116,12 @@ import { IntegrationModule } from 'src/shared/integration/integration.module';
     HomepageClarisaCategoryEndpointModule,
     EndOfInitiativeOutcomesModule,
     IntegrationModule,
+    MisModule,
+    InnovationCharacteristicModule,
+    PolicyStageModule,
+    InstitutionTypeModule,
+    InstitutionModule,
+    InstitutionDictionaryModule,
   ],
 })
 export class ApiModule {}

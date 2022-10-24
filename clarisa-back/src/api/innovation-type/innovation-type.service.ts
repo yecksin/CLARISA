@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
-import { IndicatorTypeEnum } from 'src/shared/entities/enums/indicator-types';
+import { SourceOption } from 'src/shared/entities/enums/source-options';
 import { FindOptionsWhere, Repository } from 'typeorm';
 import { UpdateInnovationTypeDto } from './dto/update-innovation-type.dto';
 import { InnovationType } from './entities/innovation-type.entity';
@@ -15,24 +15,21 @@ export class InnovationTypeService {
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
-    type: IndicatorTypeEnum = IndicatorTypeEnum.CGIAR,
+    type: string = SourceOption.CGIAR.path,
   ): Promise<InnovationType[]> {
     let whereClause: FindOptionsWhere<InnovationType> = {};
+    const incomingType = SourceOption.getfromPath(type);
 
     switch (type) {
-      case IndicatorTypeEnum.ALL:
+      case SourceOption.ALL.path:
         // do nothing. no extra conditions needed
         break;
-      case IndicatorTypeEnum.CGIAR:
+      case SourceOption.CGIAR.path:
+      case SourceOption.LEGACY.path:
+      case SourceOption.INNOVATION_CATALOG.path:
         whereClause = {
           ...whereClause,
-          is_onecgiar: true,
-        };
-        break;
-      case IndicatorTypeEnum.LEGACY:
-        whereClause = {
-          ...whereClause,
-          is_marlo: true,
+          source_id: incomingType.source_id,
         };
         break;
       default:

@@ -4,7 +4,7 @@ import { UpdateImpactAreaIndicatorDto } from './dto/update-impact-area-indicator
 import { Repository } from 'typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { ImpactAreaIndicator } from './entities/impact-area-indicator.entity';
-import { ImpactAreaIndicatorByImpactAreaDto } from './dto/impact-area-indicators-by-impact-are.dto';
+import { ImpactAreaIndicatorDto } from './dto/impact-area-indicator.dto';
 import { ImpactAreaIndicatorRepository } from './repositories/impact-area-indicators-repository';
 
 @Injectable()
@@ -15,18 +15,14 @@ export class ImpactAreaIndicatorsService {
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
-  ): Promise<ImpactAreaIndicatorByImpactAreaDto[]> {
-    switch (option) {
-      case FindAllOptions.SHOW_ALL:
-        return await this.impactAreaIndicatorsRepository.impactAreaIndicatorsByImpactArea();
-      case FindAllOptions.SHOW_ONLY_ACTIVE:
-      case FindAllOptions.SHOW_ONLY_INACTIVE:
-        return await this.impactAreaIndicatorsRepository.impactAreaIndicatorsByImpactAreaIsActive(
-          option,
-        );
-      default:
-        throw Error('?!');
+  ): Promise<ImpactAreaIndicatorDto[]> {
+    if (!Object.values<string>(FindAllOptions).includes(option)) {
+      throw Error('?!');
     }
+
+    return this.impactAreaIndicatorsRepository.findAllImpactAreaIndicators(
+      option,
+    );
   }
 
   async findOne(id: number): Promise<ImpactAreaIndicator> {

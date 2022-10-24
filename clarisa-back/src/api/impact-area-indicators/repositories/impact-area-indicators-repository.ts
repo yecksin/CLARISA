@@ -1,50 +1,63 @@
-import { dataSource } from 'src/ormconfig';
 import { ImpactAreaIndicator } from '../entities/impact-area-indicator.entity';
-import { ImpactAreaIndicatorByImpactAreaDto } from '../dto/impact-area-indicators-by-impact-are.dto';
+import { ImpactAreaIndicatorDto } from '../dto/impact-area-indicator.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Injectable } from '@nestjs/common';
-import { DataSource, Repository } from 'typeorm';
+import { DataSource, FindOptionsWhere, Repository } from 'typeorm';
 
 @Injectable()
 export class ImpactAreaIndicatorRepository extends Repository<ImpactAreaIndicator> {
   constructor(private dataSource: DataSource) {
     super(ImpactAreaIndicator, dataSource.createEntityManager());
   }
-  async impactAreaIndicatorsByImpactArea(): Promise<
-    ImpactAreaIndicatorByImpactAreaDto[]
-  > {
-    const impactAreaIndicatorsQuery = `
-      SELECT iai.id, iai.indicator_statement, iai.target_year, iai.target_unit, 
-              iai.is_aplicable_projected_benefits, iai.smo_code, ia.id AS impact_area_id, ia.name
-        FROM impact_area_indicators iai
-   LEFT JOIN impact_areas ia
-          ON iai.impact_areas_id = ia.id
-              `;
-
-    const ImpactAreaIndicatorsbyImpactArea: ImpactAreaIndicatorByImpactAreaDto[] =
-      await this.query(impactAreaIndicatorsQuery);
-
-    return ImpactAreaIndicatorsbyImpactArea;
-  }
-
-  async impactAreaIndicatorsByImpactAreaIsActive(
+  async findAllImpactAreaIndicators(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
-  ): Promise<ImpactAreaIndicatorByImpactAreaDto[]> {
-    var isActiveOption = true;
-    if (option == 'inactive') isActiveOption = false;
+  ): Promise<ImpactAreaIndicatorDto[]> {
+    let impactAreaIndicatorDtos: ImpactAreaIndicatorDto[] = [];
+    let whereClause: FindOptionsWhere<ImpactAreaIndicator> = {};
+    switch (option) {
+      case FindAllOptions.SHOW_ALL:
+        //do nothing. we will be showing everything, so no condition is needed;
+        break;
+      case FindAllOptions.SHOW_ONLY_ACTIVE:
+      case FindAllOptions.SHOW_ONLY_INACTIVE:
+        whereClause = {
+          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          impact_area_object: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
+        };
+        break;
+    }
 
-    const impactAreaIndicatorsQuery = `
-      SELECT iai.id, iai.indicator_statement, iai.target_year, iai.target_unit, 
-              iai.is_aplicable_projected_benefits, iai.smo_code, ia.id AS impact_area_id, ia.name
-        FROM impact_area_indicators iai
-   LEFT JOIN impact_areas ia
-          ON iai.impact_areas_id = ia.id
-          WHERE iai.is_active = ${isActiveOption}
-              `;
+    const impactAreaIndicators: ImpactAreaIndicator[] = await this.find({
+      where: whereClause,
+      relations: {
+        impact_area_object: true,
+      },
+    });
 
-    const ImpactAreaIndicatorsbyImpactArea: ImpactAreaIndicatorByImpactAreaDto[] =
-      await this.query(impactAreaIndicatorsQuery);
+    await Promise.all(
+      impactAreaIndicators.map(async (iai) => {
+        let impactAreaIndicatorDto: ImpactAreaIndicatorDto =
+          new ImpactAreaIndicatorDto();
 
-    return ImpactAreaIndicatorsbyImpactArea;
+        if (iai.impact_area_object) {
+          impactAreaIndicatorDto.impactAreaId = iai.impact_areas_id;
+          impactAreaIndicatorDto.impactAreaName = iai.impact_area_object.name;
+        }
+
+        impactAreaIndicatorDto.indicatorId = iai.id;
+        impactAreaIndicatorDto.indicatorStatement = iai.indicator_statement;
+        impactAreaIndicatorDto.isAplicableProjectedBenefits =
+          iai.is_aplicable_projected_benefits;
+        impactAreaIndicatorDto.targetUnit = iai.target_unit;
+        impactAreaIndicatorDto.targetYear = iai.target_year;
+        impactAreaIndicatorDto.value = iai.target_value;
+
+        impactAreaIndicatorDtos.push(impactAreaIndicatorDto);
+      }),
+    );
+
+    return impactAreaIndicatorDtos;
   }
 }

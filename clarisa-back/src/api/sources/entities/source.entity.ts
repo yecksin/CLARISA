@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
+import { InstitutionDictionary } from 'src/api/institution-dictionary/entities/institution-dictionary.entity';
 
 @Entity('sources')
 export class Source extends AuditableEntity {
@@ -7,11 +8,14 @@ export class Source extends AuditableEntity {
   id: number;
 
   @Column()
-  name: number;
+  name: string;
 
   @Column()
   acronym: string;
 
   @Column()
   contact_point_id: string;
+
+  @OneToMany(() => InstitutionDictionary, (id) => id.source_object)
+  institution_dictionary_entries: InstitutionDictionary[];
 }

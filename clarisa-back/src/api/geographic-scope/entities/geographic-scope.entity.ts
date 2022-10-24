@@ -18,11 +18,6 @@ export class GeographicScope extends AuditableEntity {
   @Column()
   definition: string;
 
-  @Exclude()
-  @Column({ type: 'tinyint' })
-  is_onecgiar: boolean;
-
-  @Exclude()
-  @Column({ type: 'tinyint' })
-  is_legacy: boolean;
+  @Column()
+  source_id: number;
 }

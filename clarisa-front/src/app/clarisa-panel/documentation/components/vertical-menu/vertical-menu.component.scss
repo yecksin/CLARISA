@@ -1,0 +1,29 @@
+.side-menu__label{
+    color: #0065bd;
+    font-size: 14.6px;
+    font-weight: 600;
+}
+
+li :hover{
+    color: black;
+}
+
+.slide-item:hover {
+    color: black;
+}
+
+.visible{
+    display: block;
+}
+
+.hide{
+    display: none;
+}
+.main-sidemenu{
+    margin-top: 60px
+}
+@media (max-width: 992px) {
+    .main-sidemenu{
+        margin-top: 0px;
+    }
+}

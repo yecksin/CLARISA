@@ -3,23 +3,42 @@ import { CommonModule } from '@angular/common';
 
 import { DocumentationRoutingModule } from './documentation-routing.module';
 import { DocumentationComponent } from './documentation.component';
-import { NavegationComponent } from './components/navegation/navegation.component';
-import { NavegationVerticalComponent } from './components/navegation-vertical/navegation-vertical.component';
-import { ContentEndpointsComponent } from './components/content-endpoints/content-endpoints.component';
-import { SubMenuComponent } from './components/navegation-vertical/sections/sub-menu/sub-menu.component';
-
+import { VerticalMenuComponent } from './components/vertical-menu/vertical-menu.component';
+import { HorizontalMenuComponent } from './components/horizontal-menu/horizontal-menu.component';
+import { ContentComponent } from './components/content/content.component';
+import { TableModule } from 'primeng/table';
+import { CalendarModule } from 'primeng/calendar';
+import { SliderModule } from 'primeng/slider';
+import { DialogModule } from 'primeng/dialog';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+import { InputTextModule } from 'primeng/inputtext';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
     DocumentationComponent,
-    NavegationComponent,
-    NavegationVerticalComponent,
-    ContentEndpointsComponent,
-    SubMenuComponent
+    VerticalMenuComponent,
+    HorizontalMenuComponent,
+    ContentComponent,
   ],
   imports: [
     CommonModule,
-    DocumentationRoutingModule
-  ]
+    DocumentationRoutingModule,
+    TableModule,
+    CalendarModule,
+    SliderModule,
+    DialogModule,
+    MultiSelectModule,
+    ContextMenuModule,
+    DropdownModule,
+    ButtonModule,
+    ToastModule,
+    InputTextModule,
+    ProgressBarModule,
+  ],
 })
-export class DocumentationModule { }
+export class DocumentationModule {}

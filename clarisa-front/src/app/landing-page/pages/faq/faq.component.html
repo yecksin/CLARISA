@@ -1,2 +1,5 @@
 <app-banner></app-banner>
-<app-question></app-question>
+<app-question
+  [metaDataFaq]="item"
+  *ngFor="let item of informationQuestions"
+></app-question>

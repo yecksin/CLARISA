@@ -34,15 +34,15 @@ export class Region extends AuditableEntity {
   //relations
   @ManyToOne(() => Region, (parent) => parent.children)
   @JoinColumn({ name: 'parent_id' })
-  parent_object: Promise<Region>;
+  parent_object: Region;
 
   @OneToMany(() => Region, (child) => child.parent_object)
-  children: Promise<Region[]>;
+  children: Region[];
 
   @ManyToMany(() => Country, (country) => country.regions)
-  countries: Promise<Country[]>;
+  countries: Country[];
 
-  @ManyToOne(() => RegionType)
+  @ManyToOne(() => RegionType, (rt) => rt.regions)
   @JoinColumn({ name: 'region_type_id' })
-  region_type_object: Promise<RegionType>;
+  region_type_object: RegionType;
 }

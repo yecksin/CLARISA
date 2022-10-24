@@ -1157,11 +1157,11 @@ section.testimonials-wrapper {
 	border-radius: 50%;
 }
 .testimonials-wrapper .carousel-indicators li.active:before {
-	background: #6bb600;
+	background: #ffc84f;
 }
 .testimonials-wrapper .carousel-indicators .active {
 	background: none;
-	border: solid 1px #6bb600;
+	border: solid 1px #ffc84f;
 	width: 18px;
 	height: 18px;
 }
@@ -1618,14 +1618,15 @@ section.news {
 	z-index: -1;
 }
 .satisfied-wrapper {
-	background-image: url(../images/fontIndicartors.jpg);
-	background-position: center top;
+	background-image: url(../images/Image-CGIAR.jpg);
+	background-position: center;
 	background-size: cover;
 	float: left;
 	padding: 55px 0;
 	position: relative;
 	width: 100%;
 	z-index: 2;
+	
 }
 .satisfied-wrapper h2 {
 	color: #fff;

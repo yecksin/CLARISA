@@ -13,6 +13,6 @@ export class HorizontalMenuComponent implements OnInit {
   reload() {
     setTimeout(() => {
       window.location.reload();
-    }, 100);
+    }, 0);
   }
 }

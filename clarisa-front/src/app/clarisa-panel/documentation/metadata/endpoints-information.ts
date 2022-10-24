@@ -22,7 +22,7 @@ export const endpointsInfo = [
             id: 1,
             name: 'CGIAR entities',
             description:
-              'This list contains the official list of CGIAR Centers, CGIAR Research Programs (CRPs), and CGIAR Platforms (PTFs). It also contains the list of Entities that are no longer active now.',
+              'This list contains the official list of CGIAR Centers, CGIAR Research Programs (CRPs), and CGIAR Platforms (PTFs). It also includes the list of entities that are no longer active. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/cgiar-entities',
             http_method: 'GET',
             request_json: 'null',
@@ -31,9 +31,9 @@ export const endpointsInfo = [
           },
           {
             id: 2,
-            name: 'CGIAR entities Types',
+            name: 'CGIAR entity Types',
             description:
-              'This list contains the types of entities we have currently in the CGIAR. So far, we have the CGIAR Research Programs, platforms, and Centers.',
+              'This list provides the entity types of CGIAR Research Programs (CRPs), CGIAR Platforms (PTFs), CGIAR Centers, CGIAR Initiatives and One CGIAR Platform. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/cgiar-entity-types',
             http_method: 'GET',
             request_json: 'null',
@@ -44,7 +44,7 @@ export const endpointsInfo = [
             id: 3,
             name: 'Countries',
             description:
-              'This list contains all the countries and is following the ISO-3166 standard. The data includes the country names in English, alpha-2 code, and the associated Region according to the UN49 standard.',
+              'This list contains all the countries and follows the ISO-3166 standard. Data includes the country names in English, the ISO alpha-2 code and the associated Region according to the United Nations (UN) M49 standard. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/countries',
             http_method: 'GET',
             request_json: 'null',
@@ -55,7 +55,7 @@ export const endpointsInfo = [
             id: 4,
             name: 'UN Regions',
             description:
-              'According to the One CGIAR Strategy, the CGIAR works in six regions: Central and West Asia and North Africa, Latin America and the Caribbean, West and Central Africa, East and Southern Africa, South Asia, Southeast Asia, and Pacific',
+              'This list contains all the regions based on the United Nations (UN) M49 standard. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/un-regions',
             http_method: 'GET',
             request_json: 'null',
@@ -66,7 +66,7 @@ export const endpointsInfo = [
             id: 5,
             name: 'One CGIAR Regions',
             description:
-              'According to the One CGIAR Strategy, the CGIAR works in six regions: Central and West Asia and North Africa, Latin America and the Caribbean, West and Central Africa, East and Southern Africa, South Asia, Southeast Asia, and Pacific',
+              'This list contains groups of regions in which One CGIAR is concentrating its efforts, as stated in the One CGIAR Strategy. This includes Central and West Asia and North Africa, Latin America and the Caribbean, West and Central Africa, East and Southern Africa, South Asia, Southeast Asia and the Pacific. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/OneCGIARRegions',
             http_method: 'GET',
             request_json: 'null',
@@ -76,7 +76,8 @@ export const endpointsInfo = [
           {
             id: 6,
             name: 'CGIAR Acronyms',
-            description: 'View all CGIAR Acronyms.',
+            description:
+              'This list contains acronyms of common use within One CGIAR. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/acronyms',
             http_method: 'GET',
             request_json: 'null',
@@ -86,7 +87,8 @@ export const endpointsInfo = [
           {
             id: 7,
             name: 'Glossary',
-            description: 'View Glossary of terms.',
+            description:
+              'This list contains a glossary of terms extracted from the "Monitoring, Evaluation, Learning and Impact Assessment (MELIA) Glossary" prepared by the CGIAR Monitoring, Evaluation and Learning (MEL) Community of Practice (CoP) group in November 2021. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/glossary',
             http_method: 'GET',
             request_json: 'null',
@@ -97,15 +99,16 @@ export const endpointsInfo = [
       },
       {
         id: 6,
-        name: 'Institutions',
-        description: null,
+        name: 'Institutions Control Lists',
+        description:
+          'This section contains lists of institutions that can serve not only One CGIAR but other stakeholders and strategic partners. The lists available are the Institutions List, the Institutions-related list and the Institution types. ',
         subcategories: [],
         endpoints: [
           {
             id: 8,
-            name: 'Institutions List',
+            name: 'Institutions',
             description:
-              'This is a worldwide list of institutions that have been related to CGIAR activities as funders, leaders, partners, and/or contributors. This list reflects the information consolidated by some of the CGIAR Management Information Systems and external sources (i.e. MARLO and MEL).',
+              'This is a worldwide list of institutions related to CGIAR activity, leaders, partners, and contributors. This list reflects the information consolidated throughout the years from external sources and two main CGIAR Management Information Systems and external sources, namely Managing Agricultural Research for Learning and Outcomes (MARLO) and Monitoring, Evaluation and Learning (MEL). Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/institutions',
             http_method: 'GET',
             request_json: 'null',
@@ -115,7 +118,8 @@ export const endpointsInfo = [
           {
             id: 9,
             name: 'Institutions Related List',
-            description: '',
+            description:
+              'This section contains lists of institutions gathered from different sources and matched with the institution list in CLARISA. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/institutionsSimpleRelated',
             http_method: 'GET',
             request_json: 'null',
@@ -125,7 +129,8 @@ export const endpointsInfo = [
           {
             id: 10,
             name: 'Institution Types',
-            description: '',
+            description:
+              'This list provides the institution types related to CGIAR activity, leaders, partners, and contributors. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/institution-types',
             http_method: 'GET',
             request_json: 'null',
@@ -137,13 +142,15 @@ export const endpointsInfo = [
       {
         id: 7,
         name: 'Research Strategy 2030',
-        description: null,
+        description:
+          'This section collects the lists of CGIAR Research and Innovation Strategy. It contains lists covering various subjects, from CGIAR Action and Impact Areas to Sustainable Development Goals (SDGs). ',
         subcategories: [],
         endpoints: [
           {
             id: 11,
             name: 'Action Areas',
-            description: 'Test funtionality.',
+            description:
+              'This list contains the three One CGIAR Action Areas: Systems Transformation, Resilient Agrifood Systems and Genetic Innovation. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/action-areas',
             http_method: 'GET',
             request_json: 'null',
@@ -153,7 +160,8 @@ export const endpointsInfo = [
           {
             id: 12,
             name: 'Impact Areas',
-            description: 'Test funtionality.',
+            description:
+              'This list contains the five One CGIAR Impact Areas: Nutrition, health and food security; Poverty reduction, livelihoods and jobs; Gender equality, youth and inclusion; Climate adaptation and mitigation; Environmental health and biodiversity. These Impact Areas focus on five Sustainable Development Goals (SDGs). Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/impact-areas',
             http_method: 'GET',
             request_json: 'null',
@@ -163,7 +171,8 @@ export const endpointsInfo = [
           {
             id: 13,
             name: 'Impact Areas Indicators',
-            description: 'Test funtionality.',
+            description:
+              'This list contains indicators formulated around the five One CGIAR Impact Areas. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/impact-area-indicators',
             http_method: 'GET',
             request_json: 'null',
@@ -173,7 +182,8 @@ export const endpointsInfo = [
           {
             id: 14,
             name: 'Sustainable Development Goals',
-            description: 'Test funtionality.',
+            description:
+              'This list contains all seventeen United Nations Sustainable Development Goals (SDGs). Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/allSDG',
             http_method: 'GET',
             request_json: 'null',
@@ -183,7 +193,8 @@ export const endpointsInfo = [
           {
             id: 15,
             name: 'SDG Targets',
-            description: 'Test funtionality.',
+            description:
+              'This list contains United Nations Sustainable Development Goals (SDGs) targets. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/allSDGTargets',
             http_method: 'GET',
             request_json: 'null',
@@ -193,7 +204,8 @@ export const endpointsInfo = [
           {
             id: 16,
             name: 'SDG Indicators',
-            description: 'Test funtionality.',
+            description:
+              'This list contains United Nations Sustainable Development Goals (SDGs) Indicators. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/allSDGIndicators',
             http_method: 'GET',
             request_json: 'null',
@@ -203,7 +215,8 @@ export const endpointsInfo = [
           {
             id: 17,
             name: 'Initiatives',
-            description: 'Test funtionality.',
+            description:
+              'This list contains all One CGIAR Research Initiatives, formulated around specific themes and impacts central to each Action Area. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/allInitiatives',
             http_method: 'GET',
             request_json: 'null',
@@ -214,7 +227,7 @@ export const endpointsInfo = [
             id: 18,
             name: 'End of Initiative Outcomes',
             description:
-              'The following control list displays all the End of Initiative Outcomes reported thorough the Online Submission Tool (OST), using the Theory of Change (TOC) Board.',
+              'This list displays all the End of Initiative Outcomes reported through the Online Submission Tool (OST) using the Theory of Change (TOC) Board. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/end-of-initiative-outcomes',
             http_method: 'GET',
             request_json: 'null',
@@ -224,7 +237,8 @@ export const endpointsInfo = [
           {
             id: 19,
             name: 'Action Areas Outcomes',
-            description: 'Test funtionality.',
+            description:
+              'This list contains the expected outcomes of Action Areas. Users can preview and export the list by clicking the ‘Display control list’ button below.',
             route: 'api/action-area-outcomes',
             http_method: 'GET',
             request_json: 'null',
@@ -244,7 +258,8 @@ export const endpointsInfo = [
           {
             id: 21,
             name: 'Workpackages',
-            description: 'Test funtionality.',
+            description:
+              'This list contains all the work packages. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/workpackages',
             http_method: 'GET',
             request_json: 'null',
@@ -254,25 +269,28 @@ export const endpointsInfo = [
           {
             id: 22,
             name: 'MELIA study types',
-            description: 'Gives a list with MELIA study types from OneCGIAR.',
-            route: 'api/MELIA/study-types',
+            description:
+              'This list provides the Monitoring, Evaluation, Learning and Impact Assessment (MELIA) study types from One CGIAR. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
+            route: 'api/study-types',
             http_method: 'GET',
             request_json: 'null',
             response_json:
-              '{"type": "response", "order": null, "properties": {"id": {"type": "number", "order": 0, "properties": null, "column_name": "Code", "object_type": "field", "show_in_table": true}, "name": {"type": "string", "order": 1, "properties": null, "column_name": "Name", "object_type": "field", "show_in_table": true}, "description": {"type": "string", "order": 3, "properties": null, "column_name": "Description", "object_type": "field", "show_in_table": true}}, "column_name": null, "object_type": "list", "show_in_table": false}',
+              '{"type": "response", "order": null, "properties": {"id": {"type": "number", "order": 0, "properties": null, "column_name": "Code", "object_type": "field", "show_in_table": true}, "name": {"type": "string", "order": 1, "properties": null, "column_name": "Name", "object_type": "field", "show_in_table": true}, "description": {"type": "string", "order": 2, "properties": null, "column_name": "Description", "object_type": "field", "show_in_table": true}}, "column_name": null, "object_type": "list", "show_in_table": false}',
           },
         ],
       },
       {
         id: 8,
         name: 'Innovation Catalog',
-        description: null,
+        description:
+          'This section collects the lists related to CGIAR Innovation Catalog. One example of the use of these lists can be referred to the Root Tuber and Bananas (RTB)’s Innovation Catalog, which documents RTB innovations using CLARISA’s standardized descriptor specifications.',
         subcategories: [],
         endpoints: [
           {
             id: 23,
             name: 'Business Category',
-            description: 'Test funtionality.',
+            description:
+              'This list contains the six main business categories. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/business-categories',
             http_method: 'GET',
             request_json: 'null',
@@ -282,7 +300,8 @@ export const endpointsInfo = [
           {
             id: 24,
             name: 'Technical Field',
-            description: 'Test funtionality.',
+            description:
+              'This list contains the eight main technical fields. Users can preview and export the list by clicking the ‘Display control list’ button below.',
             route: 'api/technical-fields',
             http_method: 'GET',
             request_json: 'null',
@@ -292,7 +311,8 @@ export const endpointsInfo = [
           {
             id: 25,
             name: 'Type of Innovation',
-            description: 'Test funtionality.',
+            description:
+              'This list contains the five main types of innovations. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/type-of-innovations',
             http_method: 'GET',
             request_json: 'null',
@@ -302,7 +322,8 @@ export const endpointsInfo = [
           {
             id: 26,
             name: 'Governance Type',
-            description: 'Test funtionality.',
+            description:
+              'This list contains the three main governance types: private, public or shared private and public. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/governance-types',
             http_method: 'GET',
             request_json: 'null',
@@ -312,7 +333,8 @@ export const endpointsInfo = [
           {
             id: 27,
             name: 'Environmental Benefits',
-            description: 'Test funtionality.',
+            description:
+              'This list contains the main environmental benefits, from biodiversity and ecosystems to water and fuel. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/environmental-benefits',
             http_method: 'GET',
             request_json: 'null',
@@ -322,7 +344,8 @@ export const endpointsInfo = [
           {
             id: 28,
             name: 'Technology Development Stage',
-            description: 'Test funtionality.',
+            description:
+              'This list contains various technology development stages. Users can preview and export the list by clicking the ‘Display control list’ button below.',
             route: 'api/technology-development-stages',
             http_method: 'GET',
             request_json: 'null',
@@ -332,7 +355,8 @@ export const endpointsInfo = [
           {
             id: 29,
             name: 'Innovation Readiness Levels',
-            description: 'Test funtionality.',
+            description:
+              'This list contains the different innovation readiness levels, from the idea to the proven innovation. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/innovation-readiness-levels',
             http_method: 'GET',
             request_json: 'null',
@@ -343,16 +367,17 @@ export const endpointsInfo = [
             id: 30,
             name: 'Administrative Scale',
             description: 'Test funtionality.',
-            route: 'api/administrative-scale',
+            route: 'api/administrative-scales',
             http_method: 'GET',
             request_json: 'null',
             response_json:
-              '{"type": "response", "order": null, "properties": {"id": {"type": "number", "order": 0, "properties": null, "column_name": "Code", "object_type": "field", "show_in_table": true}, "name": {"type": "string", "order": 1, "properties": null, "column_name": "Name", "object_type": "field", "show_in_table": true}}, "column_name": null, "object_type": "list", "show_in_table": false}',
+              '{"type": "response", "order": null, "properties": {"code": {"type": "number", "order": 0, "properties": null, "column_name": "Code", "object_type": "field", "show_in_table": true}, "name": {"type": "string", "order": 1, "properties": null, "column_name": "Name", "object_type": "field", "show_in_table": true}}, "column_name": null, "object_type": "list", "show_in_table": false}',
           },
           {
             id: 31,
             name: 'Users',
-            description: 'Test funtionality.',
+            description:
+              'This list contains the different user typologies, from farmers to financial institutions. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/oc-users',
             http_method: 'GET',
             request_json: 'null',
@@ -361,8 +386,9 @@ export const endpointsInfo = [
           },
           {
             id: 32,
-            name: 'Beneficiarie',
-            description: 'Test funtionality.',
+            name: 'Beneficiaries',
+            description:
+              'This list contains the different beneficiary typologies, from farmers to financial institutions. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/beneficiaries',
             http_method: 'GET',
             request_json: 'null',
@@ -372,7 +398,8 @@ export const endpointsInfo = [
           {
             id: 33,
             name: 'Type of Investment',
-            description: 'Test funtionality.',
+            description:
+              'This list contains the different types of investments, from grants to venture capital. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/investment-types',
             http_method: 'GET',
             request_json: 'null',
@@ -382,7 +409,8 @@ export const endpointsInfo = [
           {
             id: 34,
             name: 'Innovation Use Levels',
-            description: 'Test funtionality.',
+            description:
+              'This list contains the different innovation use levels, from team to unconnected end-user. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/innovation-use-levels',
             http_method: 'GET',
             request_json: 'null',
@@ -431,7 +459,7 @@ export const endpointsInfo = [
             id: 1,
             name: 'CGIAR entities',
             description:
-              'This list contains the official list of CGIAR Centers, CGIAR Research Programs (CRPs), and CGIAR Platforms (PTFs). It also contains the list of Entities that are no longer active now.',
+              'This list contains the official list of CGIAR Centers, CGIAR Research Programs (CRPs), and CGIAR Platforms (PTFs). It also includes the list of entities that are no longer active. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/cgiar-entities',
             http_method: 'GET',
             request_json: 'null',
@@ -440,9 +468,9 @@ export const endpointsInfo = [
           },
           {
             id: 2,
-            name: 'CGIAR entities Types',
+            name: 'CGIAR entity Types',
             description:
-              'This list contains the types of entities we have currently in the CGIAR. So far, we have the CGIAR Research Programs, platforms, and Centers.',
+              'This list provides the entity types of CGIAR Research Programs (CRPs), CGIAR Platforms (PTFs), CGIAR Centers, CGIAR Initiatives and One CGIAR Platform. Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/cgiar-entity-types',
             http_method: 'GET',
             request_json: 'null',
@@ -524,7 +552,8 @@ export const endpointsInfo = [
           {
             id: 12,
             name: 'Impact Areas',
-            description: 'Test funtionality.',
+            description:
+              'This list contains the five One CGIAR Impact Areas: Nutrition, health and food security; Poverty reduction, livelihoods and jobs; Gender equality, youth and inclusion; Climate adaptation and mitigation; Environmental health and biodiversity. These Impact Areas focus on five Sustainable Development Goals (SDGs). Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/impact-areas',
             http_method: 'GET',
             request_json: 'null',
@@ -534,7 +563,8 @@ export const endpointsInfo = [
           {
             id: 14,
             name: 'Sustainable Development Goals',
-            description: 'Test funtionality.',
+            description:
+              'This list contains all seventeen United Nations Sustainable Development Goals (SDGs). Users can preview and export the list by clicking the ‘Display control list’ button below. ',
             route: 'api/allSDG',
             http_method: 'GET',
             request_json: 'null',

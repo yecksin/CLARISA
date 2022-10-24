@@ -297,7 +297,7 @@ export const endpointsInfo = [
             http_method: 'GET',
             request_json: 'null',
             response_json:
-              '{"type": "response", "order": null, "properties": {"id": {"type": "number", "order": 0, "properties": null, "column_name": "Code", "object_type": "field", "show_in_table": true}, "name": {"type": "string", "order": 1, "properties": null, "column_name": "Name", "object_type": "field", "show_in_table": true}, "definition": {"type": "string", "order": null, "properties": null, "column_name": null, "object_type": "field", "show_in_table": false}}, "column_name": null, "object_type": "list", "show_in_table": false}',
+              '{"type": "response", "order": null, "properties": {"code": {"type": "number", "order": 0, "properties": null, "column_name": "Code", "object_type": "field", "show_in_table": true}, "name": {"type": "string", "order": 1, "properties": null, "column_name": "Name", "object_type": "field", "show_in_table": true}, "definition": {"type": "string", "order": null, "properties": null, "column_name": null, "object_type": "field", "show_in_table": false}}, "column_name": null, "object_type": "list", "show_in_table": false}',
           },
           {
             id: 26,
@@ -353,7 +353,7 @@ export const endpointsInfo = [
             id: 31,
             name: 'Users',
             description: 'Test funtionality.',
-            route: 'api/users',
+            route: 'api/oc-users',
             http_method: 'GET',
             request_json: 'null',
             response_json:

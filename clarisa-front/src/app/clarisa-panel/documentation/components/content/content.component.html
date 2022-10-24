@@ -492,12 +492,29 @@
                       </span>
                     </span>
                     <span *ngSwitchCase="'list'">
-                      <span *ngFor="let i of cols[3]">
-                        <span *ngIf="rowData[cols[1]] != null">
-                          <span *ngFor="let k of rowData[cols[1]]"
-                            >{{ k[i[1]] }},</span
-                          >
+                      <span *ngIf="cols[3].length == 1">
+                        <span *ngFor="let i of cols[3]">
+                          <span *ngIf="rowData[cols[1]] != null">
+                            <span *ngFor="let k of rowData[cols[1]]">
+                              {{ k[i[1]] }},
+                            </span>
+                          </span>
                           <span *ngIf="rowData[cols[1]] == null"> </span>
+                        </span>
+                      </span>
+                      <span *ngIf="cols[3].length != 1">
+                        <span *ngIf="rowData[cols[1]] != null">
+                          <span *ngFor="let i of rowData[cols[1]]">
+                            <span *ngFor="let k of cols[3]">
+                              <span *ngIf="k[0] != null && k[0] != ''">
+                                <span style="font-weight: 800">{{ k[0] }}</span>
+                                : {{ i[k[1]] }} <br />
+                              </span>
+                              <span *ngIf="k[0] == null || k[0] == ''">
+                                {{ i[k[1]] }}
+                              </span>
+                            </span>
+                          </span>
                         </span>
                       </span>
                     </span>

@@ -457,13 +457,30 @@
                     </span>
                     <span *ngSwitchCase="'object'">
                       <span *ngFor="let i of cols[3]">
-                        <span *ngIf="rowData[cols[1]] != null && i[0] != ''">
+                        <span
+                          *ngIf="
+                            rowData[cols[1]] != null &&
+                            i[0] != '' &&
+                            i[0] != null
+                          "
+                        >
                           {{ i[0] }} : {{ rowData[cols[1]][i[1]] }}
                         </span>
-                        <span *ngIf="rowData[cols[1]] == null && i[0] != ''">
+                        <span
+                          *ngIf="
+                            rowData[cols[1]] == null &&
+                            i[0] != '' &&
+                            i[0] != null
+                          "
+                        >
                           {{ i[0] }} :
                         </span>
-                        <span *ngIf="rowData[cols[1]] != null && i[0] == ''">
+                        <span
+                          *ngIf="
+                            (rowData[cols[1]] != null && i[0] == '') ||
+                            i[0] == null
+                          "
+                        >
                           {{ rowData[cols[1]][i[1]] }}
                         </span>
                       </span>

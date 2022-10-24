@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ParentRegionDto } from 'src/api/region/dto/parent-region.dto';
-import { RegionDto } from 'src/api/region/dto/region.dto';
+import { SimpleRegionDto } from 'src/api/region/dto/simple-region.dto';
 import { Region } from 'src/api/region/entities/region.entity';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { DataSource, Repository } from 'typeorm';
@@ -52,7 +52,7 @@ export class CountryRepository extends Repository<Country> {
             : undefined;
 
         let countryDto: CountryDto = new CountryDto();
-        let regionDto: RegionDto = null;
+        let regionDto: SimpleRegionDto = null;
         let parentRegionDto: ParentRegionDto = null;
 
         if (region) {
@@ -62,7 +62,7 @@ export class CountryRepository extends Repository<Country> {
             parentRegionDto.um49Code = parentRegion.iso_numeric;
           }
 
-          regionDto = new RegionDto();
+          regionDto = new SimpleRegionDto();
           regionDto.name = region.name;
           regionDto.um49Code = region.iso_numeric;
           regionDto.parentRegion = parentRegionDto;

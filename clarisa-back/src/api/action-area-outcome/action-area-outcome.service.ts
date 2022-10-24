@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
+import { ActionAreaOutcomeIndicatorRepository } from '../action-area-outcome-indicator/repositories/action-area-outcome-indicator-repository';
+import { ActionAreaOutcomeDto } from './dto/action-area-outcome.dto';
 import { UpdateActionAreaOutcomeDto } from './dto/update-action-area-outcome.dto';
 import { ActionAreaOutcome } from './entities/action-area-outcome.entity';
 
@@ -10,24 +12,19 @@ export class ActionAreaOutcomeService {
   constructor(
     @InjectRepository(ActionAreaOutcome)
     private actionAreaOutcomesRepository: Repository<ActionAreaOutcome>,
+    private actionAreaOutcomeIndicatorRepositort: ActionAreaOutcomeIndicatorRepository,
   ) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
-  ): Promise<ActionAreaOutcome[]> {
-    switch (option) {
-      case FindAllOptions.SHOW_ALL:
-        return await this.actionAreaOutcomesRepository.find();
-      case FindAllOptions.SHOW_ONLY_ACTIVE:
-      case FindAllOptions.SHOW_ONLY_INACTIVE:
-        return await this.actionAreaOutcomesRepository.find({
-          where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
-          },
-        });
-      default:
-        throw Error('?!');
+  ): Promise<ActionAreaOutcomeDto[]> {
+    if (!Object.values<string>(FindAllOptions).includes(option)) {
+      throw Error('?!');
     }
+
+    return this.actionAreaOutcomeIndicatorRepositort.findAllActionAreaOutcomes(
+      option,
+    );
   }
 
   async findOne(id: number): Promise<ActionAreaOutcome> {

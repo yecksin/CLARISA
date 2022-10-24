@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { SimpleCountryDto } from 'src/api/country/dto/simple-country.dto';
 import { ParentRegionDto } from 'src/api/region/dto/parent-region.dto';
 import { RegionDto } from 'src/api/region/dto/region.dto';
 import { Region } from 'src/api/region/entities/region.entity';
@@ -27,36 +28,51 @@ export class RegionRepository extends Repository<Region> {
           is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
         };
     }
-    let regions: Region[] = await this.find({ where: whereClause });
+    let regions: Region[] = await this.find({
+      where: whereClause,
+      relations: {
+        parent_object: true,
+        countries: true,
+        region_type_object: true,
+      },
+    });
     let regionDtos: RegionDto[] = [];
 
     await Promise.all(
       regions.map(async (r) => {
-        let parentRegion: Region = await this.query(
-          `
-        select r.* from regions r
-        where r.id = ?;
-      `,
-          [r.parent_id],
-        );
-        parentRegion =
-          ((<unknown>parentRegion) as Region[]).length === 1
-            ? parentRegion[0]
-            : undefined;
-
-        let regionDto: RegionDto = null;
+        let regionDto: RegionDto = new RegionDto();
         let parentRegionDto: ParentRegionDto = null;
 
-        if (parentRegion) {
-          parentRegionDto = new ParentRegionDto();
-          parentRegionDto.name = parentRegion.name;
-          parentRegionDto.um49Code = parentRegion.iso_numeric;
+        if (regionType === RegionTypeEnum.UN_REGION) {
+          regionDto.um49Code = r.iso_numeric;
+        } else if (regionType === RegionTypeEnum.CGIAR_REGION) {
+          regionDto.id = r.iso_numeric;
         }
 
-        regionDto = new RegionDto();
         regionDto.name = r.name;
-        regionDto.um49Code = r.iso_numeric;
-        regionDto.parentRegion = parentRegionDto;
+        if (regionType !== RegionTypeEnum.UN_REGION) {
+          regionDto.acronym = r.acronym;
+        }
+
+        if (r.parent_object) {
+          parentRegionDto = new ParentRegionDto();
+          parentRegionDto.name = r.parent_object.name;
+          parentRegionDto.um49Code = r.parent_object.iso_numeric;
+          regionDto.parentRegion = parentRegionDto;
+        }
+
+        if (regionType === RegionTypeEnum.CGIAR_REGION) {
+          regionDto.countries = r.countries.map((c) => {
+            let countryDto: SimpleCountryDto = new SimpleCountryDto();
+
+            countryDto.code = c.iso_numeric;
+            countryDto.isoAlpha2 = c.iso_alpha_2;
+            countryDto.isoAlpha3 = c.iso_alpha_3;
+            countryDto.name = c.name;
+
+            return countryDto;
+          });
+        }
 
         regionDtos.push(regionDto);
       }),

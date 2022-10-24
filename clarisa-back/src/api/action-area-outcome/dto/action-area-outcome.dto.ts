@@ -1,10 +1,10 @@
 export class ActionAreaOutcomeDto {
   actionAreaId: number;
-  actionAreaName: String;
+  actionAreaName: string;
   outcomeId: number;
-  outcomeSMOcode: String;
-  outcomeStatement: String;
+  outcomeSMOcode: string;
+  outcomeStatement: string;
   outcomeIndicatorId: number;
-  outcomeIndicatorSMOcode: String;
-  outcomeIndicatorStatement: String;
+  outcomeIndicatorSMOcode: string;
+  outcomeIndicatorStatement: string;
 }

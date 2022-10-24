@@ -13575,7 +13575,7 @@ a.icon {
 }
 
 a.icon:hover {
-    color: #1a1a1a !important;
+    color: #1a1a1a ;
 }
 
 .o-auto {
@@ -15084,7 +15084,7 @@ html.fullscreenie {
 }
 
 a.icon:hover {
-    color: var(--primary-bg-color) !important;
+    color: var(--primary-bg-color) ;
 }
 
 .avatar {
@@ -62305,7 +62305,7 @@ ul {
 .slide-item:hover,
 .slide-item:focus {
     text-decoration: none;
-    color: var(--primary-bg-color) !important;
+    color: #0065bd ;
 }
 
 .slide-menu li {
@@ -63397,7 +63397,7 @@ ul {
 .icontext-menu .slide-item:hover,
 .icontext-menu .slide-item:focus {
     text-decoration: none;
-    color: var(--primary-bg-color) !important;
+    color: var(--primary-bg-color) ;
 }
 
 .icontext-menu .slide-menu li {
@@ -64469,7 +64469,7 @@ ul {
 .closed-leftmenu .slide-item:hover,
 .closed-leftmenu .slide-item:focus {
     text-decoration: none;
-    color: var(--primary-bg-color) !important;
+    color: var(--primary-bg-color) ;
 }
 
 .closed-leftmenu .slide-menu li {
@@ -65306,7 +65306,7 @@ ul {
 .hover-submenu .slide-item:hover,
 .hover-submenu .slide-item:focus {
     text-decoration: none;
-    color: var(--primary-bg-color) !important;
+    color: var(--primary-bg-color) ;
 }
 
 .hover-submenu .slide-menu li {
@@ -66519,7 +66519,7 @@ ul {
 .hover-submenu1 .slide-item:hover,
 .hover-submenu1 .slide-item:focus {
     text-decoration: none;
-    color: var(--primary-bg-color) !important;
+    color: var(--primary-bg-color) ;
 }
 
 .hover-submenu1 .slide-menu li {

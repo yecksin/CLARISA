@@ -12,4 +12,8 @@ export class EndpointsInformationService {
   getAllEndpoints() {
     return this.http.get(`${this.urlApi}hp-clarisa-category-endpoints`);
   }
+
+  getAnyEndpoint(name: any) {
+    return this.http.get(`${this.urlApi}${name}`);
+  }
 }

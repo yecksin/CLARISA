@@ -6,6 +6,17 @@ import { DocumentationComponent } from './documentation.component';
 import { VerticalMenuComponent } from './components/vertical-menu/vertical-menu.component';
 import { HorizontalMenuComponent } from './components/horizontal-menu/horizontal-menu.component';
 import { ContentComponent } from './components/content/content.component';
+import { TableModule } from 'primeng/table';
+import { CalendarModule } from 'primeng/calendar';
+import { SliderModule } from 'primeng/slider';
+import { DialogModule } from 'primeng/dialog';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+import { InputTextModule } from 'primeng/inputtext';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -14,6 +25,20 @@ import { ContentComponent } from './components/content/content.component';
     HorizontalMenuComponent,
     ContentComponent,
   ],
-  imports: [CommonModule, DocumentationRoutingModule],
+  imports: [
+    CommonModule,
+    DocumentationRoutingModule,
+    TableModule,
+    CalendarModule,
+    SliderModule,
+    DialogModule,
+    MultiSelectModule,
+    ContextMenuModule,
+    DropdownModule,
+    ButtonModule,
+    ToastModule,
+    InputTextModule,
+    ProgressBarModule,
+  ],
 })
 export class DocumentationModule {}

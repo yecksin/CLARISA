@@ -1,58 +1,132 @@
 <section class="testimonials-wrapper">
-    <div class="container">
-      <h2>Information on <span>Dashboards and API Services</span></h2>
-      <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="testimonials"> 
-        
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item slides active">
-                <div class="slide-1">
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <div style=" display: flex; justify-content: center; margin-top: -20px;">
-                        <div class="tes-img"><img class="imgCarrusel" src="assets/images/dash.png"  alt="Grow Landscape"></div>
-                      </div>
-                    </div>
-                    <div class="col-sm-8">
-                      <div class="testimonials-content">
-                        <p>CLARISA helps collect and transform the raw CGIAR research and activities data into standardized and aggregated information. 
-                          By providing control lists with codes (i.e., unique identifiers), data on common indicators can be gathered from the systems 
-                          adopting these codes and results compiled at a system-wide level, including through dashboards. </p>
-                        
-                        <a [routerLink]="['../dashboards']" ><button type="button" class="btn btn-shadow" style=" color: black; cursor: pointer;"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Dashboards</button>
-                        </a>
-                      </div>
-                    </div>
+  <div class="container">
+    <h2>
+      Information on
+      <span style="color: #ffc84f">Dashboards and API Services</span>
+    </h2>
+    <div
+      class="carousel fade-carousel slide"
+      data-ride="carousel"
+      data-interval="4000"
+      id="testimonials"
+    >
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item slides active">
+          <div class="slide-1">
+            <div class="row">
+              <div class="col-sm-4">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    margin-top: -20px;
+                  "
+                >
+                  <div class="tes-img">
+                    <img
+                      class="imgCarrusel"
+                      src="assets/images/dash.png"
+                      alt="Grow Landscape"
+                    />
                   </div>
                 </div>
               </div>
-              <div class="item slides">
-                <div class="slide-2">
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <div style=" display: flex; justify-content: center; margin-top: -20px;">
-                        <div class="tes-img"><img src="assets/images/api.png" class="imgCarrusel" alt="Grow Landscape"></div>
-                      </div>
-                    </div>
-                    <div class="col-sm-8">
-                      <div class="testimonials-content">
-                        <p>CLARISA's architectural style enables computer systems to work together over the Internet. 
-                          In programming terms, CLARISA is based on a REST (Representational State Transfer) - 
-                          API (Application Programming Interface). Thanks to its architecture, CLARISA unifies the 
-                          language across different platforms, overcoming the common challenge of non-standardized information. </p>
-                        <a [routerLink]="['../api-services']"><button type="button" class="btn btn-shadow" style=" color: black; cursor: pointer;"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> API Services</button>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+              <div class="col-sm-8">
+                <div class="testimonials-content">
+                  <p>
+                    CLARISA helps collect and transform the raw CGIAR research
+                    and activities data into standardized and aggregated
+                    information. By providing control lists with codes (i.e.,
+                    unique identifiers), data on common indicators can be
+                    gathered from the systems adopting these codes and results
+                    compiled at a system-wide level, including through
+                    dashboards.
+                  </p>
+
+                  <a [routerLink]="['../dashboards']"
+                    ><button
+                      type="button"
+                      class="btn btn-shadow"
+                      style="
+                        color: black;
+                        font-weight: 800;
+                        cursor: pointer;
+                        background-color: #ffc84f;
+                      "
+                    >
+                      <i
+                        class="fa fa-arrow-circle-o-right"
+                        aria-hidden="true"
+                      ></i>
+                      Dashboards
+                    </button>
+                  </a>
                 </div>
               </div>
+            </div>
+          </div>
         </div>
-        <!-- Indicators -->
-        <ol class="carousel-indicators" style="margin-bottom: -20px;">
-          <li data-target="#testimonials" data-slide-to="0" class="active"></li>
-          <li data-target="#testimonials" data-slide-to="1"></li>
-        </ol>
+        <div class="item slides">
+          <div class="slide-2">
+            <div class="row">
+              <div class="col-sm-4">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    margin-top: -20px;
+                  "
+                >
+                  <div class="tes-img">
+                    <img
+                      src="assets/images/api.png"
+                      class="imgCarrusel"
+                      alt="Grow Landscape"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-8">
+                <div class="testimonials-content">
+                  <p>
+                    CLARISA's architectural style enables computer systems to
+                    work together over the Internet. In programming terms,
+                    CLARISA is based on a REST (Representational State Transfer)
+                    - API (Application Programming Interface). Thanks to its
+                    architecture, CLARISA unifies the language across different
+                    platforms, overcoming the common challenge of
+                    non-standardized information.
+                  </p>
+                  <a [routerLink]="['../api-services']"
+                    ><button
+                      type="button"
+                      class="btn btn-shadow"
+                      style="
+                        color: black;
+                        font-weight: 800;
+                        cursor: pointer;
+                        background-color: #ffc84f;
+                      "
+                    >
+                      <i
+                        class="fa fa-arrow-circle-o-right"
+                        aria-hidden="true"
+                      ></i>
+                      API Services
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      <!-- Indicators -->
+      <ol class="carousel-indicators" style="margin-bottom: -20px">
+        <li data-target="#testimonials" data-slide-to="0" class="active"></li>
+        <li data-target="#testimonials" data-slide-to="1"></li>
+      </ol>
     </div>
-  </section>
+  </div>
+</section>

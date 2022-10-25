@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
+import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
+import { RowDataPacket } from 'mysql2';
 
 @Injectable()
 export class UserService {
@@ -49,6 +50,23 @@ export class UserService {
     return await this.usersRepository.findOneBy({ id });
   }
 
+  private async getUserPermissions(user: User): Promise<string[]> {
+    const permissions_result: any = await this.usersRepository.query(
+      'call getUserPermissions(?)',
+      [user.id],
+    );
+
+    let permissions: string[] = [];
+
+    if (permissions_result[0]?.constructor.name === Array.name) {
+      permissions = permissions_result[0].map(
+        (rdp) => rdp.permission_route as string,
+      );
+    }
+
+    return permissions;
+  }
+
   /**
    * Finds an user by their email
    * @param email the user's email
@@ -60,7 +78,11 @@ export class UserService {
     email: string,
     isService: boolean = true,
   ): Promise<User> {
-    const user: User = await this.usersRepository.findOneBy({ email });
+    let user: User = await this.usersRepository.findOneBy({ email });
+    if (user) {
+      user.permissions = await this.getUserPermissions(user);
+    }
+
     if (isService) {
       delete user.password;
     }
@@ -79,7 +101,12 @@ export class UserService {
     username: string,
     isService: boolean = false,
   ): Promise<User> {
-    const user: User = await this.usersRepository.findOneBy({ username });
+    let user: User = await this.usersRepository.findOneBy({ username });
+    user.permissions = await this.getUserPermissions(user);
+    if (user) {
+      user.permissions = await this.getUserPermissions(user);
+    }
+
     if (isService) {
       delete user.password;
     }

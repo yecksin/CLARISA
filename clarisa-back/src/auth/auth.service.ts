@@ -34,7 +34,7 @@ export class AuthService {
       let authResult: boolean | BaseMessageDTO =
         await authenticator.authenticate(user.email, pass);
       if (authResult.constructor.name === Boolean.name) {
-        return true;
+        return user;
       }
     } else {
       throw new HttpException(
@@ -48,7 +48,11 @@ export class AuthService {
     // Add payload
     //console.log({user});
 
-    const payload = { email: user.email, sub: user.id };
+    const payload = {
+      email: user.email,
+      sub: user.id,
+      permissions: user.permissions,
+    };
     return { access_token: this.jwtService.sign(payload) };
   }
 }

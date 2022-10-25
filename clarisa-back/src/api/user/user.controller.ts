@@ -11,13 +11,16 @@ import {
   ParseIntPipe,
   UseInterceptors,
   ClassSerializerInterceptor,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { Response } from 'express';
 import { PaginationParams } from 'src/shared/interfaces/pageable';
-import { User } from './entities/user.entity';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
+import { User } from './entities/user.entity';
+import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
+import { PermissionGuard } from 'src/shared/guards/permission.guard';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
@@ -49,7 +52,7 @@ export class UserController {
     return this.userService.getUsersPagination(offset, limit);
   }
 
-  //@UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, PermissionGuard)
   @Patch('update')
   async update(
     @Res() res: Response,

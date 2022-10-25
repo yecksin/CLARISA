@@ -13,6 +13,7 @@ import {
   Res,
   HttpStatus,
   HttpException,
+  UseGuards,
 } from '@nestjs/common';
 import { HomepageClarisaCategoryService } from './homepage-clarisa-category.service';
 import { CreateHomepageClarisaCategoryDto } from './dto/create-homepage-clarisa-category.dto';
@@ -20,7 +21,12 @@ import { UpdateHomepageClarisaCategoryDto } from './dto/update-homepage-clarisa-
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { HomepageClarisaCategory } from './entities/homepage-clarisa-category.entity';
+import { ClarisaPageOnly } from 'src/shared/decorators/clarisa-page.decorator';
+import { PermissionGuard } from 'src/shared/guards/permission.guard';
+import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
 
+//@ClarisaPageOnly()
+//@UseGuards(JwtAuthGuard, PermissionGuard)
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
 export class HomepageClarisaCategoryController {

@@ -50,7 +50,7 @@ export class UserService {
     return await this.usersRepository.findOneBy({ id });
   }
 
-  private async getUserPermissions(user: User): Promise<string[]> {
+  async getUserPermissions(user: User): Promise<string[] | undefined> {
     const permissions_result: any = await this.usersRepository.query(
       'call getUserPermissions(?)',
       [user.id],
@@ -59,12 +59,12 @@ export class UserService {
     let permissions: string[] = [];
 
     if (permissions_result[0]?.constructor.name === Array.name) {
-      permissions = permissions_result[0].map(
-        (rdp) => rdp.permission_route as string,
-      );
+      permissions = permissions_result[0]
+        .map((rdp) => rdp.permission_route as string)
+        .filter((p) => p);
     }
 
-    return permissions;
+    return permissions.length == 0 ? undefined : permissions;
   }
 
   /**

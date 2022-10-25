@@ -21,6 +21,7 @@ import { User } from './entities/user.entity';
 import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
 import { PermissionGuard } from 'src/shared/guards/permission.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ClarisaPageOnly } from 'src/shared/decorators/clarisa-page.decorator';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

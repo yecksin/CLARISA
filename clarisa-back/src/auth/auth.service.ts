@@ -10,6 +10,7 @@ import { BaseMessageDTO } from './utils/BaseMessageDTO';
 
 @Injectable()
 export class AuthService {
+  private readonly clarisaExpirationDate = new Date().setFullYear(9999);
   constructor(
     private usersService: UserService,
     private jwtService: JwtService,
@@ -45,14 +46,12 @@ export class AuthService {
   }
 
   async login(user: User) {
-    // Add payload
-    //console.log({user});
-
     const payload = {
       email: user.email,
       sub: user.id,
       permissions: user.permissions,
     };
+
     return { access_token: this.jwtService.sign(payload) };
   }
 }

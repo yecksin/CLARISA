@@ -1,4 +1,4 @@
-import { HttpStatusCode } from '../interfaces/Constants';
+/*import { HttpStatusCode } from '../interfaces/Constants';
 import { logger } from './Logger';
 
 class BaseError extends Error {
@@ -42,3 +42,4 @@ class APIError extends BaseError {
 }
 
 export { APIError, BaseError };
+*/

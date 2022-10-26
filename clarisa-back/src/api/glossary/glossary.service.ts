@@ -37,7 +37,7 @@ export class GlossaryService {
     return await this.glossaryRepository.save(updateGlossary);
   }
 
-  async getRolesPagination(offset?: number, limit: number = 10) {
+  async getRolesPagination(offset?: number, limit = 10) {
     const [items, count] = await this.glossaryRepository.findAndCount({
       order: {
         id: 'ASC',

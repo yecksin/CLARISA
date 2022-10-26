@@ -5,10 +5,12 @@ import { ApiModule } from './api/api.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { routes } from './routes';
-import { AuthModule } from './auth/auth.module';
-import { dataSource } from './ormconfig';
 import { ScheduleModule } from '@nestjs/schedule';
 import { IntegrationModule } from './shared/integration/integration.module';
+import { User } from './api/user/entities/user.entity';
+import { dataSource } from './ormconfig';
+import { AuthModule } from './auth/auth.module';
+import { UserService } from './api/user/user.service';
 
 @Module({
   imports: [
@@ -19,11 +21,12 @@ import { IntegrationModule } from './shared/integration/integration.module';
     }),
     ScheduleModule.forRoot(),
     RouterModule.register(routes),
+    TypeOrmModule.forFeature([User]),
     ApiModule,
     AuthModule,
     IntegrationModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, UserService],
 })
 export class AppModule {}

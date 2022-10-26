@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
-import { CreateHomepageClarisaEndpointDto } from './dto/create-homepage-clarisa-endpoint.dto';
 import { UpdateHomepageClarisaEndpointDto } from './dto/update-homepage-clarisa-endpoint.dto';
 import { HomepageClarisaEndpoint } from './entities/homepage-clarisa-endpoint.entity';
 

@@ -15,10 +15,7 @@ describe('CGIAR entity (e2e)', () => {
 
   //It is tested to return a 200 since it is the get all
   it('/api/cgiar-entities (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/api/cgiar-entities')
-      .expect(200)
-
+    return request(app.getHttpServer()).get('/api/cgiar-entities').expect(200);
   });
 
   //The endpoint is used to search by id, a valid id is sent to it.
@@ -27,12 +24,11 @@ describe('CGIAR entity (e2e)', () => {
       .get('/api/cgiar-entities/get/' + 1)
       .expect(200)
       .expect((res) => {
-        const data = res.body
-        expect(data).toHaveProperty("name");
-        expect(data).toHaveProperty("acronym");
-        expect(data).toHaveProperty("code");
-        expect(data).toHaveProperty("financial_code");
-
+        const data = res.body;
+        expect(data).toHaveProperty('name');
+        expect(data).toHaveProperty('acronym');
+        expect(data).toHaveProperty('code');
+        expect(data).toHaveProperty('financial_code');
       });
   });
 
@@ -40,7 +36,7 @@ describe('CGIAR entity (e2e)', () => {
   it('/api/cgiar-entities/get/a (GET)', () => {
     return request(app.getHttpServer())
       .get('/api/cgiar-entities/get/' + 'a')
-      .expect(400)
+      .expect(400);
   });
 
   afterAll(async () => {

@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { ActionAreaOutcomeDto } from 'src/api/action-area-outcome/dto/action-area-outcome.dto';
-import { ActionAreaOutcome } from 'src/api/action-area-outcome/entities/action-area-outcome.entity';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { DataSource, FindOptionsWhere, Repository } from 'typeorm';
 import { ActionAreaOutcomeIndicatorRequestDto } from '../dto/action-area-outcome-indicator-request.dto';
@@ -15,7 +14,7 @@ export class ActionAreaOutcomeIndicatorRepository extends Repository<ActionAreaO
   async findAllActionAreaOutcomes(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<ActionAreaOutcomeDto[]> {
-    let actionAreaOutcomeDtos: ActionAreaOutcomeDto[] = [];
+    const actionAreaOutcomeDtos: ActionAreaOutcomeDto[] = [];
     let whereClause: FindOptionsWhere<ActionAreaOutcomeIndicator> = {};
     switch (option) {
       case FindAllOptions.SHOW_ALL:
@@ -44,7 +43,7 @@ export class ActionAreaOutcomeIndicatorRepository extends Repository<ActionAreaO
 
     await Promise.all(
       actionAreaOutcomeIndicator.map(async (aaoi) => {
-        let actionAreaOutcomeDto: ActionAreaOutcomeDto =
+        const actionAreaOutcomeDto: ActionAreaOutcomeDto =
           new ActionAreaOutcomeDto();
 
         if (aaoi.action_area_object) {
@@ -100,7 +99,7 @@ export class ActionAreaOutcomeIndicatorRepository extends Repository<ActionAreaO
   async actionAreaOutcomeIndicatorByAllIsActive(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<ActionAreaOutcomeIndicatorRequestDto[]> {
-    var isActiveOption = true;
+    let isActiveOption = true;
     if (option == 'inactive') isActiveOption = false;
 
     const impactAreaIndicatorsQuery = `

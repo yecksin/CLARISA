@@ -1,4 +1,3 @@
-import { Expose } from 'class-transformer';
 import { AccountType } from 'src/api/account-type/entities/account-type.entity';
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {

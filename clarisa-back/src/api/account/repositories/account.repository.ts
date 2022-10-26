@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { AccountTypeDto } from 'src/api/account-type/dto/account-type.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { DataSource, FindOptionsWhere, Repository } from 'typeorm';
 import { AccountDto } from '../dto/account.dto';
-import { ParentAccountDto } from '../dto/parent-account.dto';
 import { Account } from '../entities/account.entity';
 
 @Injectable()
@@ -16,7 +14,7 @@ export class AccountRepository extends Repository<Account> {
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<AccountDto[]> {
     let whereClause: FindOptionsWhere<Account> = {};
-    let accountDtos: AccountDto[] = [];
+    const accountDtos: AccountDto[] = [];
     switch (option) {
       case FindAllOptions.SHOW_ALL:
         //do nothing. we will be showing everything, so no condition is needed;
@@ -35,7 +33,7 @@ export class AccountRepository extends Repository<Account> {
 
     await Promise.all(
       accounts.map(async (a) => {
-        let accountDto: AccountDto = new AccountDto();
+        const accountDto: AccountDto = new AccountDto();
         accountDto.code = a.id;
         accountDto.description = a.description;
         accountDto.financialCode = a.financial_code;

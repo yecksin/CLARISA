@@ -9,7 +9,9 @@ describe('HomepageClarisaCategoryService', () => {
       providers: [HomepageClarisaCategoryService],
     }).compile();
 
-    service = module.get<HomepageClarisaCategoryService>(HomepageClarisaCategoryService);
+    service = module.get<HomepageClarisaCategoryService>(
+      HomepageClarisaCategoryService,
+    );
   });
 
   it('should be defined', () => {

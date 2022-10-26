@@ -10,6 +10,7 @@ import { BaseMessageDTO } from './utils/BaseMessageDTO';
 
 @Injectable()
 export class AuthService {
+  private readonly clarisaExpirationDate = new Date().setFullYear(9999);
   constructor(
     private usersService: UserService,
     private jwtService: JwtService,
@@ -22,7 +23,6 @@ export class AuthService {
       (await this.usersService.findOneByEmail(email, false)) ??
       (await this.usersService.findOneByUsername(email, false));
     let authenticator: BaseAuthenticator;
-    console.log({ user });
 
     // const user_Info = await user.userInfo;
 
@@ -32,13 +32,10 @@ export class AuthService {
       authenticator = this.moduleRef.get(
         user.is_cgiar_user ? LDAPAuth : DBAuth,
       );
-      let authResult: User | BaseMessageDTO = await authenticator.authenticate(
-        user.email,
-        pass,
-      );
-      if ('id' in authResult) {
-        console.log('epic', { user });
-        return true;
+      const authResult: boolean | BaseMessageDTO =
+        await authenticator.authenticate(user.email, pass);
+      if (authResult.constructor.name === Boolean.name) {
+        return user;
       }
     } else {
       throw new HttpException(
@@ -49,10 +46,12 @@ export class AuthService {
   }
 
   async login(user: User) {
-    // Add payload
-    //console.log({user});
+    const payload = {
+      email: user.email,
+      sub: user.id,
+      permissions: user.permissions,
+    };
 
-    const payload = { email: user.email, sub: user.id };
     return { access_token: this.jwtService.sign(payload) };
   }
 }

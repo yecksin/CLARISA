@@ -11,7 +11,9 @@ describe('InnovationCharacteristicController', () => {
       providers: [InnovationCharacteristicService],
     }).compile();
 
-    controller = module.get<InnovationCharacteristicController>(InnovationCharacteristicController);
+    controller = module.get<InnovationCharacteristicController>(
+      InnovationCharacteristicController,
+    );
   });
 
   it('should be defined', () => {

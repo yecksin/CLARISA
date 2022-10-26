@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
-import { CreateScienceGroupDto } from './dto/create-science-group.dto';
 import { ScienceGroupDto } from './dto/science-group.dto';
 import { UpdateScienceGroupDto } from './dto/update-science-group.dto';
 import { ScienceGroup } from './entities/science-group.entity';

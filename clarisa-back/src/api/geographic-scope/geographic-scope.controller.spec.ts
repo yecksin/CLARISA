@@ -11,7 +11,9 @@ describe('GeographicScopeController', () => {
       providers: [GeographicScopeService],
     }).compile();
 
-    controller = module.get<GeographicScopeController>(GeographicScopeController);
+    controller = module.get<GeographicScopeController>(
+      GeographicScopeController,
+    );
   });
 
   it('should be defined', () => {

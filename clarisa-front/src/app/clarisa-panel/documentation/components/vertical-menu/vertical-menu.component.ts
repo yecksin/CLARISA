@@ -7,6 +7,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import * as $ from 'jquery';
+
 @Component({
   selector: 'app-vertical-menu',
   templateUrl: './vertical-menu.component.html',
@@ -20,7 +21,6 @@ export class VerticalMenuComponent implements OnInit {
   ngOnInit(): void {}
 
   ngOnChanges(paramsUrl: SimpleChanges) {
-    console.log(paramsUrl['urlParams'].currentValue.namesubcategory);
     let idUl = '#' + paramsUrl['urlParams'].currentValue.namesubcategory;
     $(document).ready(function () {
       $('.categoriesNoActive').addClass('hide').removeClass('visible');

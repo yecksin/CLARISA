@@ -48,9 +48,12 @@
         <li
           class="slide"
           *ngFor="let item of subCategories.subcategories"
-          routerLink="/clarisa-panel/documentation/{{
-            subCategories.name.split(' ').join('_')
-          }}/{{ item.name.split(' ').join('_') }}"
+          [routerLink]="[
+            '/clarisa-panel',
+            'documentation',
+            subCategories.name.split(' ').join('_'),
+            item.name.split(' ').join('_')
+          ]"
         >
           <a
             class="side-menu__item"
@@ -66,11 +69,13 @@
             <li
               id="none"
               *ngFor="let items of item.endpoints"
-              routerLink="/clarisa-panel/documentation/{{
-                subCategories.name.split(' ').join('_')
-              }}/{{ item.name.split(' ').join('_') }}/{{
+              [routerLink]="[
+                '/clarisa-panel',
+                'documentation',
+                subCategories.name.split(' ').join('_'),
+                item.name.split(' ').join('_'),
                 items.name.split(' ').join('_')
-              }}"
+              ]"
             >
               <a
                 class="slide-item"

@@ -17,8 +17,7 @@ describe('Business Category (e2e)', () => {
   it('/api/business-categories (GET)', () => {
     return request(app.getHttpServer())
       .get('/api/business-categories')
-      .expect(200)
-      
+      .expect(200);
   });
 
   //The endpoint is used to search by id, a valid id is sent to it.
@@ -27,9 +26,9 @@ describe('Business Category (e2e)', () => {
       .get('/api/business-categories/get/' + 1)
       .expect(200)
       .expect((res) => {
-        const data = res.body
-        expect(data).toHaveProperty("id");
-        expect(data).toHaveProperty("name");
+        const data = res.body;
+        expect(data).toHaveProperty('id');
+        expect(data).toHaveProperty('name');
       });
   });
 
@@ -37,7 +36,7 @@ describe('Business Category (e2e)', () => {
   it('/api/business-categories/get/a (GET)', () => {
     return request(app.getHttpServer())
       .get('/api/business-categories/get/' + 'a')
-      .expect(400)
+      .expect(400);
   });
 
   afterAll(async () => {

@@ -1,10 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { InstitutionDictionaryDto } from 'src/api/institution-dictionary/dto/institution-dictionary.dto';
 import { InstitutionSourceDto } from 'src/api/institution-dictionary/dto/institution-source.dto';
-import { InstitutionDictionary } from 'src/api/institution-dictionary/entities/institution-dictionary.entity';
 import { InstitutionTypeDto } from 'src/api/institution-type/dto/institution-type.dto';
-import { InstitutionType } from 'src/api/institution-type/entities/institution-type.entity';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { DataSource, FindOptionsWhere, Repository } from 'typeorm';
 import { InstitutionCountryDto } from '../dto/institution-country.dto';
@@ -21,7 +18,7 @@ export class InstitutionRepository extends Repository<Institution> {
   async findAllInstitutions(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<InstitutionDto[]> {
-    let institutionDtos: InstitutionDto[] = [];
+    const institutionDtos: InstitutionDto[] = [];
     let whereClause: FindOptionsWhere<Institution> = {};
     switch (option) {
       case FindAllOptions.SHOW_ALL:
@@ -47,7 +44,7 @@ export class InstitutionRepository extends Repository<Institution> {
 
     await Promise.all(
       institution.map(async (i) => {
-        let institutionDto: InstitutionDto = new InstitutionDto();
+        const institutionDto: InstitutionDto = new InstitutionDto();
         institutionDto.code = i.id;
         institutionDto.name = i.name;
         institutionDto.acronym = i.acronym;
@@ -55,7 +52,7 @@ export class InstitutionRepository extends Repository<Institution> {
         institutionDto.added = i.created_at;
 
         institutionDto.countryOfficeDTO = i.institution_locations.map((il) => {
-          let countryDto: InstitutionCountryDto = new InstitutionCountryDto();
+          const countryDto: InstitutionCountryDto = new InstitutionCountryDto();
 
           countryDto.code = il.country_object.id;
           countryDto.isHeadquarter = il.is_headquater;
@@ -80,7 +77,7 @@ export class InstitutionRepository extends Repository<Institution> {
   async findAllInstitutionSourceEntries(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<InstitutionDictionaryDto[]> {
-    let institutionDictionaryDtos: InstitutionDictionaryDto[] = [];
+    const institutionDictionaryDtos: InstitutionDictionaryDto[] = [];
     let whereClause: FindOptionsWhere<Institution> = {};
     switch (option) {
       case FindAllOptions.SHOW_ALL:
@@ -109,7 +106,7 @@ export class InstitutionRepository extends Repository<Institution> {
 
     await Promise.all(
       institution.map(async (i) => {
-        let institutionDictionaryDto: InstitutionDictionaryDto =
+        const institutionDictionaryDto: InstitutionDictionaryDto =
           new InstitutionDictionaryDto();
 
         institutionDictionaryDto.code = i.id;
@@ -131,7 +128,7 @@ export class InstitutionRepository extends Repository<Institution> {
         institutionDictionaryDto.institutionRelatedList =
           i.institution_dictionary_entries
             .map((id) => {
-              let institution_dictionary_dto: InstitutionSourceDto =
+              const institution_dictionary_dto: InstitutionSourceDto =
                 new InstitutionSourceDto();
 
               institution_dictionary_dto.institutionCode =

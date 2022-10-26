@@ -1,11 +1,8 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { ModuleRef, Reflector } from '@nestjs/core';
-import { InjectRepository } from '@nestjs/typeorm';
-import { urlencoded } from 'express';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from 'src/api/user/entities/user.entity';
 import { UserService } from 'src/api/user/user.service';
-import { Repository } from 'typeorm';
 import { IS_CLARISA_PAGE } from '../decorators/clarisa-page.decorator';
 
 @Injectable()
@@ -36,12 +33,5 @@ export class PermissionGuard implements CanActivate {
 
         return (userDb.permissions ?? []).includes(route.path);
       });
-  }
-
-  private matchRoles(
-    routeRequirements: string[],
-    userRoles: string[],
-  ): boolean {
-    return true;
   }
 }

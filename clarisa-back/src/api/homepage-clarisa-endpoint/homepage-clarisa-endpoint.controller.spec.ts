@@ -11,7 +11,9 @@ describe('HomepageClarisaEndpointController', () => {
       providers: [HomepageClarisaEndpointService],
     }).compile();
 
-    controller = module.get<HomepageClarisaEndpointController>(HomepageClarisaEndpointController);
+    controller = module.get<HomepageClarisaEndpointController>(
+      HomepageClarisaEndpointController,
+    );
   });
 
   it('should be defined', () => {

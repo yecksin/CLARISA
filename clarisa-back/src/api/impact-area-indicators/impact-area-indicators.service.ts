@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateImpactAreaIndicatorDto } from './dto/update-impact-area-indicator.dto';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { ImpactAreaIndicator } from './entities/impact-area-indicator.entity';
 import { ImpactAreaIndicatorDto } from './dto/impact-area-indicator.dto';

@@ -32,7 +32,7 @@ export class AuthService {
       authenticator = this.moduleRef.get(
         user.is_cgiar_user ? LDAPAuth : DBAuth,
       );
-      let authResult: boolean | BaseMessageDTO =
+      const authResult: boolean | BaseMessageDTO =
         await authenticator.authenticate(user.email, pass);
       if (authResult.constructor.name === Boolean.name) {
         return user;

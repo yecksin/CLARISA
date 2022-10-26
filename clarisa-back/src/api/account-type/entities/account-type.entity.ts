@@ -1,13 +1,7 @@
-import { Exclude, Expose, Transform } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 import { Account } from 'src/api/account/entities/account.entity';
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('account_types')
 export class AccountType extends AuditableEntity {

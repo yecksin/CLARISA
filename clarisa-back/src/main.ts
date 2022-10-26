@@ -21,7 +21,12 @@ async function bootstrap() {
       console.error('Error during Data Source initialization', err);
     });
   await app.listen(env.APP_PORT);
-  const server = app.getHttpServer();
+
+  /*TODO now that he know how to extract all the routes in the app
+    dynamically, we would need to update the "permissions" table
+    to have the most updated list of available endpoints
+  */
+  /*const server = app.getHttpServer();
   const router = server._events.request._router;
 
   const availableRoutes: [] = router.stack
@@ -35,11 +40,6 @@ async function bootstrap() {
         };
       }
     })
-    .filter((item) => item !== undefined);
-  //console.log(availableRoutes);
-  /*TODO now that he know how to extract all the routes in the app
-    dynamically, we would need to update the "permissions" table
-    to have the most updated list of available endpoints
-  */
+    .filter((item) => item !== undefined);*/
 }
 bootstrap();

@@ -14,7 +14,7 @@ export class CountryRepository extends Repository<Country> {
   }
 
   async findAllCountries(option: FindAllOptions): Promise<CountryDto[]> {
-    let countries: Country[] = await this.find(
+    const countries: Country[] = await this.find(
       option !== FindAllOptions.SHOW_ALL
         ? {
             where: {
@@ -23,7 +23,7 @@ export class CountryRepository extends Repository<Country> {
           }
         : undefined,
     );
-    let countryDtos: CountryDto[] = [];
+    const countryDtos: CountryDto[] = [];
 
     await Promise.all(
       countries.map(async (c) => {
@@ -51,7 +51,7 @@ export class CountryRepository extends Repository<Country> {
             ? parentRegion[0]
             : undefined;
 
-        let countryDto: CountryDto = new CountryDto();
+        const countryDto: CountryDto = new CountryDto();
         let regionDto: SimpleRegionDto = null;
         let parentRegionDto: ParentRegionDto = null;
 

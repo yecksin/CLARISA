@@ -14,7 +14,7 @@ export class InitiativeRepository extends Repository<Initiative> {
   async findAllInitiatives(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<InitiativeDto[]> {
-    let isActiveCondition: string = '';
+    let isActiveCondition = '';
     switch (option) {
       case FindAllOptions.SHOW_ALL:
         //do nothing. we will be showing everything, so no condition is needed;
@@ -27,7 +27,7 @@ export class InitiativeRepository extends Repository<Initiative> {
         break;
     }
 
-    const initiativeQuery: string = `
+    const initiativeQuery = `
         select sti.id, sti.name, sti.short_name, sti.official_code, 
             sti.is_active as active, stis.status, sts.id as stageId, sts.description,
             aa.id as action_area_id, aa.description as action_area_description
@@ -45,7 +45,7 @@ export class InitiativeRepository extends Repository<Initiative> {
         order by stis.initiative_id;
     `;
 
-    const initiativeStagesQuery: string = `
+    const initiativeStagesQuery = `
         select stis.initiative_id as id, stis.id as initvStgId, 
         stis.stage_id as stageId, stis.is_active as active
         from submission_tool_initiative_stages stis
@@ -56,7 +56,7 @@ export class InitiativeRepository extends Repository<Initiative> {
 
     await Promise.all(
       initiatives.map(async (i) => {
-        let initiativeStages: StageDto[] = await this.query(
+        const initiativeStages: StageDto[] = await this.query(
           initiativeStagesQuery,
           [i.id],
         );

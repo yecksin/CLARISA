@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
-import { CreateInstitutionDto } from './dto/create-institution.dto';
 import { InstitutionDto } from './dto/institution.dto';
 import { UpdateInstitutionDto } from './dto/update-institution.dto';
 import { Institution } from './entities/institution.entity';

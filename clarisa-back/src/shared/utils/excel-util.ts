@@ -1,4 +1,4 @@
-import * as Excel from 'exceljs';
+/*import * as Excel from 'exceljs';
 
 export class ExcelUtil {
   workbook = new Excel.Workbook();
@@ -43,13 +43,12 @@ export class ExcelUtil {
   ) {
     const row = worksheet.getRow(rowNumber);
     let result: Excel.Cell | undefined;
-    const self = this;
     row.eachCell(function (cell: Excel.Cell, colNumber: number) {
-      const fetchedHeader: string = self.headers[colNumber - 1];
+      const fetchedHeader: string = this.headers[colNumber - 1];
       if (fetchedHeader.toLowerCase().trim() === header.toLowerCase().trim()) {
         result = cell;
       }
     });
     return result;
   }
-}
+}*/

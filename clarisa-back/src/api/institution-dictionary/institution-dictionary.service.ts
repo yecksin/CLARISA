@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
 import { InstitutionRepository } from '../institution/repositories/institution.repository';
-import { CreateInstitutionDictionaryDto } from './dto/create-institution-dictionary.dto';
 import { InstitutionDictionaryDto } from './dto/institution-dictionary.dto';
 import { UpdateInstitutionDictionaryDto } from './dto/update-institution-dictionary.dto';
 import { InstitutionDictionary } from './entities/institution-dictionary.entity';

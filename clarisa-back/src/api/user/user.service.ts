@@ -4,7 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
-import { RowDataPacket } from 'mysql2';
 
 @Injectable()
 export class UserService {
@@ -31,7 +30,7 @@ export class UserService {
     }
   }
 
-  async getUsersPagination(offset?: number, limit: number = 10) {
+  async getUsersPagination(offset?: number, limit = 10) {
     const [items, count] = await this.usersRepository.findAndCount({
       order: {
         id: 'ASC',
@@ -74,11 +73,8 @@ export class UserService {
    * false if it's being called from the auth module
    * @returns an user or empty, if not found.
    */
-  async findOneByEmail(
-    email: string,
-    isService: boolean = true,
-  ): Promise<User> {
-    let user: User = await this.usersRepository.findOneBy({ email });
+  async findOneByEmail(email: string, isService = true): Promise<User> {
+    const user: User = await this.usersRepository.findOneBy({ email });
     if (user) {
       user.permissions = await this.getUserPermissions(user);
     }
@@ -97,11 +93,8 @@ export class UserService {
    * false if it's being called from the auth module
    * @returns an user or empty, if not found.
    */
-  async findOneByUsername(
-    username: string,
-    isService: boolean = false,
-  ): Promise<User> {
-    let user: User = await this.usersRepository.findOneBy({ username });
+  async findOneByUsername(username: string, isService = false): Promise<User> {
+    const user: User = await this.usersRepository.findOneBy({ username });
     user.permissions = await this.getUserPermissions(user);
     if (user) {
       user.permissions = await this.getUserPermissions(user);

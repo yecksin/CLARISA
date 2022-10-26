@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+/*import nodemailer from 'nodemailer';
 //import {APIError} from '../handlers/BaseError';
 //import {HttpStatusCode} from '../interfaces/Constants';
 
@@ -34,3 +34,4 @@ export async function notifyByEmail() {
     // throw new APIError('EMAIL ERROR', HttpStatusCode.BAD_REQUEST, true, error);
   });
 }
+*/

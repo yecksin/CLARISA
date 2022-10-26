@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
-import { UpdateRoleDto } from './dto/update-role.dto';
 import { Role } from './entities/role.entity';
 
 @Injectable()
@@ -34,11 +33,7 @@ export class RoleService {
     return this.rolesRepository.findOneBy({ id });
   }
 
-  update(id: number, updateRoleDto: UpdateRoleDto) {
-    return `This action updates a #${id} role`;
-  }
-
-  async getRolesPagination(offset?: number, limit: number = 10) {
+  async getRolesPagination(offset?: number, limit = 10) {
     const [items, count] = await this.rolesRepository.findAndCount({
       order: {
         id: 'ASC',

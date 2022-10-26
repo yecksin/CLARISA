@@ -1,5 +1,5 @@
-import { Cron, CronExpression, Timeout } from '@nestjs/schedule';
-import { HttpStatus, Injectable, Logger, Param } from '@nestjs/common';
+import { Cron } from '@nestjs/schedule';
+import { HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { ApiOST } from './api.ost';
 import { Initiative } from 'src/api/initiative/entities/initiative.entity';
 import { WorkpackageRepository } from 'src/api/workpackage/repositories/workpackage.repository';
@@ -47,7 +47,7 @@ export class CronOST {
     );
 
     if (workpackagesRequest.status === HttpStatus.OK) {
-      let oldWorkpackagesDb: Workpackage[] =
+      const oldWorkpackagesDb: Workpackage[] =
         await this.workpackageRepository.find();
 
       let updatedWorkpackagesDb: Workpackage[] = [];
@@ -64,7 +64,7 @@ export class CronOST {
         }),
       );
 
-      let oldWorkpackageCountriesDb: WorkpackageCountry[] =
+      const oldWorkpackageCountriesDb: WorkpackageCountry[] =
         await this.workpackageCountryRepository.find();
       const countries: Country[] = await this.countryRepository.find();
       let updatedWorkpackageCountriesDb: WorkpackageCountry[] = [];
@@ -76,7 +76,7 @@ export class CronOST {
         }),
       );
 
-      let oldWorkpackageRegionsDb: WorkpackageRegion[] =
+      const oldWorkpackageRegionsDb: WorkpackageRegion[] =
         await this.workpackageRegionRepository.find();
       const regions: Region[] = await this.regionRepository.find();
       let updatedWorkpackageRegionsDb: WorkpackageRegion[] = [];
@@ -90,7 +90,7 @@ export class CronOST {
 
       const workpackagesOST: WorkpackageOstDto[] =
         workpackagesRequest.data?.response?.workpackages ?? [];
-      let newWorkpackages: WorkpackageOstDto[] = CronOST.getNewWorkpackages(
+      const newWorkpackages: WorkpackageOstDto[] = CronOST.getNewWorkpackages(
         oldWorkpackagesDb,
         workpackagesOST,
       );
@@ -102,23 +102,23 @@ export class CronOST {
         );
 
         if (workpackageOst) {
-          let currentWorkpackageCountries: WorkpackageCountry[] =
+          const currentWorkpackageCountries: WorkpackageCountry[] =
             oldWorkpackageCountriesDb.filter(
               (owc) => owc.work_package_id === w.id,
             );
-          let currentWorkpackageRegions: WorkpackageRegion[] =
+          const currentWorkpackageRegions: WorkpackageRegion[] =
             oldWorkpackageRegionsDb.filter(
               (owr) => owr.work_package_id === w.id,
             );
 
-          let newWorkpackageCountries: WorkpackageCountryOstDto[] =
+          const newWorkpackageCountries: WorkpackageCountryOstDto[] =
             CronOST.getNewWorkpackageCountries(
               w,
               currentWorkpackageCountries,
               workpackageOst,
             );
 
-          let newWorkpackageRegions: WorkpackageRegionOstDto[] =
+          const newWorkpackageRegions: WorkpackageRegionOstDto[] =
             CronOST.getNewWorkpackageRegions(
               w,
               currentWorkpackageRegions,
@@ -148,7 +148,7 @@ export class CronOST {
               (c) => c.iso_alpha_2 === nwc.isoAlpha2,
             );
             if (wpCountry) {
-              let newWorkpackageCountry: WorkpackageCountry =
+              const newWorkpackageCountry: WorkpackageCountry =
                 CronOST.createNewWorkpackageCountry(
                   workpackageOst,
                   wpCountry,
@@ -165,7 +165,7 @@ export class CronOST {
           newWorkpackageRegions.forEach((nwr) => {
             const wpRegion = regions.find((r) => r.acronym === nwr.acronym);
             if (wpRegion) {
-              let newWorkpackageRegion: WorkpackageRegion =
+              const newWorkpackageRegion: WorkpackageRegion =
                 CronOST.createNewWorkpackageRegion(workpackageOst, wpRegion, w);
               newWorkpackageRegionsDb.push(newWorkpackageRegion);
             } else {
@@ -184,7 +184,7 @@ export class CronOST {
           (is) => is.id === nw.initvStgId,
         );
         if (dbInitiativeStage) {
-          let newWorkpackage: Workpackage = CronOST.createNewWorkpackage(
+          const newWorkpackage: Workpackage = CronOST.createNewWorkpackage(
             nw,
             dbInitiativeStage,
           );
@@ -194,7 +194,7 @@ export class CronOST {
               (c) => c.iso_alpha_2 === nwc.isoAlpha2,
             );
             if (wpCountry) {
-              let newWorkpackageCountry: WorkpackageCountry =
+              const newWorkpackageCountry: WorkpackageCountry =
                 CronOST.createNewWorkpackageCountry(
                   nw,
                   wpCountry,
@@ -211,7 +211,7 @@ export class CronOST {
           (nw.regions ?? []).forEach((nwr) => {
             const wpRegion = regions.find((r) => r.acronym === nwr.acronym);
             if (wpRegion) {
-              let newWorkpackageRegion: WorkpackageRegion =
+              const newWorkpackageRegion: WorkpackageRegion =
                 CronOST.createNewWorkpackageRegion(
                   nw,
                   wpRegion,
@@ -292,7 +292,7 @@ export class CronOST {
     ostWorkpackage: WorkpackageOstDto,
     dbInitiativeStage: InitiativeStage,
   ): Workpackage {
-    let newWorkpackage: Workpackage = new Workpackage();
+    const newWorkpackage: Workpackage = new Workpackage();
 
     newWorkpackage.acronym = ostWorkpackage.acronym;
     newWorkpackage.created_at = ostWorkpackage.created_at;
@@ -314,7 +314,7 @@ export class CronOST {
     workpackage: Workpackage,
     ostWorkpackages: WorkpackageOstDto[],
   ): WorkpackageOstDto {
-    let ostWorkpackage: WorkpackageOstDto = ostWorkpackages.find(
+    const ostWorkpackage: WorkpackageOstDto = ostWorkpackages.find(
       (oi) =>
         workpackage.initiative_stage?.initiative_id === oi.initiative_id &&
         workpackage.initiative_stage?.stage_id === oi.stage_id,
@@ -358,7 +358,7 @@ export class CronOST {
     ostWorkpackage: WorkpackageOstDto,
     ostWorkpackageCountries: WorkpackageCountryOstDto[],
   ): WorkpackageCountryOstDto {
-    let ostWorkpackageCountry: WorkpackageCountryOstDto =
+    const ostWorkpackageCountry: WorkpackageCountryOstDto =
       ostWorkpackageCountries.find(
         (owc) => owc.isoAlpha2 === workpackageCountry.country?.iso_alpha_2,
       );
@@ -380,7 +380,7 @@ export class CronOST {
     dbCountry: Country,
     dbWorkpackage: Workpackage,
   ): WorkpackageCountry {
-    let newWorkpackageCountry: WorkpackageCountry = new WorkpackageCountry();
+    const newWorkpackageCountry: WorkpackageCountry = new WorkpackageCountry();
 
     newWorkpackageCountry.country_id = dbCountry.id;
     newWorkpackageCountry.created_at = new Date();
@@ -411,7 +411,7 @@ export class CronOST {
     ostWorkpackage: WorkpackageOstDto,
     ostWorkpackageRegions: WorkpackageRegionOstDto[],
   ): WorkpackageRegionOstDto {
-    let ostWorkpackageRegion: WorkpackageRegionOstDto =
+    const ostWorkpackageRegion: WorkpackageRegionOstDto =
       ostWorkpackageRegions.find(
         (owc) => owc.acronym === workpackageRegion.region?.acronym,
       );
@@ -433,7 +433,7 @@ export class CronOST {
     dbRegion: Region,
     dbWorkpackage: Workpackage,
   ): WorkpackageRegion {
-    let newWorkpackageRegion: WorkpackageRegion = new WorkpackageRegion();
+    const newWorkpackageRegion: WorkpackageRegion = new WorkpackageRegion();
 
     newWorkpackageRegion.region_id = dbRegion.id;
     newWorkpackageRegion.created_at = new Date();
@@ -450,19 +450,19 @@ export class CronOST {
     const initiativesRequest = await firstValueFrom(this.api.getInitiatives());
 
     if (initiativesRequest.status === HttpStatus.OK) {
-      let oldInitiativesDb: Initiative[] =
+      const oldInitiativesDb: Initiative[] =
         await this.initiativeRepository.find();
       let updatedInitiativesDb: Initiative[] = [];
       let newInitiativesDb: Initiative[] = [];
 
-      let oldInitiativeStagesDb: InitiativeStage[] =
+      const oldInitiativeStagesDb: InitiativeStage[] =
         await this.initiativeStageRepository.find();
       let updatedInitiativeStagesDb: InitiativeStage[] = [];
       let newInitiativeStagesDb: InitiativeStage[] = [];
 
       const initiativesOST: InitiativeOstDto[] =
         initiativesRequest.data?.response?.initiatives ?? [];
-      let newInitiatives: InitiativeOstDto[] = CronOST.getNewInitiatives(
+      const newInitiatives: InitiativeOstDto[] = CronOST.getNewInitiatives(
         oldInitiativesDb,
         initiativesOST,
       );
@@ -474,10 +474,10 @@ export class CronOST {
         );
 
         if (initiativeOst) {
-          let currentInitiativeStages: InitiativeStage[] =
+          const currentInitiativeStages: InitiativeStage[] =
             oldInitiativeStagesDb.filter((is) => is.initiative_id === i.id);
 
-          let newInitiativeStages: InitiativeStageOstDto[] =
+          const newInitiativeStages: InitiativeStageOstDto[] =
             CronOST.getNewInitiativeStatus(
               currentInitiativeStages,
               initiativeOst,
@@ -493,7 +493,7 @@ export class CronOST {
           });
 
           newInitiativeStages.forEach((nis) => {
-            let newInitiativeStage: InitiativeStage =
+            const newInitiativeStage: InitiativeStage =
               CronOST.createNewInitiativeStage(nis, initiativeOst, i);
             newInitiativeStagesDb.push(newInitiativeStage);
           });
@@ -503,10 +503,10 @@ export class CronOST {
       });
 
       newInitiatives.forEach((ni) => {
-        let newInitiative: Initiative = CronOST.createNewInitiative(ni);
+        const newInitiative: Initiative = CronOST.createNewInitiative(ni);
 
         (ni.stages ?? []).forEach((nis) => {
-          let newInitiativeStage: InitiativeStage =
+          const newInitiativeStage: InitiativeStage =
             CronOST.createNewInitiativeStage(nis, ni, newInitiative);
           newInitiative.initiativeStages.push(newInitiativeStage);
         });
@@ -552,7 +552,7 @@ export class CronOST {
   private static createNewInitiative(
     ostInitiative: InitiativeOstDto,
   ): Initiative {
-    let newInitiative: Initiative = new Initiative();
+    const newInitiative: Initiative = new Initiative();
 
     newInitiative.created_at = new Date();
     newInitiative.is_active = ostInitiative.active === 1;
@@ -570,7 +570,7 @@ export class CronOST {
     initiative: Initiative,
     ostInitiatives: InitiativeOstDto[],
   ): InitiativeOstDto {
-    let ostInitiative: InitiativeOstDto = ostInitiatives.find(
+    const ostInitiative: InitiativeOstDto = ostInitiatives.find(
       (oi) => oi.official_code === initiative.official_code,
     );
 
@@ -606,7 +606,7 @@ export class CronOST {
     ostInitiative: InitiativeOstDto,
     dbInitiative: Initiative,
   ): InitiativeStage {
-    let newInitiativeStage: InitiativeStage = new InitiativeStage();
+    const newInitiativeStage: InitiativeStage = new InitiativeStage();
 
     newInitiativeStage.action_area_id = +ostInitiative.action_area_id;
     newInitiativeStage.created_at = new Date();
@@ -626,7 +626,7 @@ export class CronOST {
     ostInitiative: InitiativeOstDto,
     ostInitiativeStages: InitiativeStageOstDto[],
   ): InitiativeStageOstDto {
-    let ostInitiativeStage: InitiativeStageOstDto = ostInitiativeStages.find(
+    const ostInitiativeStage: InitiativeStageOstDto = ostInitiativeStages.find(
       (ois) => ois.stageId === initiativeStage.stage_id,
     );
 

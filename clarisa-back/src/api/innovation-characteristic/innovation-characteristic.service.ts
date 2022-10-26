@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
-import { CreateInnovationCharacteristicDto } from './dto/create-innovation-characteristic.dto';
 import { UpdateInnovationCharacteristicDto } from './dto/update-innovation-characteristic.dto';
 import { InnovationCharacteristic } from './entities/innovation-characteristic.entity';
 

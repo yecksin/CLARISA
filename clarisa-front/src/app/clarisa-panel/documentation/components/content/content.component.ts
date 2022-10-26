@@ -207,14 +207,18 @@ export class ContentComponent implements OnInit {
   }
 
   exportPdf() {
-    let information = [];
     let d = new Date();
-    for (let k of this.informationEndpoint) {
+    let columns = [];
+    let information = [];
+    this.arrayColumns.map((x) => {
+      columns.push(x[0]);
+    });
+    for (let k of this.exportInformation()) {
       information.push(Object.values(k));
     }
     const doc = new jsPDF();
     autoTable(doc, {
-      head: [this.arrayColumns],
+      head: [columns],
       body: information,
       didDrawPage: (dataArg) => {
         doc.text('PAGE', dataArg.settings.margin.left, 10);
@@ -234,7 +238,7 @@ export class ContentComponent implements OnInit {
 
   exportExcel() {
     import('xlsx').then((xlsx) => {
-      const worksheet = xlsx.utils.json_to_sheet(this.informationEndpoint);
+      const worksheet = xlsx.utils.json_to_sheet(this.exportInformation());
       const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = xlsx.write(workbook, {
         bookType: 'xlsx',
@@ -263,5 +267,71 @@ export class ContentComponent implements OnInit {
         d.getMinutes() +
         EXCEL_EXTENSION
     );
+  }
+
+  exportInformation() {
+    let exportInformation = [];
+    let objectFormat = {};
+    var infoListUnque = '';
+    var infoListObject = '';
+    var infoObject = '';
+    for (let i of this.informationEndpoint) {
+      objectFormat = {};
+      infoListUnque = '';
+      infoListObject = '';
+      infoObject = '';
+      for (let k of this.arrayColumns) {
+        if (k[2] == 'field') {
+          objectFormat[k[1]] = i[k[1]];
+        }
+        if (k[2] == 'object') {
+          if (i[k[1]] != null) {
+            for (let j of k[3]) {
+              if (j[0] != '' && j[0] != null) {
+                infoObject = infoObject + j[0] + ' : ' + i[k[1]][j[1]] + '\n';
+                objectFormat[k[1]] = infoObject;
+              }
+              if (j[0] == '' || j[0] == null) {
+                objectFormat[k[1]] = infoObject + i[k[1]][j[1]] + '\n';
+              }
+            }
+          }
+          if (i[k[1]] == null) {
+            objectFormat[k[1]] = '';
+          }
+        }
+        if (k[2] == 'list') {
+          if (i[k[1]] != null) {
+            if (k[3].length == 1) {
+              for (let j of i[k[1]]) {
+                infoListUnque += j[k[3][0][1]] + ',' + '\n';
+              }
+
+              objectFormat[k[1]] = infoListUnque;
+            }
+            if (k[3].length != 1) {
+              for (let j of i[k[1]]) {
+                for (let p of k[3]) {
+                  if (p[0] != null && p[0] != '') {
+                    infoListObject =
+                      infoListObject + p[0] + ' : ' + j[p[1]] + '\n';
+                  }
+                  if (p[0] == null || p[0] == '') {
+                    infoListObject = infoListObject + j[p[1]] + '\n';
+                  }
+                }
+              }
+              objectFormat[k[1]] = infoListObject;
+            }
+          }
+          if (i[k[1]] == null) {
+            objectFormat[k[1]] = '';
+          }
+        }
+      }
+      exportInformation.push(objectFormat);
+    }
+
+    return exportInformation;
   }
 }

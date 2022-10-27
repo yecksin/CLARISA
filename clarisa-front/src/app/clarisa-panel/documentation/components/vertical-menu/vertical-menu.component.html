@@ -54,6 +54,8 @@
             subCategories.name.split(' ').join('_'),
             item.name.split(' ').join('_')
           ]"
+          id="{{ item.name.split(' ').join('_') }}1"
+          (click)="clickMenu(item.name.split(' ').join('_'))"
         >
           <a
             class="side-menu__item"
@@ -67,15 +69,18 @@
             id="{{ item.name.split(' ').join('_') }}"
           >
             <li
-              id="none"
+              id="{{ items.name.split(' ').join('_') }}"
               *ngFor="let items of item.endpoints"
-              [routerLink]="[
-                '/clarisa-panel',
-                'documentation',
-                subCategories.name.split(' ').join('_'),
-                item.name.split(' ').join('_'),
-                items.name.split(' ').join('_')
-              ]"
+              (click)="
+                reloadComponent(
+                  '/clarisa-panel/documentation/' +
+                    subCategories.name.split(' ').join('_') +
+                    '/' +
+                    item.name.split(' ').join('_') +
+                    '/' +
+                    items.name.split(' ').join('_')
+                )
+              "
             >
               <a
                 class="slide-item"

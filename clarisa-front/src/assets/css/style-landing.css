@@ -763,7 +763,7 @@ header.affix .affix-logo {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background: #6bb600;
+	background: #c0d89d;
 	-webkit-transform: scaleX(0);
 	transform: scaleX(0);
 	-webkit-transform-origin: 50%;
@@ -800,7 +800,7 @@ header.affix .affix-logo {
 	transform: scaleX(1);
 }
 .our-services .services:hover h3, .our-services .services:hover a, .our-services .services:hover p {
-	color: #fff;
+	color: black;
 }
 .our-services .services i {
 	background: #fff;

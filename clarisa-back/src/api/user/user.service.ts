@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
+import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 
 @Injectable()
 export class UserService {
@@ -30,7 +30,7 @@ export class UserService {
     }
   }
 
-  async getUsersPagination(offset?: number, limit: number = 10) {
+  async getUsersPagination(offset?: number, limit = 10) {
     const [items, count] = await this.usersRepository.findAndCount({
       order: {
         id: 'ASC',
@@ -49,6 +49,23 @@ export class UserService {
     return await this.usersRepository.findOneBy({ id });
   }
 
+  async getUserPermissions(user: User): Promise<string[] | undefined> {
+    const permissions_result: any = await this.usersRepository.query(
+      'call getUserPermissions(?)',
+      [user.id],
+    );
+
+    let permissions: string[] = [];
+
+    if (permissions_result[0]?.constructor.name === Array.name) {
+      permissions = permissions_result[0]
+        .map((rdp) => rdp.permission_route as string)
+        .filter((p) => p);
+    }
+
+    return permissions.length == 0 ? undefined : permissions;
+  }
+
   /**
    * Finds an user by their email
    * @param email the user's email
@@ -56,11 +73,12 @@ export class UserService {
    * false if it's being called from the auth module
    * @returns an user or empty, if not found.
    */
-  async findOneByEmail(
-    email: string,
-    isService: boolean = true,
-  ): Promise<User> {
+  async findOneByEmail(email: string, isService = true): Promise<User> {
     const user: User = await this.usersRepository.findOneBy({ email });
+    if (user) {
+      user.permissions = await this.getUserPermissions(user);
+    }
+
     if (isService) {
       delete user.password;
     }
@@ -75,11 +93,13 @@ export class UserService {
    * false if it's being called from the auth module
    * @returns an user or empty, if not found.
    */
-  async findOneByUsername(
-    username: string,
-    isService: boolean = false,
-  ): Promise<User> {
+  async findOneByUsername(username: string, isService = false): Promise<User> {
     const user: User = await this.usersRepository.findOneBy({ username });
+    user.permissions = await this.getUserPermissions(user);
+    if (user) {
+      user.permissions = await this.getUserPermissions(user);
+    }
+
     if (isService) {
       delete user.password;
     }

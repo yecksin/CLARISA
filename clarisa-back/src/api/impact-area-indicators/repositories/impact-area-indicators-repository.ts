@@ -12,7 +12,7 @@ export class ImpactAreaIndicatorRepository extends Repository<ImpactAreaIndicato
   async findAllImpactAreaIndicators(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<ImpactAreaIndicatorDto[]> {
-    let impactAreaIndicatorDtos: ImpactAreaIndicatorDto[] = [];
+    const impactAreaIndicatorDtos: ImpactAreaIndicatorDto[] = [];
     let whereClause: FindOptionsWhere<ImpactAreaIndicator> = {};
     switch (option) {
       case FindAllOptions.SHOW_ALL:
@@ -38,7 +38,7 @@ export class ImpactAreaIndicatorRepository extends Repository<ImpactAreaIndicato
 
     await Promise.all(
       impactAreaIndicators.map(async (iai) => {
-        let impactAreaIndicatorDto: ImpactAreaIndicatorDto =
+        const impactAreaIndicatorDto: ImpactAreaIndicatorDto =
           new ImpactAreaIndicatorDto();
 
         if (iai.impact_area_object) {

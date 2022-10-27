@@ -1,11 +1,9 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   Query,
   ParseIntPipe,
   Res,
@@ -15,7 +13,6 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { PolicyStageService } from './policy-stage.service';
-import { CreatePolicyStageDto } from './dto/create-policy-stage.dto';
 import { UpdatePolicyStageDto } from './dto/update-policy-stage.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';

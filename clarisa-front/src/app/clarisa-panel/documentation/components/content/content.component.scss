@@ -1,3 +1,8 @@
 .colorheader{
     background-color: red;
 }
+@media (min-width: 992px) {
+.main-content{
+    margin-left: 320px
+}
+}

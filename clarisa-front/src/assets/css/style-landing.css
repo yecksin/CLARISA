@@ -763,7 +763,7 @@ header.affix .affix-logo {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background: #6bb600;
+	background: #c0d89d;
 	-webkit-transform: scaleX(0);
 	transform: scaleX(0);
 	-webkit-transform-origin: 50%;
@@ -800,7 +800,7 @@ header.affix .affix-logo {
 	transform: scaleX(1);
 }
 .our-services .services:hover h3, .our-services .services:hover a, .our-services .services:hover p {
-	color: #fff;
+	color: black;
 }
 .our-services .services i {
 	background: #fff;
@@ -1836,15 +1836,15 @@ section.news {
 	position: relative;
 }
 .inner-wrapper.faq .panel-title a {
-	color: #fff;
+	color: black;
 	padding: 12px 18px;
-	background-color: #2b2b2b;
-	border: solid 1px #2b2b2b;
+	background-color: #f0f0f0;
+	
 	display: block;
 }
 .inner-wrapper.faq .panel-title a.collapsed {
-	color: #fff;
-	background-color: #6bb600;
+	color: black;
+	background-color: white;
 	border: solid 1px #6bb600;
 }
 .inner-wrapper.faq .panel-title i {

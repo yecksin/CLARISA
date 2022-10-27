@@ -14,15 +14,16 @@ const routes: Routes = [
             (m) => m.DocumentationModule
           ),
       },
+
       {
-        path: 'documentation/:nameCategory/:namesubcategory',
+        path: 'documentation/:nameCategory/:namesubcategory/:nameEndpoint',
         loadChildren: () =>
           import('./documentation/documentation.module').then(
             (m) => m.DocumentationModule
           ),
       },
       {
-        path: 'documentation/:nameCategory/:namesubcategory/:nameEndpoint',
+        path: 'documentation/:nameCategory/:namesubcategory',
         loadChildren: () =>
           import('./documentation/documentation.module').then(
             (m) => m.DocumentationModule

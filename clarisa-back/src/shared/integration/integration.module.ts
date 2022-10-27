@@ -8,7 +8,6 @@ import { InitiativeRepository } from 'src/api/initiative/repositories/initiative
 import { RegionRepository } from 'src/api/region/repositories/region.repository';
 import { WorkpackageCountry } from 'src/api/workpackage/entities/workpackage-country.entity';
 import { WorkpackageRegion } from 'src/api/workpackage/entities/workpackage-region.entity';
-import { Workpackage } from 'src/api/workpackage/entities/workpackage.entity';
 import { WorkpackageRepository } from 'src/api/workpackage/repositories/workpackage.repository';
 import { ApiOST } from './ost/api.ost';
 import { CronOST } from './ost/cron.ost';

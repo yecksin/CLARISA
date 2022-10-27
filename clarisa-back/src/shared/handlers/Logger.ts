@@ -1,4 +1,4 @@
-import winston from 'winston';
+/*import winston from 'winston';
 require('dotenv').config();
 
 const customLevels = {
@@ -80,3 +80,4 @@ class Logger {
 }
 
 export const logger = new Logger();
+*/

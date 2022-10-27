@@ -40,4 +40,7 @@ export class User extends AuditableEntity {
   @ManyToMany(() => Role, (role) => role.users)
   @JoinTable()
   roles: Role[];
+
+  //meant to be used by the guard
+  permissions: string[];
 }

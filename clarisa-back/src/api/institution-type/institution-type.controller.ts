@@ -1,11 +1,9 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   UseInterceptors,
   ClassSerializerInterceptor,
   Query,
@@ -15,7 +13,6 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { InstitutionTypeService } from './institution-type.service';
-import { CreateInstitutionTypeDto } from './dto/create-institution-type.dto';
 import { UpdateInstitutionTypeDto } from './dto/update-institution-type.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';

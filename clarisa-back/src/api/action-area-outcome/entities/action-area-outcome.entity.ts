@@ -1,13 +1,6 @@
 import { ActionAreaOutcomeIndicator } from 'src/api/action-area-outcome-indicator/entities/action-area-outcome-indicator.entity';
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('action_area_outcomes')
 export class ActionAreaOutcome extends AuditableEntity {

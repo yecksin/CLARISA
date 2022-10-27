@@ -28,7 +28,7 @@ export class RegionRepository extends Repository<Region> {
           is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
         };
     }
-    let regions: Region[] = await this.find({
+    const regions: Region[] = await this.find({
       where: whereClause,
       relations: {
         parent_object: true,
@@ -36,11 +36,11 @@ export class RegionRepository extends Repository<Region> {
         region_type_object: true,
       },
     });
-    let regionDtos: RegionDto[] = [];
+    const regionDtos: RegionDto[] = [];
 
     await Promise.all(
       regions.map(async (r) => {
-        let regionDto: RegionDto = new RegionDto();
+        const regionDto: RegionDto = new RegionDto();
         let parentRegionDto: ParentRegionDto = null;
 
         if (regionType === RegionTypeEnum.UN_REGION) {
@@ -63,7 +63,7 @@ export class RegionRepository extends Repository<Region> {
 
         if (regionType === RegionTypeEnum.CGIAR_REGION) {
           regionDto.countries = r.countries.map((c) => {
-            let countryDto: SimpleCountryDto = new SimpleCountryDto();
+            const countryDto: SimpleCountryDto = new SimpleCountryDto();
 
             countryDto.code = c.iso_numeric;
             countryDto.isoAlpha2 = c.iso_alpha_2;

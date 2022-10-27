@@ -9,7 +9,9 @@ describe('HomepageClarisaEndpointService', () => {
       providers: [HomepageClarisaEndpointService],
     }).compile();
 
-    service = module.get<HomepageClarisaEndpointService>(HomepageClarisaEndpointService);
+    service = module.get<HomepageClarisaEndpointService>(
+      HomepageClarisaEndpointService,
+    );
   });
 
   it('should be defined', () => {

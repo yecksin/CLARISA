@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { SourceOption } from 'src/shared/entities/enums/source-options';
 import { FindOptionsWhere, Repository } from 'typeorm';
-import { CreateGeographicScopeDto } from './dto/create-geographic-scope.dto';
 import { UpdateGeographicScopeDto } from './dto/update-geographic-scope.dto';
 import { GeographicScope } from './entities/geographic-scope.entity';
 

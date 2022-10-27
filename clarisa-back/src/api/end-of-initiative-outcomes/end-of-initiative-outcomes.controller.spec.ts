@@ -11,7 +11,9 @@ describe('EndOfInitiativeOutcomesController', () => {
       providers: [EndOfInitiativeOutcomesService],
     }).compile();
 
-    controller = module.get<EndOfInitiativeOutcomesController>(EndOfInitiativeOutcomesController);
+    controller = module.get<EndOfInitiativeOutcomesController>(
+      EndOfInitiativeOutcomesController,
+    );
   });
 
   it('should be defined', () => {

@@ -25,17 +25,18 @@ export class IndicatorsComponent implements OnInit {
     {
       name: 'Initiatives',
       icon: 'fa fa-globe ',
-      numberIndicator: '35',
+      numberIndicator: '32',
+    },
+
+    {
+      name: 'Worckpackages',
+      icon: 'fa fa-newspaper-o',
+      numberIndicator: '156',
     },
     {
       name: 'Institutions',
       icon: 'fa fa-university',
       numberIndicator: '7060',
-    },
-    {
-      name: 'Worckpackages',
-      icon: 'fa fa-newspaper-o',
-      numberIndicator: '156',
     },
   ];
   constructor() {}

@@ -1,4 +1,4 @@
-<div class="main-content app-content mt-0" style="margin-left: 320px">
+<div class="main-content app-content mt-0">
   <div class="side-app">
     <!-- CONTAINER -->
     <div class="main-container container-fluid">
@@ -32,13 +32,48 @@
                   <p>
                     {{ information.description }}
                   </p>
+                  <p>
+                    <i class="pi pi-arrow-left"></i>
+                    To start, please select one of the categories located in the
+                    left panel
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="urlParams.hasOwnProperty('namesubcategory')">
+      <div
+        class="row"
+        *ngIf="
+          urlParams.hasOwnProperty('namesubcategory') &&
+          urlParams.hasOwnProperty('nameEndpoint') == false
+        "
+      >
+        <div class="col-md-12 col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <h3
+                class="card-title"
+                style="color: #0065bd; font-size: 25px; font-weight: 700"
+              >
+                {{ informationPrint.name }}
+              </h3>
+            </div>
+            <div class="card-body">
+              <div class="expanel expanel-default">
+                <div class="expanel-body" style="background-color: #f0f0f0">
+                  <h3>Summary:</h3>
+                  <p>
+                    {{ informationPrint.description }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="urlParams.hasOwnProperty('nameEndpoint')">
         <div class="col-md-12 col-lg-12">
           <div class="card">
             <div class="card-header">
@@ -457,7 +492,7 @@
               pRipple
               (click)="exportExcel()"
               class="p-button-success mr-2"
-              pTooltip="XLS"
+              pTooltip="Excel"
               tooltipPosition="bottom"
               style="margin-left: 20px"
             >

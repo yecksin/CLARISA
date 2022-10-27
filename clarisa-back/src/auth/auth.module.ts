@@ -11,6 +11,7 @@ import { DBAuth } from './utils/DBAuth';
 import { LDAPAuth } from './utils/LDAPAuth';
 import { LegacyPasswordEncoder } from './utils/LegacyPasswordEncoder';
 import { env } from 'process';
+import 'dotenv/config';
 
 @Module({
   controllers: [AuthController],

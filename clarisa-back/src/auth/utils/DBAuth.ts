@@ -46,6 +46,7 @@ export class DBAuth implements BaseAuthenticator {
   }
 
   public isLegacyPassword(incomingPassword: string): boolean {
-    return incomingPassword.split('$').length !== 4;
+    const newLocal = incomingPassword.split('$').length;
+    return newLocal !== 4;
   }
 }

@@ -28,6 +28,7 @@ import { DropdownModule } from 'primeng/dropdown';
   imports: [
     CommonModule,
     DocumentationRoutingModule,
+
     TableModule,
     CalendarModule,
     SliderModule,

@@ -9,7 +9,8 @@ export const endpointsInfo = [
   {
     id: 2,
     name: 'One CGIAR Control List',
-    description: null,
+    description:
+      'CLARISA provides standards in the form of control lists that can be used across platforms and systems to enable interoperability. These lists include the indicators defined in the Performance Results Management Framework of One CGIAR, currently being updated. In the panel on the left side, users can access different sections. ',
     subcategories: [
       {
         id: 5,
@@ -447,12 +448,14 @@ export const endpointsInfo = [
   {
     id: 4,
     name: 'One CGIAR Operation',
-    description: null,
+    description:
+      'CLARISA supports One CGIAR Business Operations and Finance team by providing a service to implement functionalities for the Corporate Performance management tool (CPM) to consolidate One CGIAR budget and financial reporting.',
     subcategories: [
       {
         id: 11,
         name: 'CGIAR Entities',
-        description: null,
+        description:
+          'The list of REST-API services below contains some of the most important general control lists for SMO Finance and operation group and that can also be used to standardize and provide interoperability across any other CGIAR platforms.',
         subcategories: [],
         endpoints: [
           {
@@ -546,7 +549,8 @@ export const endpointsInfo = [
       {
         id: 15,
         name: 'CGIAR Impact Areas',
-        description: null,
+        description:
+          'CGIAR is targeting multiple SDG benefits across five Impact Areas. Working with others, for each of the Impact Areas CGIAR contributes to collective global targets for the transformation of food, land, and water systems across local, regional, and global levels. In each Action Area, designated Platforms will foster critical thinking and use of evidence to improve their focus on the scaling of innovation and impact from research. CGIAR Impact Areas include: (I) Nutrition, health and food security; (II) Poverty reduction, livelihoods and jobs; (III) Gender equality, youth and inclusion; (IV) Climate adaptation and mitigation; (V) Environmental health and biodiversity.',
         subcategories: [],
         endpoints: [
           {

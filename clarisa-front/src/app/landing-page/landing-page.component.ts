@@ -34,8 +34,9 @@ export class LandingPageComponent implements OnInit {
     this.changesAditionalTwo.setAttribute('href', this.urlAditionalTwo);
     this.changesAditionalThree.setAttribute('href', this.urlAditionalThree);
     this.changesAditinalFour.setAttribute('href', this.urlAditinalFour);
+
     setTimeout(() => {
       this.estado = false;
-    }, 500);
+    }, 2000);
   }
 }

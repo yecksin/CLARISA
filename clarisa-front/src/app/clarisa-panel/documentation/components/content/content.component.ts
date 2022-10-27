@@ -1,10 +1,10 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { EndpointsInformationService } from '../../services/endpoints-information.service';
-import { PrimeNGConfig, SortEvent } from 'primeng/api';
+
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import * as FileSaver from 'file-saver';
-import { Table } from 'primeng/table';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-content',
@@ -21,16 +21,23 @@ export class ContentComponent implements OnInit {
   informationEndpoint: any;
   findColumns: string[] = [];
   first = 0;
-
+  dialogVisible: boolean;
   rows = 10;
+  loading: boolean = true;
+  urlClarisa: string;
   constructor(private _manageApiService: EndpointsInformationService) {}
 
   ngOnInit(): void {
-    console.log(this.information);
+    this.loading = true;
+    if (environment.production) {
+      this.urlClarisa = environment.apiUrl;
+    } else {
+      this.urlClarisa = environment.apiUrl;
+    }
   }
 
   ngOnChanges(paramsUrl: SimpleChanges) {
-    console.log(paramsUrl['urlParams'].currentValue.namesubcategory);
+    console.log(paramsUrl);
 
     if (Object.keys(this.urlParams).length == 2) {
       let variableAux = paramsUrl['urlParams'].currentValue.namesubcategory
@@ -69,6 +76,7 @@ export class ContentComponent implements OnInit {
         .getAnyEndpoint(this.informationPrint.route)
         .subscribe((resp) => {
           this.informationEndpoint = resp;
+          this.loading = false;
         });
     }
   }
@@ -158,6 +166,7 @@ export class ContentComponent implements OnInit {
     if (typeResponse == 'object') {
       variable = variable + '\n ' + '\t'.repeat(countSpace - 1) + '}';
     }
+
     return variable;
   }
 
@@ -221,7 +230,7 @@ export class ContentComponent implements OnInit {
       head: [columns],
       body: information,
       didDrawPage: (dataArg) => {
-        doc.text('PAGE', dataArg.settings.margin.left, 10);
+        doc.text(this.informationPrint.name, dataArg.settings.margin.left, 10);
       },
     });
     doc.save(
@@ -333,5 +342,8 @@ export class ContentComponent implements OnInit {
     }
 
     return exportInformation;
+  }
+  showDialog() {
+    this.dialogVisible = true;
   }
 }

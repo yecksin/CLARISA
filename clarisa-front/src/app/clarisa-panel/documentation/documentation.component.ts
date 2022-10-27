@@ -14,6 +14,8 @@ export class DocumentationComponent implements OnInit {
   endpointsFilterInformation: any;
   categoriaSelection: any;
   informationEndpoint: any;
+  contador: any;
+  cont: any;
   constructor(
     private routeActive: ActivatedRoute,
     private _manageApiService: EndpointsInformationService,

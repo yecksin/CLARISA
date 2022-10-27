@@ -10,7 +10,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(bodyparser.urlencoded({ limit: '100mb', extended: true }));
   app.use(bodyparser.json({ limit: '100mb' }));
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes();
   app.enableCors();
   await dataSource
     .initialize()

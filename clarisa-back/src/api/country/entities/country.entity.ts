@@ -1,5 +1,6 @@
 import { Geoposition } from 'src/api/geoposition/entities/geoposition.entity';
 import { InstitutionLocation } from 'src/api/institution/entities/institution-location.entity';
+import { PartnerRequest } from 'src/api/partner-request/entities/partner-request.entity';
 import { Region } from 'src/api/region/entities/region.entity';
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
@@ -30,12 +31,12 @@ export class Country extends AuditableEntity {
   @Column()
   iso_numeric: number;
 
-  @ManyToOne(() => Geoposition)
-  @JoinColumn({ name: 'geoposition_id' })
-  geoposition_object: Promise<Geoposition>;
-
   @Column()
   geoposition_id: number;
+
+  @ManyToOne(() => Geoposition)
+  @JoinColumn({ name: 'geoposition_id' })
+  geoposition_object: Geoposition;
 
   @ManyToMany(() => Region, (region) => region.countries)
   @JoinTable({
@@ -49,8 +50,11 @@ export class Country extends AuditableEntity {
       referencedColumnName: 'id',
     },
   })
-  regions: Promise<Region[]>;
+  regions: Region[];
 
   @OneToMany(() => InstitutionLocation, (il) => il.country_object)
-  institution_locations: Promise<InstitutionLocation[]>;
+  institution_locations: InstitutionLocation[];
+
+  @OneToMany(() => PartnerRequest, (pr) => pr.institution_type_object)
+  partner_requests: PartnerRequest[];
 }

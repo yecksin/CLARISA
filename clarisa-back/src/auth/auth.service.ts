@@ -10,7 +10,6 @@ import { BaseMessageDTO } from './utils/BaseMessageDTO';
 
 @Injectable()
 export class AuthService {
-  private readonly clarisaExpirationDate = new Date().setFullYear(9999);
   constructor(
     private usersService: UserService,
     private jwtService: JwtService,

@@ -15,7 +15,6 @@ import {
 import { Response } from 'express';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { ActionAreaOutcomeService } from './action-area-outcome.service';
-import { CreateActionAreaOutcomeDto } from './dto/create-action-area-outcome.dto';
 import { UpdateActionAreaOutcomeDto } from './dto/update-action-area-outcome.dto';
 import { ActionAreaOutcome } from './entities/action-area-outcome.entity';
 

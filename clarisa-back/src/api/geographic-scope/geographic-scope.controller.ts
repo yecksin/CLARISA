@@ -1,11 +1,9 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   UseInterceptors,
   ClassSerializerInterceptor,
   Query,
@@ -15,10 +13,8 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { GeographicScopeService } from './geographic-scope.service';
-import { CreateGeographicScopeDto } from './dto/create-geographic-scope.dto';
 import { UpdateGeographicScopeDto } from './dto/update-geographic-scope.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
-import { SourceOption } from 'src/shared/entities/enums/source-options';
 import { Response } from 'express';
 import { GeographicScope } from './entities/geographic-scope.entity';
 

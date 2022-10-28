@@ -1,9 +1,5 @@
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('projected_benefits_depths')
 export class ProjectedBenefitDepth extends AuditableEntity {

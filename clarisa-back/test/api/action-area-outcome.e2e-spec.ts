@@ -17,8 +17,7 @@ describe('Action Area Outcomes (e2e)', () => {
   it('/api/action-area-outcomes (GET)', () => {
     return request(app.getHttpServer())
       .get('/api/action-area-outcomes')
-      .expect(200)
-      
+      .expect(200);
   });
 
   //The endpoint is used to search by id, a valid id is sent to it.
@@ -27,10 +26,10 @@ describe('Action Area Outcomes (e2e)', () => {
       .get('/api/action-area-outcomes/get/' + 1)
       .expect(200)
       .expect((res) => {
-        const data = res.body
-        expect(data).toHaveProperty("id");
-        expect(data).toHaveProperty("smo_code");
-        expect(data).toHaveProperty("outcome_statement");
+        const data = res.body;
+        expect(data).toHaveProperty('id');
+        expect(data).toHaveProperty('smo_code');
+        expect(data).toHaveProperty('outcome_statement');
       });
   });
 
@@ -38,7 +37,7 @@ describe('Action Area Outcomes (e2e)', () => {
   it('/api/action-area-outcomes/get/a (GET)', () => {
     return request(app.getHttpServer())
       .get('/api/action-area-outcomes/get/' + 'a')
-      .expect(400)
+      .expect(400);
   });
 
   afterAll(async () => {

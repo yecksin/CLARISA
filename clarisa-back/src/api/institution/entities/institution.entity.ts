@@ -1,5 +1,6 @@
 import { InstitutionDictionary } from 'src/api/institution-dictionary/entities/institution-dictionary.entity';
 import { InstitutionType } from 'src/api/institution-type/entities/institution-type.entity';
+import { PartnerRequest } from 'src/api/partner-request/entities/partner-request.entity';
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Column,
@@ -40,4 +41,7 @@ export class Institution extends AuditableEntity {
 
   @OneToMany(() => InstitutionDictionary, (id) => id.institution_object)
   institution_dictionary_entries: InstitutionDictionary[];
+
+  @OneToMany(() => PartnerRequest, (pr) => pr.institution_type_object)
+  partner_requests: PartnerRequest[];
 }

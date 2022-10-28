@@ -1,11 +1,9 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   UseInterceptors,
   ClassSerializerInterceptor,
   Query,
@@ -15,7 +13,6 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { ScienceGroupService } from './science-group.service';
-import { CreateScienceGroupDto } from './dto/create-science-group.dto';
 import { UpdateScienceGroupDto } from './dto/update-science-group.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';

@@ -1,11 +1,9 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   UseInterceptors,
   ClassSerializerInterceptor,
   Query,
@@ -15,7 +13,6 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { InnovationCharacteristicService } from './innovation-characteristic.service';
-import { CreateInnovationCharacteristicDto } from './dto/create-innovation-characteristic.dto';
 import { UpdateInnovationCharacteristicDto } from './dto/update-innovation-characteristic.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';

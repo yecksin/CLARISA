@@ -9,7 +9,9 @@ describe('EndOfInitiativeOutcomesService', () => {
       providers: [EndOfInitiativeOutcomesService],
     }).compile();
 
-    service = module.get<EndOfInitiativeOutcomesService>(EndOfInitiativeOutcomesService);
+    service = module.get<EndOfInitiativeOutcomesService>(
+      EndOfInitiativeOutcomesService,
+    );
   });
 
   it('should be defined', () => {

@@ -55,6 +55,7 @@ import { PolicyStageModule } from './policy-stage/policy-stage.module';
 import { InstitutionTypeModule } from './institution-type/institution-type.module';
 import { InstitutionModule } from './institution/institution.module';
 import { InstitutionDictionaryModule } from './institution-dictionary/institution-dictionary.module';
+import { PartnerRequestModule } from './partner-request/partner-request.module';
 
 export const apiRoutes = [
   {
@@ -284,5 +285,9 @@ export const apiRoutes = [
   {
     path: 'institution-dictionary',
     module: InstitutionDictionaryModule,
+  },
+  {
+    path: 'partner-requests',
+    module: PartnerRequestModule,
   },
 ];

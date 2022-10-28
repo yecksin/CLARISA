@@ -59,6 +59,7 @@ import { PolicyStageModule } from './policy-stage/policy-stage.module';
 import { InstitutionTypeModule } from './institution-type/institution-type.module';
 import { InstitutionModule } from './institution/institution.module';
 import { InstitutionDictionaryModule } from './institution-dictionary/institution-dictionary.module';
+import { PartnerRequestModule } from './partner-request/partner-request.module';
 
 @Module({
   controllers: [ApiController],
@@ -122,6 +123,7 @@ import { InstitutionDictionaryModule } from './institution-dictionary/institutio
     InstitutionTypeModule,
     InstitutionModule,
     InstitutionDictionaryModule,
+    PartnerRequestModule,
   ],
 })
 export class ApiModule {}

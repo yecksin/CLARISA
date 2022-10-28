@@ -14,7 +14,7 @@ export class UnitRepository extends Repository<Unit> {
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<UnitDto[]> {
     let whereClause: FindOptionsWhere<Unit> = {};
-    let unitDtos: UnitDto[] = [];
+    const unitDtos: UnitDto[] = [];
     switch (option) {
       case FindAllOptions.SHOW_ALL:
         //do nothing. we will be showing everything, so no condition is needed;
@@ -33,7 +33,7 @@ export class UnitRepository extends Repository<Unit> {
 
     await Promise.all(
       units.map(async (u) => {
-        let unitDto: UnitDto = new UnitDto();
+        const unitDto: UnitDto = new UnitDto();
         unitDto.code = u.id;
         unitDto.description = u.description;
         unitDto.financialCode = u.financial_code;

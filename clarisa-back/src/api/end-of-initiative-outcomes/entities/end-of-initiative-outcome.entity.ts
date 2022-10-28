@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, PrimaryGeneratedColumn } from 'typeorm';
 import { InitiativeOutcomeDto } from '../dto/initiative-outcomes.dto';
 
 export class EndOfInitiativeOutcome {

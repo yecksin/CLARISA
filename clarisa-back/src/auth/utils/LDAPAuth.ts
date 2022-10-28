@@ -3,7 +3,6 @@ import ActiveDirectory from 'activedirectory';
 import config from 'src/shared/config/config';
 import { BaseMessageDTO } from './BaseMessageDTO';
 import { Injectable } from '@nestjs/common';
-import { User } from 'src/api/user/entities/user.entity';
 
 @Injectable()
 export class LDAPAuth implements BaseAuthenticator {
@@ -12,11 +11,8 @@ export class LDAPAuth implements BaseAuthenticator {
   authenticate(
     username: string,
     password: string,
-  ): Promise<User | BaseMessageDTO> {
+  ): Promise<boolean | BaseMessageDTO> {
     return new Promise((resolve, reject) => {
-      // var userPrincipalName = 'j.cadavid@cgiar.org';
-      // var username = 'CN=Juan,OU=Users,DC=CGIARAD,DC=ORG';
-
       this.ad.authenticate(username, password, (err, auth) => {
         console.log({ auth });
         if (auth) {

@@ -9,7 +9,9 @@ describe('InnovationCharacteristicService', () => {
       providers: [InnovationCharacteristicService],
     }).compile();
 
-    service = module.get<InnovationCharacteristicService>(InnovationCharacteristicService);
+    service = module.get<InnovationCharacteristicService>(
+      InnovationCharacteristicService,
+    );
   });
 
   it('should be defined', () => {

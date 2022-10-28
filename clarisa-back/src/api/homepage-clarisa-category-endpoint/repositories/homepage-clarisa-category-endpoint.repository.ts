@@ -23,7 +23,7 @@ export class HomepageClarisaCategoryEndpointRepository extends Repository<Homepa
   private async getSubcategories(
     parent_category_id: number,
   ): Promise<CategoryEndpointDto[]> {
-    let categories: HomepageClarisaCategory[] =
+    const categories: HomepageClarisaCategory[] =
       await this.categoryRepository.find({
         where: {
           parent_id: parent_category_id ? parent_category_id : IsNull(),
@@ -31,18 +31,18 @@ export class HomepageClarisaCategoryEndpointRepository extends Repository<Homepa
         },
       });
 
-    const endpointsQuery: string = `
+    const endpointsQuery = `
         select hce.id, hce.name, hce.description, hce.route, hce.http_method, hce.request_json, hce.response_json from hp_clarisa_endpoints hce 
         join hp_clarisa_category_endpoints hcce on hcce.endpoint_id = hce.id and hcce.is_active = 1
         where hcce.category_id = ? and hce.is_active = 1
         order by hce.id;
     `;
 
-    let categoryEndpoints: CategoryEndpointDto[] = [];
+    const categoryEndpoints: CategoryEndpointDto[] = [];
 
     await Promise.all(
       categories.map(async (c) => {
-        let category: CategoryEndpointDto = new CategoryEndpointDto();
+        const category: CategoryEndpointDto = new CategoryEndpointDto();
 
         category.id = c.id;
         category.name = c.name;

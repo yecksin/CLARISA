@@ -34,7 +34,7 @@ export class GlobalTargetsService {
     return await this.GlobalTargetsRepository.findOneBy({ id });
   }
 
-  async getUsersPagination(offset?: number, limit: number = 10) {
+  async getUsersPagination(offset?: number, limit = 10) {
     const [items, count] = await this.GlobalTargetsRepository.findAndCount({
       order: {
         id: 'ASC',

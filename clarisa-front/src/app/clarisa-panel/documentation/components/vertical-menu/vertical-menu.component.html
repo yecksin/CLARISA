@@ -44,18 +44,26 @@
           />
         </svg>
       </div>
+
       <ul class="side-menu" style="color: #0065bd">
+        <li class="sub-category">
+          <h3>Categories</h3>
+        </li>
         <li
           class="slide"
           *ngFor="let item of subCategories.subcategories"
-          routerLink="/clarisa-panel/documentation/{{
-            subCategories.name.split(' ').join('_')
-          }}/{{ item.name.split(' ').join('_') }}"
+          [class.active]="homeLinks.classList.contains('active')"
+          id="{{ item.name.split(' ').join('_') }}1"
         >
           <a
+            #homeLinks
             class="side-menu__item"
             data-bs-toggle="slide"
-            href="javascript:void(0)"
+            routerLink="/clarisa-panel/documentation/{{
+              subCategories.name.split(' ').join('_')
+            }}/{{ item.name.split(' ').join('_') }}"
+            routerLinkActive="active"
+            (click)="clickMenu(item.name.split(' ').join('_'))"
             ><span class="side-menu__label"> {{ item.name }}</span
             ><i class="angle fe fe-chevron-right"></i
           ></a>
@@ -64,17 +72,21 @@
             id="{{ item.name.split(' ').join('_') }}"
           >
             <li
-              id="none"
+              class="endpoints"
+              [class.active]="homeLink.classList.contains('active')"
+              id="{{ items.name.split(' ').join('_') }}"
               *ngFor="let items of item.endpoints"
-              routerLink="/clarisa-panel/documentation/{{
-                subCategories.name.split(' ').join('_')
-              }}/{{ item.name.split(' ').join('_') }}/{{
-                items.name.split(' ').join('_')
-              }}"
             >
               <a
+                #homeLink
                 class="slide-item"
                 style="color: black; font-weight: 500; cursor: pointer"
+                routerLink="/clarisa-panel/documentation/{{
+                  subCategories.name.split(' ').join('_')
+                }}/{{ item.name.split(' ').join('_') }}/{{
+                  items.name.split(' ').join('_')
+                }}"
+                routerLinkActive="active"
               >
                 {{ items.name }}</a
               >

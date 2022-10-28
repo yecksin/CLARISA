@@ -9,7 +9,9 @@ describe('InstitutionDictionaryService', () => {
       providers: [InstitutionDictionaryService],
     }).compile();
 
-    service = module.get<InstitutionDictionaryService>(InstitutionDictionaryService);
+    service = module.get<InstitutionDictionaryService>(
+      InstitutionDictionaryService,
+    );
   });
 
   it('should be defined', () => {

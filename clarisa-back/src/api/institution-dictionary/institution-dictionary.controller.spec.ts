@@ -11,7 +11,9 @@ describe('InstitutionDictionaryController', () => {
       providers: [InstitutionDictionaryService],
     }).compile();
 
-    controller = module.get<InstitutionDictionaryController>(InstitutionDictionaryController);
+    controller = module.get<InstitutionDictionaryController>(
+      InstitutionDictionaryController,
+    );
   });
 
   it('should be defined', () => {

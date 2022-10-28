@@ -9,7 +9,8 @@ export const endpointsInfo = [
   {
     id: 2,
     name: 'One CGIAR Control List',
-    description: null,
+    description:
+      'CLARISA provides standards in the form of control lists that can be used across platforms and systems to enable interoperability. These lists include the indicators defined in the Performance Results Management Framework of One CGIAR, currently being updated. In the panel on the left side, users can access different sections. ',
     subcategories: [
       {
         id: 5,
@@ -71,7 +72,7 @@ export const endpointsInfo = [
             http_method: 'GET',
             request_json: 'null',
             response_json:
-              '{"type": "response", "order": null, "properties": {"code": {"type": "number", "order": 0, "properties": null, "column_name": "Code", "object_type": "field", "show_in_table": true}, "name": {"type": "string", "order": 1, "properties": null, "column_name": "Name", "object_type": "field", "show_in_table": true}, "acronym": {"type": "string", "order": 2, "properties": null, "column_name": "Acronym", "object_type": "field", "show_in_table": true}, "countries": {"type": "cgiarEntityTypeDTO", "order": 3, "properties": {"code": {"type": "number", "order": null, "properties": null, "column_name": null, "object_type": "field", "show_in_table": false}, "name": {"type": "string", "order": null, "properties": null, "column_name": null, "object_type": "field", "show_in_table": false}, "isoAlpha2": {"type": "string", "order": 0, "properties": null, "column_name": null, "object_type": "field", "show_in_table": true}}, "column_name": "Countries", "object_type": "list", "show_in_table": true}}, "column_name": null, "object_type": "list", "show_in_table": false}',
+              '{"type": "response", "order": null, "properties": {"id": {"type": "number", "order": 0, "properties": null, "column_name": "Code", "object_type": "field", "show_in_table": true}, "name": {"type": "string", "order": 1, "properties": null, "column_name": "Name", "object_type": "field", "show_in_table": true}, "acronym": {"type": "string", "order": 2, "properties": null, "column_name": "Acronym", "object_type": "field", "show_in_table": true}, "countries": {"type": "cgiarEntityTypeDTO", "order": 3, "properties": {"code": {"type": "number", "order": null, "properties": null, "column_name": null, "object_type": "field", "show_in_table": false}, "name": {"type": "string", "order": null, "properties": null, "column_name": null, "object_type": "field", "show_in_table": false}, "isoAlpha2": {"type": "string", "order": 0, "properties": null, "column_name": null, "object_type": "field", "show_in_table": true}}, "column_name": "Countries", "object_type": "list", "show_in_table": true}}, "column_name": null, "object_type": "list", "show_in_table": false}',
           },
           {
             id: 6,
@@ -177,7 +178,7 @@ export const endpointsInfo = [
             http_method: 'GET',
             request_json: 'null',
             response_json:
-              '{"type": "response", "order": null, "properties": {"value": {"type": "string", "order": 6, "properties": null, "column_name": "Indicator Target Value", "object_type": "field", "show_in_table": false}, "target_unit": {"type": "string", "order": 5, "properties": null, "column_name": "Indicator Target Unit", "object_type": "field", "show_in_table": true}, "target_year": {"type": "number", "order": 4, "properties": null, "column_name": "Indicator Target Year", "object_type": "field", "show_in_table": true}, "id": {"type": "number", "order": 0, "properties": null, "column_name": "Indicator ID", "object_type": "field", "show_in_table": true}, "impact_area_id": {"type": "number", "order": 2, "properties": null, "column_name": "Impact Area ID", "object_type": "field", "show_in_table": true}, "name": {"type": "string", "order": 3, "properties": null, "column_name": "Impact Area Name", "object_type": "field", "show_in_table": true}, "indicator_statement": {"type": "string", "order": 1, "properties": null, "column_name": "Indicator Statement", "object_type": "field", "show_in_table": true}, "is_aplicable_projected_benefits": {"type": "boolean", "order": null, "properties": null, "column_name": null, "object_type": "field", "show_in_table": false}}, "column_name": null, "object_type": "list", "show_in_table": false}',
+              '{"type": "response", "order": null, "properties": {"value": {"type": "string", "order": 6, "properties": null, "column_name": "Indicator Target Value", "object_type": "field", "show_in_table": true}, "targetUnit": {"type": "string", "order": 5, "properties": null, "column_name": "Indicator Target Unit", "object_type": "field", "show_in_table": true}, "targetYear": {"type": "number", "order": 4, "properties": null, "column_name": "Indicator Target Year", "object_type": "field", "show_in_table": true}, "indicatorId": {"type": "number", "order": 0, "properties": null, "column_name": "Indicator ID", "object_type": "field", "show_in_table": true}, "impactAreaId": {"type": "number", "order": 2, "properties": null, "column_name": "Impact Area ID", "object_type": "field", "show_in_table": true}, "impactAreaName": {"type": "string", "order": 3, "properties": null, "column_name": "Impact Area Name", "object_type": "field", "show_in_table": true}, "indicatorStatement": {"type": "string", "order": 1, "properties": null, "column_name": "Indicator Statement", "object_type": "field", "show_in_table": true}, "isAplicableProjectedBenefits": {"type": "boolean", "order": null, "properties": null, "column_name": null, "object_type": "field", "show_in_table": false}}, "column_name": null, "object_type": "list", "show_in_table": false}',
           },
           {
             id: 14,
@@ -188,7 +189,7 @@ export const endpointsInfo = [
             http_method: 'GET',
             request_json: 'null',
             response_json:
-              '{"type": "response", "order": null, "properties": {"fullName": {"type": "string", "order": 2, "properties": null, "column_name": "Full Name", "object_type": "field", "show_in_table": true}, "usndCode": {"type": "number", "order": 0, "properties": null, "column_name": "UN Code", "object_type": "field", "show_in_table": true}, "shortName": {"type": "string", "order": 1, "properties": null, "column_name": "Short Name", "object_type": "field", "show_in_table": true}, "financialCode": {"type": "string", "order": 2, "properties": null, "column_name": null, "object_type": "field", "show_in_table": false}}, "column_name": null, "object_type": "list", "show_in_table": false}',
+              '{"type": "response", "order": null, "properties": {"full_name": {"type": "string", "order": 2, "properties": null, "column_name": "Full Name", "object_type": "field", "show_in_table": true}, "smo_code": {"type": "number", "order": 0, "properties": null, "column_name": "UN Code", "object_type": "field", "show_in_table": true}, "short_name": {"type": "string", "order": 1, "properties": null, "column_name": "Short Name", "object_type": "field", "show_in_table": true}, "financial_code": {"type": "string", "order": 2, "properties": null, "column_name": null, "object_type": "field", "show_in_table": false}}, "column_name": null, "object_type": "list", "show_in_table": false}',
           },
           {
             id: 15,
@@ -243,7 +244,7 @@ export const endpointsInfo = [
             http_method: 'GET',
             request_json: 'null',
             response_json:
-              '{"type": "response", "order": null, "properties": {"id": {"type": "number", "order": 0, "properties": null, "column_name": "Outcome ID", "object_type": "field", "show_in_table": true}, "actionAreaId": {"type": "number", "order": 0, "properties": null, "column_name": "Action Area Code", "object_type": "field", "show_in_table": false}, "actionAreaName": {"type": "string", "order": 1, "properties": null, "column_name": "Action Area Name", "object_type": "field", "show_in_table": false}, "smo_code": {"type": "string", "order": 1, "properties": null, "column_name": "Outcome SMO Code", "object_type": "field", "show_in_table": true}, "outcome_statement": {"type": "string", "order": 2, "properties": null, "column_name": "Outcome Statement", "object_type": "field", "show_in_table": true}}, "column_name": null, "object_type": "list", "show_in_table": false}',
+              '{"type": "response", "order": null, "properties": {"outcomeId": {"type": "number", "order": 0, "properties": null, "column_name": "Outcome ID", "object_type": "field", "show_in_table": true}, "actionAreaId": {"type": "number", "order": 0, "properties": null, "column_name": "Action Area Code", "object_type": "field", "show_in_table": false}, "actionAreaName": {"type": "string", "order": 1, "properties": null, "column_name": "Action Area Name", "object_type": "field", "show_in_table": false}, "outcomeIndicatorSMOcode": {"type": "string", "order": 1, "properties": null, "column_name": "Outcome SMO Code", "object_type": "field", "show_in_table": true}, "outcomeIndicatorStatement": {"type": "string", "order": 2, "properties": null, "column_name": "Outcome Statement", "object_type": "field", "show_in_table": true}}, "column_name": null, "object_type": "list", "show_in_table": false}',
           },
           {
             id: 20,
@@ -447,12 +448,14 @@ export const endpointsInfo = [
   {
     id: 4,
     name: 'One CGIAR Operation',
-    description: null,
+    description:
+      'CLARISA supports One CGIAR Business Operations and Finance team by providing a service to implement functionalities for the Corporate Performance management tool (CPM) to consolidate One CGIAR budget and financial reporting.',
     subcategories: [
       {
         id: 11,
         name: 'CGIAR Entities',
-        description: null,
+        description:
+          'The list of REST-API services below contains some of the most important general control lists for SMO Finance and operation group and that can also be used to standardize and provide interoperability across any other CGIAR platforms.',
         subcategories: [],
         endpoints: [
           {
@@ -546,7 +549,8 @@ export const endpointsInfo = [
       {
         id: 15,
         name: 'CGIAR Impact Areas',
-        description: null,
+        description:
+          'CGIAR is targeting multiple SDG benefits across five Impact Areas. Working with others, for each of the Impact Areas CGIAR contributes to collective global targets for the transformation of food, land, and water systems across local, regional, and global levels. In each Action Area, designated Platforms will foster critical thinking and use of evidence to improve their focus on the scaling of innovation and impact from research. CGIAR Impact Areas include: (I) Nutrition, health and food security; (II) Poverty reduction, livelihoods and jobs; (III) Gender equality, youth and inclusion; (IV) Climate adaptation and mitigation; (V) Environmental health and biodiversity.',
         subcategories: [],
         endpoints: [
           {

@@ -1,11 +1,9 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   ClassSerializerInterceptor,
   UseInterceptors,
   Query,
@@ -15,12 +13,13 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { HomepageClarisaCategoryService } from './homepage-clarisa-category.service';
-import { CreateHomepageClarisaCategoryDto } from './dto/create-homepage-clarisa-category.dto';
 import { UpdateHomepageClarisaCategoryDto } from './dto/update-homepage-clarisa-category.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { HomepageClarisaCategory } from './entities/homepage-clarisa-category.entity';
 
+//@ClarisaPageOnly()
+//@UseGuards(JwtAuthGuard, PermissionGuard)
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
 export class HomepageClarisaCategoryController {

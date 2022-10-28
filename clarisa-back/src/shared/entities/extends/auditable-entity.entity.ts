@@ -37,4 +37,10 @@ export abstract class AuditableEntity {
   @Exclude({ toPlainOnly: true })
   @Column({ type: 'tinyint' })
   is_active: boolean;
+
+  @Exclude()
+  created_by_object: User;
+
+  @Exclude()
+  updated_by_object: User;
 }

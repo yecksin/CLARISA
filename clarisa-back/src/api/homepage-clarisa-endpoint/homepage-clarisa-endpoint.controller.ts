@@ -1,11 +1,9 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   UseInterceptors,
   ClassSerializerInterceptor,
   Query,
@@ -15,12 +13,13 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { HomepageClarisaEndpointService } from './homepage-clarisa-endpoint.service';
-import { CreateHomepageClarisaEndpointDto } from './dto/create-homepage-clarisa-endpoint.dto';
 import { UpdateHomepageClarisaEndpointDto } from './dto/update-homepage-clarisa-endpoint.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { HomepageClarisaEndpoint } from './entities/homepage-clarisa-endpoint.entity';
 import { Response } from 'express';
 
+//@ClarisaPageOnly()
+//@UseGuards(JwtAuthGuard, PermissionGuard)
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
 export class HomepageClarisaEndpointController {

@@ -4,10 +4,7 @@ import {
   Column,
   Entity,
   JoinColumn,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { SdgTarget } from '../../sdg-target/entities/sdg-target.entity';

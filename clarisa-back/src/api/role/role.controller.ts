@@ -1,8 +1,6 @@
 import {
   Controller,
   Get,
-  Body,
-  Patch,
   Param,
   ParseIntPipe,
   Query,
@@ -10,7 +8,6 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { RoleService } from './role.service';
-import { UpdateRoleDto } from './dto/update-role.dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 
 @Controller()
@@ -26,10 +23,5 @@ export class RoleController {
   @Get('get/:id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
     return this.roleService.findOne(id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRoleDto: UpdateRoleDto) {
-    return this.roleService.update(+id, updateRoleDto);
   }
 }

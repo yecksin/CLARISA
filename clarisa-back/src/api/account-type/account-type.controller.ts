@@ -1,11 +1,9 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   ClassSerializerInterceptor,
   UseInterceptors,
   Query,
@@ -17,7 +15,6 @@ import {
 import { Response } from 'express';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { AccountTypeService } from './account-type.service';
-import { CreateAccountTypeDto } from './dto/create-account-type.dto';
 import { UpdateAccountTypeDto } from './dto/update-account-type.dto';
 import { AccountType } from './entities/account-type.entity';
 

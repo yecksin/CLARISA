@@ -26,6 +26,10 @@ export class CgiarEntity extends AuditableEntity {
   smo_code: string;
 
   @Column()
+  @Expose({ name: 'institutionId' })
+  institution_id: number;
+
+  @Column()
   financial_code: string;
 
   @Exclude()

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { RouterEventsModule } from './shared/router-events/router-events.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TawkToModule } from './shared/components/tawk-to/tawk-to.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -14,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     HttpClientModule,
     RouterEventsModule,
+    TawkToModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

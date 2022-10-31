@@ -163,18 +163,22 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
   }
 
   private fillOutRegionInfo(regions: Region[]): SimpleRegionDto {
+    let regionDto = null;
     const region: Region = regions.find(
       (r) => r.region_type_id === RegionTypeEnum.CGIAR_REGION,
     );
-    const regionDto = new SimpleRegionDto();
 
-    regionDto.name = region.name;
-    regionDto.um49Code = region.iso_numeric;
+    if (region) {
+      regionDto = new SimpleRegionDto();
 
-    if (regionDto.parentRegion) {
-      regionDto.parentRegion = new ParentRegionDto();
-      regionDto.parentRegion.name = region.parent_object.name;
-      regionDto.parentRegion.um49Code = region.parent_object.iso_numeric;
+      regionDto.name = region.name;
+      regionDto.um49Code = region.iso_numeric;
+
+      if (regionDto.parentRegion) {
+        regionDto.parentRegion = new ParentRegionDto();
+        regionDto.parentRegion.name = region.parent_object.name;
+        regionDto.parentRegion.um49Code = region.parent_object.iso_numeric;
+      }
     }
 
     return regionDto;

@@ -291,22 +291,22 @@ export class ContentComponent implements OnInit {
       infoObject = '';
       for (let k of this.arrayColumns) {
         if (k[2] == 'field') {
-          objectFormat[k[1]] = i[k[1]];
+          objectFormat[k[0]] = i[k[1]];
         }
         if (k[2] == 'object') {
           if (i[k[1]] != null) {
             for (let j of k[3]) {
               if (j[0] != '' && j[0] != null) {
-                infoObject = infoObject + j[0] + ' : ' + i[k[1]][j[1]] + '\n';
-                objectFormat[k[1]] = infoObject;
+                infoObject = infoObject + k[0] + ' : ' + i[k[1]][j[1]] + '\n';
+                objectFormat[k[0]] = infoObject;
               }
               if (j[0] == '' || j[0] == null) {
-                objectFormat[k[1]] = infoObject + i[k[1]][j[1]] + '\n';
+                objectFormat[k[0]] = infoObject + i[k[1]][j[1]] + '\n';
               }
             }
           }
           if (i[k[1]] == null) {
-            objectFormat[k[1]] = '';
+            objectFormat[k[0]] = '';
           }
         }
         if (k[2] == 'list') {
@@ -316,7 +316,7 @@ export class ContentComponent implements OnInit {
                 infoListUnque += j[k[3][0][1]] + ',' + '\n';
               }
 
-              objectFormat[k[1]] = infoListUnque;
+              objectFormat[k[0]] = infoListUnque;
             }
             if (k[3].length != 1) {
               for (let j of i[k[1]]) {
@@ -330,11 +330,11 @@ export class ContentComponent implements OnInit {
                   }
                 }
               }
-              objectFormat[k[1]] = infoListObject;
+              objectFormat[k[0]] = infoListObject;
             }
           }
           if (i[k[1]] == null) {
-            objectFormat[k[1]] = '';
+            objectFormat[k[0]] = '';
           }
         }
       }

@@ -222,7 +222,7 @@
                                             <pre
                                               style="
                                                 background-color: #1e1e1e;
-                                                font-weight: 500;
+                                                font-weight: 300;
                                                 font-size: 15px;
                                               "
                                             ><code style="color: white; ">{{returnResponseJson()}}</code></pre>
@@ -439,7 +439,7 @@
     [maximizable]="true"
     appendTo="body"
     [(visible)]="dialogVisible"
-    [style]="{ width: '75vw' }"
+    [style]="{ width: '75vw', overflow: 'scroll' }"
     [contentStyle]="{ height: '800px' }"
   >
     <p-table
@@ -447,8 +447,6 @@
       [columns]="iniciativeEndInformation()"
       [value]="informationEndpoint"
       responsiveLayout="scroll"
-      [scrollable]="true"
-      scrollHeight="flex"
       [paginator]="true"
       [rows]="10"
       [showCurrentPageReport]="true"
@@ -600,7 +598,7 @@
         pRipple
         icon="pi pi-times"
         (click)="dialogVisible = false"
-        label="Dismiss"
+        label="Close"
         class="p-button-text"
       ></button>
     </ng-template>

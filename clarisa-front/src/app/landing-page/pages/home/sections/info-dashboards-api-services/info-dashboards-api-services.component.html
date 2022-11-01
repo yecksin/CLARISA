@@ -11,8 +11,8 @@
       id="testimonials"
     >
       <!-- Wrapper for slides -->
-      <div class="carousel-inner">
-        <div class="item slides active">
+      <div class="carousel">
+        <div class="item active line">
           <div class="slide-1">
             <div class="row">
               <div class="col-sm-4">
@@ -44,7 +44,7 @@
                     dashboards.
                   </p>
 
-                  <a [routerLink]="['../dashboards']"
+                  <a href="/landing-page/dashboards"
                     ><button
                       type="button"
                       class="btn btn-shadow"
@@ -98,7 +98,7 @@
                     platforms, overcoming the common challenge of
                     non-standardized information.
                   </p>
-                  <a [routerLink]="['../api-services']"
+                  <a href="/landing-page/api-services"
                     ><button
                       type="button"
                       class="btn btn-shadow"
@@ -123,10 +123,6 @@
         </div>
       </div>
       <!-- Indicators -->
-      <ol class="carousel-indicators" style="margin-bottom: -20px">
-        <li data-target="#testimonials" data-slide-to="0" class="active"></li>
-        <li data-target="#testimonials" data-slide-to="1"></li>
-      </ol>
     </div>
   </div>
 </section>

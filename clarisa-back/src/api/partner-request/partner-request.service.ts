@@ -53,11 +53,15 @@ export class PartnerRequestService {
 
   async createPartnerRequest(
     incomingPartnerRequest: CreatePartnerRequestDto,
-    userData: UserData,
+    userData: UserData & { mis: string },
   ): Promise<ResponseDto<PartnerRequestDto>> {
     incomingPartnerRequest.userId = userData.userId;
     incomingPartnerRequest.externalUserMail =
       incomingPartnerRequest.externalUserMail ?? userData.email;
+
+    if (userData.mis && !incomingPartnerRequest.misAcronym) {
+      incomingPartnerRequest.misAcronym = userData.mis;
+    }
 
     incomingPartnerRequest = plainToInstance(
       CreatePartnerRequestDto,

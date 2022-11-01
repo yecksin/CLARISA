@@ -43,8 +43,13 @@ export class PartnerRequestController {
   async createPartnerRequest(
     @Req() request: Request,
     @Body() newPartnerRequest: CreatePartnerRequestDto,
+    @Query('mis') mis: string,
   ): Promise<ResponseDto<PartnerRequestDto>> {
-    const userData: UserData = request.user as UserData;
+    const userData: UserData & { mis: string } = request.user as UserData & {
+      mis: string;
+    };
+    userData.mis = mis;
+
     return this.partnerRequestService.createPartnerRequest(
       newPartnerRequest,
       userData,

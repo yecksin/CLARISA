@@ -1,5 +1,16 @@
-import { Controller, Get, HttpStatus, Redirect } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpStatus,
+  Redirect,
+  Post,
+  Req,
+  Res,
+  Param,
+} from '@nestjs/common';
+import { Request, Response } from 'express';
 import { ApiService } from './api.service';
+import { PartnerRequestDto } from './partner-request/dto/partner-request.dto';
 
 @Controller()
 export class ApiController {
@@ -107,6 +118,19 @@ export class ApiController {
   @Get('scienceGroups')
   @Redirect('science-groups', HttpStatus.MOVED_PERMANENTLY)
   getScienceGroups() {
+    // nothing, we are just going to redirect
+  }
+
+  @Post('/:mis/institutions/institution-requests')
+  institutionRequests(
+    @Req() request: Request,
+    @Res() response: Response,
+    @Param('mis') mis: string,
+  ) {
+    response.redirect(
+      HttpStatus.PERMANENT_REDIRECT,
+      `/api/partner-requests/institution?mis=${mis}`,
+    );
     // nothing, we are just going to redirect
   }
 }

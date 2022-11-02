@@ -9,10 +9,16 @@ import { InstitutionModule } from '../institution/institution.module';
 import { InstitutionRepository } from '../institution/repositories/institution.repository';
 import { CountryRepository } from '../country/repositories/country.repository';
 import { CountryOfficeRequestRepository } from './repositories/country-office-request.repository';
+import { InstitutionLocation } from '../institution/entities/institution-location.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([CountryOfficeRequest, Mis, User]),
+    TypeOrmModule.forFeature([
+      CountryOfficeRequest,
+      Mis,
+      User,
+      InstitutionLocation,
+    ]),
     //InstitutionModule,
   ],
   controllers: [CountryOfficeRequestController],

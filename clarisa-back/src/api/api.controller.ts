@@ -129,7 +129,20 @@ export class ApiController {
   ) {
     response.redirect(
       HttpStatus.PERMANENT_REDIRECT,
-      `/api/partner-requests/institution?mis=${mis}`,
+      `/api/partner-requests/create?mis=${mis}`,
+    );
+    // nothing, we are just going to redirect
+  }
+
+  @Post('/:mis/institutions/country-office-requests')
+  countryOfficeRequests(
+    @Req() request: Request,
+    @Res() response: Response,
+    @Param('mis') mis: string,
+  ) {
+    response.redirect(
+      HttpStatus.PERMANENT_REDIRECT,
+      `/api/country-office-requests/create?mis=${mis}`,
     );
     // nothing, we are just going to redirect
   }

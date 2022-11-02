@@ -5,6 +5,7 @@ import { InstitutionTypeDto } from 'src/api/institution-type/dto/institution-typ
 import { InstitutionCountryDto } from 'src/api/institution/dto/institution-country.dto';
 import { InstitutionDto } from 'src/api/institution/dto/institution.dto';
 import { Institution } from 'src/api/institution/entities/institution.entity';
+import { InstitutionRepository } from 'src/api/institution/repositories/institution.repository';
 import { ParentRegionDto } from 'src/api/region/dto/parent-region.dto';
 import { SimpleRegionDto } from 'src/api/region/dto/simple-region.dto';
 import { Region } from 'src/api/region/entities/region.entity';
@@ -21,6 +22,7 @@ import {
 } from 'typeorm';
 import { CountryOfficeRequestDto } from '../dto/country-office-request.dto';
 import { CreateCountryOfficeRequestDto } from '../dto/create-country-office-request.dto';
+import { RespondCountryOfficeRequestDto } from '../dto/respond-country-office-request.dto';
 import { CountryOfficeRequest } from '../entities/country-office-request.entity';
 @Injectable()
 export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequest> {
@@ -43,7 +45,10 @@ export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequ
       },
     };
 
-  constructor(private dataSource: DataSource) {
+  constructor(
+    private dataSource: DataSource,
+    private institutionRepository: InstitutionRepository,
+  ) {
     super(CountryOfficeRequest, dataSource.createEntityManager());
   }
 
@@ -253,5 +258,37 @@ export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequ
         return this.fillOutCountryOfficeRequestDto(partialCountryOfficeRequest);
       }),
     );
+  }
+
+  async respondCountryOfficeRequest(
+    partialCountryOfficeRequest: CountryOfficeRequest,
+    respondCountryOfficeRequestDto: RespondCountryOfficeRequestDto,
+  ): Promise<CountryOfficeRequestDto> {
+    partialCountryOfficeRequest.is_active = false;
+    partialCountryOfficeRequest.external_user_mail =
+      respondCountryOfficeRequestDto.externalUserMail;
+    partialCountryOfficeRequest.external_user_name =
+      respondCountryOfficeRequestDto.externalUserName;
+    partialCountryOfficeRequest.external_user_comments =
+      respondCountryOfficeRequestDto.externalUserComments;
+
+    const accepted = respondCountryOfficeRequestDto.accept;
+
+    partialCountryOfficeRequest.modification_justification = accepted
+      ? `Accepted on ${partialCountryOfficeRequest.accepted_date.toISOString()}`
+      : respondCountryOfficeRequestDto.rejectJustification;
+
+    partialCountryOfficeRequest.updated_by = accepted
+      ? partialCountryOfficeRequest.accepted_by
+      : partialCountryOfficeRequest.rejected_by;
+
+    partialCountryOfficeRequest = await this.save(partialCountryOfficeRequest);
+
+    await this.institutionRepository.createInstitutionCountry(
+      partialCountryOfficeRequest,
+      false,
+    );
+
+    return this.fillOutCountryOfficeRequestDto(partialCountryOfficeRequest);
   }
 }

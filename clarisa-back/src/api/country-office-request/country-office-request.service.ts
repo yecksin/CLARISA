@@ -2,6 +2,7 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
+import e from 'express';
 import { ResponseDto } from 'src/shared/entities/dtos/response-dto';
 import { MisOption } from 'src/shared/entities/enums/mises-options';
 import { PartnerStatus } from 'src/shared/entities/enums/partner-status';
@@ -15,12 +16,91 @@ import { Mis } from '../mis/entities/mis.entity';
 import { User } from '../user/entities/user.entity';
 import { CountryOfficeRequestDto } from './dto/country-office-request.dto';
 import { CreateCountryOfficeRequestDto } from './dto/create-country-office-request.dto';
+import { RespondCountryOfficeRequestDto } from './dto/respond-country-office-request.dto';
 import { UpdateCountryOfficeRequestDto } from './dto/update-country-office-request.dto';
 import { CountryOfficeRequest } from './entities/country-office-request.entity';
 import { CountryOfficeRequestRepository } from './repositories/country-office-request.repository';
 
 @Injectable()
 export class CountryOfficeRequestService {
+  async respondCountryOfficeRequest(
+    respondCountryOfficeRequestDto: RespondCountryOfficeRequestDto,
+    userData: UserData,
+  ): Promise<CountryOfficeRequestDto> {
+    respondCountryOfficeRequestDto.userId = userData.userId;
+    respondCountryOfficeRequestDto.externalUserMail =
+      respondCountryOfficeRequestDto.externalUserMail ??= userData.email;
+
+    respondCountryOfficeRequestDto = plainToInstance(
+      RespondCountryOfficeRequestDto,
+      respondCountryOfficeRequestDto,
+    );
+
+    //Basic validations
+    let validationErrors: string[] = (
+      await validate(respondCountryOfficeRequestDto)
+    ).flatMap((e) => {
+      const newLocal = Object.values(e.constraints).map((m) => m);
+      return newLocal;
+    });
+
+    if (validationErrors.length > 0) {
+      throw new HttpException(
+        HttpException.createBody(
+          ResponseDto.createBadResponse(validationErrors, this.constructor),
+        ),
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    //Comprehensive validations
+    const countryOfficeRequest: CountryOfficeRequest =
+      await this.countryOfficeRequestRepository.findOneBy({
+        id: respondCountryOfficeRequestDto.countryOfficeRequestId,
+      });
+
+    const user: User = await this.userRepository.findOneBy({
+      id: respondCountryOfficeRequestDto.userId,
+    });
+
+    if (!countryOfficeRequest) {
+      validationErrors.push(
+        `A country office request with id '${respondCountryOfficeRequestDto.countryOfficeRequestId}' could not be found`,
+      );
+    }
+
+    if (!user) {
+      validationErrors.push(
+        `An user with id '${respondCountryOfficeRequestDto.userId}' could not be found`,
+      );
+    }
+
+    if (validationErrors.length > 0) {
+      throw new HttpException(
+        HttpException.createBody(
+          ResponseDto.createBadResponse(validationErrors, this.constructor),
+        ),
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const now = new Date();
+
+    if (respondCountryOfficeRequestDto.accept) {
+      countryOfficeRequest.accepted_by = user.id;
+      countryOfficeRequest.accepted_date = now;
+    } else {
+      countryOfficeRequest.rejected_by = user.id;
+      countryOfficeRequest.rejected_date = now;
+      countryOfficeRequest.reject_justification =
+        respondCountryOfficeRequestDto.rejectJustification;
+    }
+
+    return this.countryOfficeRequestRepository.respondCountryOfficeRequest(
+      countryOfficeRequest,
+      respondCountryOfficeRequestDto,
+    );
+  }
   constructor(
     private countryOfficeRequestRepository: CountryOfficeRequestRepository,
     private institutionRepository: InstitutionRepository,

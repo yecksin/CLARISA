@@ -12,6 +12,7 @@ import {
   Req,
 } from '@nestjs/common';
 import { Request } from 'express';
+import { GetUserData } from 'src/shared/decorators/user-data.decorator';
 import { ResponseDto } from 'src/shared/entities/dtos/response-dto';
 import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
 import { PermissionGuard } from 'src/shared/guards/permission.guard';
@@ -19,6 +20,7 @@ import { UserData } from 'src/shared/interfaces/user-data';
 import { CountryOfficeRequestService } from './country-office-request.service';
 import { CountryOfficeRequestDto } from './dto/country-office-request.dto';
 import { CreateCountryOfficeRequestDto } from './dto/create-country-office-request.dto';
+import { RespondCountryOfficeRequestDto } from './dto/respond-country-office-request.dto';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
@@ -43,17 +45,29 @@ export class CountryOfficeRequestController {
   @Post('create')
   @UseGuards(JwtAuthGuard, PermissionGuard)
   async createCountryOfficeRequests(
-    @Req() request: Request,
+    @GetUserData() userData: UserData,
     @Body() newCountryOfficeRequest: CreateCountryOfficeRequestDto,
     @Query('mis') mis: string,
   ): Promise<ResponseDto<CountryOfficeRequestDto[]>> {
-    const userData: UserData & { mis: string } = request.user as UserData & {
-      mis: string;
+    const userDataMis: UserData & { mis: string } = {
+      ...userData,
+      mis,
     };
-    userData.mis = mis;
 
     return this.countryOfficeRequestService.createCountryOfficeRequest(
       newCountryOfficeRequest,
+      userDataMis,
+    );
+  }
+
+  @Post('respond')
+  @UseGuards(JwtAuthGuard, PermissionGuard)
+  async respondCountryOfficeRequest(
+    @GetUserData() userData: UserData,
+    @Body() respondCountryOfficeRequestDto: RespondCountryOfficeRequestDto,
+  ): Promise<CountryOfficeRequestDto> {
+    return this.countryOfficeRequestService.respondCountryOfficeRequest(
+      respondCountryOfficeRequestDto,
       userData,
     );
   }

@@ -52,6 +52,13 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     super(PartnerRequest, dataSource.createEntityManager());
   }
 
+  async findPartnerRequestById(id: number): Promise<PartnerRequestDto> {
+    return this.findOne({
+      where: { id },
+      relations: this.partnerRelations,
+    }).then((pr) => this.fillOutPartnerRequestDto(pr));
+  }
+
   async findAllPartnerRequests(
     status: string = PartnerStatus.PENDING.path,
     mis: string = MisOption.ALL.path,

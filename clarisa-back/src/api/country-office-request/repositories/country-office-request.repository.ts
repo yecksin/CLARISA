@@ -52,6 +52,15 @@ export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequ
     super(CountryOfficeRequest, dataSource.createEntityManager());
   }
 
+  async findCountryOfficeRequestById(
+    id: number,
+  ): Promise<CountryOfficeRequestDto> {
+    return this.findOne({
+      where: { id },
+      relations: this.requestRelations,
+    }).then((pr) => this.fillOutCountryOfficeRequestDto(pr));
+  }
+
   async findAllCountryOfficeRequests(
     status: string = PartnerStatus.PENDING.path,
     mis: string = MisOption.ALL.path,

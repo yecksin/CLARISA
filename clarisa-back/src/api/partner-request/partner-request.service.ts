@@ -45,11 +45,8 @@ export class PartnerRequestService {
     return this.partnerRequestRepository.findAllPartnerRequests(status, mis);
   }
 
-  async findOne(id: number): Promise<PartnerRequest> {
-    return await this.partnerRequestRepository.findOneBy({
-      id,
-      is_active: true,
-    });
+  async findOne(id: number): Promise<PartnerRequestDto> {
+    return this.partnerRequestRepository.findPartnerRequestById(id);
   }
 
   async createPartnerRequest(

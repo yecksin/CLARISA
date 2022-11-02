@@ -51,11 +51,8 @@ export class CountryOfficeRequestService {
     );
   }
 
-  async findOne(id: number): Promise<CountryOfficeRequest> {
-    return await this.countryOfficeRequestRepository.findOneBy({
-      id,
-      is_active: true,
-    });
+  async findOne(id: number): Promise<CountryOfficeRequestDto> {
+    return this.countryOfficeRequestRepository.findCountryOfficeRequestById(id);
   }
 
   async createCountryOfficeRequest(

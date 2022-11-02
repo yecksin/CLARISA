@@ -22,7 +22,7 @@ import {
 } from 'typeorm';
 import { CountryOfficeRequestDto } from '../dto/country-office-request.dto';
 import { CreateCountryOfficeRequestDto } from '../dto/create-country-office-request.dto';
-import { RespondCountryOfficeRequestDto } from '../dto/respond-country-office-request.dto';
+import { RespondRequestDto } from '../../../shared/entities/dtos/respond-country-office-request.dto';
 import { CountryOfficeRequest } from '../entities/country-office-request.entity';
 @Injectable()
 export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequest> {
@@ -262,7 +262,7 @@ export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequ
 
   async respondCountryOfficeRequest(
     partialCountryOfficeRequest: CountryOfficeRequest,
-    respondCountryOfficeRequestDto: RespondCountryOfficeRequestDto,
+    respondCountryOfficeRequestDto: RespondRequestDto,
   ): Promise<CountryOfficeRequestDto> {
     partialCountryOfficeRequest.is_active = false;
     partialCountryOfficeRequest.external_user_mail =

@@ -1,8 +1,8 @@
 import { IsEmail, IsNotEmpty, Min, ValidateIf } from 'class-validator';
 
-export class RespondCountryOfficeRequestDto {
+export class RespondRequestDto {
   @Min(1)
-  countryOfficeRequestId: number;
+  requestId: number;
 
   @Min(1)
   userId: number;

@@ -16,7 +16,7 @@ import { Mis } from '../mis/entities/mis.entity';
 import { User } from '../user/entities/user.entity';
 import { CountryOfficeRequestDto } from './dto/country-office-request.dto';
 import { CreateCountryOfficeRequestDto } from './dto/create-country-office-request.dto';
-import { RespondCountryOfficeRequestDto } from './dto/respond-country-office-request.dto';
+import { RespondRequestDto } from '../../shared/entities/dtos/respond-country-office-request.dto';
 import { UpdateCountryOfficeRequestDto } from './dto/update-country-office-request.dto';
 import { CountryOfficeRequest } from './entities/country-office-request.entity';
 import { CountryOfficeRequestRepository } from './repositories/country-office-request.repository';
@@ -24,7 +24,7 @@ import { CountryOfficeRequestRepository } from './repositories/country-office-re
 @Injectable()
 export class CountryOfficeRequestService {
   async respondCountryOfficeRequest(
-    respondCountryOfficeRequestDto: RespondCountryOfficeRequestDto,
+    respondCountryOfficeRequestDto: RespondRequestDto,
     userData: UserData,
   ): Promise<CountryOfficeRequestDto> {
     respondCountryOfficeRequestDto.userId = userData.userId;
@@ -32,7 +32,7 @@ export class CountryOfficeRequestService {
       respondCountryOfficeRequestDto.externalUserMail ??= userData.email;
 
     respondCountryOfficeRequestDto = plainToInstance(
-      RespondCountryOfficeRequestDto,
+      RespondRequestDto,
       respondCountryOfficeRequestDto,
     );
 
@@ -56,7 +56,7 @@ export class CountryOfficeRequestService {
     //Comprehensive validations
     const countryOfficeRequest: CountryOfficeRequest =
       await this.countryOfficeRequestRepository.findOneBy({
-        id: respondCountryOfficeRequestDto.countryOfficeRequestId,
+        id: respondCountryOfficeRequestDto.requestId,
       });
 
     const user: User = await this.userRepository.findOneBy({
@@ -65,7 +65,7 @@ export class CountryOfficeRequestService {
 
     if (!countryOfficeRequest) {
       validationErrors.push(
-        `A country office request with id '${respondCountryOfficeRequestDto.countryOfficeRequestId}' could not be found`,
+        `A country office request with id '${respondCountryOfficeRequestDto.requestId}' could not be found`,
       );
     }
 

@@ -20,7 +20,7 @@ import { UserData } from 'src/shared/interfaces/user-data';
 import { CountryOfficeRequestService } from './country-office-request.service';
 import { CountryOfficeRequestDto } from './dto/country-office-request.dto';
 import { CreateCountryOfficeRequestDto } from './dto/create-country-office-request.dto';
-import { RespondCountryOfficeRequestDto } from './dto/respond-country-office-request.dto';
+import { RespondRequestDto } from '../../shared/entities/dtos/respond-country-office-request.dto';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
@@ -64,7 +64,7 @@ export class CountryOfficeRequestController {
   @UseGuards(JwtAuthGuard, PermissionGuard)
   async respondCountryOfficeRequest(
     @GetUserData() userData: UserData,
-    @Body() respondCountryOfficeRequestDto: RespondCountryOfficeRequestDto,
+    @Body() respondCountryOfficeRequestDto: RespondRequestDto,
   ): Promise<CountryOfficeRequestDto> {
     return this.countryOfficeRequestService.respondCountryOfficeRequest(
       respondCountryOfficeRequestDto,

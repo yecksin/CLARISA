@@ -38,7 +38,7 @@ export class PartnerRequestController {
     return await this.partnerRequestService.findOne(id);
   }
 
-  @Post('institution')
+  @Post('create')
   @UseGuards(JwtAuthGuard, PermissionGuard)
   async createPartnerRequest(
     @Req() request: Request,

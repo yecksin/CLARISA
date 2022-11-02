@@ -187,4 +187,30 @@ export class InstitutionRepository extends Repository<Institution> {
 
     return this.institutionLocationRepository.save(institutionLocation);
   }
+
+  async createInstitution(
+    partnerRequest: PartnerRequest,
+  ): Promise<InstitutionDto> {
+    let institution: Institution = new Institution();
+
+    institution.acronym = partnerRequest.acronym;
+    institution.created_at = partnerRequest.accepted_date;
+    institution.created_by = partnerRequest.accepted_by;
+    institution.institution_type_id = partnerRequest.institution_type_id;
+    institution.name = partnerRequest.partner_name;
+    institution.website_link = partnerRequest.web_page;
+
+    await this.createInstitutionCountry(partnerRequest, true);
+
+    institution = await this.save(institution);
+
+    institution = await this.findOne({
+      where: {
+        id: institution.id,
+      },
+      relations: this.institutionRelations,
+    });
+
+    return this.fillOutInstitutionInfo(institution);
+  }
 }

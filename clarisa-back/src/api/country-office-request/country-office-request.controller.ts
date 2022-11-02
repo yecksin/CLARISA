@@ -20,7 +20,7 @@ import { UserData } from 'src/shared/interfaces/user-data';
 import { CountryOfficeRequestService } from './country-office-request.service';
 import { CountryOfficeRequestDto } from './dto/country-office-request.dto';
 import { CreateCountryOfficeRequestDto } from './dto/create-country-office-request.dto';
-import { RespondRequestDto } from '../../shared/entities/dtos/respond-country-office-request.dto';
+import { RespondRequestDto } from '../../shared/entities/dtos/respond-request.dto';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

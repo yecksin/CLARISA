@@ -22,7 +22,7 @@ import {
 } from 'typeorm';
 import { CountryOfficeRequestDto } from '../dto/country-office-request.dto';
 import { CreateCountryOfficeRequestDto } from '../dto/create-country-office-request.dto';
-import { RespondRequestDto } from '../../../shared/entities/dtos/respond-country-office-request.dto';
+import { RespondRequestDto } from '../../../shared/entities/dtos/respond-request.dto';
 import { CountryOfficeRequest } from '../entities/country-office-request.entity';
 @Injectable()
 export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequest> {

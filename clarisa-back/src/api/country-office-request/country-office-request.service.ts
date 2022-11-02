@@ -16,91 +16,13 @@ import { Mis } from '../mis/entities/mis.entity';
 import { User } from '../user/entities/user.entity';
 import { CountryOfficeRequestDto } from './dto/country-office-request.dto';
 import { CreateCountryOfficeRequestDto } from './dto/create-country-office-request.dto';
-import { RespondRequestDto } from '../../shared/entities/dtos/respond-country-office-request.dto';
+import { RespondRequestDto } from '../../shared/entities/dtos/respond-request.dto';
 import { UpdateCountryOfficeRequestDto } from './dto/update-country-office-request.dto';
 import { CountryOfficeRequest } from './entities/country-office-request.entity';
 import { CountryOfficeRequestRepository } from './repositories/country-office-request.repository';
 
 @Injectable()
 export class CountryOfficeRequestService {
-  async respondCountryOfficeRequest(
-    respondCountryOfficeRequestDto: RespondRequestDto,
-    userData: UserData,
-  ): Promise<CountryOfficeRequestDto> {
-    respondCountryOfficeRequestDto.userId = userData.userId;
-    respondCountryOfficeRequestDto.externalUserMail =
-      respondCountryOfficeRequestDto.externalUserMail ??= userData.email;
-
-    respondCountryOfficeRequestDto = plainToInstance(
-      RespondRequestDto,
-      respondCountryOfficeRequestDto,
-    );
-
-    //Basic validations
-    let validationErrors: string[] = (
-      await validate(respondCountryOfficeRequestDto)
-    ).flatMap((e) => {
-      const newLocal = Object.values(e.constraints).map((m) => m);
-      return newLocal;
-    });
-
-    if (validationErrors.length > 0) {
-      throw new HttpException(
-        HttpException.createBody(
-          ResponseDto.createBadResponse(validationErrors, this.constructor),
-        ),
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-
-    //Comprehensive validations
-    const countryOfficeRequest: CountryOfficeRequest =
-      await this.countryOfficeRequestRepository.findOneBy({
-        id: respondCountryOfficeRequestDto.requestId,
-      });
-
-    const user: User = await this.userRepository.findOneBy({
-      id: respondCountryOfficeRequestDto.userId,
-    });
-
-    if (!countryOfficeRequest) {
-      validationErrors.push(
-        `A country office request with id '${respondCountryOfficeRequestDto.requestId}' could not be found`,
-      );
-    }
-
-    if (!user) {
-      validationErrors.push(
-        `An user with id '${respondCountryOfficeRequestDto.userId}' could not be found`,
-      );
-    }
-
-    if (validationErrors.length > 0) {
-      throw new HttpException(
-        HttpException.createBody(
-          ResponseDto.createBadResponse(validationErrors, this.constructor),
-        ),
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-
-    const now = new Date();
-
-    if (respondCountryOfficeRequestDto.accept) {
-      countryOfficeRequest.accepted_by = user.id;
-      countryOfficeRequest.accepted_date = now;
-    } else {
-      countryOfficeRequest.rejected_by = user.id;
-      countryOfficeRequest.rejected_date = now;
-      countryOfficeRequest.reject_justification =
-        respondCountryOfficeRequestDto.rejectJustification;
-    }
-
-    return this.countryOfficeRequestRepository.respondCountryOfficeRequest(
-      countryOfficeRequest,
-      respondCountryOfficeRequestDto,
-    );
-  }
   constructor(
     private countryOfficeRequestRepository: CountryOfficeRequestRepository,
     private institutionRepository: InstitutionRepository,
@@ -251,5 +173,84 @@ export class CountryOfficeRequestService {
       );
 
     return ResponseDto.createCreatedResponse(response, this.constructor);
+  }
+
+  async respondCountryOfficeRequest(
+    respondCountryOfficeRequestDto: RespondRequestDto,
+    userData: UserData,
+  ): Promise<CountryOfficeRequestDto> {
+    respondCountryOfficeRequestDto.userId = userData.userId;
+    respondCountryOfficeRequestDto.externalUserMail =
+      respondCountryOfficeRequestDto.externalUserMail ??= userData.email;
+
+    respondCountryOfficeRequestDto = plainToInstance(
+      RespondRequestDto,
+      respondCountryOfficeRequestDto,
+    );
+
+    //Basic validations
+    let validationErrors: string[] = (
+      await validate(respondCountryOfficeRequestDto)
+    ).flatMap((e) => {
+      const newLocal = Object.values(e.constraints).map((m) => m);
+      return newLocal;
+    });
+
+    if (validationErrors.length > 0) {
+      throw new HttpException(
+        HttpException.createBody(
+          ResponseDto.createBadResponse(validationErrors, this.constructor),
+        ),
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    //Comprehensive validations
+    const countryOfficeRequest: CountryOfficeRequest =
+      await this.countryOfficeRequestRepository.findOneBy({
+        id: respondCountryOfficeRequestDto.requestId,
+      });
+
+    const user: User = await this.userRepository.findOneBy({
+      id: respondCountryOfficeRequestDto.userId,
+    });
+
+    if (!countryOfficeRequest) {
+      validationErrors.push(
+        `A country office request with id '${respondCountryOfficeRequestDto.requestId}' could not be found`,
+      );
+    }
+
+    if (!user) {
+      validationErrors.push(
+        `An user with id '${respondCountryOfficeRequestDto.userId}' could not be found`,
+      );
+    }
+
+    if (validationErrors.length > 0) {
+      throw new HttpException(
+        HttpException.createBody(
+          ResponseDto.createBadResponse(validationErrors, this.constructor),
+        ),
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const now = new Date();
+
+    if (respondCountryOfficeRequestDto.accept) {
+      countryOfficeRequest.accepted_by = user.id;
+      countryOfficeRequest.accepted_date = now;
+    } else {
+      countryOfficeRequest.rejected_by = user.id;
+      countryOfficeRequest.rejected_date = now;
+      countryOfficeRequest.reject_justification =
+        respondCountryOfficeRequestDto.rejectJustification;
+    }
+
+    return this.countryOfficeRequestRepository.respondCountryOfficeRequest(
+      countryOfficeRequest,
+      respondCountryOfficeRequestDto,
+    );
   }
 }

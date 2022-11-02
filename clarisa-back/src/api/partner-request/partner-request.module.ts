@@ -8,6 +8,7 @@ import { InstitutionType } from '../institution-type/entities/institution-type.e
 import { CountryRepository } from '../country/repositories/country.repository';
 import { Mis } from '../mis/entities/mis.entity';
 import { User } from '../user/entities/user.entity';
+import { InstitutionRepository } from '../institution/repositories/institution.repository';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { User } from '../user/entities/user.entity';
     PartnerRequestService,
     PartnerRequestRepository,
     CountryRepository,
+    InstitutionRepository,
   ],
 })
 export class PartnerRequestModule {}

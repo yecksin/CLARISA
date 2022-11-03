@@ -24,6 +24,7 @@ import { CountryOfficeRequestDto } from '../dto/country-office-request.dto';
 import { CreateCountryOfficeRequestDto } from '../dto/create-country-office-request.dto';
 import { RespondRequestDto } from '../../../shared/entities/dtos/respond-request.dto';
 import { CountryOfficeRequest } from '../entities/country-office-request.entity';
+import { UpdateCountryOfficeRequestDto } from '../dto/update-country-office-request.dto';
 @Injectable()
 export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequest> {
   private readonly requestRelations: FindOptionsRelations<CountryOfficeRequest> =
@@ -159,7 +160,7 @@ export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequ
   private getRequestStatus(accepted: boolean | undefined): string {
     // this did not work for some odd reason in TS; in JS it works just fine
     //return (accepted === undefined ? 'Pending' : (accepted ? 'Accepted', 'Rejected'));
-    if (accepted === undefined) {
+    if (accepted == undefined) {
       return PartnerStatus.PENDING.name;
     }
 
@@ -299,5 +300,25 @@ export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequ
     );
 
     return this.fillOutCountryOfficeRequestDto(partialCountryOfficeRequest);
+  }
+
+  async updateCountryOfficeRequest(
+    updateCountryOfficeRequest: UpdateCountryOfficeRequestDto,
+    countryOfficeRequest: CountryOfficeRequest,
+  ): Promise<CountryOfficeRequestDto> {
+    countryOfficeRequest.country_id = countryOfficeRequest.country_object.id;
+
+    countryOfficeRequest.updated_by = countryOfficeRequest.updated_by_object.id;
+    countryOfficeRequest.modification_justification =
+      updateCountryOfficeRequest.modification_justification;
+
+    countryOfficeRequest = await this.save(countryOfficeRequest);
+
+    countryOfficeRequest = await this.findOne({
+      where: { id: countryOfficeRequest.id },
+      relations: this.requestRelations,
+    });
+
+    return this.fillOutCountryOfficeRequestDto(countryOfficeRequest);
   }
 }

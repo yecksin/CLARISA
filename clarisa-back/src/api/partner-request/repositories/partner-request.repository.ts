@@ -22,6 +22,7 @@ import {
 } from 'typeorm';
 import { CreatePartnerRequestDto } from '../dto/create-partner-request.dto';
 import { PartnerRequestDto } from '../dto/partner-request.dto';
+import { UpdatePartnerRequestDto } from '../dto/update-partner-request.dto';
 import { PartnerRequest } from '../entities/partner-request.entity';
 
 @Injectable()
@@ -154,7 +155,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
   private getRequestStatus(accepted: boolean | undefined): string {
     // this did not work for some odd reason in TS; in JS it works just fine
     //return (accepted === undefined ? 'Pending' : (accepted ? 'Accepted', 'Rejected'));
-    if (accepted === undefined) {
+    if (accepted == undefined) {
       return PartnerStatus.PENDING.name;
     }
 
@@ -288,5 +289,31 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     await this.institutionRepository.createInstitution(partialPartnerRequest);
 
     return this.fillOutPartnerRequestDto(partialPartnerRequest);
+  }
+
+  async updatePartnerRequest(
+    updatePartnerRequest: UpdatePartnerRequestDto,
+    partnerRequest: PartnerRequest,
+  ): Promise<PartnerRequestDto> {
+    partnerRequest.partner_name = updatePartnerRequest.name;
+    partnerRequest.acronym = updatePartnerRequest.acronym;
+    partnerRequest.web_page = updatePartnerRequest.websiteLink;
+
+    partnerRequest.institution_type_id =
+      partnerRequest.institution_type_object.id;
+    partnerRequest.country_id = partnerRequest.country_object.id;
+
+    partnerRequest.updated_by = partnerRequest.updated_by_object.id;
+    partnerRequest.modification_justification =
+      updatePartnerRequest.modification_justification;
+
+    partnerRequest = await this.save(partnerRequest);
+
+    partnerRequest = await this.findOne({
+      where: { id: partnerRequest.id },
+      relations: this.partnerRelations,
+    });
+
+    return this.fillOutPartnerRequestDto(partnerRequest);
   }
 }

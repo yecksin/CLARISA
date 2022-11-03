@@ -93,87 +93,67 @@ export class ContentComponent implements OnInit {
 
   returnResponseJson() {
     var auxVariable = JSON.parse(this.informationPrint.response_json);
-    this.responseJsonPrint = this.response_json(
+    this.responseJsonPrint = this.jsonResponse(
       auxVariable.properties,
-      auxVariable.object_type,
-      1
+      auxVariable.object_type
     );
 
-    return this.setCharAt(
-      this.responseJsonPrint,
-      this.responseJsonPrint.lastIndexOf(','),
-      ''
-    );
+    return JSON.stringify(this.responseJsonPrint, null, 3);
   }
 
   //In this function we organize the response in json type.
-  response_json(listResponse, typeResponse, subObject) {
-    let variable = '';
-    var auxList = listResponse;
-    var countSpace = subObject;
-    if (typeResponse == 'list' && countSpace == 1) {
-      variable = '[ \n { ';
+  jsonResponse(jsonStr, typeJson) {
+    let responseJson;
+    let auxList = jsonStr;
+
+    if (typeJson == 'list') {
+      responseJson = [{}];
     }
-    if (typeResponse == 'list' && countSpace != 1) {
-      variable = '[ \n' + '\t'.repeat(countSpace) + '{ ';
+    if (typeJson == 'object') {
+      responseJson = {};
     }
-    if (typeResponse == 'object') {
-      variable = '{';
-    }
+
     for (let i in auxList) {
-      if (auxList[i].object_type == 'object') {
-        variable = variable + '\n' + '\t'.repeat(countSpace) + '"' + i + '":';
-        variable =
-          variable +
-          this.response_json(
+      if (Array.isArray(responseJson)) {
+        if (auxList[i].object_type == 'field') {
+          responseJson[0][i] = auxList[i].type;
+        }
+        if (auxList[i].object_type == 'object') {
+          responseJson[0][i] = this.jsonResponse(
             auxList[i].properties,
-            auxList[i].object_type,
-            countSpace + 1
+            auxList[i].object_type
           );
-      } else if (auxList[i].object_type == 'list') {
-        variable = variable + '\n' + '\t'.repeat(countSpace) + '"' + i + '":';
-        variable =
-          variable +
-          this.response_json(
+        }
+        if (auxList[i].object_type == 'list') {
+          responseJson[0][i] = this.jsonResponse(
             auxList[i].properties,
-            auxList[i].object_type,
-            countSpace + 1
+            auxList[i].object_type
           );
-      } else {
-        variable =
-          variable +
-          '\n ' +
-          '\t'.repeat(countSpace) +
-          '"' +
-          i +
-          '" : " ' +
-          auxList[i].type +
-          '", ';
+        }
+      }
+      if (
+        Array.isArray(responseJson) == false &&
+        typeof responseJson == 'object'
+      ) {
+        if (auxList[i].object_type == 'field') {
+          responseJson[i] = auxList[i].type;
+        }
+        if (auxList[i].object_type == 'object') {
+          responseJson[i] = this.jsonResponse(
+            auxList[i].properties,
+            auxList[i].object_type
+          );
+        }
+        if (auxList[i].object_type == 'list') {
+          responseJson[0][i] = this.jsonResponse(
+            auxList[i].properties,
+            auxList[i].object_type
+          );
+        }
       }
     }
-    if (typeResponse == 'list' && countSpace == 1) {
-      variable = variable + ' \n } \n]';
-    }
-    if (typeResponse == 'list' && countSpace != 1) {
-      variable =
-        variable +
-        ' \n ' +
-        '\t'.repeat(countSpace) +
-        '}\n' +
-        '\t'.repeat(countSpace - 1) +
-        ']';
-    }
-    if (typeResponse == 'object') {
-      variable = variable + '\n ' + '\t'.repeat(countSpace - 1) + '}';
-    }
 
-    return variable;
-  }
-
-  //With this function delete last character with example the comma (,)
-  setCharAt(str, index, chr) {
-    if (index > str.length - 1) return str;
-    return str.substring(0, index) + chr + str.substring(index + 1);
+    return responseJson;
   }
 
   columnsTable(listaAux) {
@@ -343,6 +323,7 @@ export class ContentComponent implements OnInit {
 
     return exportInformation;
   }
+
   showDialog() {
     this.dialogVisible = true;
   }

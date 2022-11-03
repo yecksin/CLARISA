@@ -98,7 +98,7 @@ export class ContentComponent implements OnInit {
       auxVariable.object_type
     );
 
-    return JSON.stringify(this.responseJsonPrint, null, 3);
+    return JSON.stringify(this.responseJsonPrint, null, 4);
   }
 
   //In this function we organize the response in json type.

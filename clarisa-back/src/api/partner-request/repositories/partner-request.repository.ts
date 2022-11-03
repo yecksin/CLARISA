@@ -5,9 +5,11 @@ import { InstitutionTypeDto } from 'src/api/institution-type/dto/institution-typ
 import { InstitutionCountryDto } from 'src/api/institution/dto/institution-country.dto';
 import { InstitutionDto } from 'src/api/institution/dto/institution.dto';
 import { Institution } from 'src/api/institution/entities/institution.entity';
+import { InstitutionRepository } from 'src/api/institution/repositories/institution.repository';
 import { ParentRegionDto } from 'src/api/region/dto/parent-region.dto';
 import { SimpleRegionDto } from 'src/api/region/dto/simple-region.dto';
 import { Region } from 'src/api/region/entities/region.entity';
+import { RespondRequestDto } from 'src/shared/entities/dtos/respond-request.dto';
 import { MisOption } from 'src/shared/entities/enums/mises-options';
 import { PartnerStatus } from 'src/shared/entities/enums/partner-status';
 import { RegionTypeEnum } from 'src/shared/entities/enums/region-types';
@@ -43,8 +45,18 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     },
   };
 
-  constructor(private dataSource: DataSource) {
+  constructor(
+    private dataSource: DataSource,
+    private institutionRepository: InstitutionRepository,
+  ) {
     super(PartnerRequest, dataSource.createEntityManager());
+  }
+
+  async findPartnerRequestById(id: number): Promise<PartnerRequestDto> {
+    return this.findOne({
+      where: { id },
+      relations: this.partnerRelations,
+    }).then((pr) => this.fillOutPartnerRequestDto(pr));
   }
 
   async findAllPartnerRequests(
@@ -245,6 +257,35 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       where: { id: partialPartnerRequest.id },
       relations: this.partnerRelations,
     });
+
+    return this.fillOutPartnerRequestDto(partialPartnerRequest);
+  }
+
+  async respondPartnerRequest(
+    partialPartnerRequest: PartnerRequest,
+    respondPartnerRequestDto: RespondRequestDto,
+  ): Promise<PartnerRequestDto> {
+    partialPartnerRequest.is_active = false;
+    partialPartnerRequest.external_user_mail =
+      respondPartnerRequestDto.externalUserMail;
+    partialPartnerRequest.external_user_name =
+      respondPartnerRequestDto.externalUserName;
+    partialPartnerRequest.external_user_comments =
+      respondPartnerRequestDto.externalUserComments;
+
+    const accepted = respondPartnerRequestDto.accept;
+
+    partialPartnerRequest.modification_justification = accepted
+      ? `Accepted on ${partialPartnerRequest.accepted_date.toISOString()}`
+      : respondPartnerRequestDto.rejectJustification;
+
+    partialPartnerRequest.updated_by = accepted
+      ? partialPartnerRequest.accepted_by
+      : partialPartnerRequest.rejected_by;
+
+    partialPartnerRequest = await this.save(partialPartnerRequest);
+
+    await this.institutionRepository.createInstitution(partialPartnerRequest);
 
     return this.fillOutPartnerRequestDto(partialPartnerRequest);
   }

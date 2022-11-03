@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
     console.log(authData);
     this.authService.userAuth(authData).subscribe({
       next: (resp) => {
-        console.log(resp);
         const { access_token, user } = resp;
         this.authService.localStorageToken = access_token;
         this.authService.localStorageUser = user;

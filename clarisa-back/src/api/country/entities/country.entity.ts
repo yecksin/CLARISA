@@ -1,3 +1,4 @@
+import { CountryOfficeRequest } from 'src/api/country-office-request/entities/country-office-request.entity';
 import { Geoposition } from 'src/api/geoposition/entities/geoposition.entity';
 import { InstitutionLocation } from 'src/api/institution/entities/institution-location.entity';
 import { PartnerRequest } from 'src/api/partner-request/entities/partner-request.entity';
@@ -57,4 +58,7 @@ export class Country extends AuditableEntity {
 
   @OneToMany(() => PartnerRequest, (pr) => pr.institution_type_object)
   partner_requests: PartnerRequest[];
+
+  @OneToMany(() => CountryOfficeRequest, (cof) => cof.country_object)
+  country_office_requests: CountryOfficeRequest[];
 }

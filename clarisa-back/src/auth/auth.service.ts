@@ -16,11 +16,11 @@ export class AuthService {
     private moduleRef: ModuleRef,
   ) {}
 
-  async validateUser(email: string, pass: string) {
-    email = email.trim().toLowerCase();
+  async validateUser(login: string, pass: string) {
+    login = login.trim().toLowerCase();
     const user: User =
-      (await this.usersService.findOneByEmail(email, false)) ??
-      (await this.usersService.findOneByUsername(email, false));
+      (await this.usersService.findOneByEmail(login, false)) ??
+      (await this.usersService.findOneByUsername(login, false));
     let authenticator: BaseAuthenticator;
 
     // const user_Info = await user.userInfo;
@@ -46,11 +46,17 @@ export class AuthService {
 
   async login(user: User) {
     const payload = {
-      email: user.email,
+      login: user.email,
       sub: user.id,
       permissions: user.permissions,
     };
 
-    return { access_token: this.jwtService.sign(payload) };
+    return {
+      access_token: this.jwtService.sign(payload),
+      user: {
+        username: user.username,
+        name: `${user.first_name} ${user.last_name}`,
+      },
+    };
   }
 }

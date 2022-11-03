@@ -93,87 +93,67 @@ export class ContentComponent implements OnInit {
 
   returnResponseJson() {
     var auxVariable = JSON.parse(this.informationPrint.response_json);
-    this.responseJsonPrint = this.response_json(
+    this.responseJsonPrint = this.jsonResponse(
       auxVariable.properties,
-      auxVariable.object_type,
-      1
+      auxVariable.object_type
     );
 
-    return this.setCharAt(
-      this.responseJsonPrint,
-      this.responseJsonPrint.lastIndexOf(','),
-      ''
-    );
+    return JSON.stringify(this.responseJsonPrint, null, 3);
   }
 
   //In this function we organize the response in json type.
-  response_json(listResponse, typeResponse, subObject) {
-    let variable = '';
-    var auxList = listResponse;
-    var countSpace = subObject;
-    if (typeResponse == 'list' && countSpace == 1) {
-      variable = '[ \n { ';
+  jsonResponse(jsonStr, typeJson) {
+    let responseJson;
+    let auxList = jsonStr;
+
+    if (typeJson == 'list') {
+      responseJson = [{}];
     }
-    if (typeResponse == 'list' && countSpace != 1) {
-      variable = '[ \n' + '\t'.repeat(countSpace) + '{ ';
+    if (typeJson == 'object') {
+      responseJson = {};
     }
-    if (typeResponse == 'object') {
-      variable = '{';
-    }
+
     for (let i in auxList) {
-      if (auxList[i].object_type == 'object') {
-        variable = variable + '\n' + '\t'.repeat(countSpace) + '"' + i + '":';
-        variable =
-          variable +
-          this.response_json(
+      if (Array.isArray(responseJson)) {
+        if (auxList[i].object_type == 'field') {
+          responseJson[0][i] = auxList[i].type;
+        }
+        if (auxList[i].object_type == 'object') {
+          responseJson[0][i] = this.jsonResponse(
             auxList[i].properties,
-            auxList[i].object_type,
-            countSpace + 1
+            auxList[i].object_type
           );
-      } else if (auxList[i].object_type == 'list') {
-        variable = variable + '\n' + '\t'.repeat(countSpace) + '"' + i + '":';
-        variable =
-          variable +
-          this.response_json(
+        }
+        if (auxList[i].object_type == 'list') {
+          responseJson[0][i] = this.jsonResponse(
             auxList[i].properties,
-            auxList[i].object_type,
-            countSpace + 1
+            auxList[i].object_type
           );
-      } else {
-        variable =
-          variable +
-          '\n ' +
-          '\t'.repeat(countSpace) +
-          '"' +
-          i +
-          '" : " ' +
-          auxList[i].type +
-          '", ';
+        }
+      }
+      if (
+        Array.isArray(responseJson) == false &&
+        typeof responseJson == 'object'
+      ) {
+        if (auxList[i].object_type == 'field') {
+          responseJson[i] = auxList[i].type;
+        }
+        if (auxList[i].object_type == 'object') {
+          responseJson[i] = this.jsonResponse(
+            auxList[i].properties,
+            auxList[i].object_type
+          );
+        }
+        if (auxList[i].object_type == 'list') {
+          responseJson[0][i] = this.jsonResponse(
+            auxList[i].properties,
+            auxList[i].object_type
+          );
+        }
       }
     }
-    if (typeResponse == 'list' && countSpace == 1) {
-      variable = variable + ' \n } \n]';
-    }
-    if (typeResponse == 'list' && countSpace != 1) {
-      variable =
-        variable +
-        ' \n ' +
-        '\t'.repeat(countSpace) +
-        '}\n' +
-        '\t'.repeat(countSpace - 1) +
-        ']';
-    }
-    if (typeResponse == 'object') {
-      variable = variable + '\n ' + '\t'.repeat(countSpace - 1) + '}';
-    }
 
-    return variable;
-  }
-
-  //With this function delete last character with example the comma (,)
-  setCharAt(str, index, chr) {
-    if (index > str.length - 1) return str;
-    return str.substring(0, index) + chr + str.substring(index + 1);
+    return responseJson;
   }
 
   columnsTable(listaAux) {
@@ -291,22 +271,22 @@ export class ContentComponent implements OnInit {
       infoObject = '';
       for (let k of this.arrayColumns) {
         if (k[2] == 'field') {
-          objectFormat[k[1]] = i[k[1]];
+          objectFormat[k[0]] = i[k[1]];
         }
         if (k[2] == 'object') {
           if (i[k[1]] != null) {
             for (let j of k[3]) {
               if (j[0] != '' && j[0] != null) {
-                infoObject = infoObject + j[0] + ' : ' + i[k[1]][j[1]] + '\n';
-                objectFormat[k[1]] = infoObject;
+                infoObject = infoObject + k[0] + ' : ' + i[k[1]][j[1]] + '\n';
+                objectFormat[k[0]] = infoObject;
               }
               if (j[0] == '' || j[0] == null) {
-                objectFormat[k[1]] = infoObject + i[k[1]][j[1]] + '\n';
+                objectFormat[k[0]] = infoObject + i[k[1]][j[1]] + '\n';
               }
             }
           }
           if (i[k[1]] == null) {
-            objectFormat[k[1]] = '';
+            objectFormat[k[0]] = '';
           }
         }
         if (k[2] == 'list') {
@@ -316,7 +296,7 @@ export class ContentComponent implements OnInit {
                 infoListUnque += j[k[3][0][1]] + ',' + '\n';
               }
 
-              objectFormat[k[1]] = infoListUnque;
+              objectFormat[k[0]] = infoListUnque;
             }
             if (k[3].length != 1) {
               for (let j of i[k[1]]) {
@@ -330,11 +310,11 @@ export class ContentComponent implements OnInit {
                   }
                 }
               }
-              objectFormat[k[1]] = infoListObject;
+              objectFormat[k[0]] = infoListObject;
             }
           }
           if (i[k[1]] == null) {
-            objectFormat[k[1]] = '';
+            objectFormat[k[0]] = '';
           }
         }
       }
@@ -343,6 +323,7 @@ export class ContentComponent implements OnInit {
 
     return exportInformation;
   }
+
   showDialog() {
     this.dialogVisible = true;
   }

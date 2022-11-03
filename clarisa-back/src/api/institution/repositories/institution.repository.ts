@@ -1,9 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CountryOfficeRequest } from 'src/api/country-office-request/entities/country-office-request.entity';
 import { InstitutionDictionaryDto } from 'src/api/institution-dictionary/dto/institution-dictionary.dto';
 import { InstitutionSourceDto } from 'src/api/institution-dictionary/dto/institution-source.dto';
 import { InstitutionTypeDto } from 'src/api/institution-type/dto/institution-type.dto';
+import { PartnerRequest } from 'src/api/partner-request/entities/partner-request.entity';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
-import { DataSource, FindOptionsWhere, Repository } from 'typeorm';
+import {
+  DataSource,
+  FindOptionsRelations,
+  FindOptionsWhere,
+  Repository,
+} from 'typeorm';
 import { InstitutionCountryDto } from '../dto/institution-country.dto';
 import { InstitutionDto } from '../dto/institution.dto';
 import { InstitutionLocation } from '../entities/institution-location.entity';
@@ -11,7 +19,18 @@ import { Institution } from '../entities/institution.entity';
 
 @Injectable()
 export class InstitutionRepository extends Repository<Institution> {
-  constructor(private dataSource: DataSource) {
+  private readonly institutionRelations: FindOptionsRelations<Institution> = {
+    institution_type_object: true,
+    institution_locations: {
+      country_object: true,
+    },
+  };
+
+  constructor(
+    private dataSource: DataSource,
+    @InjectRepository(InstitutionLocation)
+    private institutionLocationRepository: Repository<InstitutionLocation>,
+  ) {
     super(Institution, dataSource.createEntityManager());
   }
 
@@ -34,44 +53,48 @@ export class InstitutionRepository extends Repository<Institution> {
 
     const institution: Institution[] = await this.find({
       where: whereClause,
-      relations: {
-        institution_type_object: true,
-        institution_locations: {
-          country_object: true,
-        },
-      },
+      relations: this.institutionRelations,
     });
 
     await Promise.all(
       institution.map(async (i) => {
-        const institutionDto: InstitutionDto = new InstitutionDto();
-        institutionDto.code = i.id;
-        institutionDto.name = i.name;
-        institutionDto.acronym = i.acronym;
-        institutionDto.websiteLink = i.website_link;
-        institutionDto.added = i.created_at;
-
-        institutionDto.countryOfficeDTO = i.institution_locations.map((il) => {
-          const countryDto: InstitutionCountryDto = new InstitutionCountryDto();
-
-          countryDto.code = il.country_object.id;
-          countryDto.isHeadquarter = il.is_headquater;
-          countryDto.isoAlpha2 = il.country_object.iso_alpha_2;
-          countryDto.name = il.country_object.name;
-          countryDto.regionDTO = null;
-
-          return countryDto;
-        });
-
-        institutionDto.institutionType = new InstitutionTypeDto();
-        institutionDto.institutionType.code = `${i.institution_type_object.id}`;
-        institutionDto.institutionType.name = i.institution_type_object.name;
-
+        const institutionDto: InstitutionDto = this.fillOutInstitutionInfo(i);
         institutionDtos.push(institutionDto);
       }),
     );
 
     return institutionDtos;
+  }
+
+  private fillOutInstitutionInfo(institution: Institution): InstitutionDto {
+    const institutionDto: InstitutionDto = new InstitutionDto();
+
+    institutionDto.code = institution.id;
+    institutionDto.name = institution.name;
+    institutionDto.acronym = institution.acronym;
+    institutionDto.websiteLink = institution.website_link;
+    institutionDto.added = institution.created_at;
+
+    institutionDto.countryOfficeDTO = institution.institution_locations.map(
+      (il) => {
+        const countryDto: InstitutionCountryDto = new InstitutionCountryDto();
+
+        countryDto.code = il.country_object.id;
+        countryDto.isHeadquarter = il.is_headquater;
+        countryDto.isoAlpha2 = il.country_object.iso_alpha_2;
+        countryDto.name = il.country_object.name;
+        countryDto.regionDTO = null;
+
+        return countryDto;
+      },
+    );
+
+    institutionDto.institutionType = new InstitutionTypeDto();
+    institutionDto.institutionType.code = `${institution.institution_type_object.id}`;
+    institutionDto.institutionType.name =
+      institution.institution_type_object.name;
+
+    return institutionDto;
   }
 
   async findAllInstitutionSourceEntries(
@@ -148,5 +171,46 @@ export class InstitutionRepository extends Repository<Institution> {
     );
 
     return institutionDictionaryDtos;
+  }
+
+  async createInstitutionCountry(
+    request: CountryOfficeRequest | PartnerRequest,
+    isHQ: boolean,
+  ): Promise<InstitutionLocation> {
+    let institutionLocation: InstitutionLocation = new InstitutionLocation();
+
+    institutionLocation.country_id = request.country_id;
+    institutionLocation.created_at = request.accepted_date;
+    institutionLocation.created_by = request.accepted_by;
+    institutionLocation.institution_id = request.institution_id;
+    institutionLocation.is_headquater = isHQ;
+
+    return this.institutionLocationRepository.save(institutionLocation);
+  }
+
+  async createInstitution(
+    partnerRequest: PartnerRequest,
+  ): Promise<InstitutionDto> {
+    let institution: Institution = new Institution();
+
+    institution.acronym = partnerRequest.acronym;
+    institution.created_at = partnerRequest.accepted_date;
+    institution.created_by = partnerRequest.accepted_by;
+    institution.institution_type_id = partnerRequest.institution_type_id;
+    institution.name = partnerRequest.partner_name;
+    institution.website_link = partnerRequest.web_page;
+
+    await this.createInstitutionCountry(partnerRequest, true);
+
+    institution = await this.save(institution);
+
+    institution = await this.findOne({
+      where: {
+        id: institution.id,
+      },
+      relations: this.institutionRelations,
+    });
+
+    return this.fillOutInstitutionInfo(institution);
   }
 }

@@ -15,7 +15,7 @@ export class GeographicScopeService {
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
-    type: string = SourceOption.CGIAR.path,
+    type: string = SourceOption.LEGACY.path,
   ): Promise<GeographicScope[]> {
     let whereClause: FindOptionsWhere<GeographicScope> = {};
     const incomingType = SourceOption.getfromPath(type);
@@ -24,7 +24,7 @@ export class GeographicScopeService {
       case SourceOption.ALL.path:
         // do nothing. no extra conditions needed
         break;
-      case SourceOption.CGIAR.path:
+      //case SourceOption.CGIAR.path:
       case SourceOption.LEGACY.path:
         whereClause = {
           ...whereClause,

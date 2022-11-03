@@ -7,17 +7,20 @@ import {
   Query,
   ParseIntPipe,
   Post,
-  Req,
   UseGuards,
   Body,
+  Patch,
 } from '@nestjs/common';
 import { Request } from 'express';
+import { GetUserData } from 'src/shared/decorators/user-data.decorator';
+import { RespondRequestDto } from 'src/shared/entities/dtos/respond-request.dto';
 import { ResponseDto } from 'src/shared/entities/dtos/response-dto';
 import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
 import { PermissionGuard } from 'src/shared/guards/permission.guard';
 import { UserData } from 'src/shared/interfaces/user-data';
 import { CreatePartnerRequestDto } from './dto/create-partner-request.dto';
 import { PartnerRequestDto } from './dto/partner-request.dto';
+import { UpdatePartnerRequestDto } from './dto/update-partner-request.dto';
 import { PartnerRequestService } from './partner-request.service';
 
 @Controller()
@@ -38,15 +41,44 @@ export class PartnerRequestController {
     return await this.partnerRequestService.findOne(id);
   }
 
-  @Post('institution')
+  @Post('create')
   @UseGuards(JwtAuthGuard, PermissionGuard)
   async createPartnerRequest(
-    @Req() request: Request,
+    @GetUserData() userData: UserData,
     @Body() newPartnerRequest: CreatePartnerRequestDto,
+    @Query('mis') mis: string,
   ): Promise<ResponseDto<PartnerRequestDto>> {
-    const userData: UserData = request.user as UserData;
+    const userDataMis: UserData & { mis: string } = {
+      ...userData,
+      mis,
+    };
+
     return this.partnerRequestService.createPartnerRequest(
       newPartnerRequest,
+      userDataMis,
+    );
+  }
+
+  @Post('respond')
+  @UseGuards(JwtAuthGuard, PermissionGuard)
+  async respondPartnerRequest(
+    @GetUserData() userData: UserData,
+    @Body() respondPartnerRequestDto: RespondRequestDto,
+  ): Promise<PartnerRequestDto> {
+    return this.partnerRequestService.respondPartnerRequest(
+      respondPartnerRequestDto,
+      userData,
+    );
+  }
+
+  @Patch('update')
+  @UseGuards(JwtAuthGuard, PermissionGuard)
+  async updatePartnerRequest(
+    @GetUserData() userData: UserData,
+    @Body() updatePartnerRequest: UpdatePartnerRequestDto,
+  ): Promise<ResponseDto<PartnerRequestDto>> {
+    return this.partnerRequestService.updatePartnerRequest(
+      updatePartnerRequest,
       userData,
     );
   }

@@ -5,9 +5,11 @@ import { InstitutionTypeDto } from 'src/api/institution-type/dto/institution-typ
 import { InstitutionCountryDto } from 'src/api/institution/dto/institution-country.dto';
 import { InstitutionDto } from 'src/api/institution/dto/institution.dto';
 import { Institution } from 'src/api/institution/entities/institution.entity';
+import { InstitutionRepository } from 'src/api/institution/repositories/institution.repository';
 import { ParentRegionDto } from 'src/api/region/dto/parent-region.dto';
 import { SimpleRegionDto } from 'src/api/region/dto/simple-region.dto';
 import { Region } from 'src/api/region/entities/region.entity';
+import { RespondRequestDto } from 'src/shared/entities/dtos/respond-request.dto';
 import { MisOption } from 'src/shared/entities/enums/mises-options';
 import { PartnerStatus } from 'src/shared/entities/enums/partner-status';
 import { RegionTypeEnum } from 'src/shared/entities/enums/region-types';
@@ -20,6 +22,7 @@ import {
 } from 'typeorm';
 import { CreatePartnerRequestDto } from '../dto/create-partner-request.dto';
 import { PartnerRequestDto } from '../dto/partner-request.dto';
+import { UpdatePartnerRequestDto } from '../dto/update-partner-request.dto';
 import { PartnerRequest } from '../entities/partner-request.entity';
 
 @Injectable()
@@ -43,8 +46,18 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     },
   };
 
-  constructor(private dataSource: DataSource) {
+  constructor(
+    private dataSource: DataSource,
+    private institutionRepository: InstitutionRepository,
+  ) {
     super(PartnerRequest, dataSource.createEntityManager());
+  }
+
+  async findPartnerRequestById(id: number): Promise<PartnerRequestDto> {
+    return this.findOne({
+      where: { id },
+      relations: this.partnerRelations,
+    }).then((pr) => this.fillOutPartnerRequestDto(pr));
   }
 
   async findAllPartnerRequests(
@@ -142,7 +155,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
   private getRequestStatus(accepted: boolean | undefined): string {
     // this did not work for some odd reason in TS; in JS it works just fine
     //return (accepted === undefined ? 'Pending' : (accepted ? 'Accepted', 'Rejected'));
-    if (accepted === undefined) {
+    if (accepted == undefined) {
       return PartnerStatus.PENDING.name;
     }
 
@@ -163,18 +176,22 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
   }
 
   private fillOutRegionInfo(regions: Region[]): SimpleRegionDto {
+    let regionDto = null;
     const region: Region = regions.find(
       (r) => r.region_type_id === RegionTypeEnum.CGIAR_REGION,
     );
-    const regionDto = new SimpleRegionDto();
 
-    regionDto.name = region.name;
-    regionDto.um49Code = region.iso_numeric;
+    if (region) {
+      regionDto = new SimpleRegionDto();
 
-    if (regionDto.parentRegion) {
-      regionDto.parentRegion = new ParentRegionDto();
-      regionDto.parentRegion.name = region.parent_object.name;
-      regionDto.parentRegion.um49Code = region.parent_object.iso_numeric;
+      regionDto.name = region.name;
+      regionDto.um49Code = region.iso_numeric;
+
+      if (regionDto.parentRegion) {
+        regionDto.parentRegion = new ParentRegionDto();
+        regionDto.parentRegion.name = region.parent_object.name;
+        regionDto.parentRegion.um49Code = region.parent_object.iso_numeric;
+      }
     }
 
     return regionDto;
@@ -243,5 +260,60 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     });
 
     return this.fillOutPartnerRequestDto(partialPartnerRequest);
+  }
+
+  async respondPartnerRequest(
+    partialPartnerRequest: PartnerRequest,
+    respondPartnerRequestDto: RespondRequestDto,
+  ): Promise<PartnerRequestDto> {
+    partialPartnerRequest.is_active = false;
+    partialPartnerRequest.external_user_mail =
+      respondPartnerRequestDto.externalUserMail;
+    partialPartnerRequest.external_user_name =
+      respondPartnerRequestDto.externalUserName;
+    partialPartnerRequest.external_user_comments =
+      respondPartnerRequestDto.externalUserComments;
+
+    const accepted = respondPartnerRequestDto.accept;
+
+    partialPartnerRequest.modification_justification = accepted
+      ? `Accepted on ${partialPartnerRequest.accepted_date.toISOString()}`
+      : respondPartnerRequestDto.rejectJustification;
+
+    partialPartnerRequest.updated_by = accepted
+      ? partialPartnerRequest.accepted_by
+      : partialPartnerRequest.rejected_by;
+
+    partialPartnerRequest = await this.save(partialPartnerRequest);
+
+    await this.institutionRepository.createInstitution(partialPartnerRequest);
+
+    return this.fillOutPartnerRequestDto(partialPartnerRequest);
+  }
+
+  async updatePartnerRequest(
+    updatePartnerRequest: UpdatePartnerRequestDto,
+    partnerRequest: PartnerRequest,
+  ): Promise<PartnerRequestDto> {
+    partnerRequest.partner_name = updatePartnerRequest.name;
+    partnerRequest.acronym = updatePartnerRequest.acronym;
+    partnerRequest.web_page = updatePartnerRequest.websiteLink;
+
+    partnerRequest.institution_type_id =
+      partnerRequest.institution_type_object.id;
+    partnerRequest.country_id = partnerRequest.country_object.id;
+
+    partnerRequest.updated_by = partnerRequest.updated_by_object.id;
+    partnerRequest.modification_justification =
+      updatePartnerRequest.modification_justification;
+
+    partnerRequest = await this.save(partnerRequest);
+
+    partnerRequest = await this.findOne({
+      where: { id: partnerRequest.id },
+      relations: this.partnerRelations,
+    });
+
+    return this.fillOutPartnerRequestDto(partnerRequest);
   }
 }

@@ -60,6 +60,7 @@ import { InstitutionTypeModule } from './institution-type/institution-type.modul
 import { InstitutionModule } from './institution/institution.module';
 import { InstitutionDictionaryModule } from './institution-dictionary/institution-dictionary.module';
 import { PartnerRequestModule } from './partner-request/partner-request.module';
+import { CountryOfficeRequestModule } from './country-office-request/country-office-request.module';
 
 @Module({
   controllers: [ApiController],
@@ -124,6 +125,7 @@ import { PartnerRequestModule } from './partner-request/partner-request.module';
     InstitutionModule,
     InstitutionDictionaryModule,
     PartnerRequestModule,
+    CountryOfficeRequestModule,
   ],
 })
 export class ApiModule {}

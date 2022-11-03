@@ -8,12 +8,14 @@ import { MisOption } from 'src/shared/entities/enums/mises-options';
 import { PartnerStatus } from 'src/shared/entities/enums/partner-status';
 import { UserData } from 'src/shared/interfaces/user-data';
 import { Repository } from 'typeorm';
+import { Country } from '../country/entities/country.entity';
 import { CountryRepository } from '../country/repositories/country.repository';
 import { InstitutionType } from '../institution-type/entities/institution-type.entity';
 import { Mis } from '../mis/entities/mis.entity';
 import { User } from '../user/entities/user.entity';
 import { CreatePartnerRequestDto } from './dto/create-partner-request.dto';
 import { PartnerRequestDto } from './dto/partner-request.dto';
+import { UpdatePartnerRequestDto } from './dto/update-partner-request.dto';
 import { PartnerRequest } from './entities/partner-request.entity';
 import { PartnerRequestRepository } from './repositories/partner-request.repository';
 
@@ -222,5 +224,104 @@ export class PartnerRequestService {
       partnerRequest,
       respondPartnerRequestDto,
     );
+  }
+
+  async updatePartnerRequest(
+    updatePartnerRequest: UpdatePartnerRequestDto,
+    userData: UserData,
+  ): Promise<ResponseDto<PartnerRequestDto>> {
+    updatePartnerRequest = plainToInstance(
+      UpdatePartnerRequestDto,
+      updatePartnerRequest,
+    );
+
+    updatePartnerRequest.userId = userData.userId;
+    updatePartnerRequest.externalUserMail =
+      updatePartnerRequest.externalUserMail ??= userData.email;
+    // we do not really want the user to send these fields again, and
+    // in order for the next validation not to fail, they need to have
+    // any value
+    updatePartnerRequest.misAcronym = 'SOME';
+    updatePartnerRequest.externalUserMail = 'some@mail.com';
+
+    //Basic validations
+    let validationErrors: string[] = (
+      await validate(updatePartnerRequest)
+    ).flatMap((e) => Object.values(e.constraints).map((m) => m));
+
+    if (validationErrors.length > 0) {
+      throw new HttpException(
+        HttpException.createBody(
+          ResponseDto.createBadResponse(validationErrors, this.constructor),
+        ),
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    //Comprehensive validations
+    const partnerRequest: PartnerRequest =
+      await this.partnerRequestRepository.findOneBy({
+        id: updatePartnerRequest.id,
+      });
+
+    partnerRequest.updated_by_object = await this.userRepository.findOneBy({
+      id: updatePartnerRequest.userId,
+    });
+
+    partnerRequest.country_object = await this.countryRepository.findOneBy({
+      iso_alpha_2: updatePartnerRequest.hqCountryIso,
+    });
+
+    partnerRequest.institution_type_object =
+      await this.institutionTypeRepository.findOneBy({
+        id: updatePartnerRequest.institutionTypeCode,
+      });
+
+    if (!partnerRequest) {
+      validationErrors.push(
+        `A partner request with id '${updatePartnerRequest.id}' could not be found`,
+      );
+    }
+
+    if (!partnerRequest.is_active) {
+      validationErrors.push(
+        `The partner request is not active. Please check if it has been accepted or rejected`,
+      );
+    }
+
+    if (!partnerRequest.updated_by_object) {
+      validationErrors.push(
+        `An user with id '${updatePartnerRequest.userId}' could not be found`,
+      );
+    }
+
+    if (!partnerRequest.institution_type_object) {
+      validationErrors.push(
+        `An institution type with id '${updatePartnerRequest.institutionTypeCode}' could not be found`,
+      );
+    }
+
+    if (!partnerRequest.country_object) {
+      validationErrors.push(
+        `A country with the ISO-2 code '${updatePartnerRequest.hqCountryIso}' could not be found`,
+      );
+    }
+
+    if (validationErrors.length > 0) {
+      throw new HttpException(
+        HttpException.createBody(
+          ResponseDto.createBadResponse(validationErrors, this.constructor),
+        ),
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const response: PartnerRequestDto =
+      await this.partnerRequestRepository.updatePartnerRequest(
+        updatePartnerRequest,
+        partnerRequest,
+      );
+
+    return ResponseDto.createCreatedResponse(response, this.constructor);
   }
 }

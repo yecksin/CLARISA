@@ -7,9 +7,9 @@ import {
   Query,
   ParseIntPipe,
   Post,
-  Req,
   UseGuards,
   Body,
+  Patch,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { GetUserData } from 'src/shared/decorators/user-data.decorator';
@@ -20,6 +20,7 @@ import { PermissionGuard } from 'src/shared/guards/permission.guard';
 import { UserData } from 'src/shared/interfaces/user-data';
 import { CreatePartnerRequestDto } from './dto/create-partner-request.dto';
 import { PartnerRequestDto } from './dto/partner-request.dto';
+import { UpdatePartnerRequestDto } from './dto/update-partner-request.dto';
 import { PartnerRequestService } from './partner-request.service';
 
 @Controller()
@@ -66,6 +67,18 @@ export class PartnerRequestController {
   ): Promise<PartnerRequestDto> {
     return this.partnerRequestService.respondPartnerRequest(
       respondPartnerRequestDto,
+      userData,
+    );
+  }
+
+  @Patch('update')
+  @UseGuards(JwtAuthGuard, PermissionGuard)
+  async updatePartnerRequest(
+    @GetUserData() userData: UserData,
+    @Body() updatePartnerRequest: UpdatePartnerRequestDto,
+  ): Promise<ResponseDto<PartnerRequestDto>> {
+    return this.partnerRequestService.updatePartnerRequest(
+      updatePartnerRequest,
       userData,
     );
   }

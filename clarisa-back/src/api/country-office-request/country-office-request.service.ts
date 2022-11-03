@@ -250,4 +250,94 @@ export class CountryOfficeRequestService {
       respondCountryOfficeRequestDto,
     );
   }
+
+  async updateCountryOfficeRequest(
+    updateCountryOfficeRequest: UpdateCountryOfficeRequestDto,
+    userData: UserData,
+  ): Promise<ResponseDto<CountryOfficeRequestDto>> {
+    updateCountryOfficeRequest = plainToInstance(
+      UpdateCountryOfficeRequestDto,
+      updateCountryOfficeRequest,
+    );
+
+    updateCountryOfficeRequest.userId = userData.userId;
+    updateCountryOfficeRequest.externalUserMail =
+      updateCountryOfficeRequest.externalUserMail ??= userData.email;
+    // we do not really want the user to send these fields again, and
+    // in order for the next validation not to fail, they need to have
+    // any value
+    updateCountryOfficeRequest.misAcronym = 'SOME';
+    updateCountryOfficeRequest.externalUserMail = 'some@mail.com';
+
+    //Basic validations
+    let validationErrors: string[] = (
+      await validate(updateCountryOfficeRequest)
+    ).flatMap((e) => Object.values(e.constraints).map((m) => m));
+
+    if (validationErrors.length > 0) {
+      throw new HttpException(
+        HttpException.createBody(
+          ResponseDto.createBadResponse(validationErrors, this.constructor),
+        ),
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    //Comprehensive validations
+    const countryOfficeRequest: CountryOfficeRequest =
+      await this.countryOfficeRequestRepository.findOneBy({
+        id: updateCountryOfficeRequest.id,
+      });
+
+    countryOfficeRequest.updated_by_object =
+      await this.userRepository.findOneBy({
+        id: updateCountryOfficeRequest.userId,
+      });
+
+    countryOfficeRequest.country_object =
+      await this.countryRepository.findOneBy({
+        id: updateCountryOfficeRequest.userId,
+      });
+
+    if (!countryOfficeRequest) {
+      validationErrors.push(
+        `A country office request with id '${updateCountryOfficeRequest.id}' could not be found`,
+      );
+    }
+
+    if (!countryOfficeRequest.is_active) {
+      validationErrors.push(
+        `The country office request is not active. Please check if it has been accepted or rejected`,
+      );
+    }
+
+    if (!countryOfficeRequest.country_object) {
+      validationErrors.push(
+        `A country with the ISO-2 code '${updateCountryOfficeRequest.countryIso}' could not be found`,
+      );
+    }
+
+    if (!countryOfficeRequest.updated_by_object) {
+      validationErrors.push(
+        `An user with id '${updateCountryOfficeRequest.userId}' could not be found`,
+      );
+    }
+
+    if (validationErrors.length > 0) {
+      throw new HttpException(
+        HttpException.createBody(
+          ResponseDto.createBadResponse(validationErrors, this.constructor),
+        ),
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const response: CountryOfficeRequestDto =
+      await this.countryOfficeRequestRepository.updateCountryOfficeRequest(
+        updateCountryOfficeRequest,
+        countryOfficeRequest,
+      );
+
+    return ResponseDto.createCreatedResponse(response, this.constructor);
+  }
 }

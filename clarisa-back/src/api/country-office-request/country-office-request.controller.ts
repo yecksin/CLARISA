@@ -10,6 +10,7 @@ import {
   ParseIntPipe,
   UseGuards,
   Req,
+  Patch,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { GetUserData } from 'src/shared/decorators/user-data.decorator';
@@ -21,6 +22,7 @@ import { CountryOfficeRequestService } from './country-office-request.service';
 import { CountryOfficeRequestDto } from './dto/country-office-request.dto';
 import { CreateCountryOfficeRequestDto } from './dto/create-country-office-request.dto';
 import { RespondRequestDto } from '../../shared/entities/dtos/respond-request.dto';
+import { UpdateCountryOfficeRequestDto } from './dto/update-country-office-request.dto';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
@@ -68,6 +70,18 @@ export class CountryOfficeRequestController {
   ): Promise<CountryOfficeRequestDto> {
     return this.countryOfficeRequestService.respondCountryOfficeRequest(
       respondCountryOfficeRequestDto,
+      userData,
+    );
+  }
+
+  @Patch('update')
+  @UseGuards(JwtAuthGuard, PermissionGuard)
+  async updateCountryOfficeRequest(
+    @GetUserData() userData: UserData,
+    @Body() updateCountryOfficeRequest: UpdateCountryOfficeRequestDto,
+  ): Promise<ResponseDto<CountryOfficeRequestDto>> {
+    return this.countryOfficeRequestService.updateCountryOfficeRequest(
+      updateCountryOfficeRequest,
       userData,
     );
   }

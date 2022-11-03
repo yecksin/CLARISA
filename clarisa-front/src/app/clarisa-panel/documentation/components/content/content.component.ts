@@ -214,8 +214,9 @@ export class ContentComponent implements OnInit {
       },
     });
     doc.save(
-      'clarisa ' +
+      'CLARISA_' +
         this.informationPrint.name +
+        '_' +
         d.getFullYear() +
         (d.getMonth() + 1) +
         d.getDate() +
@@ -233,7 +234,7 @@ export class ContentComponent implements OnInit {
         bookType: 'xlsx',
         type: 'array',
       });
-      this.saveAsExcelFile(excelBuffer, 'Clarisa ');
+      this.saveAsExcelFile(excelBuffer, 'CLARISA_');
     });
   }
 
@@ -249,6 +250,7 @@ export class ContentComponent implements OnInit {
       data,
       fileName +
         this.informationPrint.name +
+        '_' +
         d.getFullYear() +
         (d.getMonth() + 1) +
         d.getDate() +

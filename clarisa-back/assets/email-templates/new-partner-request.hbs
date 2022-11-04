@@ -1,0 +1,77 @@
+{{!<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+To: MARLOSupport@cgiar.org<br>
+CC: support@gmail.com<br>
+BBC: MARLOSupport@cgiar.org<br>
+----------------------------------------------------<br><br>
+<div style="font-family:Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif; ">
+    Support Dev (support@gmail.com) is
+    requesting to add the following partner information:<br><br>Partner Name: Example test<br>Acronym: Example
+    <br>Partner type: Academic, Training and Research <br>Headquarter country location: Afghanistan <br>
+    <br><br>Additional Information <br>From: Submission Tool;
+    Initiative ID: 4 - Network 4 Enabling Tools, Technology and Shared Services
+    ;
+    Stage: proposal
+    ;
+    Section: Key Partners;
+    User Id: 120;
+    Initiative role: No role;
+    Initiative status: Approved;
+    App role: Admin;
+    <br> <br><br>This request was sent through CLARISA API <br><br>
+</div>}}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .card {
+      border-width: 1px;
+      border-style: solid;
+      border-color: #E0E0E0;
+      border-radius: 3px;
+      padding: 16px;
+      max-width: 512px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .title {
+      color: #202124;
+      width: 100%;
+    }
+    ul {
+      color: #202124;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="title">
+      <h2> {{external_user_name}} ({{external_user_mail}}) is requesting to add an institution with the following information</h2>
+    </div>
+  
+    <strong>Request Details:</strong>
+     <ul>
+      <li> <strong>Partner Name: </strong> {{partner_name}}</li>
+      <li> <strong>Acronym: </strong>  {{acronym}}</li>
+      <li> <strong>Partner type: </strong>  {{institution_type_object.name}}</li>
+      <li> <strong>Headquarter country location: </strong> {{country_object.name}}</li>
+      <li> <strong>Webpage: </strong> {{web_page}}</li>
+      <li> <strong>MIS: </strong> {{mis_object.name}}</li>
+      <li> <strong>Creation date: </strong> {{mis_object.name}}</li>
+
+      <li> <strong>Additional comments: </strong> <br>
+        {{external_user_comments}}
+      </li>
+    </ul>
+    <br> <br>
+    <div style="color: #757575; margin-left: auto;  margin-right: auto; text-align: center;">
+      <small> This request was sent through the CLARISA API </small> <br>
+      <small> Sent on 2022</small>
+    </div>
+  </div>
+</body>
+</html>

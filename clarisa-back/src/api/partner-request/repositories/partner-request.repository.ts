@@ -13,6 +13,7 @@ import { RespondRequestDto } from 'src/shared/entities/dtos/respond-request.dto'
 import { MisOption } from 'src/shared/entities/enums/mises-options';
 import { PartnerStatus } from 'src/shared/entities/enums/partner-status';
 import { RegionTypeEnum } from 'src/shared/entities/enums/region-types';
+import { MailUtil } from 'src/shared/utils/mailer.util';
 import {
   DataSource,
   FindOptionsRelations,
@@ -33,6 +34,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
         parent_object: true,
       },
     },
+    mis_object: true,
     institution_type_object: true,
     institution_object: {
       institution_type_object: true,
@@ -49,6 +51,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
   constructor(
     private dataSource: DataSource,
     private institutionRepository: InstitutionRepository,
+    private mailUtil: MailUtil,
   ) {
     super(PartnerRequest, dataSource.createEntityManager());
   }
@@ -258,6 +261,8 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       where: { id: partialPartnerRequest.id },
       relations: this.partnerRelations,
     });
+
+    this.mailUtil.sendNewPartnerRequestNotification(partialPartnerRequest);
 
     return this.fillOutPartnerRequestDto(partialPartnerRequest);
   }

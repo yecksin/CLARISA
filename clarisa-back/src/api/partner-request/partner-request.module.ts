@@ -10,6 +10,7 @@ import { Mis } from '../mis/entities/mis.entity';
 import { User } from '../user/entities/user.entity';
 import { InstitutionRepository } from '../institution/repositories/institution.repository';
 import { InstitutionLocation } from '../institution/entities/institution-location.entity';
+import { MailUtil } from 'src/shared/utils/mailer.util';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { InstitutionLocation } from '../institution/entities/institution-locatio
     PartnerRequestRepository,
     CountryRepository,
     InstitutionRepository,
+    MailUtil,
   ],
 })
 export class PartnerRequestModule {}

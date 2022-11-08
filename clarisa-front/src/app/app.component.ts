@@ -8,9 +8,13 @@ import { AuthService } from './shared/services/auth.service';
 })
 export class AppComponent {
   title = 'clarisa-front';
+  showTWK = false;
   constructor(public authService: AuthService) {}
 
   ngOnInit(): void {
     this.authService.inLogin = false;
+    setTimeout(() => {
+      this.showTWK = true;
+    }, 40000);
   }
 }

@@ -1,4 +1,5 @@
 export class ActionAreaOutcomeDto {
+  id: number;
   actionAreaId: number;
   actionAreaName: string;
   outcomeId: number;

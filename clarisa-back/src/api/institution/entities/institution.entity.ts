@@ -1,8 +1,3 @@
-import { CountryOfficeRequest } from 'src/api/country-office-request/entities/country-office-request.entity';
-import { InstitutionDictionary } from 'src/api/institution-dictionary/entities/institution-dictionary.entity';
-import { InstitutionType } from 'src/api/institution-type/entities/institution-type.entity';
-import { PartnerRequest } from 'src/api/partner-request/entities/partner-request.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Column,
   Entity,
@@ -11,6 +6,11 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { CountryOfficeRequest } from '../../country-office-request/entities/country-office-request.entity';
+import { InstitutionDictionary } from '../../institution-dictionary/entities/institution-dictionary.entity';
+import { InstitutionType } from '../../institution-type/entities/institution-type.entity';
+import { PartnerRequest } from '../../partner-request/entities/partner-request.entity';
 import { InstitutionLocation } from './institution-location.entity';
 
 @Entity('institutions')

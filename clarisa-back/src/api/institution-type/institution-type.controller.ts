@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { InstitutionTypeService } from './institution-type.service';
 import { UpdateInstitutionTypeDto } from './dto/update-institution-type.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { InstitutionType } from './entities/institution-type.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

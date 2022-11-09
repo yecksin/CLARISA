@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CountryOfficeRequest } from 'src/api/country-office-request/entities/country-office-request.entity';
-import { InstitutionDictionaryDto } from 'src/api/institution-dictionary/dto/institution-dictionary.dto';
-import { InstitutionSourceDto } from 'src/api/institution-dictionary/dto/institution-source.dto';
-import { InstitutionTypeDto } from 'src/api/institution-type/dto/institution-type.dto';
-import { PartnerRequest } from 'src/api/partner-request/entities/partner-request.entity';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import {
   DataSource,
   FindOptionsRelations,
   FindOptionsWhere,
   Repository,
 } from 'typeorm';
+import { FindAllOptions } from '../../../shared/entities/enums/find-all-options';
+import { CountryOfficeRequest } from '../../country-office-request/entities/country-office-request.entity';
+import { InstitutionDictionaryDto } from '../../institution-dictionary/dto/institution-dictionary.dto';
+import { InstitutionSourceDto } from '../../institution-dictionary/dto/institution-source.dto';
+import { InstitutionTypeDto } from '../../institution-type/dto/institution-type.dto';
+import { PartnerRequest } from '../../partner-request/entities/partner-request.entity';
 import { InstitutionCountryDto } from '../dto/institution-country.dto';
 import { InstitutionDto } from '../dto/institution.dto';
 import { InstitutionLocation } from '../entities/institution-location.entity';

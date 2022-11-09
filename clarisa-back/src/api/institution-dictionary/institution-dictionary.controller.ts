@@ -13,10 +13,10 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { InstitutionDictionaryService } from './institution-dictionary.service';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { UpdateInstitutionDictionaryDto } from './dto/update-institution-dictionary.dto';
 import { InstitutionDictionary } from './entities/institution-dictionary.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

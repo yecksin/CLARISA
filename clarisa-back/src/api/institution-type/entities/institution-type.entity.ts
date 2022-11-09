@@ -1,7 +1,14 @@
 import { Institution } from 'src/api/institution/entities/institution.entity';
 import { PartnerRequest } from 'src/api/partner-request/entities/partner-request.entity';
 import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('institution_types')
 export class InstitutionType extends AuditableEntity {
@@ -20,9 +27,19 @@ export class InstitutionType extends AuditableEntity {
   @Column()
   source_id: number;
 
+  @Column()
+  parent_id: number;
+
   @OneToMany(() => Institution, (i) => i.institution_type_object)
   institutions: Promise<Institution[]>;
 
   @OneToMany(() => PartnerRequest, (pr) => pr.institution_type_object)
   partner_requests: PartnerRequest[];
+
+  @OneToMany(() => InstitutionType, (it) => it.parent_object)
+  children: InstitutionType[];
+
+  @ManyToOne(() => InstitutionType, (it) => it.children)
+  @JoinColumn({ name: 'parent_id' })
+  parent_object: InstitutionType;
 }

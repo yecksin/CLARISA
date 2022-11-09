@@ -33,6 +33,17 @@ export class InstitutionTypeController {
     return await this.institutionTypeService.findAll(show, type);
   }
 
+  @Get('/from-parent')
+  async findAllFromParentToChildren(
+    @Query('show') show: FindAllOptions,
+    @Query('type') type: string,
+  ) {
+    return await this.institutionTypeService.findAllFromParentToChildren(
+      show,
+      type,
+    );
+  }
+
   @Get('get/:id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
     return await this.institutionTypeService.findOne(id);

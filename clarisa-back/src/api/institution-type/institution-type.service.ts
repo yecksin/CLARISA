@@ -3,55 +3,50 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { SourceOption } from 'src/shared/entities/enums/source-options';
 import { FindOptionsWhere, Repository } from 'typeorm';
+import { InstitutionTypeFromParentDto } from './dto/institution-type-from-parent.dto';
+import { InstitutionTypeDto } from './dto/institution-type.dto';
 import { UpdateInstitutionTypeDto } from './dto/update-institution-type.dto';
 import { InstitutionType } from './entities/institution-type.entity';
+import { InstitutionTypeRepository } from './repositories/institution-type.repository';
 
 @Injectable()
 export class InstitutionTypeService {
-  constructor(
-    @InjectRepository(InstitutionType)
-    private institutionTypesRepository: Repository<InstitutionType>,
-  ) {}
+  constructor(private institutionTypesRepository: InstitutionTypeRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
     type: string = SourceOption.CGIAR.path,
-  ): Promise<InstitutionType[]> {
-    let whereClause: FindOptionsWhere<InstitutionType> = {};
-    const incomingType = SourceOption.getfromPath(type);
-
-    switch (type) {
-      case SourceOption.ALL.path:
-        // do nothing. no extra conditions needed
-        break;
-      case SourceOption.CGIAR.path:
-      case SourceOption.LEGACY.path:
-        whereClause = {
-          ...whereClause,
-          source_id: incomingType.source_id,
-        };
-        break;
-      default:
-        throw Error('?!');
+  ): Promise<InstitutionTypeDto[]> {
+    if (!Object.values<string>(FindAllOptions).includes(option)) {
+      throw Error('?!');
     }
 
-    switch (option) {
-      case FindAllOptions.SHOW_ALL:
-        return await this.institutionTypesRepository.find({
-          where: whereClause,
-        });
-      case FindAllOptions.SHOW_ONLY_ACTIVE:
-      case FindAllOptions.SHOW_ONLY_INACTIVE:
-        whereClause = {
-          ...whereClause,
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
-        };
-        return await this.institutionTypesRepository.find({
-          where: whereClause,
-        });
-      default:
-        throw Error('?!');
+    if (!SourceOption.getfromPath(type)) {
+      throw Error('?!');
     }
+
+    return this.institutionTypesRepository.findAllTypesFromChildrenToParent(
+      option,
+      type,
+    );
+  }
+
+  async findAllFromParentToChildren(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+    type: string = SourceOption.CGIAR.path,
+  ): Promise<InstitutionTypeFromParentDto[]> {
+    if (!Object.values<string>(FindAllOptions).includes(option)) {
+      throw Error('?!');
+    }
+
+    if (!SourceOption.getfromPath(type)) {
+      throw Error('?!');
+    }
+
+    return this.institutionTypesRepository.findAllTypesFromParentToChildren(
+      option,
+      type,
+    );
   }
 
   async findOne(id: number): Promise<InstitutionType> {

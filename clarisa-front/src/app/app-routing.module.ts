@@ -3,22 +3,34 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path:"landing-page", 
-    loadChildren: () => import('./landing-page/landing-page.module').then((m) => m.LandingPageModule),
+    path: 'landing-page',
+    loadChildren: () =>
+      import('./landing-page/landing-page.module').then(
+        (m) => m.LandingPageModule
+      ),
   },
   {
-    redirectTo:"landing-page",
-    path:"",
-    pathMatch:"full",
+    redirectTo: 'landing-page',
+    path: '',
+    pathMatch: 'full',
+  },
+
+  {
+    path: 'clarisa-panel',
+    loadChildren: () =>
+      import('./clarisa-panel/clarisa-panel.module').then(
+        (m) => m.ClarisaPanelModule
+      ),
   },
   {
-    path:"clarisa-panel", 
-    loadChildren: () => import('./clarisa-panel/clarisa-panel.module').then((m) => m.ClarisaPanelModule),
-  }
+    redirectTo: 'clarisa-panel',
+    path: 'swagger/generalListReference.html',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -46,6 +46,8 @@ export class ActionAreaOutcomeIndicatorRepository extends Repository<ActionAreaO
         const actionAreaOutcomeDto: ActionAreaOutcomeDto =
           new ActionAreaOutcomeDto();
 
+        actionAreaOutcomeDto.id = aaoi.id;
+
         if (aaoi.action_area_object) {
           actionAreaOutcomeDto.actionAreaId = aaoi.action_area_id;
           actionAreaOutcomeDto.actionAreaName = aaoi.action_area_object.name;

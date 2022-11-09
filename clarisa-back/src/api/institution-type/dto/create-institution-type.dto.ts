@@ -8,4 +8,6 @@ export class CreateInstitutionTypeDto extends AuditableDto {
   description: string;
 
   source_id: number;
+
+  parent_id: number;
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ApiOST } from 'src/shared/integration/ost/api.ost';
 import { firstValueFrom } from 'rxjs';
+import { ApiOST } from '../../shared/integration/ost/api.ost';
 
 @Injectable()
 export class EndOfInitiativeOutcomesService {

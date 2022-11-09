@@ -1,4 +1,3 @@
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Column,
   Entity,
@@ -6,6 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { ImpactArea } from '../../impact-area/entities/impact-area.entity';
 
 @Entity('impact_area_indicators')

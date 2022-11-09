@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
-import { SourceOption } from 'src/shared/entities/enums/source-options';
 import { FindOptionsWhere, Repository } from 'typeorm';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
+import { SourceOption } from '../../shared/entities/enums/source-options';
 import { UpdatePolicyStageDto } from './dto/update-policy-stage.dto';
 import { PolicyStage } from './entities/policy-stage.entity';
 

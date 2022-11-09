@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { TechnologyDevelopmentStageService } from './technology-development-stage.service';
 import { UpdateTechnologyDevelopmentStageDto } from './dto/update-technology-development-stage.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { TechnologyDevelopmentStage } from './entities/technology-development-stage.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

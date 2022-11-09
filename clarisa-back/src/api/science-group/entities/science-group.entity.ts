@@ -1,5 +1,3 @@
-import { Unit } from 'src/api/unit/entities/unit.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Column,
   Entity,
@@ -8,6 +6,8 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { Unit } from '../../unit/entities/unit.entity';
 
 @Entity('science_groups')
 export class ScienceGroup extends AuditableEntity {

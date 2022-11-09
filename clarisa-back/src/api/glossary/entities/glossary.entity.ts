@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 
 @Entity('glossary')
 export class Glossary extends AuditableEntity {

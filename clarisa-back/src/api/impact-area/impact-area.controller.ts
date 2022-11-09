@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { ImpactAreaService } from './impact-area.service';
 import { UpdateImpactAreaDto } from './dto/update-impact-area.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { ImpactArea } from './entities/impact-area.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

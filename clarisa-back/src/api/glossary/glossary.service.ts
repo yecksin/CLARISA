@@ -3,7 +3,7 @@ import { UpdateGlossaryDto } from './dto/update-glossary.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Glossary } from './entities/glossary.entity';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 @Injectable()
 export class GlossaryService {
   constructor(

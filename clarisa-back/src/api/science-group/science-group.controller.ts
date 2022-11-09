@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { ScienceGroupService } from './science-group.service';
 import { UpdateScienceGroupDto } from './dto/update-science-group.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { ScienceGroup } from './entities/science-group.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

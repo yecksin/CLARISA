@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { HomepageClarisaCategory } from 'src/api/homepage-clarisa-category/entities/homepage-clarisa-category.entity';
 import { DataSource, IsNull, Repository } from 'typeorm';
+import { HomepageClarisaCategory } from '../../homepage-clarisa-category/entities/homepage-clarisa-category.entity';
 import { CategoryEndpointDto } from '../dto/category-endpoints.dto';
 import { HomepageClarisaCategoryEndpoint } from '../entities/homepage-clarisa-category-endpoint.entity';
 

@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { RegionTypeService } from './region-type.service';
 import { UpdateRegionTypeDto } from './dto/update-region-type.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { RegionType } from './entities/region-type.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

@@ -1,5 +1,4 @@
 import { Role } from 'src/api/role/entities/role.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Entity,
   Column,
@@ -7,6 +6,7 @@ import {
   ManyToMany,
   JoinTable,
 } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 
 @Entity('users')
 export class User extends AuditableEntity {

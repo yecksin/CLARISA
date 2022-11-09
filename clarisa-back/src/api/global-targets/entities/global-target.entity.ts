@@ -1,5 +1,4 @@
 import { Expose, Transform } from 'class-transformer';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Entity,
   Column,
@@ -7,6 +6,7 @@ import {
   JoinColumn,
   ManyToOne,
 } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { ImpactArea } from '../../impact-area/entities/impact-area.entity';
 
 @Entity('global_targets')

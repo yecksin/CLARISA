@@ -16,7 +16,7 @@ import { MisService } from './mis.service';
 import { UpdateMisDto } from './dto/update-mis.dto';
 import { Mis } from './entities/mis.entity';
 import { Response } from 'express';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

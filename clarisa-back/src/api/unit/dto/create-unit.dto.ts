@@ -1,4 +1,4 @@
-import { AuditableDto } from 'src/shared/entities/dtos/auditable-dto';
+import { AuditableDto } from '../../../shared/entities/dtos/auditable-dto';
 
 export class CreateUnitDto extends AuditableDto {
   financial_code: string;

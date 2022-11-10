@@ -22,11 +22,6 @@ const routes: Routes = [
         (m) => m.ClarisaPanelModule
       ),
   },
-  {
-    redirectTo: 'clarisa-panel/documentation/One_CGIAR_Control_List',
-    path: 'swagger/generalListReference.html',
-    pathMatch: 'full',
-  },
 ];
 
 @NgModule({

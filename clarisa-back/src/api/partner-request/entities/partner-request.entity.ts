@@ -1,8 +1,3 @@
-import { Country } from 'src/api/country/entities/country.entity';
-import { InstitutionType } from 'src/api/institution-type/entities/institution-type.entity';
-import { Institution } from 'src/api/institution/entities/institution.entity';
-import { Mis } from 'src/api/mis/entities/mis.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Column,
   Entity,
@@ -11,6 +6,11 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { Country } from '../../country/entities/country.entity';
+import { InstitutionType } from '../../institution-type/entities/institution-type.entity';
+import { Institution } from '../../institution/entities/institution.entity';
+import { Mis } from '../../mis/entities/mis.entity';
 
 @Entity('partner_requests')
 export class PartnerRequest extends AuditableEntity {

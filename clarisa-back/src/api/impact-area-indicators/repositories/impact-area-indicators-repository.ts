@@ -1,8 +1,8 @@
 import { ImpactAreaIndicator } from '../entities/impact-area-indicator.entity';
 import { ImpactAreaIndicatorDto } from '../dto/impact-area-indicator.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Injectable } from '@nestjs/common';
 import { DataSource, FindOptionsWhere, Repository } from 'typeorm';
+import { FindAllOptions } from '../../../shared/entities/enums/find-all-options';
 
 @Injectable()
 export class ImpactAreaIndicatorRepository extends Repository<ImpactAreaIndicator> {

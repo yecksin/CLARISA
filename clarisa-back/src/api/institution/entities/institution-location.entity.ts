@@ -1,5 +1,3 @@
-import { Country } from 'src/api/country/entities/country.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Column,
   Entity,
@@ -7,6 +5,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { Country } from '../../country/entities/country.entity';
 import { Institution } from './institution.entity';
 
 @Entity('institution_locations')

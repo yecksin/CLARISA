@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -23,7 +24,10 @@ export class LandingPageComponent implements OnInit {
   urlAditionalThree = `./assets/css/ionicons.min.css`;
   urlAditinalFour = `./assets/css/magnific-popup.css`;
   estado = true;
-  constructor() {}
+  urls: any;
+  constructor(private activeRoute: Router) {
+    this.urls = this.activeRoute.url;
+  }
 
   ngOnInit(): void {
     this.changesStyles.setAttribute('href', this.url);
@@ -38,5 +42,6 @@ export class LandingPageComponent implements OnInit {
     setTimeout(() => {
       this.estado = false;
     }, 2000);
+    console.log(this.urls);
   }
 }

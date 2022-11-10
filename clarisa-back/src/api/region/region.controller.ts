@@ -14,10 +14,10 @@ import {
 } from '@nestjs/common';
 import { RegionService } from './region.service';
 import { UpdateRegionDto } from './dto/update-region.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { Region } from './entities/region.entity';
-import { RegionTypeEnum } from 'src/shared/entities/enums/region-types';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
+import { RegionTypeEnum } from '../../shared/entities/enums/region-types';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

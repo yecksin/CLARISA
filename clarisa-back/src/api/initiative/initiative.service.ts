@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { InitiativeDto } from './dto/initiative.dto';
 import { UpdateInitiativeDto } from './dto/update-initiative.dto';
 import { Initiative } from './entities/initiative.entity';

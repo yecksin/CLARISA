@@ -1,4 +1,4 @@
-import { AuditableDto } from 'src/shared/entities/dtos/auditable-dto';
+import { AuditableDto } from '../../../shared/entities/dtos/auditable-dto';
 
 export class CreateInstitutionTypeDto extends AuditableDto {
   name: string;
@@ -8,4 +8,6 @@ export class CreateInstitutionTypeDto extends AuditableDto {
   description: string;
 
   source_id: number;
+
+  parent_id: number;
 }

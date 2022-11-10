@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { UpdateImpactAreaIndicatorDto } from './dto/update-impact-area-indicator.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { ImpactAreaIndicator } from './entities/impact-area-indicator.entity';
 import { ImpactAreaIndicatorDto } from './dto/impact-area-indicator.dto';
 import { ImpactAreaIndicatorRepository } from './repositories/impact-area-indicators-repository';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Injectable()
 export class ImpactAreaIndicatorsService {

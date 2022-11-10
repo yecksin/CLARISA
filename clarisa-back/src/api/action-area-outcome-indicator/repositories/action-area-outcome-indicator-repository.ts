@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { ActionAreaOutcomeDto } from 'src/api/action-area-outcome/dto/action-area-outcome.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { DataSource, FindOptionsWhere, Repository } from 'typeorm';
+import { FindAllOptions } from '../../../shared/entities/enums/find-all-options';
+import { ActionAreaOutcomeDto } from '../../action-area-outcome/dto/action-area-outcome.dto';
 import { ActionAreaOutcomeIndicatorRequestDto } from '../dto/action-area-outcome-indicator-request.dto';
 import { ActionAreaOutcomeIndicator } from '../entities/action-area-outcome-indicator.entity';
 

@@ -1,0 +1,81 @@
+<div
+  style="
+    width: 100%;
+    background-color: rgb(199, 199, 199);
+    color: black;
+    border-radius: 20px;
+  "
+>
+  <p style="font-size: 14px; padding: 20px">
+    Please enter the instiitution as the legal entity.
+    <br />
+    The name of the institution should be in its language.(e.g. For CIAT)
+  </p>
+</div>
+<div style="margin-top: 50px">
+  <div>
+    <span>Name:*</span>
+    <input type="text" pInputText style="width: 100%" />
+  </div>
+  <div
+    style="margin-top: 10px; width: 100%; display: flex; flex-direction: row"
+  >
+    <div style="width: 50%">
+      <span>Type:*</span>
+      <br />
+      <p-dropdown
+        [options]="type"
+        [(ngModel)]="selectedType"
+        optionLabel="name"
+        [style]="{ width: '90%' }"
+      ></p-dropdown>
+    </div>
+    <div style="width: 50%">
+      <span>Country:*</span>
+      <br />
+      <p-dropdown
+        [options]="cities"
+        [(ngModel)]="selectedCity"
+        optionLabel="name"
+        [style]="{ width: '90%' }"
+      ></p-dropdown>
+    </div>
+  </div>
+  <div
+    style="margin-top: 10px; width: 100%; display: flex; flex-direction: row"
+  >
+    <div style="width: 70%">
+      <span>Website:</span>
+      <input type="text" pInputText style="width: 100%" />
+    </div>
+    <div style="width: 30%; margin-left: 20px">
+      <span>Acronym:</span>
+      <input type="text" pInputText style="width: 100%" />
+    </div>
+  </div>
+  <div style="margin-top: 10px">
+    <span>Comments:</span><br />
+    <textarea
+      [rows]="5"
+      pInputTextarea
+      [autoResize]="true"
+      style="width: 100%"
+    ></textarea>
+  </div>
+  <div
+    style="
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    "
+  >
+    <button
+      pButton
+      type="button"
+      label="Request New institution"
+      class="p-button-warning"
+      style="border-radius: 30px"
+    ></button>
+  </div>
+</div>

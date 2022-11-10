@@ -15,8 +15,8 @@ import {
 import { BeneficiarieService } from './beneficiarie.service';
 import { UpdateBeneficiarieDto } from './dto/update-beneficiarie.dto';
 import { Response } from 'express';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Beneficiarie } from './entities/beneficiarie.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

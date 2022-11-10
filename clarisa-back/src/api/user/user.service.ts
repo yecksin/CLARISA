@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Injectable()
 export class UserService {
@@ -95,7 +95,6 @@ export class UserService {
    */
   async findOneByUsername(username: string, isService = false): Promise<User> {
     const user: User = await this.usersRepository.findOneBy({ username });
-    user.permissions = await this.getUserPermissions(user);
     if (user) {
       user.permissions = await this.getUserPermissions(user);
     }

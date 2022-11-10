@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
-import { InstitutionDictionary } from 'src/api/institution-dictionary/entities/institution-dictionary.entity';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { InstitutionDictionary } from '../../institution-dictionary/entities/institution-dictionary.entity';
 
 @Entity('sources')
 export class Source extends AuditableEntity {

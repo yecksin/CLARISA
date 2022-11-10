@@ -1,6 +1,6 @@
-import { InitiativeStage } from 'src/api/initiative/entities/initiative-status.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { InitiativeStage } from '../../initiative/entities/initiative-status.entity';
 import { WorkpackageCountry } from './workpackage-country.entity';
 import { WorkpackageRegion } from './workpackage-region.entity';
 

@@ -1,5 +1,4 @@
 import { Expose, Transform } from 'class-transformer';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Entity,
   Column,
@@ -7,6 +6,7 @@ import {
   JoinColumn,
   ManyToOne,
 } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { ImpactArea } from '../../impact-area/entities/impact-area.entity';
 
 @Entity('global_targets')
@@ -16,7 +16,7 @@ export class GlobalTarget extends AuditableEntity {
   id: number;
 
   @Column()
-  @Expose({ name: 'impactAreasId' })
+  @Expose({ name: 'impactAreaId' })
   impact_areas_id: number;
 
   @ManyToOne(() => ImpactArea, { eager: true })
@@ -24,7 +24,7 @@ export class GlobalTarget extends AuditableEntity {
   @Transform(({ value }) => {
     return value.name;
   })
-  @Expose({ name: 'ActionAreaName' })
+  @Expose({ name: 'impactAreaName' })
   impact_area_name: ImpactArea;
 
   @Column()

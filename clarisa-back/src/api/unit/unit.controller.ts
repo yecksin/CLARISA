@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { UnitService } from './unit.service';
 import { UpdateUnitDto } from './dto/update-unit.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { Unit } from './entities/unit.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

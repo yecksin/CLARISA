@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { StudyTypeService } from './study-type.service';
 import { UpdateStudyTypeDto } from './dto/update-study-type.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { StudyType } from './entities/study-type.entity';
 import { Response } from 'express';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

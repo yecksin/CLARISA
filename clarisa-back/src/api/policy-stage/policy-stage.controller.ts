@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { PolicyStageService } from './policy-stage.service';
 import { UpdatePolicyStageDto } from './dto/update-policy-stage.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { PolicyStage } from './entities/policy-stage.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

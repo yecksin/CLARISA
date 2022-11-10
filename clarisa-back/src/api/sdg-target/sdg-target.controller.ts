@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { SdgTargetService } from './sdg-target.service';
 import { UpdateSdgTargetDto } from './dto/update-sdg-target.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { SdgTarget } from './entities/sdg-target.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

@@ -163,7 +163,7 @@
                             >
                               Functionality
                             </h3>
-                            <p style="font-size: 15px">
+                            <p>
                               {{ informationPrint.description }}
                             </p>
                             <h3 style="font-weight: 400; color: black">
@@ -171,7 +171,7 @@
                             </h3>
                             <div style="display: flex">
                               <div>
-                                <p style="font-size: 15px">No parameters</p>
+                                <p>No parameters</p>
                               </div>
                             </div>
                             <br />
@@ -181,7 +181,7 @@
                             <span
                               style="
                                 background-color: black;
-                                font-size: 20px;
+                                font-size: 18px;
                                 color: white;
                                 width: 500px;
                               "
@@ -209,7 +209,10 @@
                                                 margin-top: 5px;
                                               "
                                             >
-                                              State code: 200: OK
+                                              State code:
+                                              <span style="color: #9eee00"
+                                                >200: OK</span
+                                              >
                                             </h4>
                                           </div>
                                           <div
@@ -222,7 +225,7 @@
                                             <pre
                                               style="
                                                 background-color: #1e1e1e;
-                                                font-weight: 300;
+
                                                 font-size: 15px;
                                               "
                                             ><code style="color: white; ">{{returnResponseJson()}}</code></pre>
@@ -496,6 +499,7 @@
             >
               <i class="pi pi-file-excel" style="font-size: 1.5rem"></i>
             </button>
+            <!--
             <button
               type="button"
               pButton
@@ -507,7 +511,7 @@
               style="margin-left: 20px; background-color: #cc5847"
             >
               <i class="pi pi-file-pdf" style="font-size: 1.5rem"></i>
-            </button>
+            </button>-->
           </div>
         </div>
       </ng-template>

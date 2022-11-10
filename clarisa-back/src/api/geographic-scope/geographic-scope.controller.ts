@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { GeographicScopeService } from './geographic-scope.service';
 import { UpdateGeographicScopeDto } from './dto/update-geographic-scope.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { GeographicScope } from './entities/geographic-scope.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

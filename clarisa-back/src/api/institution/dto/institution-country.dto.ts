@@ -1,4 +1,4 @@
-import { RegionDto } from 'src/api/region/dto/region.dto';
+import { RegionDto } from '../../region/dto/region.dto';
 
 export class InstitutionCountryDto {
   code: number;

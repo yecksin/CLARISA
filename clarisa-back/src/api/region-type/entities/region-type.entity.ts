@@ -1,6 +1,6 @@
-import { Region } from 'src/api/region/entities/region.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { Region } from '../../region/entities/region.entity';
 
 @Entity('region_types')
 export class RegionType extends AuditableEntity {

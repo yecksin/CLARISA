@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { HomepageClarisaEndpointService } from './homepage-clarisa-endpoint.service';
 import { UpdateHomepageClarisaEndpointDto } from './dto/update-homepage-clarisa-endpoint.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { HomepageClarisaEndpoint } from './entities/homepage-clarisa-endpoint.entity';
 import { Response } from 'express';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 //@ClarisaPageOnly()
 //@UseGuards(JwtAuthGuard, PermissionGuard)

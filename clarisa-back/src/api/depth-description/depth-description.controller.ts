@@ -12,11 +12,11 @@ import {
   UseInterceptors,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { DepthDescriptionService } from './depth-description.service';
 import { UpdateDepthDescriptionDto } from './dto/update-depth-description.dto';
 import { DepthDescription } from './entities/depth-description.entity';
 import { Response } from 'express';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

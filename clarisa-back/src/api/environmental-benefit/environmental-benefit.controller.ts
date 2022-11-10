@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { EnvironmentalBenefitService } from './environmental-benefit.service';
 import { UpdateEnvironmentalBenefitDto } from './dto/update-environmental-benefit.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { EnvironmentalBenefit } from './entities/environmental-benefit.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

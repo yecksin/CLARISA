@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { InstitutionRepository } from '../institution/repositories/institution.repository';
 import { InstitutionDictionaryDto } from './dto/institution-dictionary.dto';
 import { UpdateInstitutionDictionaryDto } from './dto/update-institution-dictionary.dto';

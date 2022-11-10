@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { SimpleCountryDto } from 'src/api/country/dto/simple-country.dto';
-import { ParentRegionDto } from 'src/api/region/dto/parent-region.dto';
-import { RegionDto } from 'src/api/region/dto/region.dto';
-import { Region } from 'src/api/region/entities/region.entity';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
-import { RegionTypeEnum } from 'src/shared/entities/enums/region-types';
 import { DataSource, FindOptionsWhere, Repository } from 'typeorm';
+import { FindAllOptions } from '../../../shared/entities/enums/find-all-options';
+import { RegionTypeEnum } from '../../../shared/entities/enums/region-types';
+import { SimpleCountryDto } from '../../country/dto/simple-country.dto';
+import { ParentRegionDto } from '../dto/parent-region.dto';
+import { RegionDto } from '../dto/region.dto';
+import { Region } from '../entities/region.entity';
 
 @Injectable()
 export class RegionRepository extends Repository<Region> {

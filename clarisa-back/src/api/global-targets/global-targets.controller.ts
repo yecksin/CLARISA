@@ -16,7 +16,7 @@ import { GlobalTargetsService } from './global-targets.service';
 import { UpdateGlobalTargetDto } from './dto/update-global-target.dto';
 import { GlobalTarget } from './entities/global-target.entity';
 import { Response } from 'express';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

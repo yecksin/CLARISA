@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateWorkpackageDto } from './dto/update-workpackage.dto';
 import { WorkpackageDto } from './dto/workpackage.dto';
 import { Workpackage } from './entities/workpackage.entity';

@@ -1,4 +1,4 @@
-import { BasicDto } from 'src/shared/entities/dtos/basic-dto';
+import { BasicDto } from '../../../shared/entities/dtos/basic-dto';
 import { UnitTypeDto } from './unit-type.dto';
 
 export class UnitDto {

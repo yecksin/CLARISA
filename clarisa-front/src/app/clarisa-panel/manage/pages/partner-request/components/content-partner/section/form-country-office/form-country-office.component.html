@@ -1,0 +1,41 @@
+<div style="width: 50%">
+  <span>Institution:*</span>
+  <br />
+  <p-dropdown
+    [options]="informationEndpoint"
+    [(ngModel)]="institution"
+    placeholder="Select Item"
+    [virtualScroll]="true"
+    [itemSize]="31"
+    [filter]="false"
+    optionLabel="name"
+  ></p-dropdown>
+</div>
+<div style="width: 50%; margin-top: 20px">
+  <span>Countrys:*</span>
+  <br />
+  <p-multiSelect
+    [options]="countries"
+    [(ngModel)]="selectedCountries1"
+    defaultLabel="Select a City"
+    optionLabel="name"
+    display="chip"
+    [style]="{ width: '100%' }"
+  ></p-multiSelect>
+</div>
+<div
+  style="
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  "
+>
+  <button
+    pButton
+    type="button"
+    label="Request New country"
+    class="p-button-warning"
+    style="border-radius: 30px"
+  ></button>
+</div>

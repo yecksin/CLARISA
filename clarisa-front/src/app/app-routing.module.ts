@@ -22,11 +22,6 @@ const routes: Routes = [
         (m) => m.ClarisaPanelModule
       ),
   },
-  {
-    redirectTo: 'clarisa-panel',
-    path: 'swagger/generalListReference.html',
-    pathMatch: 'full',
-  },
 ];
 
 @NgModule({

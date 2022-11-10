@@ -19,6 +19,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.authService.inLogin = false;
+
     this.urls = this.redirectServices.findRedirectTo(
       window.location.href,
       window.location.origin

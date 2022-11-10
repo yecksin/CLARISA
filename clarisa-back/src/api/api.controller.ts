@@ -121,6 +121,36 @@ export class ApiController {
     // nothing, we are just going to redirect
   }
 
+  @Get('institutionsSimple')
+  @Redirect('institutions/simple', HttpStatus.MOVED_PERMANENTLY)
+  getInstitutionsSimple() {
+    // nothing, we are just going to redirect
+  }
+
+  @Get('impact-areas-indicators')
+  @Redirect('impact-area-indicators', HttpStatus.MOVED_PERMANENTLY)
+  getImpactAreaIndicators() {
+    // nothing, we are just going to redirect
+  }
+
+  @Get('projectedBenefits')
+  @Redirect('projected-benefits', HttpStatus.MOVED_PERMANENTLY)
+  getProjectedBenefits() {
+    // nothing, we are just going to redirect
+  }
+
+  @Get('globalTargets')
+  @Redirect('global-targets', HttpStatus.MOVED_PERMANENTLY)
+  getGlobalTargets() {
+    // nothing, we are just going to redirect
+  }
+
+  @Get('projectedBenefitsProbabilities')
+  @Redirect('projected-benefit-probabilities', HttpStatus.MOVED_PERMANENTLY)
+  getProjectedBenefitProbabilities() {
+    // nothing, we are just going to redirect
+  }
+
   @Post('/:mis/institutions/institution-requests')
   institutionRequests(
     @Req() request: Request,

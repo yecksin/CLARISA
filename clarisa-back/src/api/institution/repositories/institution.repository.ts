@@ -13,6 +13,7 @@ import { InstitutionSourceDto } from '../../institution-dictionary/dto/instituti
 import { InstitutionTypeDto } from '../../institution-type/dto/institution-type.dto';
 import { PartnerRequest } from '../../partner-request/entities/partner-request.entity';
 import { InstitutionCountryDto } from '../dto/institution-country.dto';
+import { InstitutionSimpleDto } from '../dto/institution-simple.dto';
 import { InstitutionDto } from '../dto/institution.dto';
 import { InstitutionLocation } from '../entities/institution-location.entity';
 import { Institution } from '../entities/institution.entity';
@@ -64,6 +65,49 @@ export class InstitutionRepository extends Repository<Institution> {
     );
 
     return institutionDtos;
+  }
+
+  async findAllInstitutionsSimple(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<InstitutionSimpleDto[]> {
+    const institutionDtos: InstitutionSimpleDto[] = [];
+    let whereClause: FindOptionsWhere<Institution> = {};
+    switch (option) {
+      case FindAllOptions.SHOW_ALL:
+        //do nothing. we will be showing everything, so no condition is needed;
+        break;
+      case FindAllOptions.SHOW_ONLY_ACTIVE:
+      case FindAllOptions.SHOW_ONLY_INACTIVE:
+        whereClause = {
+          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+        };
+        break;
+    }
+
+    const institution: Institution[] = await this.find({
+      where: whereClause,
+      relations: this.institutionRelations,
+    });
+
+    return institution.map((i) => {
+      const institutionDto: InstitutionSimpleDto = new InstitutionSimpleDto();
+
+      institutionDto.code = i.id;
+      institutionDto.acronym = i.acronym;
+
+      const hq: InstitutionLocation = i.institution_locations.find(
+        (il) => il.is_headquater,
+      );
+      institutionDto.hqLocation = hq.country_object.name;
+
+      institutionDto.hqLocationISOalpha2 = hq.country_object.iso_alpha_2;
+      institutionDto.institutionType = i.institution_type_object.name;
+      institutionDto.institutionTypeId = i.institution_type_object.id;
+      institutionDto.name = i.name;
+      institutionDto.websiteLink = i.website_link;
+
+      return institutionDto;
+    });
   }
 
   private fillOutInstitutionInfo(institution: Institution): InstitutionDto {

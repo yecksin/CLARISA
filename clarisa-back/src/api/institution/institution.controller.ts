@@ -28,6 +28,11 @@ export class InstitutionController {
     return await this.institutionService.findAll(show);
   }
 
+  @Get('simple')
+  async findAllSimple(@Query('show') show: FindAllOptions) {
+    return await this.institutionService.findAllSimple(show);
+  }
+
   @Get('get/:id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
     return await this.institutionService.findOne(id);

@@ -95,7 +95,6 @@ export class UserService {
    */
   async findOneByUsername(username: string, isService = false): Promise<User> {
     const user: User = await this.usersRepository.findOneBy({ username });
-    user.permissions = await this.getUserPermissions(user);
     if (user) {
       user.permissions = await this.getUserPermissions(user);
     }

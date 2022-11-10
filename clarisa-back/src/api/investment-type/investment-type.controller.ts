@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { InvestmentTypeService } from './investment-type.service';
 import { UpdateInvestmentTypeDto } from './dto/update-investment-type.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { InvestmentType } from './entities/investment-type.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

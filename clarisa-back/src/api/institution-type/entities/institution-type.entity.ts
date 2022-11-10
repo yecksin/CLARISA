@@ -1,6 +1,3 @@
-import { Institution } from 'src/api/institution/entities/institution.entity';
-import { PartnerRequest } from 'src/api/partner-request/entities/partner-request.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Column,
   Entity,
@@ -9,6 +6,9 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { Institution } from '../../institution/entities/institution.entity';
+import { PartnerRequest } from '../../partner-request/entities/partner-request.entity';
 
 @Entity('institution_types')
 export class InstitutionType extends AuditableEntity {

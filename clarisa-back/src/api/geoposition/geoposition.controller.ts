@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { GeopositionService } from './geoposition.service';
 import { UpdateGeopositionDto } from './dto/update-geoposition.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { Geoposition } from './entities/geoposition.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

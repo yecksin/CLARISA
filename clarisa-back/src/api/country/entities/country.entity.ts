@@ -1,9 +1,3 @@
-import { CountryOfficeRequest } from 'src/api/country-office-request/entities/country-office-request.entity';
-import { Geoposition } from 'src/api/geoposition/entities/geoposition.entity';
-import { InstitutionLocation } from 'src/api/institution/entities/institution-location.entity';
-import { PartnerRequest } from 'src/api/partner-request/entities/partner-request.entity';
-import { Region } from 'src/api/region/entities/region.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Column,
   Entity,
@@ -14,6 +8,12 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { CountryOfficeRequest } from '../../country-office-request/entities/country-office-request.entity';
+import { Geoposition } from '../../geoposition/entities/geoposition.entity';
+import { InstitutionLocation } from '../../institution/entities/institution-location.entity';
+import { PartnerRequest } from '../../partner-request/entities/partner-request.entity';
+import { Region } from '../../region/entities/region.entity';
 
 @Entity('countries')
 export class Country extends AuditableEntity {

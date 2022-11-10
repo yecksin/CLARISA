@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { OneCgiarUserService } from './one-cgiar-user.service';
 import { UpdateOneCgiarUserDto } from './dto/update-one-cgiar-user.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { OneCgiarUser } from './entities/one-cgiar-user.entity';
 import { Response } from 'express';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

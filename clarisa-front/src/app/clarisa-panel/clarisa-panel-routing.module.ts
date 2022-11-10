@@ -30,6 +30,11 @@ const routes: Routes = [
           ),
       },
       {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'documentation/One_CGIAR_Control_List',
+      },
+      {
         path: 'manage',
         loadChildren: () =>
           import('./manage/manage.module').then((m) => m.ManageModule),

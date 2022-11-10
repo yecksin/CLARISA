@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { InitiativeService } from './initiative.service';
 import { UpdateInitiativeDto } from './dto/update-initiative.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { Initiative } from './entities/initiative.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

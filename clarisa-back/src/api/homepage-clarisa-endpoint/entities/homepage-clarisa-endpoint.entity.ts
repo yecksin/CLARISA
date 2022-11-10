@@ -1,6 +1,6 @@
 import { Transform } from 'class-transformer';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 
 @Entity('hp_clarisa_endpoints')
 export class HomepageClarisaEndpoint extends AuditableEntity {

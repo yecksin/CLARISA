@@ -1,5 +1,3 @@
-import { AccountType } from 'src/api/account-type/entities/account-type.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Column,
   Entity,
@@ -8,6 +6,8 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { AccountType } from '../../account-type/entities/account-type.entity';
 
 @Entity('accounts')
 export class Account extends AuditableEntity {

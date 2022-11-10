@@ -1,5 +1,3 @@
-import { ImpactAreaIndicator } from 'src/api/impact-area-indicators/entities/impact-area-indicator.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Column,
   Entity,
@@ -7,6 +5,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { ImpactAreaIndicator } from '../../impact-area-indicators/entities/impact-area-indicator.entity';
 
 @Entity('projected_benefits')
 export class ProjectedBenefit extends AuditableEntity {

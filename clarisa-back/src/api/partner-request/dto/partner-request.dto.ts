@@ -1,6 +1,6 @@
-import { CountryDto } from 'src/api/country/dto/country.dto';
-import { InstitutionTypeDto } from 'src/api/institution-type/dto/institution-type.dto';
-import { InstitutionDto } from 'src/api/institution/dto/institution.dto';
+import { CountryDto } from '../../country/dto/country.dto';
+import { InstitutionTypeDto } from '../../institution-type/dto/institution-type.dto';
+import { InstitutionDto } from '../../institution/dto/institution.dto';
 
 export class PartnerRequestDto {
   id: number;

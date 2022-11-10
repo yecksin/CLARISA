@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { ParentRegionDto } from 'src/api/region/dto/parent-region.dto';
-import { SimpleRegionDto } from 'src/api/region/dto/simple-region.dto';
-import { Region } from 'src/api/region/entities/region.entity';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { DataSource, Repository } from 'typeorm';
+import { FindAllOptions } from '../../../shared/entities/enums/find-all-options';
+import { ParentRegionDto } from '../../region/dto/parent-region.dto';
+import { SimpleRegionDto } from '../../region/dto/simple-region.dto';
+import { Region } from '../../region/entities/region.entity';
 import { CountryDto } from '../dto/country.dto';
 import { Country } from '../entities/country.entity';
 

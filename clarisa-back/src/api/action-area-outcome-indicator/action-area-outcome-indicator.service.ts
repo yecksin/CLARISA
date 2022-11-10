@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { UpdateActionAreaOutcomeIndicatorDto } from './dto/update-action-area-outcome-indicator.dto';
 import { ActionAreaOutcomeIndicator } from './entities/action-area-outcome-indicator.entity';
 import { ActionAreaOutcomeIndicatorRequestDto } from './dto/action-area-outcome-indicator-request.dto';
 import { ActionAreaOutcomeIndicatorRepository } from './repositories/action-area-outcome-indicator-repository';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Injectable()
 export class ActionAreaOutcomeIndicatorService {

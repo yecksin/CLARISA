@@ -13,7 +13,8 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
+
 import { AccountTypeService } from './account-type.service';
 import { UpdateAccountTypeDto } from './dto/update-account-type.dto';
 import { AccountType } from './entities/account-type.entity';

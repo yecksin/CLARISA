@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { OutcomeIndicatorService } from './outcome-indicator.service';
 import { UpdateOutcomeIndicatorDto } from './dto/update-outcome-indicator.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { OutcomeIndicator } from './entities/outcome-indicator.entity';
 import { Response } from 'express';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

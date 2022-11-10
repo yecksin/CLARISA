@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { GovernanceTypeService } from './governance-type.service';
 import { UpdateGovernanceTypeDto } from './dto/update-governance-type.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { GovernanceType } from './entities/governance-type.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

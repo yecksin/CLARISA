@@ -1,18 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CountryDto } from 'src/api/country/dto/country.dto';
-import { Country } from 'src/api/country/entities/country.entity';
-import { InstitutionTypeDto } from 'src/api/institution-type/dto/institution-type.dto';
-import { InstitutionCountryDto } from 'src/api/institution/dto/institution-country.dto';
-import { InstitutionDto } from 'src/api/institution/dto/institution.dto';
-import { Institution } from 'src/api/institution/entities/institution.entity';
-import { InstitutionRepository } from 'src/api/institution/repositories/institution.repository';
-import { ParentRegionDto } from 'src/api/region/dto/parent-region.dto';
-import { SimpleRegionDto } from 'src/api/region/dto/simple-region.dto';
-import { Region } from 'src/api/region/entities/region.entity';
-import { RespondRequestDto } from 'src/shared/entities/dtos/respond-request.dto';
-import { MisOption } from 'src/shared/entities/enums/mises-options';
-import { PartnerStatus } from 'src/shared/entities/enums/partner-status';
-import { RegionTypeEnum } from 'src/shared/entities/enums/region-types';
 import {
   DataSource,
   FindOptionsRelations,
@@ -20,6 +6,20 @@ import {
   IsNull,
   Repository,
 } from 'typeorm';
+import { RespondRequestDto } from '../../../shared/entities/dtos/respond-request.dto';
+import { MisOption } from '../../../shared/entities/enums/mises-options';
+import { PartnerStatus } from '../../../shared/entities/enums/partner-status';
+import { RegionTypeEnum } from '../../../shared/entities/enums/region-types';
+import { CountryDto } from '../../country/dto/country.dto';
+import { Country } from '../../country/entities/country.entity';
+import { InstitutionTypeDto } from '../../institution-type/dto/institution-type.dto';
+import { InstitutionCountryDto } from '../../institution/dto/institution-country.dto';
+import { InstitutionDto } from '../../institution/dto/institution.dto';
+import { Institution } from '../../institution/entities/institution.entity';
+import { InstitutionRepository } from '../../institution/repositories/institution.repository';
+import { ParentRegionDto } from '../../region/dto/parent-region.dto';
+import { SimpleRegionDto } from '../../region/dto/simple-region.dto';
+import { Region } from '../../region/entities/region.entity';
 import { CreatePartnerRequestDto } from '../dto/create-partner-request.dto';
 import { PartnerRequestDto } from '../dto/partner-request.dto';
 import { UpdatePartnerRequestDto } from '../dto/update-partner-request.dto';

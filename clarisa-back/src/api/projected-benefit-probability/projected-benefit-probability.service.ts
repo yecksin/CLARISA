@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateProjectedBenefitProbabilityDto } from './dto/update-projected-benefit-probability.dto';
 import { ProjectedBenefitProbability } from './entities/projected-benefit-probability.entity';
 

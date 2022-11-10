@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
-import { RegionTypeEnum } from 'src/shared/entities/enums/region-types';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
+import { RegionTypeEnum } from '../../shared/entities/enums/region-types';
 import { RegionDto } from './dto/region.dto';
 import { UpdateRegionDto } from './dto/update-region.dto';
 import { Region } from './entities/region.entity';

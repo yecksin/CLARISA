@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { WorkpackageService } from './workpackage.service';
 import { UpdateWorkpackageDto } from './dto/update-workpackage.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { Workpackage } from './entities/workpackage.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

@@ -1,4 +1,4 @@
-import { SimpleCountryDto } from 'src/api/country/dto/simple-country.dto';
+import { SimpleCountryDto } from '../../country/dto/simple-country.dto';
 import { ParentRegionDto } from './parent-region.dto';
 
 export class RegionDto {

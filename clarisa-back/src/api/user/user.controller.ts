@@ -15,12 +15,12 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Response } from 'express';
-import { PaginationParams } from 'src/shared/interfaces/pageable';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { User } from './entities/user.entity';
-import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
-import { PermissionGuard } from 'src/shared/guards/permission.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
+import { PaginationParams } from '../../shared/interfaces/pageable';
+import { JwtAuthGuard } from '../../shared/guards/jwt-auth.guard';
+import { PermissionGuard } from '../../shared/guards/permission.guard';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

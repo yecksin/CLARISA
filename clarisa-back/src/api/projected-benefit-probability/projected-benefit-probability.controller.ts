@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { ProjectedBenefitProbabilityService } from './projected-benefit-probability.service';
 import { UpdateProjectedBenefitProbabilityDto } from './dto/update-projected-benefit-probability.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { ProjectedBenefitProbability } from './entities/projected-benefit-probability.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

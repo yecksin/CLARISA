@@ -12,12 +12,12 @@ import {
   Patch,
 } from '@nestjs/common';
 import { Request } from 'express';
-import { GetUserData } from 'src/shared/decorators/user-data.decorator';
-import { RespondRequestDto } from 'src/shared/entities/dtos/respond-request.dto';
-import { ResponseDto } from 'src/shared/entities/dtos/response-dto';
-import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard';
-import { PermissionGuard } from 'src/shared/guards/permission.guard';
-import { UserData } from 'src/shared/interfaces/user-data';
+import { GetUserData } from '../../shared/decorators/user-data.decorator';
+import { RespondRequestDto } from '../../shared/entities/dtos/respond-request.dto';
+import { ResponseDto } from '../../shared/entities/dtos/response-dto';
+import { JwtAuthGuard } from '../../shared/guards/jwt-auth.guard';
+import { PermissionGuard } from '../../shared/guards/permission.guard';
+import { UserData } from '../../shared/interfaces/user-data';
 import { CreatePartnerRequestDto } from './dto/create-partner-request.dto';
 import { PartnerRequestDto } from './dto/partner-request.dto';
 import { UpdatePartnerRequestDto } from './dto/update-partner-request.dto';

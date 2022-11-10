@@ -1,6 +1,3 @@
-import { Country } from 'src/api/country/entities/country.entity';
-import { RegionType } from 'src/api/region-type/entities/region-type.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Column,
   Entity,
@@ -10,6 +7,9 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { Country } from '../../country/entities/country.entity';
+import { RegionType } from '../../region-type/entities/region-type.entity';
 
 @Entity('regions')
 export class Region extends AuditableEntity {

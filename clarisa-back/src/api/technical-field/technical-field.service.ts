@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateTechnicalFieldDto } from './dto/update-technical-field.dto';
 import { TechnicalField } from './entities/technical-field.entity';
 

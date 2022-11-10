@@ -29,11 +29,7 @@ const routes: Routes = [
             (m) => m.DocumentationModule
           ),
       },
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'documentation/One_CGIAR_Control_List',
-      },
+
       {
         path: 'manage',
         loadChildren: () =>

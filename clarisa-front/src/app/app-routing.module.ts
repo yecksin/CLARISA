@@ -23,7 +23,7 @@ const routes: Routes = [
       ),
   },
   {
-    redirectTo: 'clarisa-panel',
+    redirectTo: 'clarisa-panel/documentation/One_CGIAR_Control_List',
     path: 'swagger/generalListReference.html',
     pathMatch: 'full',
   },

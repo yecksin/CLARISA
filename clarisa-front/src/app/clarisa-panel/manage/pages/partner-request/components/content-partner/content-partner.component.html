@@ -1,0 +1,77 @@
+<div class="main-content app-content mt-0">
+  <div class="side-app">
+    <div class="main-container container-fluid">
+      <!-- PAGE-HEADER -->
+      <div class="page-header">
+        <h1 class="page-title">Tabs</h1>
+        <div>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="javascript:void(0)">Bootstrap</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Tabs</li>
+          </ol>
+        </div>
+      </div>
+      <!-- PAGE-HEADER END -->
+
+      <!-- ROW-1 OPEN -->
+      <div class="row">
+        <!-- COL-END -->
+        <div class="col-xl-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Institution request</h3>
+            </div>
+            <div class="card-body">
+              <div class="panel panel-primary">
+                <div class="tab-menu-heading tab-menu-heading-boxed">
+                  <div class="tabs-menu-boxed">
+                    <!-- Tabs -->
+                    <ul class="nav panel-tabs">
+                      <li>
+                        <a href="#tab25" class="active" data-bs-toggle="tab"
+                          >List</a
+                        >
+                      </li>
+                      <li>
+                        <a href="#tab26" data-bs-toggle="tab"
+                          >Request new institution</a
+                        >
+                      </li>
+                      <li>
+                        <a href="#tab27" data-bs-toggle="tab"
+                          >Request new country office(s)</a
+                        >
+                      </li>
+                      <li>
+                        <a href="#tab28" data-bs-toggle="tab"
+                          >Request new country office(s)</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="panel-body tabs-menu-body">
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="tab25">
+                      <app-list-institution></app-list-institution>
+                    </div>
+                    <div class="tab-pane" id="tab26">
+                      <app-form-new-institution></app-form-new-institution>
+                    </div>
+                    <div class="tab-pane" id="tab27">
+                      <app-form-country-office></app-form-country-office>
+                    </div>
+                    <div class="tab-pane" id="tab28"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ROW-1 CLOSED -->
+    </div>
+  </div>
+</div>

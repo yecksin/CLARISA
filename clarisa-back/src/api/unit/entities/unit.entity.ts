@@ -1,5 +1,3 @@
-import { ScienceGroup } from 'src/api/science-group/entities/science-group.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Column,
   Entity,
@@ -8,6 +6,8 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { ScienceGroup } from '../../science-group/entities/science-group.entity';
 import { UnitType } from './unit-type';
 
 @Entity('units')

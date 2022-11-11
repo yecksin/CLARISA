@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { EndOfInitiativeOutcome } from './entities/end-of-initiative-outcome.entity';
 import { ApiOST } from '../../shared/integration/ost/api.ost';
 import { HttpModule } from '@nestjs/axios';
-import { IntegrationModule } from 'src/shared/integration/integration.module';
+import { IntegrationModule } from '../../shared/integration/integration.module';
 
 @Module({
   imports: [

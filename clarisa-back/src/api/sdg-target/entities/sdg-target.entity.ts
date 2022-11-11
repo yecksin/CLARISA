@@ -1,6 +1,4 @@
 import { Expose, Transform } from 'class-transformer';
-import { Sdg } from 'src/api/sdg/entities/sdg.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Column,
   Entity,
@@ -8,6 +6,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { Sdg } from '../../sdg/entities/sdg.entity';
 
 @Entity('sustainable_development_goal_targets')
 export class SdgTarget extends AuditableEntity {

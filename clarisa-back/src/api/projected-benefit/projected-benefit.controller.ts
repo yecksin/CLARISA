@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { ProjectedBenefitService } from './projected-benefit.service';
 import { UpdateProjectedBenefitDto } from './dto/update-projected-benefit.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { ProjectedBenefit } from './entities/projected-benefit.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

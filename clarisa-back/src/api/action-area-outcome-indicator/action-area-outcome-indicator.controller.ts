@@ -13,7 +13,7 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { ActionAreaOutcomeIndicatorService } from './action-area-outcome-indicator.service';
 import { UpdateActionAreaOutcomeIndicatorDto } from './dto/update-action-area-outcome-indicator.dto';
 import { ActionAreaOutcomeIndicator } from './entities/action-area-outcome-indicator.entity';

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .card {
+      border-width: 1px;
+      border-style: solid;
+      border-color: #E0E0E0;
+      border-radius: 3px;
+      padding: 16px;
+      max-width: 512px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .title {
+      color: #202124;
+      width: 100%;
+    }
+    ul {
+      color: #202124;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="title">
+      <h2> Dear {{external_user_name}}:</h2>
+    </div>
+    {{#if rejected_by}}
+        This email is to inform you that we were <strong>unable to approve</strong> your request for adding the institution <strong>{{acronym}} - {{partner_name}}</strong> for the following reason(s):
+        <ul>
+            <li>{{reject_justification}}</li>
+        </ul>
+    {{else}}
+        This email is to inform you that we have <strong>added</strong> the following institution into the system as per your request:
+        <ul>
+            <li>{{acronym}} - {{partner_name}}</li>
+        </ul>
+    {{/if}}
+    <br>
+    Should you have any questions, please do not hesitate to contact the technical CLARISA team ({{support_email}}).
+    <br>
+    Best regards,
+    <br>
+    <strong>CLARISA Team</strong>
+    <br> <br>
+    *** Please do not reply to this email as this is an automated notification ***
+    <br> <br>
+    <div style="color: #757575; margin-left: auto;  margin-right: auto; text-align: center;">
+      <small> This response was automatically generated and sent through the CLARISA API </small> <br>
+      <small> Sent on {{current_year}}</small>
+    </div>
+  </div>
+</body>
+</html>

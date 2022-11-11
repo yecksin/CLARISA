@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { DataSource, Repository } from 'typeorm';
+import { FindAllOptions } from '../../../shared/entities/enums/find-all-options';
 import { InitiativeDto } from '../dto/initiative.dto';
 import { StageDto } from '../dto/stage.dto';
 import { Initiative } from '../entities/initiative.entity';

@@ -15,8 +15,8 @@ import {
 import { SdgIndicatorService } from './sdg-indicator.service';
 import { UpdateSdgIndicatorDto } from './dto/update-sdg-indicator.dto';
 import { Response } from 'express';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { SdgIndicator } from './entities/sdg-indicator.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

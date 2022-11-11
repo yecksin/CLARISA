@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { InnovationCharacteristicService } from './innovation-characteristic.service';
 import { UpdateInnovationCharacteristicDto } from './dto/update-innovation-characteristic.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { InnovationCharacteristic } from './entities/innovation-characteristic.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

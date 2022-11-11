@@ -1,5 +1,4 @@
 import { Exclude, Expose } from 'class-transformer';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import {
   Column,
   Entity,
@@ -7,6 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { CgiarEntityType } from '../../cgiar-entity-type/entities/cgiar-entity-type.entity';
 
 @Entity('global_units')

@@ -16,7 +16,7 @@ import { SourcesService } from './sources.service';
 import { UpdateSourceDto } from './dto/update-source.dto';
 import { Response } from 'express';
 import { Source } from './entities/source.entity';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

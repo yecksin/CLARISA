@@ -1,7 +1,7 @@
-import { CountryOfficeRequest } from 'src/api/country-office-request/entities/country-office-request.entity';
-import { PartnerRequest } from 'src/api/partner-request/entities/partner-request.entity';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { CountryOfficeRequest } from '../../country-office-request/entities/country-office-request.entity';
+import { PartnerRequest } from '../../partner-request/entities/partner-request.entity';
 
 @Entity('mises')
 export class Mis extends AuditableEntity {

@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { InstitutionService } from './institution.service';
 import { UpdateInstitutionDto } from './dto/update-institution.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { Institution } from './entities/institution.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
@@ -26,6 +26,11 @@ export class InstitutionController {
   @Get()
   async findAll(@Query('show') show: FindAllOptions) {
     return await this.institutionService.findAll(show);
+  }
+
+  @Get('simple')
+  async findAllSimple(@Query('show') show: FindAllOptions) {
+    return await this.institutionService.findAllSimple(show);
   }
 
   @Get('get/:id')

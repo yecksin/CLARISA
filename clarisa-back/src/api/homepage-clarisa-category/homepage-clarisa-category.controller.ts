@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { HomepageClarisaCategoryService } from './homepage-clarisa-category.service';
 import { UpdateHomepageClarisaCategoryDto } from './dto/update-homepage-clarisa-category.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { HomepageClarisaCategory } from './entities/homepage-clarisa-category.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 //@ClarisaPageOnly()
 //@UseGuards(JwtAuthGuard, PermissionGuard)

@@ -1,6 +1,6 @@
 import { Exclude } from 'class-transformer';
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 
 @Entity('study_types')
 export class StudyType extends AuditableEntity {

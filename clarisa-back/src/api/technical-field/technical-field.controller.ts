@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { TechnicalFieldService } from './technical-field.service';
 import { UpdateTechnicalFieldDto } from './dto/update-technical-field.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Response } from 'express';
 import { TechnicalField } from './entities/technical-field.entity';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

@@ -2,12 +2,12 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
-import { RespondRequestDto } from 'src/shared/entities/dtos/respond-request.dto';
-import { ResponseDto } from 'src/shared/entities/dtos/response-dto';
-import { MisOption } from 'src/shared/entities/enums/mises-options';
-import { PartnerStatus } from 'src/shared/entities/enums/partner-status';
-import { UserData } from 'src/shared/interfaces/user-data';
 import { Repository } from 'typeorm';
+import { RespondRequestDto } from '../../shared/entities/dtos/respond-request.dto';
+import { ResponseDto } from '../../shared/entities/dtos/response-dto';
+import { MisOption } from '../../shared/entities/enums/mises-options';
+import { PartnerStatus } from '../../shared/entities/enums/partner-status';
+import { UserData } from '../../shared/interfaces/user-data';
 import { Country } from '../country/entities/country.entity';
 import { CountryRepository } from '../country/repositories/country.repository';
 import { InstitutionType } from '../institution-type/entities/institution-type.entity';
@@ -89,8 +89,9 @@ export class PartnerRequestService {
     const newPartnerRequest: PartnerRequest = new PartnerRequest();
 
     newPartnerRequest.institution_type_object =
-      await this.institutionTypeRepository.findOneBy({
-        id: incomingPartnerRequest.institutionTypeCode,
+      await this.institutionTypeRepository.findOne({
+        where: { id: incomingPartnerRequest.institutionTypeCode },
+        relations: { children: true },
       });
 
     newPartnerRequest.country_object = await this.countryRepository.findOneBy({
@@ -108,6 +109,14 @@ export class PartnerRequestService {
     if (!newPartnerRequest.institution_type_object) {
       validationErrors.push(
         `An institution type with id '${incomingPartnerRequest.institutionTypeCode}' could not be found`,
+      );
+    }
+
+    if (
+      (newPartnerRequest.institution_type_object?.children ?? []).length != 0
+    ) {
+      validationErrors.push(
+        `A partner request with an institution type with id '${incomingPartnerRequest.institutionTypeCode}' cannot be created. Use one of the institution types you get when using the /api/institution-types endpoint.`,
       );
     }
 
@@ -179,8 +188,9 @@ export class PartnerRequestService {
 
     //Comprehensive validations
     const partnerRequest: PartnerRequest =
-      await this.partnerRequestRepository.findOneBy({
-        id: respondPartnerRequestDto.requestId,
+      await this.partnerRequestRepository.findOne({
+        where: { id: respondPartnerRequestDto.requestId },
+        relations: { mis_object: true },
       });
 
     const user: User = await this.userRepository.findOneBy({
@@ -191,6 +201,12 @@ export class PartnerRequestService {
       validationErrors.push(
         `A partner request with id '${respondPartnerRequestDto.requestId}' could not be found`,
       );
+    } else {
+      if (!partnerRequest.is_active) {
+        validationErrors.push(
+          `The partner request with id '${respondPartnerRequestDto.requestId}' has already been responded`,
+        );
+      }
     }
 
     if (!user) {

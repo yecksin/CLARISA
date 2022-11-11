@@ -1,4 +1,4 @@
-import { SimpleRegionDto } from 'src/api/region/dto/simple-region.dto';
+import { SimpleRegionDto } from '../../region/dto/simple-region.dto';
 
 export class CountryDto {
   code: number;

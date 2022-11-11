@@ -1,4 +1,4 @@
-import { AuditableEntity } from 'src/shared/entities/extends/auditable-entity.entity';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 
 export class CreateProjectedBenefitWeightingDto extends AuditableEntity {
   projected_benefits_id: number;

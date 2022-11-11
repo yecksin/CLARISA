@@ -7,8 +7,8 @@ import {
   UseInterceptors,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { RoleService } from './role.service';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
+import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { ScienceGroupDto } from './dto/science-group.dto';
 import { UpdateScienceGroupDto } from './dto/update-science-group.dto';
 import { ScienceGroup } from './entities/science-group.entity';

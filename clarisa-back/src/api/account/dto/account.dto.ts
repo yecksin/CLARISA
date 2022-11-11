@@ -1,4 +1,4 @@
-import { AccountTypeDto } from 'src/api/account-type/dto/account-type.dto';
+import { AccountTypeDto } from '../../account-type/dto/account-type.dto';
 import { ParentAccountDto } from './parent-account.dto';
 
 export class AccountDto {

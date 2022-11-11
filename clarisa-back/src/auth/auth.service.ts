@@ -31,14 +31,17 @@ export class AuthService {
       authenticator = this.moduleRef.get(
         user.is_cgiar_user ? LDAPAuth : DBAuth,
       );
-      const authResult: boolean | BaseMessageDTO =
-        await authenticator.authenticate(user.email, pass);
+      const authResult: boolean | BaseMessageDTO = await authenticator
+        .authenticate(user.email, pass)
+        .catch((err) => {
+          throw new HttpException(err, err.httpCode);
+        });
       if (authResult.constructor.name === Boolean.name) {
         return user;
       }
     } else {
       throw new HttpException(
-        'Credenciales inválidas. Por favor revisa e inténtalo de nuevo.',
+        'Invalid credentials. Please check the provided login data and try again.',
         HttpStatus.UNAUTHORIZED,
       );
     }
@@ -56,6 +59,7 @@ export class AuthService {
       user: {
         username: user.username,
         name: `${user.first_name} ${user.last_name}`,
+        permissions: user.permissions,
       },
     };
   }

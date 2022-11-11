@@ -244,9 +244,10 @@ export class InstitutionRepository extends Repository<Institution> {
     institution.name = partnerRequest.partner_name;
     institution.website_link = partnerRequest.web_page;
 
-    await this.createInstitutionCountry(partnerRequest, true);
-
     institution = await this.save(institution);
+    partnerRequest.institution_id = institution.id;
+
+    await this.createInstitutionCountry(partnerRequest, true);
 
     institution = await this.findOne({
       where: {

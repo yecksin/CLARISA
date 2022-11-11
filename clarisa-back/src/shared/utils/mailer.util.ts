@@ -11,16 +11,11 @@ import { PartnerRequest } from 'src/api/partner-request/entities/partner-request
 @Injectable()
 export class MailUtil {
   private readonly logger: Logger = new Logger(MailUtil.name);
-  private readonly handlebarsConfig = {
-    viewEngine: {
-      extName: '.hbs',
-      partialsDir: path.join(__dirname, '../email-templates/'),
-      layoutsDir: path.join(__dirname, '../email-templates/'),
-      defaultLayout: '',
-    },
-    viewPath: path.join(__dirname, '../email-templates/'),
-    extName: '.hbs',
-  };
+
+  constructor() {
+    Handlebars.registerHelper('current_year', () => new Date().getFullYear());
+    Handlebars.registerHelper('support_email', () => env.SUPPORT_EMAIL);
+  }
 
   private async getTransporterInstance() {
     const isProd: boolean = env.APP_PROFILE === 'PROD';
@@ -119,14 +114,39 @@ export class MailUtil {
       this.sendEmail({
         from: env.SUPPORT_EMAIL, // sender address
         to, // list of receivers
-        cc,
+        //cc,
         subject, // Subject line
         //text: 'Hello world?', // plain text body
         html: compiledTemplate, // html body
       });
     });
+  }
 
-    //Handlebars.compile()
+  public sendResponseToPartnerRequest(partnerRequest: PartnerRequest) {
+    const subject: string = `${
+      env.APP_PROFILE === 'DEV' ? 'TEST' : ''
+    } [CLARISA API - ${partnerRequest.mis_object.acronym}] ${
+      partnerRequest.rejected_by ? 'REJECTED' : 'APPROVED'
+    } Partner verification - ${partnerRequest.partner_name}`;
+
+    const to: string = partnerRequest.external_user_mail;
+    const cc: string = env.SUPPORT_EMAIL;
+
+    this.loadUpTemplate(
+      '../../../assets/email-templates/responded-partner-request.hbs',
+    ).then((hbsTemplate) => {
+      const template = Handlebars.compile(hbsTemplate);
+      let compiledTemplate: string = template(partnerRequest);
+
+      this.sendEmail({
+        from: env.SUPPORT_EMAIL, // sender address
+        to, // list of receivers
+        //cc,
+        subject, // Subject line
+        //text: 'Hello world?', // plain text body
+        html: compiledTemplate, // html body
+      });
+    });
   }
 
   public async sendEmail<T>(options: Mail.Options): Promise<T> {

@@ -289,9 +289,21 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       ? partialPartnerRequest.accepted_by
       : partialPartnerRequest.rejected_by;
 
-    partialPartnerRequest = await this.save(partialPartnerRequest);
+    this.mailUtil.sendResponseToPartnerRequest(partialPartnerRequest);
 
-    await this.institutionRepository.createInstitution(partialPartnerRequest);
+    if (accepted) {
+      const newInstitution = await this.institutionRepository.createInstitution(
+        partialPartnerRequest,
+      );
+      partialPartnerRequest.institution_id = newInstitution.code;
+
+      partialPartnerRequest = await this.save(partialPartnerRequest);
+    }
+
+    partialPartnerRequest = await this.findOne({
+      where: { id: partialPartnerRequest.id },
+      relations: this.partnerRelations,
+    });
 
     return this.fillOutPartnerRequestDto(partialPartnerRequest);
   }

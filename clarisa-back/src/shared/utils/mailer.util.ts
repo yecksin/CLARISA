@@ -7,6 +7,7 @@ import 'dotenv/config';
 import Mail from 'nodemailer/lib/mailer';
 import Handlebars from 'handlebars';
 import { PartnerRequest } from 'src/api/partner-request/entities/partner-request.entity';
+import SMTPTransport from 'nodemailer/lib/smtp-transport';
 
 @Injectable()
 export class MailUtil {
@@ -20,7 +21,7 @@ export class MailUtil {
   private async getTransporterInstance() {
     const isProd: boolean = env.APP_PROFILE === 'PROD';
     // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
+    let options: SMTPTransport.Options = {
       host: env.PREFERRED_EMAIL_HOST,
       port: +env.PREFERRED_EMAIL_PORT,
       logger: isProd,
@@ -31,11 +32,20 @@ export class MailUtil {
         // do not fail on invalid certs
         rejectUnauthorized: false,
       },
-      auth: {
-        user: env.PREFERRED_EMAIL_USERNAME,
-        pass: env.PREFERRED_EMAIL_PASSWORD,
-      },
-    });
+    };
+
+    // peferred option is prod, we need to send the auth credentials
+    if (isProd) {
+      options = {
+        ...options,
+        auth: {
+          user: env.PREFERRED_EMAIL_USERNAME,
+          pass: env.PREFERRED_EMAIL_PASSWORD,
+        },
+      };
+    }
+
+    let transporter = nodemailer.createTransport(options);
 
     let isReady: boolean = await transporter
       .verify()
@@ -55,7 +65,7 @@ export class MailUtil {
         'could not init mail client with the preferred credentials. Switching to the alternative...',
       );
 
-      transporter = nodemailer.createTransport({
+      options = {
         host: env.ALTERNATIVE_EMAIL_HOST,
         port: +env.ALTERNATIVE_EMAIL_PORT,
         logger: isProd,
@@ -66,13 +76,22 @@ export class MailUtil {
           // do not fail on invalid certs
           rejectUnauthorized: false,
         },
-        auth: {
-          user: env.ALTERNATIVE_EMAIL_USERNAME,
-          pass: env.ALTERNATIVE_EMAIL_PASSWORD,
-        },
-      });
+      };
 
-      await transporter
+      // if is not prod, the alternative option is the production one, so we need to pass the auth
+      if (!isProd) {
+        options = {
+          ...options,
+          auth: {
+            user: env.ALTERNATIVE_EMAIL_USERNAME,
+            pass: env.ALTERNATIVE_EMAIL_PASSWORD,
+          },
+        };
+      }
+
+      transporter = nodemailer.createTransport(options);
+
+      isReady = await transporter
         .verify()
         .then((res) => {
           this.logger.debug('Alternative mail connection established!');
@@ -86,7 +105,13 @@ export class MailUtil {
         });
     }
 
-    return transporter;
+    if (isReady) {
+      return transporter;
+    } else {
+      throw Error(
+        'We were not able to establish a connection with the mail servers',
+      );
+    }
   }
 
   private loadUpTemplate(relativePath: string): Promise<string> {
@@ -107,19 +132,25 @@ export class MailUtil {
 
     this.loadUpTemplate(
       '../../../assets/email-templates/new-partner-request.hbs',
-    ).then((hbsTemplate) => {
-      const template = Handlebars.compile(hbsTemplate);
-      let compiledTemplate: string = template(partnerRequest);
+    )
+      .then((hbsTemplate) => {
+        const template = Handlebars.compile(hbsTemplate);
+        let compiledTemplate: string = template(partnerRequest);
 
-      this.sendEmail({
-        from: env.SUPPORT_EMAIL, // sender address
-        to, // list of receivers
-        //cc,
-        subject, // Subject line
-        //text: 'Hello world?', // plain text body
-        html: compiledTemplate, // html body
+        this.sendEmail({
+          from: env.SUPPORT_EMAIL, // sender address
+          to, // list of receivers
+          //cc,
+          subject, // Subject line
+          //text: 'Hello world?', // plain text body
+          html: compiledTemplate, // html body
+        }).catch((err) => {
+          this.logger.error(err);
+        });
+      })
+      .catch((err) => {
+        this.logger.error(`The template could not be found...${err}`);
       });
-    });
   }
 
   public sendResponseToPartnerRequest(partnerRequest: PartnerRequest) {
@@ -149,10 +180,10 @@ export class MailUtil {
     });
   }
 
-  public async sendEmail<T>(options: Mail.Options): Promise<T> {
-    let transporter: nodemailer.Transporter =
-      await this.getTransporterInstance();
-    return transporter.sendMail(options);
+  public async sendEmail(options: Mail.Options): Promise<any> {
+    return this.getTransporterInstance()
+      .then((transporter) => transporter.sendMail(options))
+      .catch((err) => err);
   }
 
   private testing_mail(transporter: nodemailer.Transporter) {

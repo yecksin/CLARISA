@@ -61,6 +61,7 @@ import { InstitutionModule } from './institution/institution.module';
 import { InstitutionDictionaryModule } from './institution-dictionary/institution-dictionary.module';
 import { PartnerRequestModule } from './partner-request/partner-request.module';
 import { CountryOfficeRequestModule } from './country-office-request/country-office-request.module';
+import { PolicyTypeModule } from './policy-type/policy-type.module';
 
 @Module({
   controllers: [ApiController],
@@ -126,6 +127,7 @@ import { CountryOfficeRequestModule } from './country-office-request/country-off
     InstitutionDictionaryModule,
     PartnerRequestModule,
     CountryOfficeRequestModule,
+    PolicyTypeModule,
   ],
 })
 export class ApiModule {}

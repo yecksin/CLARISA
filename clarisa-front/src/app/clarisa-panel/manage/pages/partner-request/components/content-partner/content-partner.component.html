@@ -46,7 +46,7 @@
                       </li>
                       <li>
                         <a href="#tab28" data-bs-toggle="tab"
-                          >Request new country office(s)</a
+                          >Request institution(s)</a
                         >
                       </li>
                     </ul>
@@ -63,7 +63,12 @@
                     <div class="tab-pane" id="tab27">
                       <app-form-country-office></app-form-country-office>
                     </div>
-                    <div class="tab-pane" id="tab28"></div>
+                    <div class="tab-pane" id="tab28">
+                      <app-request-institutions-form
+                        [informationContent]="item"
+                        *ngFor="let item of informationParnertRequest"
+                      ></app-request-institutions-form>
+                    </div>
                   </div>
                 </div>
               </div>

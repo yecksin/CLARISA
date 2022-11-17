@@ -2,13 +2,14 @@
   <span>Institution:*</span>
   <br />
   <p-dropdown
-    [options]="informationEndpoint"
+    [options]="informationEndpoint[0]"
     [(ngModel)]="institution"
     placeholder="Select Item"
     [virtualScroll]="true"
     [itemSize]="31"
     [filter]="false"
     optionLabel="name"
+    [style]="{ width: '100%' }"
   ></p-dropdown>
 </div>
 <div style="width: 50%; margin-top: 20px">

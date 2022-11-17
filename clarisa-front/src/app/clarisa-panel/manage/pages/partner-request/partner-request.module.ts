@@ -24,13 +24,15 @@ import { RatingModule } from 'primeng/rating';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
-import { MessageService } from 'primeng/api';
+
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { FormCountryOfficeComponent } from './components/content-partner/section/form-country-office/form-country-office.component';
+import { RequestInstitutionsFormComponent } from './components/content-partner/section/request-institutions-form/request-institutions-form.component';
+import { MessagesModule } from 'primeng/messages';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { FormCountryOfficeComponent } from './components/content-partner/section
     ListInstitutionComponent,
     FormNewInstitutionComponent,
     FormCountryOfficeComponent,
+    RequestInstitutionsFormComponent,
   ],
   imports: [
     CommonModule,
@@ -65,6 +68,9 @@ import { FormCountryOfficeComponent } from './components/content-partner/section
     InputTextareaModule,
     HttpClientModule,
     DynamicDialogModule,
+    ReactiveFormsModule,
+    MessagesModule,
   ],
+  providers: [ConfirmationService],
 })
 export class PartnerRequestModule {}

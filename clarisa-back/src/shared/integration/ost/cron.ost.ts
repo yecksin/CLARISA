@@ -1,4 +1,4 @@
-import { Cron } from '@nestjs/schedule';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { ApiOST } from './api.ost';
 import { Initiative } from 'src/api/initiative/entities/initiative.entity';
@@ -445,7 +445,8 @@ export class CronOST {
   }
 
   // every sunday at 4 am
-  @Cron('* * 4 * * 0')
+  //@Cron('* * 4 * * 0')
+  @Cron(CronExpression.EVERY_5_MINUTES)
   public async cronInitiativeRelatedData() {
     const initiativesRequest = await firstValueFrom(this.api.getInitiatives());
 

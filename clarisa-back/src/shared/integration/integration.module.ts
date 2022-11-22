@@ -9,6 +9,7 @@ import { RegionRepository } from 'src/api/region/repositories/region.repository'
 import { WorkpackageCountry } from 'src/api/workpackage/entities/workpackage-country.entity';
 import { WorkpackageRegion } from 'src/api/workpackage/entities/workpackage-region.entity';
 import { WorkpackageRepository } from 'src/api/workpackage/repositories/workpackage.repository';
+import { IntegrationController } from './integration.controller';
 import { ApiOST } from './ost/api.ost';
 import { CronOST } from './ost/cron.ost';
 
@@ -30,5 +31,6 @@ import { CronOST } from './ost/cron.ost';
     CountryRepository,
     RegionRepository,
   ],
+  controllers: [IntegrationController],
 })
 export class IntegrationModule {}

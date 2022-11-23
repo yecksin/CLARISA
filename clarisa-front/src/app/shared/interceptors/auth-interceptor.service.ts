@@ -28,12 +28,14 @@ export class GeneralInterceptorService implements HttpInterceptor {
     }
 
     const headers = new HttpHeaders({
-      Authorization: this.authService?.localStorageToken,
+      Authorization: `Bearer ${this.authService?.localStorageToken}`,
     });
 
     const reqClone = req.clone({
       headers,
     });
+
+    console.log(reqClone);
 
     return next.handle(reqClone);
   }

@@ -27,12 +27,13 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { FormCountryOfficeComponent } from './components/content-partner/section/form-country-office/form-country-office.component';
 import { RequestInstitutionsFormComponent } from './components/content-partner/section/request-institutions-form/request-institutions-form.component';
 import { MessagesModule } from 'primeng/messages';
 import { ConfirmationService } from 'primeng/api';
+import { GeneralInterceptorService } from '../../../../shared/interceptors/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,6 @@ import { ConfirmationService } from 'primeng/api';
     InputNumberModule,
     ConfirmDialogModule,
     InputTextareaModule,
-    HttpClientModule,
     DynamicDialogModule,
     ReactiveFormsModule,
     MessagesModule,

@@ -9,7 +9,7 @@ import { ConfirmationService, Message } from 'primeng/api';
 export class RequestInstitutionsFormComponent implements OnInit {
   displayModal: boolean;
   type: any[];
-  selectedType: any;
+  selectedType: any = {};
   cities: any[];
   selectedCity: any;
   display: boolean = false;
@@ -30,6 +30,7 @@ export class RequestInstitutionsFormComponent implements OnInit {
       { name: 'Person - Not institution' },
       { name: 'Country - Office' },
     ];
+    this.selectedType = { country: 'India' };
   }
 
   showModalDialog() {

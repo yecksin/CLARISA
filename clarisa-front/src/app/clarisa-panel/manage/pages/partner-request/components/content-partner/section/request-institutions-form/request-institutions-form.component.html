@@ -13,7 +13,7 @@
       >{{ informationContent.countryDTO.name }}<br />
       <span style="font-weight: 500; font-size: 15.5px">Request Source:</span
       >{{ informationContent.requestSource }} <br />
-      <span style="font-weight: 500; font-size: 15.5px">CRP:</span><br />
+      <span style="font-weight: 500; font-size: 15.5px">MIS:</span><br />
       <span style="font-weight: 500; font-size: 15.5px">Request By:</span> ({{
         informationContent.externalUserName
       }}) {{ informationContent.externalUserMail }}<br />
@@ -122,11 +122,13 @@
         <br />
         <p-dropdown
           [options]="type"
-          [(ngModel)]="selectedType"
+          [(ngModel)]="informationContent.institutionTypeDTO.name"
           optionLabel="name"
+          dataKey="informationContent.institutionTypeDTO.name"
           [style]="{ width: '90%' }"
-          optionValue="{{ informationContent.institutionTypeDTO.name }}"
-        ></p-dropdown>
+        >
+          {{ informationContent.institutionTypeDTO.name }}
+        </p-dropdown>
       </div>
       <div style="width: 50%">
         <span>Country:*</span>
@@ -216,7 +218,7 @@
           <span style="font-weight: 500; font-size: 15.5px"
             >Request Source:</span
           >{{ informationContent.requestSource }} <br />
-          <span style="font-weight: 500; font-size: 15.5px">CRP:</span><br />
+          <span style="font-weight: 500; font-size: 15.5px">MIS:</span><br />
           <span style="font-weight: 500; font-size: 15.5px">Request By:</span>
           ({{ informationContent.externalUserName }})
           {{ informationContent.externalUserMail }}<br />

@@ -28,7 +28,7 @@ export class GeneralInterceptorService implements HttpInterceptor {
     }
 
     const headers = new HttpHeaders({
-      auth: this.authService?.localStorageToken,
+      Authorization: this.authService?.localStorageToken,
     });
 
     const reqClone = req.clone({

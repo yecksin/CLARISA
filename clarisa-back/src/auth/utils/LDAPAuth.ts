@@ -2,7 +2,7 @@ import { BaseAuthenticator } from './interface/BaseAuthenticator';
 import ActiveDirectory from 'activedirectory';
 import config from 'src/shared/config/config';
 import { BaseMessageDTO } from './BaseMessageDTO';
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpStatus } from '@nestjs/common';
 
 @Injectable()
 export class LDAPAuth implements BaseAuthenticator {
@@ -24,7 +24,7 @@ export class LDAPAuth implements BaseAuthenticator {
           const notFound: BaseMessageDTO = {
             name: 'SERVER_NOT_FOUND',
             description: `There was an internal server error: ${err.lde_message}`,
-            httpCode: 400,
+            httpCode: HttpStatus.INTERNAL_SERVER_ERROR,
           };
           if (err.errno == 'ENOTFOUND') {
             notFound.name = 'SERVER_NOT_FOUND';
@@ -39,7 +39,7 @@ export class LDAPAuth implements BaseAuthenticator {
           const err: BaseMessageDTO = {
             name: 'INVALID_CREDENTIALS',
             description: 'The supplied credentials are invalid',
-            httpCode: 400,
+            httpCode: HttpStatus.INTERNAL_SERVER_ERROR,
           };
 
           console.log('ERROR: ' + JSON.stringify(err));

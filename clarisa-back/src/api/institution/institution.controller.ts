@@ -24,8 +24,16 @@ export class InstitutionController {
   constructor(private readonly institutionService: InstitutionService) {}
 
   @Get()
-  async findAll(@Query('show') show: FindAllOptions) {
-    return await this.institutionService.findAll(show);
+  async findAll(
+    @Query('show') show: FindAllOptions,
+    @Query('from') from: string = undefined,
+  ) {
+    return await this.institutionService.findAll(show, from);
+  }
+
+  @Get('simple')
+  async findAllSimple(@Query('show') show: FindAllOptions) {
+    return await this.institutionService.findAllSimple(show);
   }
 
   @Get('get/:id')

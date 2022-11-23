@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { AxiosResponse } from 'axios';
 import { Logger } from '@nestjs/common';
 import axios from 'axios';
+import https from 'https';
 
 export abstract class BaseApi {
   protected externalAppEndpoint: string;
@@ -11,12 +12,15 @@ export abstract class BaseApi {
   protected pass: string;
   protected logger: Logger;
 
+  private readonly httpsAgent = new https.Agent({ rejectUnauthorized: false });
+
   protected getRequest<T = any>(
     endpoint: string,
   ): Observable<AxiosResponse<T, any>> {
     try {
       return this.httpService.get(`${this.externalAppEndpoint}/${endpoint}`, {
         auth: { username: this.user, password: this.pass },
+        //httpsAgent: this.httpsAgent,
       });
     } catch (e) {
       if (axios.isAxiosError(e)) {

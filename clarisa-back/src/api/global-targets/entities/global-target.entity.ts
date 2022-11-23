@@ -16,7 +16,7 @@ export class GlobalTarget extends AuditableEntity {
   id: number;
 
   @Column()
-  @Expose({ name: 'impactAreasId' })
+  @Expose({ name: 'impactAreaId' })
   impact_areas_id: number;
 
   @ManyToOne(() => ImpactArea, { eager: true })
@@ -24,7 +24,7 @@ export class GlobalTarget extends AuditableEntity {
   @Transform(({ value }) => {
     return value.name;
   })
-  @Expose({ name: 'ActionAreaName' })
+  @Expose({ name: 'impactAreaName' })
   impact_area_name: ImpactArea;
 
   @Column()

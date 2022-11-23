@@ -4,6 +4,7 @@ import {
   DataSource,
   FindOptionsRelations,
   FindOptionsWhere,
+  MoreThanOrEqual,
   Repository,
 } from 'typeorm';
 import { FindAllOptions } from '../../../shared/entities/enums/find-all-options';
@@ -13,6 +14,7 @@ import { InstitutionSourceDto } from '../../institution-dictionary/dto/instituti
 import { InstitutionTypeDto } from '../../institution-type/dto/institution-type.dto';
 import { PartnerRequest } from '../../partner-request/entities/partner-request.entity';
 import { InstitutionCountryDto } from '../dto/institution-country.dto';
+import { InstitutionSimpleDto } from '../dto/institution-simple.dto';
 import { InstitutionDto } from '../dto/institution.dto';
 import { InstitutionLocation } from '../entities/institution-location.entity';
 import { Institution } from '../entities/institution.entity';
@@ -36,8 +38,49 @@ export class InstitutionRepository extends Repository<Institution> {
 
   async findAllInstitutions(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+    from: string = undefined,
   ): Promise<InstitutionDto[]> {
     const institutionDtos: InstitutionDto[] = [];
+    let whereClause: FindOptionsWhere<Institution> = {};
+
+    switch (option) {
+      case FindAllOptions.SHOW_ALL:
+        //do nothing. we will be showing everything, so no condition is needed;
+        break;
+      case FindAllOptions.SHOW_ONLY_ACTIVE:
+      case FindAllOptions.SHOW_ONLY_INACTIVE:
+        whereClause = {
+          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+        };
+        break;
+    }
+
+    if (from) {
+      whereClause = {
+        ...whereClause,
+        updated_at: MoreThanOrEqual(new Date(+from)),
+      };
+    }
+
+    const institution: Institution[] = await this.find({
+      where: whereClause,
+      relations: this.institutionRelations,
+    });
+
+    await Promise.all(
+      institution.map(async (i) => {
+        const institutionDto: InstitutionDto = this.fillOutInstitutionInfo(i);
+        institutionDtos.push(institutionDto);
+      }),
+    );
+
+    return institutionDtos;
+  }
+
+  async findAllInstitutionsSimple(
+    option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+  ): Promise<InstitutionSimpleDto[]> {
+    const institutionDtos: InstitutionSimpleDto[] = [];
     let whereClause: FindOptionsWhere<Institution> = {};
     switch (option) {
       case FindAllOptions.SHOW_ALL:
@@ -56,14 +99,25 @@ export class InstitutionRepository extends Repository<Institution> {
       relations: this.institutionRelations,
     });
 
-    await Promise.all(
-      institution.map(async (i) => {
-        const institutionDto: InstitutionDto = this.fillOutInstitutionInfo(i);
-        institutionDtos.push(institutionDto);
-      }),
-    );
+    return institution.map((i) => {
+      const institutionDto: InstitutionSimpleDto = new InstitutionSimpleDto();
 
-    return institutionDtos;
+      institutionDto.code = i.id;
+      institutionDto.acronym = i.acronym;
+
+      const hq: InstitutionLocation = i.institution_locations.find(
+        (il) => il.is_headquater,
+      );
+      institutionDto.hqLocation = hq.country_object.name;
+
+      institutionDto.hqLocationISOalpha2 = hq.country_object.iso_alpha_2;
+      institutionDto.institutionType = i.institution_type_object.name;
+      institutionDto.institutionTypeId = i.institution_type_object.id;
+      institutionDto.name = i.name;
+      institutionDto.websiteLink = i.website_link;
+
+      return institutionDto;
+    });
   }
 
   private fillOutInstitutionInfo(institution: Institution): InstitutionDto {
@@ -200,9 +254,10 @@ export class InstitutionRepository extends Repository<Institution> {
     institution.name = partnerRequest.partner_name;
     institution.website_link = partnerRequest.web_page;
 
-    await this.createInstitutionCountry(partnerRequest, true);
-
     institution = await this.save(institution);
+    partnerRequest.institution_id = institution.id;
+
+    await this.createInstitutionCountry(partnerRequest, true);
 
     institution = await this.findOne({
       where: {

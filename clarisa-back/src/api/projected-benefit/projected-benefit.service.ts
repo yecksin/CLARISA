@@ -1,33 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
+import { ProjectedBenefitDto } from './dto/projected-benefit.dto';
 import { UpdateProjectedBenefitDto } from './dto/update-projected-benefit.dto';
 import { ProjectedBenefit } from './entities/projected-benefit.entity';
+import { ProjectedBenefitRepository } from './repositories/projected-benefit.repository';
 
 @Injectable()
 export class ProjectedBenefitService {
   constructor(
-    @InjectRepository(ProjectedBenefit)
-    private projectedBenefitsRepository: Repository<ProjectedBenefit>,
+    private projectedBenefitsRepository: ProjectedBenefitRepository,
   ) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
-  ): Promise<ProjectedBenefit[]> {
-    switch (option) {
-      case FindAllOptions.SHOW_ALL:
-        return await this.projectedBenefitsRepository.find();
-      case FindAllOptions.SHOW_ONLY_ACTIVE:
-      case FindAllOptions.SHOW_ONLY_INACTIVE:
-        return await this.projectedBenefitsRepository.find({
-          where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
-          },
-        });
-      default:
-        throw Error('?!');
+  ): Promise<ProjectedBenefitDto[]> {
+    if (!Object.values<string>(FindAllOptions).includes(option)) {
+      throw Error('?!');
     }
+
+    return this.projectedBenefitsRepository.findAllProjectedBenefits(option);
   }
 
   async findOne(id: number): Promise<ProjectedBenefit> {

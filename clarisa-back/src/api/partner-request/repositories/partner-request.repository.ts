@@ -10,6 +10,7 @@ import { RespondRequestDto } from '../../../shared/entities/dtos/respond-request
 import { MisOption } from '../../../shared/entities/enums/mises-options';
 import { PartnerStatus } from '../../../shared/entities/enums/partner-status';
 import { RegionTypeEnum } from '../../../shared/entities/enums/region-types';
+import { MailUtil } from '../../../shared/utils/mailer.util';
 import { CountryDto } from '../../country/dto/country.dto';
 import { Country } from '../../country/entities/country.entity';
 import { InstitutionTypeDto } from '../../institution-type/dto/institution-type.dto';
@@ -33,6 +34,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
         parent_object: true,
       },
     },
+    mis_object: true,
     institution_type_object: true,
     institution_object: {
       institution_type_object: true,
@@ -49,6 +51,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
   constructor(
     private dataSource: DataSource,
     private institutionRepository: InstitutionRepository,
+    private mailUtil: MailUtil,
   ) {
     super(PartnerRequest, dataSource.createEntityManager());
   }
@@ -259,6 +262,8 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       relations: this.partnerRelations,
     });
 
+    this.mailUtil.sendNewPartnerRequestNotification(partialPartnerRequest);
+
     return this.fillOutPartnerRequestDto(partialPartnerRequest);
   }
 
@@ -284,9 +289,21 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       ? partialPartnerRequest.accepted_by
       : partialPartnerRequest.rejected_by;
 
-    partialPartnerRequest = await this.save(partialPartnerRequest);
+    this.mailUtil.sendResponseToPartnerRequest(partialPartnerRequest);
 
-    await this.institutionRepository.createInstitution(partialPartnerRequest);
+    if (accepted) {
+      const newInstitution = await this.institutionRepository.createInstitution(
+        partialPartnerRequest,
+      );
+      partialPartnerRequest.institution_id = newInstitution.code;
+
+      partialPartnerRequest = await this.save(partialPartnerRequest);
+    }
+
+    partialPartnerRequest = await this.findOne({
+      where: { id: partialPartnerRequest.id },
+      relations: this.partnerRelations,
+    });
 
     return this.fillOutPartnerRequestDto(partialPartnerRequest);
   }

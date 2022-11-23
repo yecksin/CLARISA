@@ -57,6 +57,7 @@ import { InstitutionModule } from './institution/institution.module';
 import { InstitutionDictionaryModule } from './institution-dictionary/institution-dictionary.module';
 import { PartnerRequestModule } from './partner-request/partner-request.module';
 import { CountryOfficeRequestModule } from './country-office-request/country-office-request.module';
+import { PolicyTypeModule } from './policy-type/policy-type.module';
 
 export const apiRoutes = [
   {
@@ -294,5 +295,9 @@ export const apiRoutes = [
   {
     path: 'country-office-requests',
     module: CountryOfficeRequestModule,
+  },
+  {
+    path: 'policy-types',
+    module: PolicyTypeModule,
   },
 ];

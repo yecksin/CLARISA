@@ -4,6 +4,7 @@ import {
   DataSource,
   FindOptionsRelations,
   FindOptionsWhere,
+  MoreThanOrEqual,
   Repository,
 } from 'typeorm';
 import { FindAllOptions } from '../../../shared/entities/enums/find-all-options';
@@ -37,9 +38,11 @@ export class InstitutionRepository extends Repository<Institution> {
 
   async findAllInstitutions(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+    from: string = undefined,
   ): Promise<InstitutionDto[]> {
     const institutionDtos: InstitutionDto[] = [];
     let whereClause: FindOptionsWhere<Institution> = {};
+
     switch (option) {
       case FindAllOptions.SHOW_ALL:
         //do nothing. we will be showing everything, so no condition is needed;
@@ -50,6 +53,13 @@ export class InstitutionRepository extends Repository<Institution> {
           is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
         };
         break;
+    }
+
+    if (from) {
+      whereClause = {
+        ...whereClause,
+        updated_at: MoreThanOrEqual(new Date(+from)),
+      };
     }
 
     const institution: Institution[] = await this.find({

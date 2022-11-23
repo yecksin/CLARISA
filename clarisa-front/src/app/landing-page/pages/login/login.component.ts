@@ -40,8 +40,9 @@ export class LoginComponent implements OnInit {
         setTimeout(() => {
           alert('Login successfull');
           //change this route when the new component is ready
-          //this.router.navigate(['/admin']);
+          this.router.navigate(['/clarisa-panel/manage/partner-request']);
         }, 1500);
+        console.log(resp);
       },
       error: (err) => {
         //show alert

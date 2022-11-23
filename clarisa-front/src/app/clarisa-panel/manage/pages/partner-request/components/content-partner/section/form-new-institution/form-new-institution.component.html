@@ -12,70 +12,169 @@
     The name of the institution should be in its language.(e.g. For CIAT)
   </p>
 </div>
-<div style="margin-top: 50px">
-  <div>
-    <span>Name:*</span>
-    <input type="text" pInputText style="width: 100%" />
-  </div>
-  <div
-    style="margin-top: 10px; width: 100%; display: flex; flex-direction: row"
-  >
-    <div style="width: 50%">
-      <span>Type:*</span>
-      <br />
-      <p-dropdown
-        [options]="type"
-        [(ngModel)]="selectedType"
-        optionLabel="name"
-        [style]="{ width: '90%' }"
-      ></p-dropdown>
+<form [formGroup]="group" (ngSubmit)="onSubmit(group.value)">
+  <div style="margin-top: 50px">
+    <div>
+      <span>Name:*</span>
+      <input
+        type="text"
+        pInputText
+        style="width: 100%"
+        [required]="true"
+        formControlName="name"
+      />
     </div>
-    <div style="width: 50%">
-      <span>Country:*</span>
-      <br />
-      <p-dropdown
-        [options]="cities"
-        [(ngModel)]="selectedCity"
-        optionLabel="name"
-        [style]="{ width: '90%' }"
-      ></p-dropdown>
+    <div
+      style="margin-top: 10px; width: 100%; display: flex; flex-direction: row"
+    >
+      <div style="width: 50%">
+        <span>Type:*</span>
+        <br />
+        <p-dropdown
+          [options]="type[0]"
+          [(ngModel)]="selectedType"
+          optionLabel="name"
+          [style]="{ width: '90%' }"
+          placeholder="Select a Type"
+          (onChange)="selectType($event.value)"
+          [showClear]="true"
+          [required]="true"
+        ></p-dropdown>
+        <span *ngIf="isArray(subType) && subType.length > 0">
+          <br />
+          <br />
+          <span style="margin-top: 50px">Subtype:*</span>
+          <br />
+          <p-dropdown
+            [options]="subType"
+            [(ngModel)]="selectSubtype"
+            optionLabel="name"
+            [style]="{ width: '90%' }"
+            placeholder="Select a Type"
+            (onChange)="selectSubType($event.value)"
+            [showClear]="true"
+            [required]="true"
+          ></p-dropdown>
+        </span>
+
+        <span
+          *ngIf="isArray(subsType) && subsType.length > 0"
+          style="margin-top: 30px"
+        >
+          <br />
+          <br />
+          <span>Subtype:*</span>
+          <br />
+          <p-dropdown
+            [options]="subsType"
+            [(ngModel)]="selectSubstype"
+            optionLabel="name"
+            [style]="{ width: '90%' }"
+            placeholder="Select a Type"
+            [showClear]="true"
+            [required]="true"
+            formControlName="institutionTypeCode"
+          ></p-dropdown>
+        </span>
+      </div>
+      <div style="width: 50%">
+        <span>Country:*</span>
+        <br />
+
+        <p-dropdown
+          [options]="cities[0]"
+          [(ngModel)]="selectedCity"
+          optionLabel="name"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true"
+          placeholder="Select a Country"
+          [style]="{ width: '90%' }"
+          [required]="true"
+          formControlName="hqCountryIso"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div class="country-item country-item-value" *ngIf="selectedCity">
+              <div>{{ selectedCity.name }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-country pTemplate="item">
+            <div class="country-item">
+              <div>{{ country.name }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+    </div>
+    <div
+      style="margin-top: 10px; width: 100%; display: flex; flex-direction: row"
+    >
+      <div style="width: 70%">
+        <span>Website:</span>
+        <input
+          type="text"
+          pInputText
+          style="width: 100%"
+          formControlName="websiteLink"
+        />
+      </div>
+      <div style="width: 30%; margin-left: 20px">
+        <span>Acronym:</span>
+        <input
+          type="text"
+          pInputText
+          style="width: 100%"
+          formControlName="acronym"
+        />
+      </div>
+    </div>
+    <div style="margin-top: 10px">
+      <span>Comments:</span><br />
+      <textarea
+        [rows]="5"
+        pInputTextarea
+        style="width: 100%"
+        formControlName="externalUserComments"
+      ></textarea>
+    </div>
+    <div
+      style="
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <p-confirmDialog
+        [style]="{ width: '50vw' }"
+        [baseZIndex]="10000"
+      ></p-confirmDialog>
+      <button
+        pButton
+        label="Request New institution"
+        class="p-button-warning"
+        style="border-radius: 30px"
+        type="submit"
+      ></button>
     </div>
   </div>
-  <div
-    style="margin-top: 10px; width: 100%; display: flex; flex-direction: row"
-  >
-    <div style="width: 70%">
-      <span>Website:</span>
-      <input type="text" pInputText style="width: 100%" />
-    </div>
-    <div style="width: 30%; margin-left: 20px">
-      <span>Acronym:</span>
-      <input type="text" pInputText style="width: 100%" />
-    </div>
-  </div>
-  <div style="margin-top: 10px">
-    <span>Comments:</span><br />
-    <textarea
-      [rows]="5"
-      pInputTextarea
-      [autoResize]="true"
-      style="width: 100%"
-    ></textarea>
-  </div>
-  <div
-    style="
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    "
-  >
-    <button
-      pButton
-      type="button"
-      label="Request New institution"
-      class="p-button-warning"
-      style="border-radius: 30px"
-    ></button>
-  </div>
-</div>
+</form>
+
+<p-dialog
+  header="Header"
+  [(visible)]="display"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <p class="m-0">Check that one of the mandatory compos is empty.</p>
+  <br />
+  <br />
+  <p-button
+    icon="pi pi-times"
+    (click)="display = false"
+    label="Close"
+  ></p-button>
+</p-dialog>

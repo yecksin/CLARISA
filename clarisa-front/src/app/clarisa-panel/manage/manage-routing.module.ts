@@ -21,6 +21,13 @@ const routes: Routes = [
             (m) => m.ManageRoleModule
           ),
       },
+      {
+        path: 'partner-request',
+        loadChildren: () =>
+          import('./pages/partner-request/partner-request.module').then(
+            (m) => m.PartnerRequestModule
+          ),
+      },
     ],
   },
 ];

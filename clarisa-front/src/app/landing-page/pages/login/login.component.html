@@ -1,40 +1,88 @@
-<h1>login works!</h1>
-<form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-    <p-panel header="Login">
-        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-2">
-                    Login (username or email):
-                </div>
-                <div class="ui-grid-col-6">
-                    <input pInputText type="text" formControlName="login" class="form-control" name="login">
-                </div>
-                <div class="ui-grid-col-4">
-                    <div [hidden]="loginForm.controls['login'].valid || !loginForm.controls['login'].dirty" class="alert alert-danger">
-                        Login is required
-                    </div>
-                </div>
+<div class="container">
+  <div class="login">
+    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+      <p-panel>
+        <div
+          class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid"
+          style="margin: 10px 0px"
+        >
+          <div>
+            <h2 style="color: #7ab800">Welcom to CLARISA platform</h2>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-2" style="font-size: 13px; color: black">
+              Username or email:
             </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-2">
-                    Password:
-                </div>
-                <div class="ui-grid-col-6">
-                    <input pInputText type="password" formControlName="password" class="form-control" name="password">
-                </div>
-                <div class="ui-grid-col-4">
-                    <div [hidden]="loginForm.controls['password'].valid || !loginForm.controls['password'].dirty" class="alert alert-danger">
-                        Password is required
-                    </div>
-                </div>
+            <div class="ui-grid-col-6">
+              <input
+                pInputText
+                type="text"
+                formControlName="login"
+                class="form-control"
+                name="login"
+              />
             </div>
-            <div class="ui-grid-row">
-                <div class="ui-grid-col-2"></div>
-                <div class="ui-grid-col-6">
-                    <button pButton type="submit" label="Submit" [disabled]="!loginForm.valid"></button>
-                </div>
-                <div class="ui-grid-col-4"></div>
+            <div class="ui-grid-col-4">
+              <div
+                [hidden]="
+                  loginForm.controls['login'].valid ||
+                  !loginForm.controls['login'].dirty
+                "
+                class="alert alert-danger"
+              >
+                Login is required
+              </div>
             </div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-2" style="font-size: 13px; color: black">
+              Password:
+            </div>
+            <div class="ui-grid-col-6">
+              <input
+                pInputText
+                type="password"
+                formControlName="password"
+                class="form-control"
+                name="password"
+              />
+            </div>
+            <div class="ui-grid-col-4">
+              <div
+                [hidden]="
+                  loginForm.controls['password'].valid ||
+                  !loginForm.controls['password'].dirty
+                "
+                class="alert alert-danger"
+              >
+                Password is required
+              </div>
+            </div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-2"></div>
+            <div
+              class="ui-grid-col-6"
+              style="display: flex; justify-content: center"
+            >
+              <button
+                pButton
+                type="submit"
+                label="Login"
+                [disabled]="!loginForm.valid"
+                style="
+                  margin-top: 10px;
+                  border-radius: 30px;
+                  background-color: #7ab800;
+                  color: white;
+                  font-size: 14px;
+                "
+              ></button>
+            </div>
+            <div class="ui-grid-col-4"></div>
+          </div>
         </div>
-    </p-panel>
-</form>
+      </p-panel>
+    </form>
+  </div>
+</div>

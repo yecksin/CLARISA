@@ -7,6 +7,7 @@ export class PartnerRequestDto {
   partnerName: string;
   acronym: string;
   webPage: string;
+  mis: string;
   requestStatus: string;
   requestJustification: string;
   requestSource?: string;
@@ -16,4 +17,7 @@ export class PartnerRequestDto {
   countryDTO: CountryDto;
   institutionTypeDTO: InstitutionTypeDto;
   institutionDTO: InstitutionDto;
+  category_1: string;
+  category_2: string;
+  created_at: Date;
 }

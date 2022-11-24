@@ -114,6 +114,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       where: whereClause,
       relations: this.partnerRelations,
     });
+    console.log(partnerRequest[0]);
 
     await Promise.all(
       partnerRequest.map(async (pr) => {
@@ -134,13 +135,16 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     partnerRequestDto.partnerName = pr.partner_name;
     partnerRequestDto.acronym = pr.acronym;
     partnerRequestDto.webPage = pr.web_page;
+    partnerRequestDto.mis = pr.mis_object.acronym;
     partnerRequestDto.requestStatus = this.getRequestStatus(pr.accepted);
     partnerRequestDto.requestJustification = pr.reject_justification;
     partnerRequestDto.requestSource = pr.request_source;
     partnerRequestDto.externalUserMail = pr.external_user_mail;
     partnerRequestDto.externalUserName = pr.external_user_name;
     partnerRequestDto.externalUserComments = pr.external_user_comments;
-
+    partnerRequestDto.category_1 = pr.category_1;
+    partnerRequestDto.category_2 = pr.category_2;
+    partnerRequestDto.created_at = pr.created_at;
     partnerRequestDto.countryDTO = this.fillOutCountryInfo(pr.country_object);
 
     partnerRequestDto.institutionTypeDTO = new InstitutionTypeDto();
@@ -254,6 +258,9 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
 
     partialPartnerRequest.created_by =
       partialPartnerRequest.created_by_object.id;
+
+    partialPartnerRequest.category_1 = incomingPartnerRequest.category_1;
+    partialPartnerRequest.category_2 = incomingPartnerRequest.category_2;
 
     partialPartnerRequest = await this.save(partialPartnerRequest);
 

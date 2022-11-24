@@ -101,4 +101,10 @@ export class PartnerRequest extends AuditableEntity {
   //in theory it should be ONLY one, but you'll never know...
   @OneToMany(() => PartnerRequest, (pr) => pr.parent_object)
   children: PartnerRequest[];
+
+  @Column()
+  category_1: string;
+
+  @Column()
+  category_2: string;
 }

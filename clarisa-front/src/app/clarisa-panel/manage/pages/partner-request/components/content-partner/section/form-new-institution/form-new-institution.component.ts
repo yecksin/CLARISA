@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ManageApiService } from '../../../../../../services/manage-api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService, PrimeNGConfig } from 'primeng/api';
 import { Message } from 'primeng/api';
+import { Dropdown } from 'primeng/dropdown/dropdown';
 
 @Component({
   selector: 'app-form-new-institution',
@@ -31,13 +32,17 @@ export class FormNewInstitutionComponent implements OnInit {
     this.group = this.formBuilder.group({
       name: ['', Validators.required],
       acronym: '',
-      institutionTypeCode: ['', Validators.required],
+      institutionTypeCode: [null, Validators.required],
       hqCountryIso: ['', Validators.required],
       websiteLink: '',
       misAcronym: ['CLARISA', Validators.required],
       externalUserMail: ['a', Validators.required],
       externalUserName: '',
       externalUserComments: '',
+      category_1: '',
+      category_2: '',
+      institutionHelpOne: '',
+      institutionHelpTwo: '',
     });
   }
 
@@ -53,13 +58,10 @@ export class FormNewInstitutionComponent implements OnInit {
     });
     this._manageApiService.getAllCountries().subscribe((resp) => {
       this.cities.push(resp);
-      console.log(this.cities);
     });
   }
 
   selectType(types: any) {
-    console.log(types);
-
     if (types != null) {
       this.subsType = [];
       this.subType = [];
@@ -68,7 +70,8 @@ export class FormNewInstitutionComponent implements OnInit {
       this.subsType = [];
       this.subType = [];
     }
-    this.group.controls['institutionTypeCode'].setValue(types.code);
+    let numberInst: number = parseInt(types.code);
+    this.group.controls['institutionTypeCode'].setValue(numberInst);
   }
 
   selectSubType(types: any) {
@@ -78,11 +81,11 @@ export class FormNewInstitutionComponent implements OnInit {
     } else {
       this.subsType = [];
     }
-    this.group.controls['institutionTypeCode'].setValue(types.code);
+    let numberInst: number = parseInt(types.code);
+    this.group.controls['institutionTypeCode'].setValue(numberInst);
   }
 
   onSubmit(value) {
-    console.log(value);
     let miStorage = window.localStorage.getItem('user');
     miStorage = JSON.parse(miStorage);
     if (this.group.valid) {
@@ -91,23 +94,57 @@ export class FormNewInstitutionComponent implements OnInit {
         header: 'Confirmation',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-          if (typeof value.institutionTypeCode == 'object') {
-            this.group.controls['institutionTypeCode'].setValue(
-              value.institutionTypeCode.code
-            );
+          if (
+            typeof value.institutionTypeCode == 'object' &&
+            value.institutionTypeCode != '' &&
+            value.institutionTypeCode != null
+          ) {
+            let numberInst: number = parseInt(value.institutionTypeCode.code);
+            this.group.controls['institutionTypeCode'].setValue(numberInst);
+          } else if (
+            typeof value.institutionHelpTwo == 'object' &&
+            value.institutionHelpTwo != '' &&
+            value.institutionHelpTwo != null
+          ) {
+            let numberInst: number = parseInt(value.institutionHelpTwo.code);
+            this.group.controls['institutionTypeCode'].setValue(numberInst);
+          } else {
+            let numberInst: number = parseInt(value.institutionHelpOne.code);
+            this.group.controls['institutionTypeCode'].setValue(numberInst);
           }
-          this.group.controls['hqCountryIso'].setValue(value.hqCountryIso.code);
+          this.group.controls['hqCountryIso'].setValue(
+            value.hqCountryIso.isoAlpha2
+          );
+
           this.group.controls['externalUserName'].setValue(miStorage['name']);
           this.group.controls['externalUserMail'].setValue(
-            miStorage['username']
+            'g.martinez@cgiar.org'
           );
+          this.group.removeControl('institutionHelpOne');
+          this.group.removeControl('institutionHelpTwo');
 
           this._manageApiService
             .postNewRequestIntitution(this.group.value)
             .subscribe((resp) => {
               console.log(resp);
             });
-          console.log(this.group.value);
+
+          this.group = this.formBuilder.group({
+            name: ['', Validators.required],
+            acronym: '',
+            institutionTypeCode: [null, Validators.required],
+            hqCountryIso: ['', Validators.required],
+            websiteLink: '',
+            misAcronym: ['CLARISA', Validators.required],
+            externalUserMail: ['a', Validators.required],
+            externalUserName: '',
+            externalUserComments: '',
+            category_1: '',
+            category_2: '',
+            institutionHelpOne: '',
+            institutionHelpTwo: '',
+          });
+
           this.msgs = [
             {
               severity: 'info',
@@ -129,7 +166,6 @@ export class FormNewInstitutionComponent implements OnInit {
     } else {
       this.display = true;
     }
-    console.log(miStorage);
   }
 
   isArray(list) {

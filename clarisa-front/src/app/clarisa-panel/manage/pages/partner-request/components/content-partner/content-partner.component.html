@@ -66,8 +66,25 @@
                     <div class="tab-pane" id="tab28">
                       <app-request-institutions-form
                         [informationContent]="item"
-                        *ngFor="let item of informationParnertRequest"
+                        *ngFor="
+                          let item of informationParnertRequest
+                            | paginate: { itemsPerPage: 5, currentPage: p }
+                        "
                       ></app-request-institutions-form>
+                      <div
+                        style="
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          font-size: 17px;
+                        "
+                      >
+                        <pagination-controls
+                          (pageChange)="p = $event"
+                          previousLabel="Previous"
+                          nextLabel="Next"
+                        ></pagination-controls>
+                      </div>
                     </div>
                   </div>
                 </div>

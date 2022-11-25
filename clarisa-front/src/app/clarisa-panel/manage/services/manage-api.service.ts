@@ -32,4 +32,11 @@ export class ManageApiService {
       bodyRequest
     );
   }
+
+  postAceptedOrRejectRequest(bodyRequest): Observable<any> {
+    return this.http.post(
+      `${this.urlApi}api/partner-requests/respond`,
+      bodyRequest
+    );
+  }
 }

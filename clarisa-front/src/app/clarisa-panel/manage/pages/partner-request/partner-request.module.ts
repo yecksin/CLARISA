@@ -34,6 +34,8 @@ import { RequestInstitutionsFormComponent } from './components/content-partner/s
 import { MessagesModule } from 'primeng/messages';
 import { ConfirmationService } from 'primeng/api';
 import { GeneralInterceptorService } from '../../../../shared/interceptors/auth-interceptor.service';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MessageModule } from 'primeng/message';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,8 @@ import { GeneralInterceptorService } from '../../../../shared/interceptors/auth-
     DynamicDialogModule,
     ReactiveFormsModule,
     MessagesModule,
+    MessageModule,
+    NgxPaginationModule,
   ],
   providers: [ConfirmationService],
 })

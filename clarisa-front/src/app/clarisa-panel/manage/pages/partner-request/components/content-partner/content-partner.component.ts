@@ -9,7 +9,7 @@ import { ManageApiService } from '../../../../services/manage-api.service';
 export class ContentPartnerComponent implements OnInit {
   informationParnertRequest: any;
   constructor(private _manageApiService: ManageApiService) {}
-
+  p: number = 1;
   ngOnInit(): void {
     this._manageApiService.getAllPartnerRequest().subscribe((resp) => {
       this.informationParnertRequest = resp;

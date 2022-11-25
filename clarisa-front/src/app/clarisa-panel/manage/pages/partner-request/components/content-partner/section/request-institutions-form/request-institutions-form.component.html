@@ -13,12 +13,13 @@
       >{{ informationContent.countryDTO.name }}<br />
       <span style="font-weight: 500; font-size: 15.5px">Request Source:</span
       >{{ informationContent.requestSource }} <br />
-      <span style="font-weight: 500; font-size: 15.5px">MIS:</span><br />
+      <span style="font-weight: 500; font-size: 15.5px">MIS: </span
+      >{{ informationContent.mis }}<br />
       <span style="font-weight: 500; font-size: 15.5px">Request By:</span> ({{
         informationContent.externalUserName
       }}) {{ informationContent.externalUserMail }}<br />
-      <span style="font-weight: 500; font-size: 15.5px">Active since:</span> Oct
-      3, 2022 6:03AM<br />
+      <span style="font-weight: 500; font-size: 15.5px">Active since:</span>
+      {{ informationContent.created_at }}<br />
     </p>
     <br />
     <p style="font-size: 15px">
@@ -40,6 +41,7 @@
       <h4>Comments</h4>
       <p>{{ informationContent.externalUserComments }}</p>
     </div>
+
     <div
       style="
         margin-top: 20px;
@@ -169,6 +171,10 @@
         informationContent.externalUserComments
       }}</textarea>
     </div>
+    <div style="margin-top: 10px">
+      <span>Justification</span><br />
+      <textarea [rows]="5" [cols]="75" pInputTextarea></textarea>
+    </div>
   </div>
 
   <ng-template pTemplate="footer">
@@ -263,73 +269,83 @@
         >Tick to send a justification email.</label
       >
     </div>
-
-    <div style="margin-left: 10px; margin-top: 20px">
-      <span>Select the reason why:*</span>
-      <br />
-      <p-dropdown
-        [options]="responseRejectOptions"
-        [(ngModel)]="selectResponse"
-        optionLabel="name"
-        [style]="{ width: '100%', 'z-index': '100000' }"
-        placeholder="Select a reason"
-        [showClear]="true"
-        [required]="true"
-        appendTo="body"
-      ></p-dropdown>
-    </div>
-    <div style="margin-left: 10px; margin-top: 20px">
-      <span>Justification:*</span><br />
-      <textarea [rows]="5" pInputTextarea style="width: 100%"></textarea>
-    </div>
-    <div style="margin-left: 10px; margin-top: 20px">
-      <ul style="list-style: circle">
-        <li>
-          <b>Already exists:</b> "InstitutionRequested" already exists in MARLO
-          as "MARLO Institution"
-        </li>
-        <li>
-          <b>Already exists as PPA:</b> "InstitutionRequested" is available in
-          MARLO as Managing/PPA Partner.Please contact your PMU or
-          "ManagementLiaison Role" in order to add it to the list of project
-          partners
-        </li>
-        <li>
-          <b>Not legal:</b> This is a program/project, not an institution. We
-          suggest to use "MARLOInstitution" instead.
-        </li>
-        <li>
-          <b>Sub-department:</b> The "InstitutionRequested" is a part of the
-          "MARLOInstitution". Therefore, we kindly suggest you to include
-          "MARLOInstitution" as sub-department of "MARLOInstitution".
-        </li>
-        <li>
-          <b>Person - Not institution:</b> "PersonRequested" is a person, not an
-          institution. We suggest you to include this person under the
-          institution that hired him.
-        </li>
-        <li>
-          <b>Country - Office:</b> The "InstitutionRequested" is a part of the
-          "MARLOInstitution" in "CountryInstitution". Therefore, we kindly
-          suggest you to include the "Country" country office for
-          "MARLOInstitution".
-        </li>
-      </ul>
-    </div>
+    <form [formGroup]="groups" (ngSubmit)="reject(groups.value)">
+      <div style="margin-left: 10px; margin-top: 20px">
+        <span>Select the reason why:*</span>
+        <br />
+        <p-dropdown
+          [options]="responseRejectOptions"
+          [(ngModel)]="selectResponse"
+          optionLabel="name"
+          [style]="{ width: '100%' }"
+          placeholder="Select a reason"
+          [showClear]="true"
+          [required]="true"
+          formControlName="rejectJustification"
+        ></p-dropdown>
+      </div>
+      <div style="margin-left: 10px; margin-top: 20px">
+        <span>Justification:*</span><br />
+        <textarea
+          [rows]="5"
+          pInputTextarea
+          style="width: 100%"
+          formControlName="spec"
+        ></textarea>
+      </div>
+      <p-confirmDialog
+        [style]="{ width: '50vw' }"
+        [baseZIndex]="10000"
+      ></p-confirmDialog>
+      <button
+        pButton
+        label="Reject"
+        style="
+          border-radius: 30px;
+          background-color: #7ab800;
+          color: white;
+          margin-right: 10px;
+        "
+        type="submit"
+      ></button>
+      <div style="margin-left: 10px; margin-top: 20px">
+        <ul style="list-style: circle">
+          <li>
+            <b>Already exists:</b> "InstitutionRequested" already exists in
+            MARLO as "MARLO Institution"
+          </li>
+          <li>
+            <b>Already exists as PPA:</b> "InstitutionRequested" is available in
+            MARLO as Managing/PPA Partner.Please contact your PMU or
+            "ManagementLiaison Role" in order to add it to the list of project
+            partners
+          </li>
+          <li>
+            <b>Not legal:</b> This is a program/project, not an institution. We
+            suggest to use "MARLOInstitution" instead.
+          </li>
+          <li>
+            <b>Sub-department:</b> The "InstitutionRequested" is a part of the
+            "MARLOInstitution". Therefore, we kindly suggest you to include
+            "MARLOInstitution" as sub-department of "MARLOInstitution".
+          </li>
+          <li>
+            <b>Person - Not institution:</b> "PersonRequested" is a person, not
+            an institution. We suggest you to include this person under the
+            institution that hired him.
+          </li>
+          <li>
+            <b>Country - Office:</b> The "InstitutionRequested" is a part of the
+            "MARLOInstitution" in "CountryInstitution". Therefore, we kindly
+            suggest you to include the "Country" country office for
+            "MARLOInstitution".
+          </li>
+        </ul>
+      </div>
+    </form>
   </div>
 
   <ng-template pTemplate="footer">
-    <button
-      pButton
-      type="button"
-      label="Reject"
-      style="
-        border-radius: 30px;
-        background-color: #7ab800;
-        color: white;
-        margin-right: 10px;
-      "
-    ></button>
     <button
       pButton
       type="button"
@@ -365,6 +381,7 @@
         color: white;
         margin-right: 10px;
       "
+      (click)="confirmRequest()"
     ></button>
     <button
       pButton
@@ -375,3 +392,5 @@
     ></button>
   </ng-template>
 </p-dialog>
+
+<p-messages id="msgs" timeout="3000" hideTransitionOptions="3000"></p-messages>

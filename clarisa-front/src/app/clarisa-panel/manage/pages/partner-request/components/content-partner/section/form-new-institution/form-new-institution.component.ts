@@ -117,9 +117,7 @@ export class FormNewInstitutionComponent implements OnInit {
           );
 
           this.group.controls['externalUserName'].setValue(miStorage['name']);
-          this.group.controls['externalUserMail'].setValue(
-            'g.martinez@cgiar.org'
-          );
+          this.group.controls['externalUserMail'].setValue(miStorage['email']);
           this.group.removeControl('institutionHelpOne');
           this.group.removeControl('institutionHelpTwo');
 

@@ -60,6 +60,7 @@ export class AuthService {
         username: user.username,
         name: `${user.first_name} ${user.last_name}`,
         permissions: user.permissions,
+        email: user.email,
       },
     };
   }

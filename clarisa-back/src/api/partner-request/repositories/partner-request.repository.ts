@@ -114,7 +114,6 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       where: whereClause,
       relations: this.partnerRelations,
     });
-    console.log(partnerRequest[0]);
 
     await Promise.all(
       partnerRequest.map(async (pr) => {
@@ -287,7 +286,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       respondPartnerRequestDto.externalUserComments;
 
     const accepted = respondPartnerRequestDto.accept;
-
+    partialPartnerRequest.accepted = accepted;
     partialPartnerRequest.modification_justification = accepted
       ? `Accepted on ${partialPartnerRequest.accepted_date.toISOString()}`
       : respondPartnerRequestDto.rejectJustification;
@@ -303,10 +302,8 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
         partialPartnerRequest,
       );
       partialPartnerRequest.institution_id = newInstitution.code;
-
-      partialPartnerRequest = await this.save(partialPartnerRequest);
     }
-
+    partialPartnerRequest = await this.save(partialPartnerRequest);
     partialPartnerRequest = await this.findOne({
       where: { id: partialPartnerRequest.id },
       relations: this.partnerRelations,

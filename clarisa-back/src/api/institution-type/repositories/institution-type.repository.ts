@@ -65,6 +65,10 @@ export class InstitutionTypeRepository extends Repository<InstitutionType> {
         newInstitutionType.code = `${it.id}`;
         newInstitutionType.name = it.name;
 
+        if (incomingType == SourceOption.ALL) {
+          newInstitutionType.legacy = it.source_id === 2;
+        }
+
         if (it.parent_object) {
           newInstitutionType.parent = new InstitutionTypeDto();
           newInstitutionType.parent.code = `${it.parent_object.id}`;

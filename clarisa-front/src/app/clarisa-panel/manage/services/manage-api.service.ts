@@ -39,4 +39,8 @@ export class ManageApiService {
       bodyRequest
     );
   }
+
+  getByIdTypeInstitution(id) {
+    return this.http.get(`${this.urlApi}api/institution-types/get/${id}`);
+  }
 }

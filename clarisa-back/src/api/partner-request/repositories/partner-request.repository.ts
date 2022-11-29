@@ -149,7 +149,8 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     partnerRequestDto.institutionTypeDTO = new InstitutionTypeDto();
     partnerRequestDto.institutionTypeDTO.code = `${pr.institution_type_object.id}`;
     partnerRequestDto.institutionTypeDTO.name = pr.institution_type_object.name;
-
+    partnerRequestDto.institutionTypeDTO.id_parent =
+      pr.institution_type_object.parent_id;
     if (pr.institution_id) {
       partnerRequestDto.institutionDTO = this.fillOutInstitutionInfo(
         pr.institution_object,

@@ -1,5 +1,5 @@
 import { AnimateTimings } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SelectItemGroup } from 'primeng/api';
 import { ManageApiService } from '../../../../../../../../services/manage-api.service';
@@ -24,6 +24,8 @@ export class EditRequestComponent implements OnInit {
   selectSubtypeOne: any;
   subTypeTwo: any;
   selectSubTypeTwo: any;
+  groupActualizar: any;
+  @Output() newItemEvent = new EventEmitter<boolean>();
   constructor(
     private formBuilder: FormBuilder,
     private _manageApiService: ManageApiService
@@ -135,8 +137,8 @@ export class EditRequestComponent implements OnInit {
       externalUserComments: this.informationContent.externalUserComments,
       externalUserMail: this.informationContent.externalUserMail,
       externalUserName: this.informationContent.externalUserName,
-      hqCountryIso: this.informationContent.countryDTO.isoAlpha2,
-      institutionTypeCode: this.informationContent.institutionTypeDTO.code,
+      hqCountryIso: '',
+      institutionTypeCode: '',
       misAcronym: this.informationContent.mis,
       name: this.informationContent.partnerName,
       websiteLink: this.informationContent.webPage,
@@ -144,10 +146,6 @@ export class EditRequestComponent implements OnInit {
       institutionHelpOne: '',
       institutionHelpTwo: '',
     });
-
-    setTimeout(() => {
-      console.log(this.parentInstitution);
-    }, 1000);
   }
 
   selectType(types: any) {
@@ -180,61 +178,56 @@ export class EditRequestComponent implements OnInit {
 
   edit(value) {
     console.log(value);
+    let codeInstitution = 0;
     if (this.group.valid) {
-      if (
-        this.isArray(value.institutionHelpOne.children) &&
-        value.institutionHelpOne.children.length != 0
-      ) {
-        if (
-          this.isArray(value.institutionHelpTwo.children) &&
-          value.institutionHelpTwo.children.length != 0
-        ) {
-          let numberInst: number = parseInt(value.institutionTypeCode.code);
-          value.institutionTypeCode = numberInst;
+      this.loading = true;
+      console.log(this.group.value.acronym);
+      if (typeof this.group.value.institutionTypeCode == 'object') {
+        codeInstitution = Number(this.group.value.institutionTypeCode.code);
+      } else if (this.group.value.institutionTypeCode == '') {
+        if (typeof this.group.value.institutionHelpTwo == 'object') {
+          codeInstitution = Number(this.group.value.institutionHelpTwo.code);
         } else {
-          let numberInst: number = parseInt(
-            this.informationContent.institutionTypeDTO.code
-          );
-          value.institutionTypeCode = numberInst;
+          codeInstitution = Number(this.group.value.institutionHelpOne.code);
         }
       } else {
-        let numberInst: number = parseInt(
-          this.informationContent.institutionTypeDTO.code
-        );
-        value.institutionTypeCode = numberInst;
+        codeInstitution = this.group.value.institutionTypeCode;
       }
+      console.log(codeInstitution);
 
-      console.log(value.hqCountryIso.isoAlpha2);
-      value.hqCountryIso = value.hqCountryIso.isoAlpha2;
-
-      this.group.removeControl('institutionHelpOne');
-      this.group.removeControl('institutionHelpTwo');
-      delete value.institutionHelpOne;
-      delete value.institutionHelpTwo;
-      console.log(this.group.value);
-      console.log(value);
-      this.group = this.formBuilder.group({
+      this.groupActualizar = this.formBuilder.group({
         id: this.informationContent.id,
-        acronym: this.informationContent.acronym,
-        category_1: this.informationContent.category_1,
-        category_2: this.informationContent.category_2,
-        externalUserComments: this.informationContent.externalUserComments,
-        externalUserMail: this.informationContent.externalUserMail,
-        externalUserName: this.informationContent.externalUserName,
-        hqCountryIso: this.informationContent.countryDTO.isoAlpha2,
-        institutionTypeCode: this.informationContent.institutionTypeDTO.code,
+        acronym: this.group.value.acronym,
+        category_1: this.group.value.category_1,
+        category_2: this.group.value.category_2,
+        externalUserComments: this.group.value.externalUserComments,
+        externalUserMail: this.group.value.externalUserMail,
+        externalUserName: this.group.value.externalUserName,
+        hqCountryIso: this.group.value.hqCountryIso.isoAlpha2,
+        institutionTypeCode: codeInstitution,
         misAcronym: this.informationContent.mis,
-        name: this.informationContent.partnerName,
-        websiteLink: this.informationContent.webPage,
-        modification_justification: ['', Validators.required],
-        institutionHelpOne: '',
-        institutionHelpTwo: '',
+        name: this.group.value.name,
+        websiteLink: this.group.value.websiteLink,
+        modification_justification: this.group.value.modification_justification,
       });
+      console.log(this.groupActualizar.value);
+      this._manageApiService
+        .patchPartnerRequest(this.groupActualizar.value)
+        .subscribe((re) => {
+          console.log(re);
+          this.addNewItem();
+          this.loading = false;
+          alert('Update parnert request');
+        });
     } else {
       setTimeout(() => {
         alert('Error validator');
         //change this route when the new component is ready
       }, 100);
     }
+  }
+
+  addNewItem() {
+    this.newItemEvent.emit(false);
   }
 }

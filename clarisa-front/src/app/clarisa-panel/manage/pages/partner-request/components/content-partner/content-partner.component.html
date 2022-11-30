@@ -34,17 +34,35 @@
                           >List</a
                         >
                       </li>
-                      <li>
+                      <li
+                        *ngIf="
+                          miStorage.hasOwnProperty('permissions') &&
+                          miStorage.permissions.indexOf(
+                            '/api/partner-requests/create'
+                          ) != -1
+                        "
+                      >
                         <a href="#tab26" data-bs-toggle="tab"
                           >Request new institution</a
                         >
                       </li>
+                      <!--
                       <li>
                         <a href="#tab27" data-bs-toggle="tab"
                           >Request new country office(s)</a
                         >
-                      </li>
-                      <li>
+                      </li>-->
+                      <li
+                        *ngIf="
+                          miStorage.hasOwnProperty('permissions') &&
+                          miStorage.permissions.indexOf(
+                            '/api/partner-requests/update'
+                          ) != -1 &&
+                          miStorage.permissions.indexOf(
+                            '/api/partner-requests/respond'
+                          ) != -1
+                        "
+                      >
                         <a href="#tab28" data-bs-toggle="tab"
                           >Pending Institution request(s)</a
                         >

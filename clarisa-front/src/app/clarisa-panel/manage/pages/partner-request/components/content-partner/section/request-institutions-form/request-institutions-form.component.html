@@ -108,6 +108,7 @@
   <ng-template pTemplate="content">
     <app-edit-request
       [informationContent]="informationContent"
+      (newItemEvent)="addItem($event)"
     ></app-edit-request>
   </ng-template>
 

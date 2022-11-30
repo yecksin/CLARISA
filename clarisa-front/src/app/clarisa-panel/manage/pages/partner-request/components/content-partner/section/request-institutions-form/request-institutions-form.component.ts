@@ -187,4 +187,8 @@ export class RequestInstitutionsFormComponent implements OnInit {
 
     this.displayConfirm = false;
   }
+
+  addItem(newItem: boolean) {
+    this.displayModal = newItem;
+  }
 }

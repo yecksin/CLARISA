@@ -43,4 +43,11 @@ export class ManageApiService {
   getByIdTypeInstitution(id) {
     return this.http.get(`${this.urlApi}api/institution-types/get/${id}`);
   }
+
+  patchPartnerRequest(bodyRequest): Observable<any> {
+    return this.http.patch(
+      `${this.urlApi}api/partner-requests/update`,
+      bodyRequest
+    );
+  }
 }

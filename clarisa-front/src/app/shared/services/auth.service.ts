@@ -35,7 +35,8 @@ export class AuthService {
   }
 
   logout() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['landing-page/login']);
+    window.location.reload();
     localStorage.clear();
   }
 }

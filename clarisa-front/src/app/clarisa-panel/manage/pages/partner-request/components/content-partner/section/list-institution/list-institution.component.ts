@@ -35,7 +35,7 @@ export class ListInstitutionComponent implements OnInit {
 
   ngOnInit(): void {
     this._manageApiService
-      .getAnyEndpoint('/api/institutions')
+      .getAnyEndpoint('api/institutions')
       .subscribe((resp) => {
         this.informationEndpoint = resp;
         this.loading = false;

@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { GeneralInterceptorService } from './shared/interceptors/auth-interceptor.service';
 import { TawkToModule } from './shared/components/tawk-to/tawk-to.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { TawkToModule } from './shared/components/tawk-to/tawk-to.module';
     HttpClientModule,
     RouterEventsModule,
     TawkToModule,
+    NgxPaginationModule,
   ],
   providers: [
     {

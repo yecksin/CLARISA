@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ManageComponent } from './manage.component';
+import { LoginGuardGuard } from '../../shared/services/login-guard.guard';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
           import('./pages/partner-request/partner-request.module').then(
             (m) => m.PartnerRequestModule
           ),
+        canActivate: [LoginGuardGuard],
       },
     ],
   },

@@ -28,4 +28,8 @@ export class CreatePartnerRequestDto {
   externalUserName: string;
 
   externalUserComments: string;
+
+  category_1?: string;
+
+  category_2?: string;
 }

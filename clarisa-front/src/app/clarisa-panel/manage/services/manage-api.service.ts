@@ -32,4 +32,22 @@ export class ManageApiService {
       bodyRequest
     );
   }
+
+  postAceptedOrRejectRequest(bodyRequest): Observable<any> {
+    return this.http.post(
+      `${this.urlApi}api/partner-requests/respond`,
+      bodyRequest
+    );
+  }
+
+  getByIdTypeInstitution(id) {
+    return this.http.get(`${this.urlApi}api/institution-types/get/${id}`);
+  }
+
+  patchPartnerRequest(bodyRequest): Observable<any> {
+    return this.http.patch(
+      `${this.urlApi}api/partner-requests/update`,
+      bodyRequest
+    );
+  }
 }

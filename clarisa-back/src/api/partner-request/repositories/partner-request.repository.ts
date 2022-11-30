@@ -134,19 +134,23 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     partnerRequestDto.partnerName = pr.partner_name;
     partnerRequestDto.acronym = pr.acronym;
     partnerRequestDto.webPage = pr.web_page;
+    partnerRequestDto.mis = pr.mis_object.acronym;
     partnerRequestDto.requestStatus = this.getRequestStatus(pr.accepted);
     partnerRequestDto.requestJustification = pr.reject_justification;
     partnerRequestDto.requestSource = pr.request_source;
     partnerRequestDto.externalUserMail = pr.external_user_mail;
     partnerRequestDto.externalUserName = pr.external_user_name;
     partnerRequestDto.externalUserComments = pr.external_user_comments;
-
+    partnerRequestDto.category_1 = pr.category_1;
+    partnerRequestDto.category_2 = pr.category_2;
+    partnerRequestDto.created_at = pr.created_at;
     partnerRequestDto.countryDTO = this.fillOutCountryInfo(pr.country_object);
 
     partnerRequestDto.institutionTypeDTO = new InstitutionTypeDto();
     partnerRequestDto.institutionTypeDTO.code = `${pr.institution_type_object.id}`;
     partnerRequestDto.institutionTypeDTO.name = pr.institution_type_object.name;
-
+    partnerRequestDto.institutionTypeDTO.id_parent =
+      pr.institution_type_object.parent_id;
     if (pr.institution_id) {
       partnerRequestDto.institutionDTO = this.fillOutInstitutionInfo(
         pr.institution_object,
@@ -255,6 +259,9 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     partialPartnerRequest.created_by =
       partialPartnerRequest.created_by_object.id;
 
+    partialPartnerRequest.category_1 = incomingPartnerRequest.category_1;
+    partialPartnerRequest.category_2 = incomingPartnerRequest.category_2;
+
     partialPartnerRequest = await this.save(partialPartnerRequest);
 
     partialPartnerRequest = await this.findOne({
@@ -280,7 +287,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       respondPartnerRequestDto.externalUserComments;
 
     const accepted = respondPartnerRequestDto.accept;
-
+    partialPartnerRequest.accepted = accepted;
     partialPartnerRequest.modification_justification = accepted
       ? `Accepted on ${partialPartnerRequest.accepted_date.toISOString()}`
       : respondPartnerRequestDto.rejectJustification;
@@ -296,10 +303,8 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
         partialPartnerRequest,
       );
       partialPartnerRequest.institution_id = newInstitution.code;
-
-      partialPartnerRequest = await this.save(partialPartnerRequest);
     }
-
+    partialPartnerRequest = await this.save(partialPartnerRequest);
     partialPartnerRequest = await this.findOne({
       where: { id: partialPartnerRequest.id },
       relations: this.partnerRelations,

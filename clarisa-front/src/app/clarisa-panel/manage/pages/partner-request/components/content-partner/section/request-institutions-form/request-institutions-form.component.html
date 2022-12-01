@@ -105,90 +105,14 @@
   [draggable]="false"
   [resizable]="false"
 >
-  <p class="m-0"></p>
-  <div>
-    <div>
-      <span>Name:*</span>
-      <input
-        type="text"
-        pInputText
-        style="width: 100%"
-        value="{{ informationContent.partnerName }}"
-      />
-    </div>
-    <div
-      style="margin-top: 10px; width: 100%; display: flex; flex-direction: row"
-    >
-      <div style="width: 50%">
-        <span>Type:*</span>
-        <br />
-        <p-dropdown
-          [options]="type"
-          [(ngModel)]="informationContent.institutionTypeDTO.name"
-          optionLabel="name"
-          dataKey="informationContent.institutionTypeDTO.name"
-          [style]="{ width: '90%' }"
-        >
-          {{ informationContent.institutionTypeDTO.name }}
-        </p-dropdown>
-      </div>
-      <div style="width: 50%">
-        <span>Country:*</span>
-        <br />
-        <p-dropdown
-          [options]="cities"
-          [(ngModel)]="selectedCity"
-          optionLabel="name"
-          [style]="{ width: '90%' }"
-        ></p-dropdown>
-      </div>
-    </div>
-    <div
-      style="margin-top: 10px; width: 100%; display: flex; flex-direction: row"
-    >
-      <div style="width: 70%">
-        <span>Website:</span>
-        <input
-          type="text"
-          pInputText
-          style="width: 100%"
-          value="{{ informationContent.webPage }}"
-        />
-      </div>
-      <div style="width: 30%; margin-left: 20px">
-        <span>Acronym:</span>
-        <input
-          type="text"
-          pInputText
-          style="width: 100%"
-          value="{{ informationContent.acronym }}"
-        />
-      </div>
-    </div>
-    <div style="margin-top: 10px">
-      <span>Comments:</span><br />
-      <textarea [rows]="5" [cols]="75" pInputTextarea>{{
-        informationContent.externalUserComments
-      }}</textarea>
-    </div>
-    <div style="margin-top: 10px">
-      <span>Justification</span><br />
-      <textarea [rows]="5" [cols]="75" pInputTextarea></textarea>
-    </div>
-  </div>
+  <ng-template pTemplate="content">
+    <app-edit-request
+      [informationContent]="informationContent"
+      (newItemEvent)="addItem($event)"
+    ></app-edit-request>
+  </ng-template>
 
   <ng-template pTemplate="footer">
-    <button
-      pButton
-      type="button"
-      label="Update request"
-      style="
-        border-radius: 30px;
-        background-color: #7ab800;
-        color: white;
-        margin-right: 10px;
-      "
-    ></button>
     <button
       pButton
       type="button"

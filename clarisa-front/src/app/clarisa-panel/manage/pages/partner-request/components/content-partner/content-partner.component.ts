@@ -10,7 +10,12 @@ export class ContentPartnerComponent implements OnInit {
   informationParnertRequest: any;
   constructor(private _manageApiService: ManageApiService) {}
   p: number = 1;
+  miStorage: any;
   ngOnInit(): void {
+    this.miStorage = window.localStorage.getItem('user');
+    console.log(window.localStorage);
+
+    this.miStorage = JSON.parse(this.miStorage);
     this._manageApiService.getAllPartnerRequest().subscribe((resp) => {
       this.informationParnertRequest = resp;
     });

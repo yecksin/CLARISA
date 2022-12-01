@@ -16,13 +16,13 @@ export class FormCountryOfficeComponent implements OnInit {
   ngOnInit(): void {
     this.informationEndpoint = [];
     this._manageApiService
-      .getAnyEndpoint('/api/institutions')
+      .getAnyEndpoint('api/institutions')
       .subscribe((resp) => {
         this.informationEndpoint.push(resp);
       });
 
     this._manageApiService
-      .getAnyEndpoint('/api/countries')
+      .getAnyEndpoint('api/countries')
       .subscribe((resp) => {
         this.countries = resp;
       });

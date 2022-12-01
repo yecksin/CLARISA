@@ -3,4 +3,5 @@ export class InstitutionTypeDto {
   name: string;
   parent?: InstitutionTypeDto;
   legacy?: boolean;
+  id_parent?: number;
 }

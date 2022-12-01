@@ -1,0 +1,166 @@
+<div *ngIf="loading == true" class="loader">
+  <img
+    src="../../assets/images/loadeer.gif"
+    style="width: 50px; height: 50px; opacity: 1"
+  />
+</div>
+<div *ngIf="loading == false">
+  <form [formGroup]="group" (ngSubmit)="edit(group.value)">
+    <div>
+      <div>
+        <span>Name:*</span>
+        <input
+          type="text"
+          pInputText
+          style="width: 100%"
+          formControlName="name"
+        />
+      </div>
+      <div
+        style="
+          margin-top: 10px;
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+        "
+      >
+        <div style="width: 50%">
+          <span>Country:*</span>
+          <br />
+          <p-dropdown
+            [options]="cities"
+            [(ngModel)]="selectedCity"
+            optionLabel="name"
+            [style]="{ width: '90%' }"
+            formControlName="hqCountryIso"
+          >
+          </p-dropdown>
+        </div>
+        <div style="width: 50%">
+          <span>Category 1:</span>
+          <input
+            type="text"
+            pInputText
+            style="width: 100%"
+            formControlName="category_1"
+          />
+        </div>
+      </div>
+      <div
+        style="
+          margin-top: 10px;
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+        "
+      >
+        <div style="width: 50%">
+          <span>Type:*</span>
+          <br />
+          <p-dropdown
+            [options]="type"
+            [(ngModel)]="selectedType"
+            optionLabel="name"
+            [style]="{ width: '90%' }"
+            (onChange)="selectType($event.value)"
+            formControlName="institutionHelpOne"
+          >
+          </p-dropdown>
+          <br />
+          <span *ngIf="isArray(subTypeOne) && subTypeOne.length != 0">
+            <span>Sub Type:*</span>
+            <br />
+            <p-dropdown
+              [options]="subTypeOne"
+              [(ngModel)]="selectSubtypeOne"
+              optionLabel="name"
+              [style]="{ width: '90%' }"
+              (onChange)="selectSubType($event.value)"
+              formControlName="institutionHelpTwo"
+            >
+            </p-dropdown>
+          </span>
+          <br />
+          <span *ngIf="isArray(subTypeTwo) && subTypeTwo.length != 0">
+            <span>Sub Type:*</span>
+            <br />
+            <p-dropdown
+              [options]="subTypeTwo"
+              [(ngModel)]="selectSubTypeTwo"
+              optionLabel="name"
+              [style]="{ width: '90%' }"
+              formControlName="institutionTypeCode"
+            >
+            </p-dropdown>
+          </span>
+        </div>
+        <div style="width: 50%">
+          <span>Category 2:</span>
+          <input
+            type="text"
+            pInputText
+            style="width: 100%"
+            formControlName="category_2"
+          />
+        </div>
+      </div>
+      <div
+        style="
+          margin-top: 10px;
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+        "
+      >
+        <div style="width: 70%">
+          <span>Website:</span>
+          <input
+            type="text"
+            pInputText
+            style="width: 100%"
+            formControlName="websiteLink"
+          />
+        </div>
+        <div style="width: 30%; margin-left: 20px">
+          <span>Acronym:</span>
+          <input
+            type="text"
+            pInputText
+            style="width: 100%"
+            formControlName="acronym"
+          />
+        </div>
+      </div>
+      <div style="margin-top: 10px">
+        <span>Comments:</span><br />
+        <textarea
+          [rows]="5"
+          pInputTextarea
+          style="width: 100%"
+          formControlName="externalUserComments"
+        ></textarea>
+      </div>
+      <div style="margin-top: 10px">
+        <span>Justification</span><br />
+        <textarea
+          [rows]="5"
+          pInputTextarea
+          style="width: 100%"
+          formControlName="modification_justification"
+        ></textarea>
+      </div>
+    </div>
+
+    <button
+      pButton
+      type="submit"
+      label="Update request"
+      style="
+        border-radius: 30px;
+        background-color: #7ab800;
+        color: white;
+        margin-right: 10px;
+      "
+    ></button>
+  </form>
+</div>

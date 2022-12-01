@@ -13,7 +13,7 @@ export class RequestInstitutionsFormComponent implements OnInit {
   displayModal: boolean;
   type: any[];
   selectedType: any = {};
-  cities: any[];
+  cities: any;
   selectedCity: any;
   display: boolean = false;
   @Input() informationContent: any;
@@ -24,6 +24,7 @@ export class RequestInstitutionsFormComponent implements OnInit {
   displayConfirm: boolean = false;
   group: FormGroup;
   groups: FormGroup;
+  citiesAux: any;
   constructor(
     private confirmationService: ConfirmationService,
     private formBuilder: FormBuilder,
@@ -52,7 +53,6 @@ export class RequestInstitutionsFormComponent implements OnInit {
       { name: 'Person - Not institution' },
       { name: 'Country - Office' },
     ];
-    this.selectedType = { country: 'India' };
   }
 
   showModalDialog() {
@@ -186,5 +186,9 @@ export class RequestInstitutionsFormComponent implements OnInit {
     console.log(this.group.value);
 
     this.displayConfirm = false;
+  }
+
+  addItem(newItem: boolean) {
+    this.displayModal = newItem;
   }
 }

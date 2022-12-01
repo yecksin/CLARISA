@@ -10,16 +10,14 @@ export const dataSource: DataSource = new DataSource({
   password: env.DB_PASS,
   database: env.DB_NAME,
   entities: [
-    __dirname + 'api/**/*.entity{.ts,.js}',
-    __dirname + 'auth/**/*.entity{.ts,.js}',
+    __dirname + '/api/**/*.entity{.ts,.js}',
+    __dirname + '/auth/**/*.entity{.ts,.js}',
   ],
   synchronize: false,
   migrationsRun: false,
   bigNumberStrings: false,
   logging: false,
-  migrations: [__dirname + '/../migrations/*{.ts,.js}'],
+  migrations: [__dirname + '/migrations/*{.ts,.js}'],
   migrationsTableName: 'migrations',
-  /* cli: {
-        migrationsDir: './migrations',
-    }*/
+  metadataTableName: 'orm_metadata',
 });

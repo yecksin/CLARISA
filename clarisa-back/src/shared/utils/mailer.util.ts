@@ -8,6 +8,7 @@ import Mail from 'nodemailer/lib/mailer';
 import Handlebars from 'handlebars';
 import { PartnerRequest } from 'src/api/partner-request/entities/partner-request.entity';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
+import { Profile } from '../entities/enums/profiles';
 
 @Injectable()
 export class MailUtil {
@@ -120,15 +121,33 @@ export class MailUtil {
     });
   }
 
-  public sendNewPartnerRequestNotification(partnerRequest: PartnerRequest) {
-    const subject: string = `${
-      env.APP_PROFILE === 'DEV' ? 'TEST' : ''
-    } [CLARISA API - ${
+  public sendNewPartnerRequestNotification(
+    partnerRequest: PartnerRequest,
+    //appContactPointMails: string[],
+  ) {
+    const isDev: boolean = Profile.getfromName(env.APP_PROFILE) == Profile.DEV;
+    const isProd: boolean =
+      Profile.getfromName(env.APP_PROFILE) == Profile.PROD;
+
+    const subject: string = `${isDev ? 'TEST' : ''} [CLARISA API - ${
       partnerRequest.mis_object.acronym
     }] Partner verification - ${partnerRequest.partner_name}`;
 
-    const to: string = partnerRequest.external_user_mail;
-    const cc: string = env.SUPPORT_EMAIL;
+    const to: string[] = [];
+    const cc: string[] = [partnerRequest.created_by_object.email];
+    const bcc: string[] = [];
+
+    if (isProd) {
+      to.push(env.SUPPORT_EMAIL);
+    }
+
+    if (!isProd) {
+      //bcc.push(...(appContactPointMails ?? []));
+    }
+
+    if (partnerRequest.external_user_mail) {
+      cc.push(partnerRequest.external_user_mail);
+    }
 
     this.loadUpTemplate(
       '../../../assets/email-templates/new-partner-request.hbs',
@@ -140,7 +159,8 @@ export class MailUtil {
         this.sendEmail({
           from: env.SUPPORT_EMAIL, // sender address
           to, // list of receivers
-          //cc,
+          cc,
+          bcc,
           subject, // Subject line
           //text: 'Hello world?', // plain text body
           html: compiledTemplate, // html body
@@ -153,15 +173,34 @@ export class MailUtil {
       });
   }
 
-  public sendResponseToPartnerRequest(partnerRequest: PartnerRequest) {
-    const subject: string = `${
-      env.APP_PROFILE === 'DEV' ? 'TEST' : ''
-    } [CLARISA API - ${partnerRequest.mis_object.acronym}] ${
+  public sendResponseToPartnerRequest(
+    partnerRequest: PartnerRequest,
+    //appContactPointMails: string[],
+  ) {
+    const isDev: boolean = Profile.getfromName(env.APP_PROFILE) == Profile.DEV;
+    const isProd: boolean =
+      Profile.getfromName(env.APP_PROFILE) == Profile.PROD;
+
+    const subject: string = `${isDev ? 'TEST' : ''} [CLARISA API - ${
+      partnerRequest.mis_object.acronym
+    }] ${
       partnerRequest.rejected_by ? 'REJECTED' : 'APPROVED'
     } Partner verification - ${partnerRequest.partner_name}`;
 
-    const to: string = partnerRequest.external_user_mail;
-    const cc: string = env.SUPPORT_EMAIL;
+    const to: string[] = [
+      partnerRequest.external_user_mail ??
+        partnerRequest.created_by_object.email,
+    ];
+    const cc: string[] = [];
+    const bcc: string[] = [];
+
+    if (isProd) {
+      to.push(env.SUPPORT_EMAIL);
+    }
+
+    if (!isProd) {
+      //bcc.push(...(appContactPointMails ?? []));
+    }
 
     this.loadUpTemplate(
       '../../../assets/email-templates/responded-partner-request.hbs',
@@ -172,7 +211,7 @@ export class MailUtil {
       this.sendEmail({
         from: env.SUPPORT_EMAIL, // sender address
         to, // list of receivers
-        //cc,
+        cc,
         subject, // Subject line
         //text: 'Hello world?', // plain text body
         html: compiledTemplate, // html body

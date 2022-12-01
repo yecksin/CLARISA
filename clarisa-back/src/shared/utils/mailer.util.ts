@@ -133,9 +133,19 @@ export class MailUtil {
       partnerRequest.mis_object.acronym
     }] Partner verification - ${partnerRequest.partner_name}`;
 
+    console.log('EMAIL', partnerRequest);
     const to: string[] = [];
     const cc: string[] = [partnerRequest.created_by_object.email];
-    const bcc: string[] = [];
+    const bcc: string[] = [
+      'j.d.munoz@cgiar.org',
+      'g.martinez@cgiar.org',
+      's.galvez@cgiar.org',
+      'j.cadavid@cgiar.org',
+      'j.m.morales@cgiar.org',
+      'h.f.tobon@cgiar.org',
+      'c.castiblanco@cgiar.org',
+      'G.Patarnello@cgiar.org',
+    ];
 
     if (isProd) {
       to.push(env.SUPPORT_EMAIL);

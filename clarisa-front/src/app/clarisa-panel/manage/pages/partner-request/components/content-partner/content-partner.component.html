@@ -82,11 +82,27 @@
                       <app-form-country-office></app-form-country-office>
                     </div>
                     <div class="tab-pane" id="tab28">
+                      <div
+                        class="alert alert-success"
+                        role="alert"
+                        *ngIf="
+                          informationParnertRequest == '' &&
+                          informationParnertRequest == null
+                        "
+                      >
+                        <span class="alert-inner--icon"
+                          ><i class="fe fe-thumbs-up"></i
+                        ></span>
+                        <span class="alert-inner--text"
+                          ><strong> </strong> There are no partner requests
+                          pending. Good Job!</span
+                        >
+                      </div>
                       <app-request-institutions-form
                         [informationContent]="item"
                         *ngFor="
                           let item of informationParnertRequest
-                            | paginate: { itemsPerPage: 5, currentPage: p }
+                            | paginate : { itemsPerPage: 5, currentPage: p }
                         "
                       ></app-request-institutions-form>
                       <div

@@ -202,7 +202,16 @@ export class MailUtil {
         partnerRequest.created_by_object.email,
     ];
     const cc: string[] = [];
-    const bcc: string[] = [];
+    const bcc: string[] = [
+      'j.d.munoz@cgiar.org',
+      'g.martinez@cgiar.org',
+      's.galvez@cgiar.org',
+      'j.cadavid@cgiar.org',
+      'j.m.morales@cgiar.org',
+      'h.f.tobon@cgiar.org',
+      'c.castiblanco@cgiar.org',
+      'G.Patarnello@cgiar.org',
+    ];
 
     if (isProd) {
       to.push(env.SUPPORT_EMAIL);
@@ -222,6 +231,7 @@ export class MailUtil {
         from: env.SUPPORT_EMAIL, // sender address
         to, // list of receivers
         cc,
+        bcc,
         subject, // Subject line
         //text: 'Hello world?', // plain text body
         html: compiledTemplate, // html body

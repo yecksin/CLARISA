@@ -46,7 +46,6 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
         },
       },
     },
-    created_by_object: true,
   };
 
   constructor(

@@ -33,14 +33,13 @@ export class RequestInstitutionsFormComponent implements OnInit {
   ) {
     this.groups = this.formBuilder.group({
       requestId: '',
-      userId: 4372,
+      userId: null,
       accept: false,
       rejectJustification: ['', Validators.required],
       misAcronym: 'CLARISA',
       externalUserMail: '',
       externalUserName: '',
       externalUserComments: '',
-      spec: ['', Validators.required],
     });
   }
 
@@ -65,14 +64,15 @@ export class RequestInstitutionsFormComponent implements OnInit {
 
   reject(value) {
     console.log(value);
-
+    let miStorage = window.localStorage.getItem('user');
+    miStorage = JSON.parse(miStorage);
     if (this.groups.valid) {
       this.confirmationService.confirm({
         message: 'Are you sure you want to decline this request?',
         header: 'Confirmation',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-          let infoComments = value.rejectJustification.name + ',' + value.spec;
+          this.groups.controls['userId'].setValue(miStorage['id']);
           this.groups.controls['requestId'].setValue(
             this.informationContent.id
           );
@@ -85,8 +85,6 @@ export class RequestInstitutionsFormComponent implements OnInit {
           this.groups.controls['externalUserComments'].setValue(
             this.informationContent.externalUserComments
           );
-          this.groups.controls['rejectJustification'].setValue(infoComments);
-          this.groups.removeControl('spec');
 
           this._manageApiService
             .postAceptedOrRejectRequest(this.groups.value)
@@ -119,7 +117,6 @@ export class RequestInstitutionsFormComponent implements OnInit {
             externalUserMail: '',
             externalUserName: '',
             externalUserComments: '',
-            spec: ['', Validators.required],
           });
           this.msgs = [
             {
@@ -154,9 +151,11 @@ export class RequestInstitutionsFormComponent implements OnInit {
   }
 
   confirmRequest() {
+    let miStorage = window.localStorage.getItem('user');
+    miStorage = JSON.parse(miStorage);
     this.group = this.formBuilder.group({
       requestId: this.informationContent.id,
-      userId: 4372,
+      userId: miStorage['id'],
       accept: true,
       misAcronym: 'CLARISA',
       externalUserMail: this.informationContent.externalUserMail,

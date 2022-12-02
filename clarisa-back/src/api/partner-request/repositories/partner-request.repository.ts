@@ -262,6 +262,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     partialPartnerRequest.category_1 = incomingPartnerRequest.category_1;
     partialPartnerRequest.category_2 = incomingPartnerRequest.category_2;
 
+    let informationEmail: any = partialPartnerRequest;
     partialPartnerRequest = await this.save(partialPartnerRequest);
 
     partialPartnerRequest = await this.findOne({
@@ -269,7 +270,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       relations: this.partnerRelations,
     });
 
-    this.mailUtil.sendNewPartnerRequestNotification(partialPartnerRequest);
+    this.mailUtil.sendNewPartnerRequestNotification(informationEmail);
 
     return this.fillOutPartnerRequestDto(partialPartnerRequest);
   }

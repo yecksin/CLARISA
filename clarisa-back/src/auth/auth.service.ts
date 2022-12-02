@@ -61,6 +61,7 @@ export class AuthService {
         name: `${user.first_name} ${user.last_name}`,
         permissions: user.permissions,
         email: user.email,
+        id: user.id,
       },
     };
   }

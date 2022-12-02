@@ -1,5 +1,5 @@
 export class InstitutionTypeDto {
-  code: string;
+  code: number;
   name: string;
   parent?: InstitutionTypeDto;
   legacy?: boolean;

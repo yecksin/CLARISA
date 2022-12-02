@@ -84,6 +84,9 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       case MisOption.MEL.path:
       case MisOption.OST.path:
       case MisOption.TOC.path:
+      case MisOption.PRMS.path:
+      case MisOption.MARLO.path:
+      case MisOption.PIPELINE.path:
         whereClause = {
           ...whereClause,
           mis_id: incomingMis.mis_id,
@@ -99,12 +102,14 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
         break;
       case PartnerStatus.PENDING.path:
         whereClause = {
+          ...whereClause,
           accepted: IsNull(),
         };
         break;
       case PartnerStatus.ACCEPTED.path:
       case PartnerStatus.REJECTED.path:
         whereClause = {
+          ...whereClause,
           accepted: status === incomingStatus.path,
         };
         break;
@@ -147,7 +152,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     partnerRequestDto.countryDTO = this.fillOutCountryInfo(pr.country_object);
 
     partnerRequestDto.institutionTypeDTO = new InstitutionTypeDto();
-    partnerRequestDto.institutionTypeDTO.code = `${pr.institution_type_object.id}`;
+    partnerRequestDto.institutionTypeDTO.code = pr.institution_type_object.id;
     partnerRequestDto.institutionTypeDTO.name = pr.institution_type_object.name;
     partnerRequestDto.institutionTypeDTO.id_parent =
       pr.institution_type_object.parent_id;
@@ -228,7 +233,8 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     );
 
     institutionDto.institutionType = new InstitutionTypeDto();
-    institutionDto.institutionType.code = `${institution.institution_type_object.id}`;
+    institutionDto.institutionType.code =
+      institution.institution_type_object.id;
     institutionDto.institutionType.name =
       institution.institution_type_object.name;
 

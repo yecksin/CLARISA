@@ -144,7 +144,8 @@ export class InstitutionRepository extends Repository<Institution> {
     );
 
     institutionDto.institutionType = new InstitutionTypeDto();
-    institutionDto.institutionType.code = `${institution.institution_type_object.id}`;
+    institutionDto.institutionType.code =
+      institution.institution_type_object.id;
     institutionDto.institutionType.name =
       institution.institution_type_object.name;
 

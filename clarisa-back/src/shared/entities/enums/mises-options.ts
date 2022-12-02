@@ -8,6 +8,9 @@ export class MisOption {
   public static readonly FORESIGHT = new MisOption(6, 'foresight');
   public static readonly ECONTRACTS = new MisOption(7, 'econtracts');
   public static readonly TOC = new MisOption(8, 'toc');
+  public static readonly PRMS = new MisOption(9, 'prms');
+  public static readonly MARLO = new MisOption(10, 'marlo');
+  public static readonly PIPELINE = new MisOption(11, 'pipeline');
 
   private constructor(
     public readonly mis_id: number,

@@ -62,7 +62,7 @@ export class InstitutionTypeRepository extends Repository<InstitutionType> {
     institutionTypeDtos = await Promise.all(
       institutionTypes.map(async (it) => {
         const newInstitutionType = new InstitutionTypeDto();
-        newInstitutionType.code = `${it.id}`;
+        newInstitutionType.code = it.id;
         newInstitutionType.name = it.name;
 
         if (incomingType == SourceOption.ALL) {
@@ -71,12 +71,13 @@ export class InstitutionTypeRepository extends Repository<InstitutionType> {
 
         if (it.parent_object) {
           newInstitutionType.parent = new InstitutionTypeDto();
-          newInstitutionType.parent.code = `${it.parent_object.id}`;
+          newInstitutionType.parent.code = it.parent_object.id;
           newInstitutionType.parent.name = it.parent_object.name;
 
           if (it.parent_object.parent_object) {
             newInstitutionType.parent.parent = new InstitutionTypeDto();
-            newInstitutionType.parent.parent.code = `${it.parent_object.parent_object.id}`;
+            newInstitutionType.parent.parent.code =
+              it.parent_object.parent_object.id;
             newInstitutionType.parent.parent.name =
               it.parent_object.parent_object.name;
           }

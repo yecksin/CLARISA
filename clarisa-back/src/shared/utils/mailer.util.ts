@@ -133,22 +133,26 @@ export class MailUtil {
       partnerRequest.mis_object.acronym
     }] Partner verification - ${partnerRequest.partner_name}`;
 
-    console.log('EMAIL', partnerRequest);
+    //console.log('EMAIL', partnerRequest);
     const to: string[] = [];
-    const cc: string[] = [partnerRequest.created_by_object.email];
-    const bcc: string[] = [
-      'j.d.munoz@cgiar.org',
-      'g.martinez@cgiar.org',
-      's.galvez@cgiar.org',
-      'j.cadavid@cgiar.org',
-      'j.m.morales@cgiar.org',
-      'h.f.tobon@cgiar.org',
-      'c.castiblanco@cgiar.org',
-      'G.Patarnello@cgiar.org',
+    const cc: string[] = [
+      partnerRequest.external_user_mail ??
+        partnerRequest.created_by_object.email,
     ];
+    let bcc: string[] = [];
 
     if (isProd) {
-      to.push(env.SUPPORT_EMAIL);
+      //to.push(env.SUPPORT_EMAIL);
+      bcc = [
+        'j.d.munoz@cgiar.org',
+        'g.martinez@cgiar.org',
+        's.galvez@cgiar.org',
+        'j.cadavid@cgiar.org',
+        'j.m.morales@cgiar.org',
+        'h.f.tobon@cgiar.org',
+        'c.castiblanco@cgiar.org',
+        'G.Patarnello@cgiar.org',
+      ];
     }
 
     if (!isProd) {
@@ -156,7 +160,7 @@ export class MailUtil {
     }
 
     if (partnerRequest.external_user_mail) {
-      cc.push(partnerRequest.external_user_mail);
+      //cc.push(partnerRequest.external_user_mail);
     }
 
     this.loadUpTemplate(
@@ -202,19 +206,20 @@ export class MailUtil {
         partnerRequest.created_by_object.email,
     ];
     const cc: string[] = [];
-    const bcc: string[] = [
-      'j.d.munoz@cgiar.org',
-      'g.martinez@cgiar.org',
-      's.galvez@cgiar.org',
-      'j.cadavid@cgiar.org',
-      'j.m.morales@cgiar.org',
-      'h.f.tobon@cgiar.org',
-      'c.castiblanco@cgiar.org',
-      'G.Patarnello@cgiar.org',
-    ];
+    let bcc: string[] = [];
 
     if (isProd) {
-      to.push(env.SUPPORT_EMAIL);
+      //to.push(env.SUPPORT_EMAIL);
+      bcc = [
+        'j.d.munoz@cgiar.org',
+        'g.martinez@cgiar.org',
+        's.galvez@cgiar.org',
+        'j.cadavid@cgiar.org',
+        'j.m.morales@cgiar.org',
+        'h.f.tobon@cgiar.org',
+        'c.castiblanco@cgiar.org',
+        'G.Patarnello@cgiar.org',
+      ];
     }
 
     if (!isProd) {

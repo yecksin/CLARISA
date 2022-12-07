@@ -5,6 +5,7 @@ import { InstitutionDto } from './dto/institution.dto';
 import { UpdateInstitutionDto } from './dto/update-institution.dto';
 import { Institution } from './entities/institution.entity';
 import { InstitutionRepository } from './repositories/institution.repository';
+import { CreateInstitutionBulkDto } from './dto/institution-bulk.dto';
 
 @Injectable()
 export class InstitutionService {
@@ -44,5 +45,13 @@ export class InstitutionService {
 
   async update(updateInitiativeDto: UpdateInstitutionDto[]) {
     return await this.institutionRepository.save(updateInitiativeDto);
+  }
+
+  async createBulkInstitution(
+    institutionBulkCreate: CreateInstitutionBulkDto[],
+  ) {
+    return await this.institutionRepository.createBulkInstitution(
+      institutionBulkCreate,
+    );
   }
 }

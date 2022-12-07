@@ -12,6 +12,33 @@
     The name of the institution should be in its language.(e.g. For CIAT)
   </p>
 </div>
+<div
+  style="margin-top: 20px"
+  *ngIf="
+    miStorage.hasOwnProperty('permissions') &&
+    miStorage.permissions.indexOf('/api/institutions/create-bulk') != -1
+  "
+>
+  <input
+    type="file"
+    id="file"
+    aria-label="File browser example"
+    label="File browser"
+    (change)="basicUploadSingle($any($event.target).files)"
+  />
+
+  <button
+    pButton
+    label="Accepted"
+    style="
+      border-radius: 30px;
+      background-color: #7ab800;
+      color: white;
+      margin-left: 30px;
+    "
+    (click)="accepted()"
+  ></button>
+</div>
 <form [formGroup]="group" (ngSubmit)="onSubmit(group.value)">
   <div style="margin-top: 50px">
     <div>

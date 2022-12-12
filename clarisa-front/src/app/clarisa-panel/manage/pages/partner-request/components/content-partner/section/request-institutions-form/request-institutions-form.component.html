@@ -20,6 +20,11 @@
       }}) {{ informationContent.externalUserMail }}<br />
       <span style="font-weight: 500; font-size: 15.5px">Active since:</span>
       {{ informationContent.created_at }}<br />
+      <span style="font-weight: 500; font-size: 15.5px">Website: </span>
+      <a href="{{ informationContent.webPage }}" target="_blank">{{
+        informationContent.webPage
+      }}</a
+      ><br />
     </p>
     <br />
     <p style="font-size: 15px">

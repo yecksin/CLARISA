@@ -36,6 +36,11 @@ export class PartnerRequestController {
     return await this.partnerRequestService.findAll(status, source);
   }
 
+  @Get('stadistics')
+  async stadisticsfindAll(@Query('source') source: string) {
+    return await this.partnerRequestService.statisticsPartnerRequest(source);
+  }
+
   @Get('all/:mis')
   async findAllMis(@Query('status') status: string, @Param('mis') mis: string) {
     return await this.partnerRequestService.findAll(status, mis);

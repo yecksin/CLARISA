@@ -11,6 +11,7 @@ import { DBAuth } from './utils/DBAuth';
 import { LDAPAuth } from './utils/LDAPAuth';
 import { LegacyPasswordEncoder } from './utils/LegacyPasswordEncoder';
 import { env } from 'process';
+import { QaTokenModule } from './qa-token/qa-token.module';
 import 'dotenv/config';
 
 @Module({
@@ -22,6 +23,7 @@ import 'dotenv/config';
       secret: env.JWT_SECRET,
       signOptions: { expiresIn: env.JWT_TIME },
     }),
+    QaTokenModule,
   ],
   providers: [
     AuthService,

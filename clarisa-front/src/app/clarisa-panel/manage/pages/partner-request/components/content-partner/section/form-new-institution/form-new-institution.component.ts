@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService, PrimeNGConfig } from 'primeng/api';
 import { Message } from 'primeng/api';
 import { Dropdown } from 'primeng/dropdown/dropdown';
-
+import readXlsxFile from 'read-excel-file';
 @Component({
   selector: 'app-form-new-institution',
   templateUrl: './form-new-institution.component.html',
@@ -22,7 +22,8 @@ export class FormNewInstitutionComponent implements OnInit {
   group: FormGroup;
   msgs: Message[] = [];
   display: boolean = false;
-
+  listNewIntitutions: any[] = [];
+  miStorage: any;
   constructor(
     private _manageApiService: ManageApiService,
     private formBuilder: FormBuilder,
@@ -47,6 +48,9 @@ export class FormNewInstitutionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.miStorage = window.localStorage.getItem('user');
+
+    this.miStorage = JSON.parse(this.miStorage);
     this.primengConfig.ripple = true;
     this.type = [];
     this.subType = [];
@@ -168,5 +172,33 @@ export class FormNewInstitutionComponent implements OnInit {
 
   isArray(list) {
     return Array.isArray(list);
+  }
+
+  async basicUploadSingle(file) {
+    const content = await readXlsxFile(file[0]);
+    let informartionInstitution: any;
+    console.log(content);
+    for (let i in content) {
+      informartionInstitution = {};
+      if (i != '0') {
+        informartionInstitution['name'] = content[i][1];
+        informartionInstitution['acronym'] = content[i][0];
+        informartionInstitution['website_link'] = content[i][3];
+        informartionInstitution['institution_type'] = content[i][2];
+        informartionInstitution['country'] = content[i][4];
+        this.listNewIntitutions.push(informartionInstitution);
+      }
+    }
+  }
+
+  accepted() {
+    let input: any;
+    this._manageApiService
+      .postCreateBulkInstitution(this.listNewIntitutions)
+      .subscribe((r) => {
+        input = document.getElementById('file');
+        input.value = '';
+        alert('The loading of institutions has been a success');
+      });
   }
 }

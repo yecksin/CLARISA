@@ -50,4 +50,10 @@ export class ManageApiService {
       bodyRequest
     );
   }
+  postCreateBulkInstitution(bodyRequest) {
+    return this.http.post(
+      `${this.urlApi}api/institutions/create-bulk`,
+      bodyRequest
+    );
+  }
 }

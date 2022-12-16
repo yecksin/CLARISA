@@ -84,6 +84,9 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       case MisOption.MEL.path:
       case MisOption.OST.path:
       case MisOption.TOC.path:
+      case MisOption.PRMS.path:
+      case MisOption.MARLO.path:
+      case MisOption.PIPELINE.path:
         whereClause = {
           ...whereClause,
           mis_id: incomingMis.mis_id,
@@ -99,12 +102,14 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
         break;
       case PartnerStatus.PENDING.path:
         whereClause = {
+          ...whereClause,
           accepted: IsNull(),
         };
         break;
       case PartnerStatus.ACCEPTED.path:
       case PartnerStatus.REJECTED.path:
         whereClause = {
+          ...whereClause,
           accepted: status === incomingStatus.path,
         };
         break;
@@ -147,7 +152,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     partnerRequestDto.countryDTO = this.fillOutCountryInfo(pr.country_object);
 
     partnerRequestDto.institutionTypeDTO = new InstitutionTypeDto();
-    partnerRequestDto.institutionTypeDTO.code = `${pr.institution_type_object.id}`;
+    partnerRequestDto.institutionTypeDTO.code = pr.institution_type_object.id;
     partnerRequestDto.institutionTypeDTO.name = pr.institution_type_object.name;
     partnerRequestDto.institutionTypeDTO.id_parent =
       pr.institution_type_object.parent_id;
@@ -228,7 +233,8 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     );
 
     institutionDto.institutionType = new InstitutionTypeDto();
-    institutionDto.institutionType.code = `${institution.institution_type_object.id}`;
+    institutionDto.institutionType.code =
+      institution.institution_type_object.id;
     institutionDto.institutionType.name =
       institution.institution_type_object.name;
 
@@ -338,5 +344,72 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     });
 
     return this.fillOutPartnerRequestDto(partnerRequest);
+  }
+
+  async statisticsPartner(mis: string = MisOption.ALL.path) {
+    let whereClause: FindOptionsWhere<PartnerRequest> = {};
+    let whereClauseRejected: FindOptionsWhere<PartnerRequest> = {};
+    let whereClausePending: FindOptionsWhere<PartnerRequest> = {};
+    const incomingMis = MisOption.getfromPath(mis);
+    switch (mis) {
+      case MisOption.ALL.path:
+        // do nothing. no extra conditions needed
+        break;
+      case MisOption.AICCRA.path:
+      case MisOption.CGSPACE.path:
+      case MisOption.CLARISA.path:
+      case MisOption.ECONTRACTS.path:
+      case MisOption.FORESIGHT.path:
+      case MisOption.MEL.path:
+      case MisOption.OST.path:
+      case MisOption.TOC.path:
+      case MisOption.PRMS.path:
+      case MisOption.MARLO.path:
+      case MisOption.PIPELINE.path:
+        whereClause = {
+          ...whereClause,
+          mis_id: incomingMis.mis_id,
+        };
+        break;
+      default:
+        throw Error('?!');
+    }
+
+    const partnerRequest: PartnerRequest[] = await this.find({
+      where: whereClause,
+    });
+
+    whereClauseRejected = {
+      ...whereClause,
+      accepted: false,
+    };
+    whereClausePending = {
+      ...whereClause,
+      is_active: true,
+    };
+    whereClause = {
+      ...whereClause,
+      accepted: true,
+    };
+
+    const partnerRequestAccepted: PartnerRequest[] = await this.find({
+      where: whereClause,
+    });
+
+    const partnerRequestRejected: PartnerRequest[] = await this.find({
+      where: whereClauseRejected,
+    });
+
+    const partnerRequestPending: PartnerRequest[] = await this.find({
+      where: whereClausePending,
+    });
+    const stadisticsPartner = {
+      Total: partnerRequest.length,
+      Accepted: partnerRequestAccepted.length,
+      Rejected: partnerRequestRejected.length,
+      Pending: partnerRequestPending.length,
+    };
+
+    return stadisticsPartner;
   }
 }

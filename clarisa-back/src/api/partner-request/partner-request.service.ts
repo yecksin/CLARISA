@@ -340,4 +340,11 @@ export class PartnerRequestService {
 
     return ResponseDto.createCreatedResponse(response, this.constructor);
   }
+
+  async statisticsPartnerRequest(mis: string = MisOption.ALL.path) {
+    if (!MisOption.getfromPath(mis)) {
+      throw Error('?!');
+    }
+    return this.partnerRequestRepository.statisticsPartner(mis);
+  }
 }

@@ -37,7 +37,8 @@ export class ContentComponent implements OnInit {
   }
 
   ngOnChanges(paramsUrl: SimpleChanges) {
-    console.log(paramsUrl);
+    this.loading = true;
+    this.informationEndpoint = [];
 
     if (Object.keys(this.urlParams).length == 2) {
       let variableAux = paramsUrl['urlParams'].currentValue.namesubcategory
@@ -88,6 +89,7 @@ export class ContentComponent implements OnInit {
     for (let i of this.arrayColumns) {
       this.findColumns.push(i[1]);
     }
+
     return this.arrayColumns;
   }
 
@@ -328,5 +330,9 @@ export class ContentComponent implements OnInit {
 
   showDialog() {
     this.dialogVisible = true;
+  }
+
+  closeDialog() {
+    this.dialogVisible = false;
   }
 }

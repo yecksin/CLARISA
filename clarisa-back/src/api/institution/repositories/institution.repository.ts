@@ -69,7 +69,10 @@ export class InstitutionRepository extends Repository<Institution> {
 
     await Promise.all(
       institution.map(async (i) => {
-        const institutionDto: InstitutionDto = this.fillOutInstitutionInfo(i);
+        const institutionDto: InstitutionDto = this.fillOutInstitutionInfo(
+          i,
+          option === FindAllOptions.SHOW_ALL,
+        );
         institutionDtos.push(institutionDto);
       }),
     );
@@ -120,7 +123,10 @@ export class InstitutionRepository extends Repository<Institution> {
     });
   }
 
-  private fillOutInstitutionInfo(institution: Institution): InstitutionDto {
+  private fillOutInstitutionInfo(
+    institution: Institution,
+    showActiveField: boolean = false,
+  ): InstitutionDto {
     const institutionDto: InstitutionDto = new InstitutionDto();
 
     institutionDto.code = institution.id;
@@ -128,6 +134,9 @@ export class InstitutionRepository extends Repository<Institution> {
     institutionDto.acronym = institution.acronym;
     institutionDto.websiteLink = institution.website_link;
     institutionDto.added = institution.created_at;
+    if (showActiveField) {
+      institutionDto.is_active = institution.is_active;
+    }
 
     institutionDto.countryOfficeDTO = institution.institution_locations.map(
       (il) => {

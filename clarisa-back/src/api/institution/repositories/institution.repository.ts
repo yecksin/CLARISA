@@ -13,11 +13,14 @@ import { InstitutionDictionaryDto } from '../../institution-dictionary/dto/insti
 import { InstitutionSourceDto } from '../../institution-dictionary/dto/institution-source.dto';
 import { InstitutionTypeDto } from '../../institution-type/dto/institution-type.dto';
 import { PartnerRequest } from '../../partner-request/entities/partner-request.entity';
+import { CreateInstitutionBulkDto } from '../dto/institution-bulk.dto';
 import { InstitutionCountryDto } from '../dto/institution-country.dto';
 import { InstitutionSimpleDto } from '../dto/institution-simple.dto';
 import { InstitutionDto } from '../dto/institution.dto';
 import { InstitutionLocation } from '../entities/institution-location.entity';
 import { Institution } from '../entities/institution.entity';
+import { InstitutionType } from '../../institution-type/entities/institution-type.entity';
+import { Country } from '../../country/entities/country.entity';
 
 @Injectable()
 export class InstitutionRepository extends Repository<Institution> {
@@ -69,7 +72,10 @@ export class InstitutionRepository extends Repository<Institution> {
 
     await Promise.all(
       institution.map(async (i) => {
-        const institutionDto: InstitutionDto = this.fillOutInstitutionInfo(i);
+        const institutionDto: InstitutionDto = this.fillOutInstitutionInfo(
+          i,
+          option === FindAllOptions.SHOW_ALL,
+        );
         institutionDtos.push(institutionDto);
       }),
     );
@@ -120,7 +126,10 @@ export class InstitutionRepository extends Repository<Institution> {
     });
   }
 
-  private fillOutInstitutionInfo(institution: Institution): InstitutionDto {
+  private fillOutInstitutionInfo(
+    institution: Institution,
+    showActiveField: boolean = false,
+  ): InstitutionDto {
     const institutionDto: InstitutionDto = new InstitutionDto();
 
     institutionDto.code = institution.id;
@@ -128,6 +137,9 @@ export class InstitutionRepository extends Repository<Institution> {
     institutionDto.acronym = institution.acronym;
     institutionDto.websiteLink = institution.website_link;
     institutionDto.added = institution.created_at;
+    if (showActiveField) {
+      institutionDto.is_active = institution.is_active;
+    }
 
     institutionDto.countryOfficeDTO = institution.institution_locations.map(
       (il) => {
@@ -268,5 +280,48 @@ export class InstitutionRepository extends Repository<Institution> {
     });
 
     return this.fillOutInstitutionInfo(institution);
+  }
+
+  async createInstitutionCountryBulk(
+    countryAndInstitution: CreateInstitutionBulkDto,
+    id_institution: number,
+    isHQ: boolean,
+  ) {
+    let institutionLocation: InstitutionLocation = new InstitutionLocation();
+    let countryInstitution: Country;
+    countryInstitution = await this.query(
+      `SELECT id from countries i where i.iso_alpha_2 like '%${countryAndInstitution.country}%';`,
+    );
+    institutionLocation.country_id = countryInstitution[0].id;
+    institutionLocation.is_headquater = isHQ;
+    institutionLocation.institution_id = id_institution;
+    institutionLocation.created_by = 3043;
+
+    return this.institutionLocationRepository.save(institutionLocation);
+  }
+
+  async createBulkInstitution(listBulInstitutions: CreateInstitutionBulkDto[]) {
+    let institutionType: InstitutionType;
+    for (let institutionIterator of listBulInstitutions) {
+      let institution: Institution = new Institution();
+      institution.acronym = institutionIterator.acronym;
+      institution.name = institutionIterator.name;
+      institution.website_link = institutionIterator.website_link;
+
+      institutionType = await this.query(
+        `SELECT * from institution_types i where i.name like '%${institutionIterator.institution_type}%' and source_id = 1;`,
+      );
+
+      institution.institution_type_id = institutionType[0].id;
+      institution.created_by = 3043;
+      institution = await this.save(institution);
+      await this.createInstitutionCountryBulk(
+        institutionIterator,
+        institution.id,
+        true,
+      );
+    }
+
+    return true;
   }
 }

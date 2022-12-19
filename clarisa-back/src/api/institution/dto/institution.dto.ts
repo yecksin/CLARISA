@@ -9,4 +9,5 @@ export class InstitutionDto {
   added: Date;
   institutionType: InstitutionTypeDto;
   countryOfficeDTO: InstitutionCountryDto[];
+  is_active?: boolean;
 }

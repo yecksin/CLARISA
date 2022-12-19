@@ -566,8 +566,21 @@
                 <span *ngIf="cols[3].length == 1">
                   <span *ngFor="let i of cols[3]">
                     <span *ngIf="rowData[cols[1]] != null">
-                      <span *ngFor="let k of rowData[cols[1]]">
-                        {{ k[i[1]] }},
+                      <span *ngIf="cols[0] != 'Office Location'">
+                        <span *ngFor="let k of rowData[cols[1]]">
+                          {{ k[i[1]] }},
+                        </span>
+                      </span>
+                      <span *ngIf="cols[0] == 'Office Location'">
+                        <span *ngFor="let k of rowData[cols[1]]; let j = index">
+                          <span *ngIf="k['isHeadquarter'] == true">
+                            <b>Headquarter: </b>{{ k[i[1]] }} <br />
+                          </span>
+                          <span *ngIf="k['isHeadquarter'] != true">
+                            <span *ngIf="j == 1"><b>Other: </b></span
+                            >{{ k[i[1]] }},
+                          </span>
+                        </span>
                       </span>
                     </span>
                     <span *ngIf="rowData[cols[1]] == null"> </span>
@@ -601,7 +614,7 @@
         pButton
         pRipple
         icon="pi pi-times"
-        (click)="dialogVisible = false"
+        (click)="closeDialog()"
         label="Close"
         class="p-button-text"
       ></button>

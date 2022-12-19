@@ -86,8 +86,9 @@
                         class="alert alert-success"
                         role="alert"
                         *ngIf="
-                          informationParnertRequest == '' &&
-                          informationParnertRequest == null
+                          informationParnertRequest == '' ||
+                          informationParnertRequest == null ||
+                          informationParnertRequest == []
                         "
                       >
                         <span class="alert-inner--icon"
@@ -98,6 +99,7 @@
                           pending. Good Job!</span
                         >
                       </div>
+
                       <app-request-institutions-form
                         [informationContent]="item"
                         *ngFor="

@@ -14,11 +14,12 @@ import { UpdateQaTokenDto } from './dto/update-qa-token.dto';
 import { JwtAuthGuard } from '../../shared/guards/jwt-auth.guard';
 import { PermissionGuard } from '../../shared/guards/permission.guard';
 
-@Controller('qa-token')
+@Controller()
 export class QaTokenController {
   constructor(private readonly qaTokenService: QaTokenService) {}
 
-  @Post()
+  @Post('api/qa-token')
+  @UseGuards(JwtAuthGuard, PermissionGuard)
   create(@Body() createQaTokenDto: CreateQaTokenDto) {
     if (
       createQaTokenDto.name == '' ||

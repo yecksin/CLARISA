@@ -67,6 +67,18 @@
                           >Pending Institution request(s)</a
                         >
                       </li>
+                      <li
+                        *ngIf="
+                          miStorage.hasOwnProperty('permissions') &&
+                          miStorage.permissions.indexOf(
+                            '/api/partner-requests/create-bulk'
+                          ) != -1
+                        "
+                      >
+                        <a href="#tab29" data-bs-toggle="tab"
+                          >Create Partner request Bulk</a
+                        >
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -121,6 +133,9 @@
                           nextLabel="Next"
                         ></pagination-controls>
                       </div>
+                    </div>
+                    <div class="tab-pane" id="tab29">
+                      <app-partner-bulk></app-partner-bulk>
                     </div>
                   </div>
                 </div>

@@ -1,0 +1,128 @@
+<div style="margin-top: 20px; display: flex; flex-direction: column">
+  <form [formGroup]="group" (ngSubmit)="accepted(group.value)">
+    <div
+      style="
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <div style="width: 50%">
+        <p-dropdown
+          [options]="users"
+          [(ngModel)]="selectedUser"
+          optionLabel="email"
+          [filter]="true"
+          filterBy="email"
+          [showClear]="true"
+          placeholder="Select a User"
+          [style]="{ width: '90%' }"
+          [required]="true"
+          [virtualScroll]="true"
+          [itemSize]="31"
+          formControlName="externalUser"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div class="country-item country-item-value" *ngIf="selectedUser">
+              <div>{{ selectedUser.email }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-country pTemplate="item">
+            <div class="country-item">
+              <div>{{ country.email }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+      <div style="width: 50%">
+        <p-dropdown
+          [options]="mises"
+          [(ngModel)]="selectedMis"
+          optionLabel="name"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true"
+          placeholder="Select an Mis"
+          [style]="{ width: '90%' }"
+          [required]="true"
+          [virtualScroll]="true"
+          [itemSize]="31"
+          formControlName="mis"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div class="country-item country-item-value" *ngIf="selectedMis">
+              <div>{{ selectedMis.name }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-country pTemplate="item">
+            <div class="country-item">
+              <div>{{ country.name }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+    </div>
+
+    <div style="width: 100%; margin-top: 20px">
+      <input
+        type="file"
+        id="file"
+        aria-label="File browser example"
+        (change)="basicUploadSingle($any($event.target).files)"
+        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      />
+    </div>
+
+    <div
+      style="
+        width: 100%;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: flex-end;
+      "
+    >
+      <button
+        pButton
+        label="Bulk Upload"
+        type="submit"
+        style="
+          border-radius: 10px;
+          background-color: #7ab800;
+          color: white;
+          margin-right: 50px;
+        "
+      ></button>
+    </div>
+  </form>
+</div>
+
+<p-dialog
+  header="Loading Partners Request"
+  [(visible)]="displayConfirm"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <p class="m-0">
+    Partners are being updated and institutions are being created.
+  </p>
+  <div
+    style="
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    "
+  >
+    <img
+      src="../../assets/images/loadeer.gif"
+      style="width: 50px; height: 50px"
+    />
+  </div>
+</p-dialog>

@@ -25,6 +25,9 @@ import { CreatePartnerRequestDto } from '../dto/create-partner-request.dto';
 import { PartnerRequestDto } from '../dto/partner-request.dto';
 import { UpdatePartnerRequestDto } from '../dto/update-partner-request.dto';
 import { PartnerRequest } from '../entities/partner-request.entity';
+import { BulkPartnerRequestDto } from '../dto/create-partner-dto';
+import { InstitutionType } from '../../institution-type/entities/institution-type.entity';
+import { CreateInstitutionBulkDto } from '../../institution/dto/institution-bulk.dto';
 
 @Injectable()
 export class PartnerRequestRepository extends Repository<PartnerRequest> {
@@ -411,5 +414,58 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     };
 
     return stadisticsPartner;
+  }
+
+  async createPartnerRequestBulk(partnerRequestBulk: BulkPartnerRequestDto) {
+    console.log(partnerRequestBulk);
+
+    let institutionType: InstitutionType;
+    let countryInstitution: Country;
+    let BulkInstitutions: Institution;
+    let partnerCreate: any[] = [];
+    let today = new Date();
+    for (let partnerRequestBulkIterator of partnerRequestBulk.listPartnerRequest) {
+      let partnerRequests: PartnerRequest = new PartnerRequest();
+      partnerRequests.partner_name = partnerRequestBulkIterator.name;
+      partnerRequests.acronym = partnerRequestBulkIterator.acronym;
+      partnerRequests.web_page = partnerRequestBulkIterator.website_link;
+      partnerRequests.is_office = false;
+      partnerRequests.external_user_mail = partnerRequestBulk.externalUserEmail;
+      partnerRequests.external_user_name = partnerRequestBulk.externalUserName;
+      partnerRequests.created_by = partnerRequestBulk.externalUser;
+      institutionType = await this.query(
+        `SELECT * from institution_types i where i.name like '%${partnerRequestBulkIterator.institution_type}%' and source_id = 1;`,
+      );
+
+      countryInstitution = await this.query(
+        `SELECT * from countries i where i.iso_alpha_2 like '%${partnerRequestBulkIterator.country}%'`,
+      );
+
+      partnerRequests.institution_type_id = institutionType[0].id;
+      partnerRequests.country_id = countryInstitution[0].code;
+      partnerRequests.mis_id = partnerRequestBulk.mis;
+      if (partnerRequestBulkIterator.status == 'Accepted') {
+        partnerRequests.accepted = true;
+        partnerRequests.accepted_by = partnerRequestBulk.accepted;
+        partnerRequests.accepted_date = today;
+        BulkInstitutions =
+          await this.institutionRepository.createBulkInstitution(
+            partnerRequestBulkIterator,
+            partnerRequestBulk.accepted,
+          );
+        partnerRequests.institution_id = BulkInstitutions.id;
+      }
+      if (partnerRequestBulkIterator.status == 'Rejected') {
+        partnerRequests.accepted = false;
+        partnerRequests.rejected_by = partnerRequestBulk.accepted;
+        partnerRequests.reject_justification =
+          partnerRequestBulkIterator.justification;
+        partnerRequests.rejected_date = today;
+      }
+      partnerRequests.is_active = false;
+      partnerRequests = await this.save(partnerRequests);
+      partnerCreate.push(partnerRequests);
+    }
+    return partnerCreate;
   }
 }

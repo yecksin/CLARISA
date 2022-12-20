@@ -22,6 +22,7 @@ import { CreatePartnerRequestDto } from './dto/create-partner-request.dto';
 import { PartnerRequestDto } from './dto/partner-request.dto';
 import { UpdatePartnerRequestDto } from './dto/update-partner-request.dto';
 import { PartnerRequestService } from './partner-request.service';
+import { BulkPartnerRequestDto } from './dto/create-partner-dto';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
@@ -91,5 +92,14 @@ export class PartnerRequestController {
       updatePartnerRequest,
       userData,
     );
+  }
+
+  @Post('create-bulk')
+  @UseGuards(JwtAuthGuard, PermissionGuard)
+  async createBulk(@Body() createBulkPartner: BulkPartnerRequestDto) {
+    const result: any = await this.partnerRequestService.createBulk(
+      createBulkPartner,
+    );
+    return result;
   }
 }

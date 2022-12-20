@@ -18,6 +18,7 @@ import { PartnerRequestDto } from './dto/partner-request.dto';
 import { UpdatePartnerRequestDto } from './dto/update-partner-request.dto';
 import { PartnerRequest } from './entities/partner-request.entity';
 import { PartnerRequestRepository } from './repositories/partner-request.repository';
+import { BulkPartnerRequestDto } from './dto/create-partner-dto';
 
 @Injectable()
 export class PartnerRequestService {
@@ -346,5 +347,11 @@ export class PartnerRequestService {
       throw Error('?!');
     }
     return this.partnerRequestRepository.statisticsPartner(mis);
+  }
+
+  async createBulk(createBulkPartner: BulkPartnerRequestDto) {
+    return await this.partnerRequestRepository.createPartnerRequestBulk(
+      createBulkPartner,
+    );
   }
 }

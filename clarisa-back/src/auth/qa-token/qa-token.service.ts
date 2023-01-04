@@ -16,13 +16,14 @@ export class QaTokenService {
     let returnToken: QaToken;
     let qaTokenId: number;
     qaTokenId = await this.qaTokenRepository.query(
-      `SELECT getQAToken(?,?,?,?,?)`,
+      `SELECT getQAToken(?,?,?,?,?,?)`,
       [
         createQaTokenDto.name,
         createQaTokenDto.username,
         createQaTokenDto.email,
         createQaTokenDto.misAcronym,
         createQaTokenDto.appUser,
+        createQaTokenDto.official_code,
       ],
     );
     qaTokenId = qaTokenId[0][Object.keys(qaTokenId[0])[0]];

@@ -28,6 +28,9 @@ export class QaToken {
   app_user: string;
 
   @Column()
+  official_code: string;
+
+  @Column()
   token: string;
 
   @Column()

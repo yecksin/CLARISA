@@ -35,4 +35,7 @@ export class QaToken {
 
   @Column()
   updated_at: Date;
+
+  @Column()
+  expiration_date: Date;
 }

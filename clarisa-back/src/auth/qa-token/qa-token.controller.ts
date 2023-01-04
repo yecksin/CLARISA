@@ -39,6 +39,12 @@ export class QaTokenController {
         ErrorNumber: '400 Bad request',
       };
     }
+    if(createQaTokenDto.misAcronym.toLowerCase() == 'prms' && createQaTokenDto.official_code == ''){
+      return {
+        Error: 'The official code is required',
+        ErrorNumber: '400 Bad request',
+      };
+    }
 
     return this.qaTokenService.create(createQaTokenDto);
   }

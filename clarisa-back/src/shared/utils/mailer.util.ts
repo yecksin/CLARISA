@@ -148,10 +148,7 @@ export class MailUtil {
         'g.martinez@cgiar.org',
         's.galvez@cgiar.org',
         'j.cadavid@cgiar.org',
-        'j.m.morales@cgiar.org',
         'h.f.tobon@cgiar.org',
-        'c.castiblanco@cgiar.org',
-        'G.Patarnello@cgiar.org',
       ];
     }
 

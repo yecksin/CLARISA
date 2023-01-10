@@ -28,6 +28,8 @@ import { PartnerRequest } from '../entities/partner-request.entity';
 import { BulkPartnerRequestDto } from '../dto/create-partner-dto';
 import { InstitutionType } from '../../institution-type/entities/institution-type.entity';
 import { CreateInstitutionBulkDto } from '../../institution/dto/institution-bulk.dto';
+import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
+import { share } from 'rxjs';
 
 @Injectable()
 export class PartnerRequestRepository extends Repository<PartnerRequest> {
@@ -69,6 +71,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
   async findAllPartnerRequests(
     status: string = PartnerStatus.PENDING.path,
     mis: string = MisOption.ALL.path,
+    show: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<PartnerRequestDto[]> {
     const partnerRequestDtos: PartnerRequestDto[] = [];
     let whereClause: FindOptionsWhere<PartnerRequest> = {};
@@ -116,6 +119,17 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
           accepted: status === incomingStatus.path,
         };
         break;
+    }
+
+    switch(show){
+      case FindAllOptions.SHOW_ALL:
+        break;
+      case FindAllOptions.SHOW_ONLY_ACTIVE:
+      case FindAllOptions.SHOW_ONLY_INACTIVE:
+        whereClause = {
+          ...whereClause,
+          is_active: show === FindAllOptions.SHOW_ONLY_ACTIVE,
+        };
     }
 
     const partnerRequest: PartnerRequest[] = await this.find({
@@ -289,6 +303,12 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     respondPartnerRequestDto: RespondRequestDto,
   ): Promise<PartnerRequestDto> {
     partialPartnerRequest.is_active = false;
+    if(partialPartnerRequest.partner_request_id == null){
+      await this.save(partialPartnerRequest);
+      partialPartnerRequest.partner_request_id = partialPartnerRequest.id;
+      delete partialPartnerRequest.id;
+    }
+    
     partialPartnerRequest.external_user_mail =
       respondPartnerRequestDto.externalUserMail;
     partialPartnerRequest.external_user_name =
@@ -298,9 +318,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
 
     const accepted = respondPartnerRequestDto.accept;
     partialPartnerRequest.accepted = accepted;
-    partialPartnerRequest.modification_justification = accepted
-      ? `Accepted on ${partialPartnerRequest.accepted_date.toISOString()}`
-      : respondPartnerRequestDto.rejectJustification;
+    
 
     partialPartnerRequest.updated_by = accepted
       ? partialPartnerRequest.accepted_by
@@ -327,25 +345,34 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     updatePartnerRequest: UpdatePartnerRequestDto,
     partnerRequest: PartnerRequest,
   ): Promise<PartnerRequestDto> {
+    if(partnerRequest.partner_request_id == null){
+      partnerRequest.is_active = false;
+      await this.save(partnerRequest);
+      partnerRequest.partner_request_id = partnerRequest.id;
+      delete partnerRequest.id;
+    }
+    partnerRequest.is_active = true;
     partnerRequest.partner_name = updatePartnerRequest.name;
     partnerRequest.acronym = updatePartnerRequest.acronym;
     partnerRequest.web_page = updatePartnerRequest.websiteLink;
-
     partnerRequest.institution_type_id =
       partnerRequest.institution_type_object.id;
     partnerRequest.country_id = partnerRequest.country_object.id;
-
+    partnerRequest.category_1 = updatePartnerRequest.category_1;
+    partnerRequest.category_2 = updatePartnerRequest.category_2;
     partnerRequest.updated_by = partnerRequest.updated_by_object.id;
     partnerRequest.modification_justification =
       updatePartnerRequest.modification_justification;
 
+
     partnerRequest = await this.save(partnerRequest);
 
+    
     partnerRequest = await this.findOne({
       where: { id: partnerRequest.id },
       relations: this.partnerRelations,
     });
-
+    
     return this.fillOutPartnerRequestDto(partnerRequest);
   }
 
@@ -417,8 +444,6 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
   }
 
   async createPartnerRequestBulk(partnerRequestBulk: BulkPartnerRequestDto) {
-    console.log(partnerRequestBulk);
-
     let institutionType: InstitutionType;
     let countryInstitution: Country;
     let BulkInstitutions: Institution;
@@ -442,7 +467,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       );
 
       partnerRequests.institution_type_id = institutionType[0].id;
-      partnerRequests.country_id = countryInstitution[0].code;
+      partnerRequests.country_id = countryInstitution[0].id;
       partnerRequests.mis_id = partnerRequestBulk.mis;
       if (partnerRequestBulkIterator.status == 'Accepted') {
         partnerRequests.accepted = true;
@@ -464,6 +489,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       }
       partnerRequests.is_active = false;
       partnerRequests = await this.save(partnerRequests);
+      
       partnerCreate.push(partnerRequests);
     }
     return partnerCreate;

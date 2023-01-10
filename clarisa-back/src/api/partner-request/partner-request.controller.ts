@@ -23,6 +23,7 @@ import { PartnerRequestDto } from './dto/partner-request.dto';
 import { UpdatePartnerRequestDto } from './dto/update-partner-request.dto';
 import { PartnerRequestService } from './partner-request.service';
 import { BulkPartnerRequestDto } from './dto/create-partner-dto';
+import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
@@ -33,6 +34,7 @@ export class PartnerRequestController {
   async findAll(
     @Query('status') status: string,
     @Query('source') source: string,
+    @Query('show') show: FindAllOptions
   ) {
     return await this.partnerRequestService.findAll(status, source);
   }

@@ -5,6 +5,7 @@ import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateBiParameterDto } from './dto/update-bi-parameter.dto';
 import { BiParameter } from './entities/bi-parameter.entity';
 import { BiParameterRepository } from './repositories/bi-parameter.repository';
+import { ParametersBiUnit } from './dto/parameter-unit-bi.dto';
 @Injectable()
 export class BiParameterService {
   constructor(private biParametersRepository: BiParameterRepository) {}
@@ -42,5 +43,10 @@ export class BiParameterService {
 
   async update(updateBiParameterDto: UpdateBiParameterDto[]) {
     return await this.biParametersRepository.save(updateBiParameterDto);
+  }
+
+
+  async findAllUnitParametersBi(): Promise<ParametersBiUnit> {
+    return await this.biParametersRepository.getFindAllInformation();
   }
 }

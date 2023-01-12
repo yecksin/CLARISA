@@ -25,13 +25,18 @@ import { BiParameter } from './entities/bi-parameter.entity';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
-@UseGuards(JwtAuthGuard, PermissionGuard)
+//@UseGuards(JwtAuthGuard, PermissionGuard)
 export class BiParameterController {
   constructor(private readonly biParameterService: BiParameterService) {}
 
   @Get()
   async findAll(@Query('show') show: FindAllOptions) {
     return await this.biParameterService.findAll(show);
+  }
+
+  @Get('getUnitAll')
+  async findAllUnitParams() {
+    return await this.biParameterService.findAllUnitParametersBi();
   }
 
   @Get('get/:id')

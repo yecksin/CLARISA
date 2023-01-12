@@ -12,4 +12,6 @@ export class ParametersBiUnit {
     resource_url: string;
 
     config_id: string;
+
+    embed_url_base:string;
 }

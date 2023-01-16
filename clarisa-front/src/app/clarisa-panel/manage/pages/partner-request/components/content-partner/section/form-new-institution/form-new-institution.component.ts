@@ -58,7 +58,7 @@ export class FormNewInstitutionComponent implements OnInit {
     this.cities = [];
     this._manageApiService.getAllTypeInstitutions().subscribe((resp) => {
       this.type.push(resp);
-      console.log(this.type);
+      
     });
     this._manageApiService.getAllCountries().subscribe((resp) => {
       this.cities.push(resp);

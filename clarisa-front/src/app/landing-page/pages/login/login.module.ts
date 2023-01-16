@@ -7,7 +7,7 @@ import { PanelModule } from 'primeng/panel';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GeneralInterceptorService } from '../../../shared/interceptors/auth-interceptor.service';
-
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
   declarations: [LoginComponent],
   imports: [
@@ -17,6 +17,7 @@ import { GeneralInterceptorService } from '../../../shared/interceptors/auth-int
     ButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    DialogModule
   ],
   providers: [],
 })

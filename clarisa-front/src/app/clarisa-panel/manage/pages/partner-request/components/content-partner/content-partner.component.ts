@@ -12,10 +12,11 @@ export class ContentPartnerComponent implements OnInit {
   constructor(private _manageApiService: ManageApiService) {}
   p: number = 1;
   miStorage: any;
-
+  statusProcess:boolean;
+  menssageConfirmProcess: string;
   ngOnInit(): void {
     this.miStorage = window.localStorage.getItem('user');
-    console.log(window.localStorage);
+    
 
     this.miStorage = JSON.parse(this.miStorage);
     this._manageApiService.getAllPartnerRequest().subscribe((resp) => {
@@ -23,4 +24,10 @@ export class ContentPartnerComponent implements OnInit {
     });
   }
 
+  partnerResolve(value:any){
+    this.informationParnertRequest.splice(value.id, 1);
+    this.statusProcess = true;
+    this.menssageConfirmProcess = 'The partner '+value.status+' process has been a success.';
+    
+  }
 }

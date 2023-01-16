@@ -1,5 +1,5 @@
 <div
-  style="width: 50%; height: auto; border: 1px solid #f0f0f0; margin-top: 20px"
+  style="width: 100%; height: auto; border: 1px solid #f0f0f0; margin-top: 20px"
 >
   <div style="margin: 20px">
     <h4 style="font-weight: 500; font-size: 18px">
@@ -185,14 +185,16 @@
       </div>
     </div>
     <div
-      class="p-field-radiobutton"
+      
       style="display: flex; flex-direction: row; margin-left: 10px"
     >
       <p-radioButton
         name="send-email"
-        value="send-email"
-        [(ngModel)]="email"
+        value="checked"
+        [(ngModel)]="checked"
         inputId="email"
+        [value]="checked"
+        binary="true"
       ></p-radioButton>
       <label style="margin-left: 10px; margin-top: 10px" for="email"
         >Tick to send a justification email.</label
@@ -257,7 +259,7 @@
           <li>
             <b>Sub-department:</b> The "InstitutionRequested" is a part of the
             "CLARISA Institution". Therefore, we kindly suggest you to include
-            "CLARISA Institution" as sub-department of "CLARISA Institution".
+            "instution Requested" as sub-department of "CLARISA Institution".
           </li>
           <li>
             <b>Person - Not institution:</b> "PersonRequested" is a person, not
@@ -322,5 +324,8 @@
     ></button>
   </ng-template>
 </p-dialog>
+
+
+
 
 <p-messages id="msgs" timeout="3000" hideTransitionOptions="3000"></p-messages>

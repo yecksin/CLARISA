@@ -18,6 +18,8 @@ import { PartnerRequestDto } from './dto/partner-request.dto';
 import { UpdatePartnerRequestDto } from './dto/update-partner-request.dto';
 import { PartnerRequest } from './entities/partner-request.entity';
 import { PartnerRequestRepository } from './repositories/partner-request.repository';
+import { BulkPartnerRequestDto } from './dto/create-partner-dto';
+import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 
 @Injectable()
 export class PartnerRequestService {
@@ -35,6 +37,7 @@ export class PartnerRequestService {
   async findAll(
     status: string = PartnerStatus.PENDING.path,
     mis: string = MisOption.ALL.path,
+    show: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<PartnerRequestDto[]> {
     if (!PartnerStatus.getfromPath(status)) {
       throw Error('?!');
@@ -44,7 +47,7 @@ export class PartnerRequestService {
       throw Error('?!');
     }
 
-    return this.partnerRequestRepository.findAllPartnerRequests(status, mis);
+    return this.partnerRequestRepository.findAllPartnerRequests(status, mis, show);
   }
 
   async findOne(id: number): Promise<PartnerRequestDto> {
@@ -346,5 +349,11 @@ export class PartnerRequestService {
       throw Error('?!');
     }
     return this.partnerRequestRepository.statisticsPartner(mis);
+  }
+
+  async createBulk(createBulkPartner: BulkPartnerRequestDto) {
+    return await this.partnerRequestRepository.createPartnerRequestBulk(
+      createBulkPartner,
+    );
   }
 }

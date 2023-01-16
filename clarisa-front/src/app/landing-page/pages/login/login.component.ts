@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   successLogin = false;
-
+  menssageValidate = '';
+  displayConfirm = false;
   ngOnInit() {
     this.loginForm = new FormGroup({
       login: new FormControl('', Validators.required),
@@ -30,23 +31,32 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     const authData: UserAuth = { ...this.loginForm.value };
-    console.log(authData);
+    
     this.authService.userAuth(authData).subscribe({
       next: (resp) => {
+        this.menssageValidate = '';
         const { access_token, user } = resp;
         this.authService.localStorageToken = access_token;
         this.authService.localStorageUser = user;
         this.successLogin = true;
+        
         setTimeout(() => {
-          alert('Login successfull');
+          
           //change this route when the new component is ready
           this.router.navigate(['/clarisa-panel/manage/partner-request']);
-        }, 1500);
-        console.log(resp);
+        }, 1000);
+        
+        
       },
       error: (err) => {
         //show alert
-        alert(err.error.message);
+        this.menssageValidate = 'Username or password is incorrect please validate it';
+        setTimeout(() => {
+          
+          //change this route when the new component is ready
+          this.displayConfirm = false;
+        }, 1000);
+        
       },
     });
   }

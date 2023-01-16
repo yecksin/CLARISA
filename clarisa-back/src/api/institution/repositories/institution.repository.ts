@@ -300,28 +300,30 @@ export class InstitutionRepository extends Repository<Institution> {
     return this.institutionLocationRepository.save(institutionLocation);
   }
 
-  async createBulkInstitution(listBulInstitutions: CreateInstitutionBulkDto[]) {
+  async createBulkInstitution(
+    BulkInstitutions: CreateInstitutionBulkDto,
+    createBy: number,
+  ) {
     let institutionType: InstitutionType;
-    for (let institutionIterator of listBulInstitutions) {
-      let institution: Institution = new Institution();
-      institution.acronym = institutionIterator.acronym;
-      institution.name = institutionIterator.name;
-      institution.website_link = institutionIterator.website_link;
 
-      institutionType = await this.query(
-        `SELECT * from institution_types i where i.name like '%${institutionIterator.institution_type}%' and source_id = 1;`,
-      );
+    let institution: Institution = new Institution();
+    institution.acronym = BulkInstitutions.acronym;
+    institution.name = BulkInstitutions.name;
+    institution.website_link = BulkInstitutions.website_link;
 
-      institution.institution_type_id = institutionType[0].id;
-      institution.created_by = 3043;
-      institution = await this.save(institution);
-      await this.createInstitutionCountryBulk(
-        institutionIterator,
-        institution.id,
-        true,
-      );
-    }
+    institutionType = await this.query(
+      `SELECT * from institution_types i where i.name like '%${BulkInstitutions.institution_type}%' and source_id = 1;`,
+    );
 
-    return true;
+    institution.institution_type_id = institutionType[0].id;
+    institution.created_by = createBy;
+    institution = await this.save(institution);
+    await this.createInstitutionCountryBulk(
+      BulkInstitutions,
+      institution.id,
+      true,
+    );
+
+    return institution;
   }
 }

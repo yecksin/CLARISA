@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService, Message, MessageService } from 'primeng/api';
 import { ManageApiService } from '../../../../../../services/manage-api.service';
@@ -17,6 +17,8 @@ export class RequestInstitutionsFormComponent implements OnInit {
   selectedCity: any;
   display: boolean = false;
   @Input() informationContent: any;
+  @Input() codeContent: any;
+  @Output() codePartnerResolver=  new EventEmitter<any>();
   email: any;
   responseRejectOptions: any[];
   selectResponse: string;
@@ -25,6 +27,8 @@ export class RequestInstitutionsFormComponent implements OnInit {
   group: FormGroup;
   groups: FormGroup;
   citiesAux: any;
+  checked: boolean = true;
+
   constructor(
     private confirmationService: ConfirmationService,
     private formBuilder: FormBuilder,
@@ -90,13 +94,12 @@ export class RequestInstitutionsFormComponent implements OnInit {
             .postAceptedOrRejectRequest(this.groups.value)
             .subscribe(
               (resp) => {
-                this.messageService.add({
-                  severity: 'success',
-                  summary: 'Service Message',
-                  detail: 'Via MessageService',
-                });
+                
                 this.confirmationService.close();
                 this.display = false;
+                
+                this.codePartnerResolver.emit({id:this.codeContent, status:'rejected'});
+                
               },
               (err) => {
                 this.messageService.add({
@@ -173,6 +176,7 @@ export class RequestInstitutionsFormComponent implements OnInit {
             summary: 'Service Message',
             detail: 'Via MessageService',
           });
+          this.codePartnerResolver.emit({id:this.codeContent, status:'approved'});
         },
         (err) => {
           this.messageService.add({
@@ -182,7 +186,7 @@ export class RequestInstitutionsFormComponent implements OnInit {
           });
         }
       );
-    console.log(this.group.value);
+   
 
     this.displayConfirm = false;
   }

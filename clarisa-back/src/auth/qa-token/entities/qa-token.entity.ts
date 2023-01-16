@@ -28,6 +28,9 @@ export class QaToken {
   app_user: string;
 
   @Column()
+  official_code: string;
+
+  @Column()
   token: string;
 
   @Column()
@@ -35,4 +38,7 @@ export class QaToken {
 
   @Column()
   updated_at: Date;
+
+  @Column()
+  expiration_date: Date;
 }

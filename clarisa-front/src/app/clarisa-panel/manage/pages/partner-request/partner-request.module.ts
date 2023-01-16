@@ -37,6 +37,7 @@ import { GeneralInterceptorService } from '../../../../shared/interceptors/auth-
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MessageModule } from 'primeng/message';
 import { EditRequestComponent } from './components/content-partner/section/request-institutions-form/section/edit-request/edit-request.component';
+import { PartnerBulkComponent } from './components/content-partner/section/partner-bulk/partner-bulk.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { EditRequestComponent } from './components/content-partner/section/reque
     FormCountryOfficeComponent,
     RequestInstitutionsFormComponent,
     EditRequestComponent,
+    PartnerBulkComponent,
   ],
   imports: [
     CommonModule,

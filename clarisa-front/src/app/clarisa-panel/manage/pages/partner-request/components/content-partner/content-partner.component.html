@@ -67,6 +67,18 @@
                           >Pending Institution request(s)</a
                         >
                       </li>
+                      <li
+                        *ngIf="
+                          miStorage.hasOwnProperty('permissions') &&
+                          miStorage.permissions.indexOf(
+                            '/api/partner-requests/create-bulk'
+                          ) != -1
+                        "
+                      >
+                        <a href="#tab29" data-bs-toggle="tab"
+                          >Create Partner request Bulk</a
+                        >
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -102,10 +114,12 @@
 
                       <app-request-institutions-form
                         [informationContent]="item"
+                        [codeContent]="i"
                         *ngFor="
                           let item of informationParnertRequest
-                            | paginate : { itemsPerPage: 5, currentPage: p }
+                            | paginate : { itemsPerPage: 10, currentPage: p }; let i = index
                         "
+                        (codePartnerResolver)="partnerResolve($event)"
                       ></app-request-institutions-form>
                       <div
                         style="
@@ -122,6 +136,9 @@
                         ></pagination-controls>
                       </div>
                     </div>
+                    <div class="tab-pane" id="tab29">
+                      <app-partner-bulk></app-partner-bulk>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -133,3 +150,30 @@
     </div>
   </div>
 </div>
+
+
+<p-dialog
+  header="Status Process"
+  [(visible)]="statusProcess"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <p class="m-0"></p>
+  <div>
+    <p>{{menssageConfirmProcess}}</p>
+  </div>
+
+  <ng-template pTemplate="footer">
+    
+    <button
+      pButton
+      type="button"
+      label="Close"
+      style="border-radius: 30px; background-color: #eb5b47; color: white"
+      (click)="statusProcess = false"
+    ></button>
+  </ng-template>
+</p-dialog>

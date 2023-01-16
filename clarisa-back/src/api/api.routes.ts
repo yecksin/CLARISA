@@ -58,6 +58,7 @@ import { InstitutionDictionaryModule } from './institution-dictionary/institutio
 import { PartnerRequestModule } from './partner-request/partner-request.module';
 import { CountryOfficeRequestModule } from './country-office-request/country-office-request.module';
 import { PolicyTypeModule } from './policy-type/policy-type.module';
+import { BiParameterModule } from './bi-parameter/bi-parameter.module';
 
 export const apiRoutes = [
   {
@@ -299,5 +300,9 @@ export const apiRoutes = [
   {
     path: 'policy-types',
     module: PolicyTypeModule,
+  },
+  {
+    path: 'bi-parameters',
+    module: BiParameterModule,
   },
 ];

@@ -60,14 +60,4 @@ export class InstitutionController {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
   }
-
-  @Post('create-bulk')
-  @UseGuards(JwtAuthGuard, PermissionGuard)
-  async createBulk(@Body() createBulkInstitution: CreateInstitutionBulkDto[]) {
-    const result: boolean = await this.institutionService.createBulkInstitution(
-      createBulkInstitution,
-    );
-
-    return result;
-  }
 }

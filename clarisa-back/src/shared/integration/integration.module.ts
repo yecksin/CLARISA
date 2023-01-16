@@ -12,6 +12,8 @@ import { WorkpackageRepository } from 'src/api/workpackage/repositories/workpack
 import { IntegrationController } from './integration.controller';
 import { ApiOST } from './ost/api.ost';
 import { CronOST } from './ost/cron.ost';
+import { QaService } from './qa/qa.service';
+
 
 @Module({
   imports: [
@@ -30,7 +32,10 @@ import { CronOST } from './ost/cron.ost';
     InitiativeRepository,
     CountryRepository,
     RegionRepository,
+    QaService,
+    HttpModule
   ],
   controllers: [IntegrationController],
+  exports:[QaService]
 })
 export class IntegrationModule {}

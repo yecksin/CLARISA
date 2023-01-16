@@ -46,12 +46,4 @@ export class InstitutionService {
   async update(updateInitiativeDto: UpdateInstitutionDto[]) {
     return await this.institutionRepository.save(updateInitiativeDto);
   }
-
-  async createBulkInstitution(
-    institutionBulkCreate: CreateInstitutionBulkDto[],
-  ) {
-    return await this.institutionRepository.createBulkInstitution(
-      institutionBulkCreate,
-    );
-  }
 }

@@ -4,4 +4,5 @@ export class CreateQaTokenDto {
   email: string;
   misAcronym: string;
   appUser: string;
+  official_code: string;
 }

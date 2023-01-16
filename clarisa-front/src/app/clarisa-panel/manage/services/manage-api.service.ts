@@ -11,7 +11,7 @@ export class ManageApiService {
   constructor(private http: HttpClient) {}
 
   getAllUser() {
-    return this.http.get(`${this.urlApi}users`);
+    return this.http.get(`${this.urlApi}api/users`);
   }
 
   getAllPartnerRequest() {
@@ -52,8 +52,11 @@ export class ManageApiService {
   }
   postCreateBulkInstitution(bodyRequest) {
     return this.http.post(
-      `${this.urlApi}api/institutions/create-bulk`,
+      `${this.urlApi}api/partner-requests/create-bulk`,
       bodyRequest
     );
+  }
+  getAllMis() {
+    return this.http.get(`${this.urlApi}api/mises`);
   }
 }

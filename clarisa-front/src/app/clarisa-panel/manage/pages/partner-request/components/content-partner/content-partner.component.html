@@ -114,7 +114,7 @@
 
                       <app-request-institutions-form
                         [informationContent]="item"
-                        [codeContent]="i"
+                        [codeContent]="indexList(p,i)"
                         *ngFor="
                           let item of informationParnertRequest
                             | paginate : { itemsPerPage: 10, currentPage: p }; let i = index

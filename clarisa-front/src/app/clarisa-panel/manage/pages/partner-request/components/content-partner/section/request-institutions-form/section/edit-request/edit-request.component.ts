@@ -25,7 +25,7 @@ export class EditRequestComponent implements OnInit {
   subTypeTwo: any;
   selectSubTypeTwo: any;
   groupActualizar: any;
-  @Output() newItemEvent = new EventEmitter<boolean>();
+  @Output() newItemEvent = new EventEmitter<any>();
   constructor(
     private formBuilder: FormBuilder,
     private _manageApiService: ManageApiService
@@ -108,7 +108,7 @@ export class EditRequestComponent implements OnInit {
               this.loading = false;
             });
           }
-          console.log(this.parentInstitution);
+          
         });
     } else {
       this.type.push({});
@@ -119,7 +119,7 @@ export class EditRequestComponent implements OnInit {
             Number(this.informationContent.institutionTypeDTO.code)
           ) {
             this.type[0] = this.informationContent.institutionTypeDTO;
-            console.log('entre');
+            
           } else {
             this.type.push(re[i]);
           }
@@ -177,11 +177,10 @@ export class EditRequestComponent implements OnInit {
   }
 
   edit(value) {
-    console.log(value);
     let codeInstitution = 0;
     if (this.group.valid) {
       this.loading = true;
-      console.log(this.group.value.acronym);
+      
       if (typeof this.group.value.institutionTypeCode == 'object') {
         codeInstitution = Number(this.group.value.institutionTypeCode.code);
       } else if (this.group.value.institutionTypeCode == '') {
@@ -193,7 +192,7 @@ export class EditRequestComponent implements OnInit {
       } else {
         codeInstitution = this.group.value.institutionTypeCode;
       }
-      console.log(codeInstitution);
+      
 
       this.groupActualizar = this.formBuilder.group({
         id: this.informationContent.id,
@@ -210,12 +209,13 @@ export class EditRequestComponent implements OnInit {
         websiteLink: this.group.value.websiteLink,
         modification_justification: this.group.value.modification_justification,
       });
-      console.log(this.groupActualizar.value);
+    
       this._manageApiService
         .patchPartnerRequest(this.groupActualizar.value)
         .subscribe((re) => {
-          console.log(re);
-          this.addNewItem();
+          console.log(re.response);
+          
+          this.addNewItem(re.response);
           this.loading = false;
           alert('Update parnert request');
         });
@@ -227,7 +227,8 @@ export class EditRequestComponent implements OnInit {
     }
   }
 
-  addNewItem() {
-    this.newItemEvent.emit(false);
+  addNewItem(response:any) {
+    this.newItemEvent.emit({ status:false, infoPartner: response});
+    
   }
 }

@@ -100,7 +100,7 @@ export class RequestInstitutionsFormComponent implements OnInit {
                 this.confirmationService.close();
                 this.display = false;
                 
-                this.codePartnerResolver.emit({id:this.codeContent, status:'rejected'});
+                this.codePartnerResolver.emit({id:this.codeContent, status:'rejection'});
                 
               },
               (err) => {
@@ -178,7 +178,7 @@ export class RequestInstitutionsFormComponent implements OnInit {
             summary: 'Service Message',
             detail: 'Via MessageService',
           });
-          this.codePartnerResolver.emit({id:this.codeContent, status:'approved'});
+          this.codePartnerResolver.emit({id:this.codeContent, status:'approval'});
         },
         (err) => {
           this.messageService.add({

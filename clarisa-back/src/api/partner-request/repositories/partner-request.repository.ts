@@ -290,8 +290,12 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     partialPartnerRequest.category_2 = incomingPartnerRequest.category_2;
 
     let informationEmail: any = partialPartnerRequest;
+    partialPartnerRequest.is_active = false;
     partialPartnerRequest = await this.save(partialPartnerRequest);
-
+    partialPartnerRequest.partner_request_id = partialPartnerRequest.id; 
+    delete partialPartnerRequest.id;
+    partialPartnerRequest.is_active = true;
+    partialPartnerRequest = await this.save(partialPartnerRequest);
     partialPartnerRequest = await this.findOne({
       where: { id: partialPartnerRequest.id },
       relations: this.partnerRelations,
@@ -455,7 +459,9 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     let today = new Date();
    
     countryInstitution = await this.countryPartner.find();
-    institutionTypes = await this.institutionType.find();
+    institutionTypes = await this.institutionType.find({where:{
+      source_id: 1
+    }});
     for (let partnerRequestBulkIterator of partnerRequestBulk.listPartnerRequest) {
       let partnerRequests: PartnerRequest = new PartnerRequest();
       partnerRequests.partner_name = partnerRequestBulkIterator.name;
@@ -495,7 +501,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       }
       
       partnerRequests = await this.save(partnerRequests);
-      console.log(partnerRequests);
+      
       
       partnerCreate.push(partnerRequests);
     }

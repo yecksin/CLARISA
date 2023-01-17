@@ -283,45 +283,40 @@ export class InstitutionRepository extends Repository<Institution> {
   }
 
   async createInstitutionCountryBulk(
-    countryAndInstitution: CreateInstitutionBulkDto,
+    countryAndInstitution: number,
     id_institution: number,
     isHQ: boolean,
+    createBy: number
   ) {
     let institutionLocation: InstitutionLocation = new InstitutionLocation();
-    let countryInstitution: Country;
-    countryInstitution = await this.query(
-      `SELECT id from countries i where i.iso_alpha_2 like '%${countryAndInstitution.country}%';`,
-    );
-    institutionLocation.country_id = countryInstitution[0].id;
+    
+    institutionLocation.country_id = countryAndInstitution;
     institutionLocation.is_headquater = isHQ;
     institutionLocation.institution_id = id_institution;
-    institutionLocation.created_by = 3043;
+    institutionLocation.created_by = createBy;
 
     return this.institutionLocationRepository.save(institutionLocation);
   }
 
   async createBulkInstitution(
-    BulkInstitutions: CreateInstitutionBulkDto,
+    BulkInstitutions: PartnerRequest,
     createBy: number,
   ) {
     let institutionType: InstitutionType;
 
     let institution: Institution = new Institution();
     institution.acronym = BulkInstitutions.acronym;
-    institution.name = BulkInstitutions.name;
-    institution.website_link = BulkInstitutions.website_link;
+    institution.name = BulkInstitutions.partner_name;
+    institution.website_link = BulkInstitutions.web_page;
 
-    institutionType = await this.query(
-      `SELECT * from institution_types i where i.name like '%${BulkInstitutions.institution_type}%' and source_id = 1;`,
-    );
-
-    institution.institution_type_id = institutionType[0].id;
+    institution.institution_type_id = BulkInstitutions.institution_type_id;
     institution.created_by = createBy;
     institution = await this.save(institution);
     await this.createInstitutionCountryBulk(
-      BulkInstitutions,
+      BulkInstitutions.country_id,
       institution.id,
       true,
+      createBy
     );
 
     return institution;

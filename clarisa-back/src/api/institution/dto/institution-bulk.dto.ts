@@ -9,5 +9,5 @@ export class CreateInstitutionBulkDto extends AuditableDto {
 
   institution_type: string;
 
-  country: number;
+  country: string;
 }

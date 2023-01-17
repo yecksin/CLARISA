@@ -114,7 +114,7 @@
 
                       <app-request-institutions-form
                         [informationContent]="item"
-                        [codeContent]="i"
+                        [codeContent]="indexList(p,i)"
                         *ngFor="
                           let item of informationParnertRequest
                             | paginate : { itemsPerPage: 10, currentPage: p }; let i = index
@@ -153,7 +153,7 @@
 
 
 <p-dialog
-  header="Status Process"
+  header="Process status"
   [(visible)]="statusProcess"
   [modal]="true"
   [style]="{ width: '50vw' }"

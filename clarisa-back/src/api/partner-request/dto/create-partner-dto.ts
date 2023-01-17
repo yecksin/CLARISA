@@ -18,7 +18,7 @@ export class BulkPartnerRequestInstitution extends AuditableDto {
 
   institution_type: string;
 
-  country: number;
+  country: string;
 
   status: string;
 

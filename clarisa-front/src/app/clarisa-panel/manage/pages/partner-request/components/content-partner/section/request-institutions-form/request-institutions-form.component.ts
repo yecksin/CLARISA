@@ -56,6 +56,8 @@ export class RequestInstitutionsFormComponent implements OnInit {
       { name: 'Person - Not institution' },
       { name: 'Country - Office' },
     ];
+  
+  
   }
 
   showModalDialog() {
@@ -98,7 +100,7 @@ export class RequestInstitutionsFormComponent implements OnInit {
                 this.confirmationService.close();
                 this.display = false;
                 
-                this.codePartnerResolver.emit({id:this.codeContent, status:'rejected'});
+                this.codePartnerResolver.emit({id:this.codeContent, status:'rejection'});
                 
               },
               (err) => {
@@ -176,7 +178,7 @@ export class RequestInstitutionsFormComponent implements OnInit {
             summary: 'Service Message',
             detail: 'Via MessageService',
           });
-          this.codePartnerResolver.emit({id:this.codeContent, status:'approved'});
+          this.codePartnerResolver.emit({id:this.codeContent, status:'approval'});
         },
         (err) => {
           this.messageService.add({
@@ -191,7 +193,8 @@ export class RequestInstitutionsFormComponent implements OnInit {
     this.displayConfirm = false;
   }
 
-  addItem(newItem: boolean) {
-    this.displayModal = newItem;
+  addItem(newItem: any) {
+    this.displayModal = newItem.status;
+    this.codePartnerResolver.emit({id:this.codeContent, status:'Edited', partnerInfoNew:newItem.infoPartner});
   }
 }

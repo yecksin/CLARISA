@@ -24,7 +24,7 @@ import { RatingModule } from 'primeng/rating';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import {BadgeModule} from 'primeng/badge';
+
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -78,7 +78,6 @@ import { PartnerBulkComponent } from './components/content-partner/section/partn
     MessagesModule,
     MessageModule,
     NgxPaginationModule,
-    BadgeModule
   ],
   providers: [ConfirmationService],
 })

@@ -18,4 +18,8 @@ export class Glossary extends AuditableEntity {
 
   @Column()
   definition: string;
+
+  @Exclude({ toPlainOnly: true })
+  @Column({ type: 'tinyint' })
+  show_in_dashboard: boolean;
 }

@@ -158,7 +158,11 @@ export class CronOST {
               newWorkpackageCountriesDb.push(newWorkpackageCountry);
             } else {
               this.logger.warn(
-                `The country with ISO numeric code ${nwc.country_id} for the workpackage ${nwc} could not be found`,
+                `The country with ISO numeric code ${
+                  nwc.country_id
+                } for the workpackage ${JSON.stringify(
+                  nwc,
+                )} could not be found`,
               );
             }
           });
@@ -171,7 +175,11 @@ export class CronOST {
               newWorkpackageRegionsDb.push(newWorkpackageRegion);
             } else {
               this.logger.warn(
-                `The region with id ${nwr.region_id} for the workpackage ${nwr} could not be found`,
+                `The region with id ${
+                  nwr.region_id
+                } for the workpackage ${JSON.stringify(
+                  nwr,
+                )} could not be found`,
               );
             }
           });
@@ -204,7 +212,11 @@ export class CronOST {
               newWorkpackage.countries.push(newWorkpackageCountry);
             } else {
               this.logger.warn(
-                `The country with ISO-2 code ${nwc.country_id} for the workpackage ${nwc} could not be found`,
+                `The country with ISO-2 code ${
+                  nwc.country_id
+                } for the workpackage ${JSON.stringify(
+                  nwc,
+                )} could not be found`,
               );
             }
           });
@@ -221,7 +233,11 @@ export class CronOST {
               newWorkpackage.regions.push(newWorkpackageRegion);
             } else {
               this.logger.warn(
-                `The region with acronym ${nwr.acronym} for the workpackage ${nwr} could not be found`,
+                `The region with acronym ${
+                  nwr.acronym
+                } for the workpackage ${JSON.stringify(
+                  nwr,
+                )} could not be found`,
               );
             }
           });
@@ -229,7 +245,9 @@ export class CronOST {
           newWorkpackagesDb.push(newWorkpackage);
         } else {
           this.logger.warn(
-            `An initiative status could not be found in the DB for the workpackage ${nw}`,
+            `An initiative status could not be found in the DB for the workpackage ${JSON.stringify(
+              nw,
+            )}`,
           );
         }
       });
@@ -617,6 +635,7 @@ export class CronOST {
   ): InitiativeStage {
     const newInitiativeStage: InitiativeStage = new InitiativeStage();
 
+    newInitiativeStage.id = +ostInitiativeStage.initvStgId;
     newInitiativeStage.action_area_id = +ostInitiative.action_area_id;
     newInitiativeStage.created_at = new Date();
     newInitiativeStage.created_by = 3043; //clarisadmin

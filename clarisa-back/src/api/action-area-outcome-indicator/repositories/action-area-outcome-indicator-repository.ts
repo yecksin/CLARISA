@@ -80,7 +80,7 @@ export class ActionAreaOutcomeIndicatorRepository extends Repository<ActionAreaO
     ActionAreaOutcomeIndicatorRequestDto[]
   > {
     const impactAreaIndicatorsQuery = `
-      SELECT aa.id AS 'actionAreaId', aa.name AS 'actionAreaName', aao.id AS 'outcomeId', 
+      SELECT aai.id as 'actionAreaOutcomeIndicatorId', aa.id AS 'actionAreaId', aa.name AS 'actionAreaName', aao.id AS 'outcomeId', 
         aao.smo_code AS 'outcomeSMOcode', aao.outcome_statement AS 'outcomeStatement', 
           oi.id AS 'outcomeIndicatorId', oi.smo_code AS 'outcomeIndicatorsSMOcode', oi.outcome_indicator_statement AS 'outcomeIndicatorStatement'
         FROM action_area_outcome_indicators aai
@@ -105,7 +105,7 @@ export class ActionAreaOutcomeIndicatorRepository extends Repository<ActionAreaO
     if (option == 'inactive') isActiveOption = false;
 
     const impactAreaIndicatorsQuery = `
-    SELECT aa.id AS 'actionAreaId', aa.name AS 'actionAreaName', aao.id AS 'outcomeId', 
+    SELECT aai.id as 'actionAreaOutcomeIndicatorId', aa.id AS 'actionAreaId', aa.name AS 'actionAreaName', aao.id AS 'outcomeId', 
         aao.smo_code AS 'outcomeSMOcode', aao.outcome_statement AS 'outcomeStatement', 
           oi.id AS 'outcomeIndicatorId', oi.smo_code AS 'outcomeIndicatorsSMOcode',
                           oi.outcome_indicator_statement AS 'outcomeIndicatorStatement'

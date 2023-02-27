@@ -63,6 +63,7 @@ import { PartnerRequestModule } from './partner-request/partner-request.module';
 import { CountryOfficeRequestModule } from './country-office-request/country-office-request.module';
 import { PolicyTypeModule } from './policy-type/policy-type.module';
 import { BiParameterModule } from './bi-parameter/bi-parameter.module';
+import { OldInstitutionModule } from './old-institution/old-institution.module';
 
 @Module({
   controllers: [ApiController],
@@ -130,6 +131,7 @@ import { BiParameterModule } from './bi-parameter/bi-parameter.module';
     CountryOfficeRequestModule,
     PolicyTypeModule,
     BiParameterModule,
+    OldInstitutionModule,
   ],
 })
 export class ApiModule {}

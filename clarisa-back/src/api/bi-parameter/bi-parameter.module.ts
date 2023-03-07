@@ -6,7 +6,6 @@ import { BiParameter } from './entities/bi-parameter.entity';
 import { BiParameterRepository } from './repositories/bi-parameter.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([BiParameter])],
   controllers: [BiParameterController],
   providers: [BiParameterService, BiParameterRepository],
 })

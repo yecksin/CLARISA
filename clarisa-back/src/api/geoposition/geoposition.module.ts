@@ -3,10 +3,10 @@ import { GeopositionService } from './geoposition.service';
 import { GeopositionController } from './geoposition.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Geoposition } from './entities/geoposition.entity';
+import { GeopositionRepository } from './repositories/geoposition.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Geoposition])],
   controllers: [GeopositionController],
-  providers: [GeopositionService],
+  providers: [GeopositionService, GeopositionRepository],
 })
 export class GeopositionModule {}

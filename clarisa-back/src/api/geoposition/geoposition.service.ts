@@ -4,13 +4,11 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateGeopositionDto } from './dto/update-geoposition.dto';
 import { Geoposition } from './entities/geoposition.entity';
+import { GeopositionRepository } from './repositories/geoposition.repository';
 
 @Injectable()
 export class GeopositionService {
-  constructor(
-    @InjectRepository(Geoposition)
-    private geopositionsRepository: Repository<Geoposition>,
-  ) {}
+  constructor(private geopositionsRepository: GeopositionRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,

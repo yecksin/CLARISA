@@ -20,6 +20,9 @@ async function bootstrap() {
       console.error('Error during Data Source initialization', err);
     });
   await app.listen(env.APP_PORT);
+  console.log(
+    `Our server is running on port ${env.APP_PORT} - Please go to "http://localhost:${env.APP_PORT}/" to access the application`,
+  );
 
   /*TODO now that he know how to extract all the routes in the app
     dynamically, we would need to update the "permissions" table

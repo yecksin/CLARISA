@@ -3,10 +3,10 @@ import { EnvironmentalBenefitService } from './environmental-benefit.service';
 import { EnvironmentalBenefitController } from './environmental-benefit.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EnvironmentalBenefit } from './entities/environmental-benefit.entity';
+import { EnvironmentalBenefitRepository } from './repositories/environmental-benefit.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([EnvironmentalBenefit])],
   controllers: [EnvironmentalBenefitController],
-  providers: [EnvironmentalBenefitService],
+  providers: [EnvironmentalBenefitService, EnvironmentalBenefitRepository],
 })
 export class EnvironmentalBenefitModule {}

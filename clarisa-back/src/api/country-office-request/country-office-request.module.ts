@@ -12,15 +12,6 @@ import { CountryOfficeRequestRepository } from './repositories/country-office-re
 import { InstitutionLocation } from '../institution/entities/institution-location.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([
-      CountryOfficeRequest,
-      Mis,
-      User,
-      InstitutionLocation,
-    ]),
-    //InstitutionModule,
-  ],
   controllers: [CountryOfficeRequestController],
   providers: [
     CountryOfficeRequestService,

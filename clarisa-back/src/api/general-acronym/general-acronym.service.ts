@@ -4,13 +4,11 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateGeneralAcronymDto } from './dto/update-general-acronym.dto';
 import { GeneralAcronym } from './entities/general-acronym.entity';
+import { GeneralAcronymRepository } from './repositories/general-acronym.repository';
 
 @Injectable()
 export class GeneralAcronymService {
-  constructor(
-    @InjectRepository(GeneralAcronym)
-    private generalAcronimRepository: Repository<GeneralAcronym>,
-  ) {}
+  constructor(private generalAcronimRepository: GeneralAcronymRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,

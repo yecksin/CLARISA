@@ -3,10 +3,10 @@ import { CgiarEntityService } from './cgiar-entity.service';
 import { CgiarEntityController } from './cgiar-entity.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CgiarEntity } from './entities/cgiar-entity.entity';
+import { CgiarEntityRepository } from './repositories/cgiar-entity.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([CgiarEntity])],
   controllers: [CgiarEntityController],
-  providers: [CgiarEntityService],
+  providers: [CgiarEntityService, CgiarEntityRepository],
 })
 export class CgiarEntityModule {}

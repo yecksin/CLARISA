@@ -5,13 +5,11 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateAccountTypeDto } from './dto/update-account-type.dto';
 import { AccountType } from './entities/account-type.entity';
+import { AccountTypeRepository } from './repositories/account-type.repository';
 
 @Injectable()
 export class AccountTypeService {
-  constructor(
-    @InjectRepository(AccountType)
-    private accountTypesRepository: Repository<AccountType>,
-  ) {}
+  constructor(private accountTypesRepository: AccountTypeRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,

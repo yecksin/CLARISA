@@ -5,13 +5,11 @@ import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { SourceOption } from '../../shared/entities/enums/source-options';
 import { UpdateGeographicScopeDto } from './dto/update-geographic-scope.dto';
 import { GeographicScope } from './entities/geographic-scope.entity';
+import { GeographicScopeRepository } from './repositories/geographic-scope.repository';
 
 @Injectable()
 export class GeographicScopeService {
-  constructor(
-    @InjectRepository(GeographicScope)
-    private geographicScopesRepository: Repository<GeographicScope>,
-  ) {}
+  constructor(private geographicScopesRepository: GeographicScopeRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,

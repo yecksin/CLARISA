@@ -6,7 +6,6 @@ import { Country } from './entities/country.entity';
 import { CountryRepository } from './repositories/country.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Country])],
   controllers: [CountryController],
   providers: [CountryService, CountryRepository],
 })

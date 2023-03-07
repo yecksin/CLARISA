@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { ScienceGroup } from '../../science-group/entities/science-group.entity';
-import { UnitType } from './unit-type';
+import { UnitType } from './unit-type.entity';
 
 @Entity('units')
 export class Unit extends AuditableEntity {

@@ -4,13 +4,11 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateGovernanceTypeDto } from './dto/update-governance-type.dto';
 import { GovernanceType } from './entities/governance-type.entity';
+import { GovernanceTypeRepository } from './repositories/governance-type.repository';
 
 @Injectable()
 export class GovernanceTypeService {
-  constructor(
-    @InjectRepository(GovernanceType)
-    private governanceTypesRepository: Repository<GovernanceType>,
-  ) {}
+  constructor(private governanceTypesRepository: GovernanceTypeRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,

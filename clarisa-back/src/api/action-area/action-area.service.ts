@@ -5,13 +5,11 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateActionAreaDto } from './dto/update-action-area.dto';
 import { ActionArea } from './entities/action-area.entity';
+import { ActionAreaRepository } from './repositories/action-area.repository';
 
 @Injectable()
 export class ActionAreaService {
-  constructor(
-    @InjectRepository(ActionArea)
-    private actionAreasRepository: Repository<ActionArea>,
-  ) {}
+  constructor(private actionAreasRepository: ActionAreaRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,

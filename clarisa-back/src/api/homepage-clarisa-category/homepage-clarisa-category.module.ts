@@ -3,10 +3,13 @@ import { HomepageClarisaCategoryService } from './homepage-clarisa-category.serv
 import { HomepageClarisaCategoryController } from './homepage-clarisa-category.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { HomepageClarisaCategory } from './entities/homepage-clarisa-category.entity';
+import { HomepageClarisaCategoryRepository } from './repositories/homepage-clarisa-category.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([HomepageClarisaCategory])],
   controllers: [HomepageClarisaCategoryController],
-  providers: [HomepageClarisaCategoryService],
+  providers: [
+    HomepageClarisaCategoryService,
+    HomepageClarisaCategoryRepository,
+  ],
 })
 export class HomepageClarisaCategoryModule {}

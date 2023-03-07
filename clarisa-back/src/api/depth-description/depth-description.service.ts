@@ -4,13 +4,11 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateDepthDescriptionDto } from './dto/update-depth-description.dto';
 import { DepthDescription } from './entities/depth-description.entity';
+import { DepthDescriptionRepository } from './repositories/depth-description.repository';
 
 @Injectable()
 export class DepthDescriptionService {
-  constructor(
-    @InjectRepository(DepthDescription)
-    private depthDescriptionRepository: Repository<DepthDescription>,
-  ) {}
+  constructor(private depthDescriptionRepository: DepthDescriptionRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,

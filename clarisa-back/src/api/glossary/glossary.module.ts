@@ -3,10 +3,10 @@ import { GlossaryService } from './glossary.service';
 import { GlossaryController } from './glossary.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Glossary } from './entities/glossary.entity';
+import { GlossaryRepository } from './repositories/glossary.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Glossary])],
   controllers: [GlossaryController],
-  providers: [GlossaryService],
+  providers: [GlossaryService, GlossaryRepository],
 })
 export class GlossaryModule {}

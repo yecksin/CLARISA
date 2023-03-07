@@ -4,12 +4,12 @@ import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { Repository } from 'typeorm';
 import { UpdateEnvironmentalBenefitDto } from './dto/update-environmental-benefit.dto';
 import { EnvironmentalBenefit } from './entities/environmental-benefit.entity';
+import { EnvironmentalBenefitRepository } from './repositories/environmental-benefit.repository';
 
 @Injectable()
 export class EnvironmentalBenefitService {
   constructor(
-    @InjectRepository(EnvironmentalBenefit)
-    private environmentalBenefitsRepository: Repository<EnvironmentalBenefit>,
+    private environmentalBenefitsRepository: EnvironmentalBenefitRepository,
   ) {}
 
   async findAll(

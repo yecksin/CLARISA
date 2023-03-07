@@ -6,7 +6,6 @@ import { UserModule } from './user/user.module';
 import { ActionAreaModule } from './action-area/action-area.module';
 import { GlossaryModule } from './glossary/glossary.module';
 import { ImpactAreaModule } from './impact-area/impact-area.module';
-import { GlobalTargetsModule } from './global-targets/global-targets.module';
 import { StudyTypeModule } from './study-type/study-type.module';
 import { SdgModule } from './sdg/sdg.module';
 import { SdgTargetModule } from './sdg-target/sdg-target.module';
@@ -33,7 +32,6 @@ import { CgiarEntityModule } from './cgiar-entity/cgiar-entity.module';
 import { CgiarEntityTypeModule } from './cgiar-entity-type/cgiar-entity-type.module';
 import { SdgIndicatorModule } from './sdg-indicator/sdg-indicator.module';
 import { OneCgiarUserModule } from './one-cgiar-user/one-cgiar-user.module';
-import { BeneficiarieModule } from './beneficiarie/beneficiarie.module';
 import { BusinessCategoryModule } from './business-category/business-category.module';
 import { TechnicalFieldModule } from './technical-field/technical-field.module';
 import { InnovationTypeModule } from './innovation-type/innovation-type.module';
@@ -51,7 +49,6 @@ import { GeographicScopeModule } from './geographic-scope/geographic-scope.modul
 import { HomepageClarisaCategoryModule } from './homepage-clarisa-category/homepage-clarisa-category.module';
 import { HomepageClarisaEndpointModule } from './homepage-clarisa-endpoint/homepage-clarisa-endpoint.module';
 import { HomepageClarisaCategoryEndpointModule } from './homepage-clarisa-category-endpoint/homepage-clarisa-category-endpoint.module';
-import { EndOfInitiativeOutcomesModule } from './end-of-initiative-outcomes/end-of-initiative-outcomes.module';
 import { IntegrationModule } from 'src/shared/integration/integration.module';
 import { MisModule } from './mis/mis.module';
 import { InnovationCharacteristicModule } from './innovation-characteristic/innovation-characteristic.module';
@@ -64,6 +61,9 @@ import { CountryOfficeRequestModule } from './country-office-request/country-off
 import { PolicyTypeModule } from './policy-type/policy-type.module';
 import { BiParameterModule } from './bi-parameter/bi-parameter.module';
 import { OldInstitutionModule } from './old-institution/old-institution.module';
+import { GlobalTargetModule } from './global-target/global-target.module';
+import { BeneficiaryModule } from './beneficiary/beneficiary.module';
+import { EndOfInitiativeOutcomeModule } from './end-of-initiative-outcome/end-of-initiative-outcome.module';
 
 @Module({
   controllers: [ApiController],
@@ -74,7 +74,7 @@ import { OldInstitutionModule } from './old-institution/old-institution.module';
     ActionAreaModule,
     GlossaryModule,
     ImpactAreaModule,
-    GlobalTargetsModule,
+    GlobalTargetModule,
     StudyTypeModule,
     SdgModule,
     SdgTargetModule,
@@ -101,7 +101,7 @@ import { OldInstitutionModule } from './old-institution/old-institution.module';
     CgiarEntityTypeModule,
     SdgIndicatorModule,
     OneCgiarUserModule,
-    BeneficiarieModule,
+    BeneficiaryModule,
     BusinessCategoryModule,
     TechnicalFieldModule,
     InnovationTypeModule,
@@ -119,7 +119,7 @@ import { OldInstitutionModule } from './old-institution/old-institution.module';
     HomepageClarisaCategoryModule,
     HomepageClarisaEndpointModule,
     HomepageClarisaCategoryEndpointModule,
-    EndOfInitiativeOutcomesModule,
+    EndOfInitiativeOutcomeModule,
     IntegrationModule,
     MisModule,
     InnovationCharacteristicModule,

@@ -5,13 +5,11 @@ import { CgiarEntityTypeEnum } from '../../shared/entities/enums/cgiar-entity-ty
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateCgiarEntityTypeDto } from './dto/update-cgiar-entity-type.dto';
 import { CgiarEntityType } from './entities/cgiar-entity-type.entity';
+import { CgiarEntityTypeRepository } from './repositories/cgiar-entity-type.repository';
 
 @Injectable()
 export class CgiarEntityTypeService {
-  constructor(
-    @InjectRepository(CgiarEntityType)
-    private cgiarEntityTypeRepository: Repository<CgiarEntityType>,
-  ) {}
+  constructor(private cgiarEntityTypeRepository: CgiarEntityTypeRepository) {}
 
   private readonly defaultTypes = [
     CgiarEntityTypeEnum.CRP,

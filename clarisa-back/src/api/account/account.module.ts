@@ -6,7 +6,6 @@ import { Account } from './entities/account.entity';
 import { AccountRepository } from './repositories/account.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Account])],
   controllers: [AccountController],
   providers: [AccountService, AccountRepository],
 })

@@ -7,12 +7,6 @@ import { HomepageClarisaCategoryEndpoint } from './entities/homepage-clarisa-cat
 import { HomepageClarisaCategory } from '../homepage-clarisa-category/entities/homepage-clarisa-category.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([
-      HomepageClarisaCategoryEndpoint,
-      HomepageClarisaCategory,
-    ]),
-  ],
   controllers: [HomepageClarisaCategoryEndpointController],
   providers: [
     HomepageClarisaCategoryEndpointService,

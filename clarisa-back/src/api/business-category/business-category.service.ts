@@ -4,12 +4,12 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateBusinessCategoryDto } from './dto/update-business-category.dto';
 import { BusinessCategory } from './entities/business-category.entity';
+import { BusinessCategoryRepository } from './repositories/business-category.repository';
 
 @Injectable()
 export class BusinessCategoryService {
   constructor(
-    @InjectRepository(BusinessCategory)
-    private businessCategoriesRepository: Repository<BusinessCategory>,
+    private businessCategoriesRepository: BusinessCategoryRepository,
   ) {}
 
   async findAll(

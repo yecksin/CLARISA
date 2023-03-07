@@ -4,12 +4,12 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateHomepageClarisaEndpointDto } from './dto/update-homepage-clarisa-endpoint.dto';
 import { HomepageClarisaEndpoint } from './entities/homepage-clarisa-endpoint.entity';
+import { HomepageClarisaEndpointRepository } from './repositories/homepage-clarisa-endpoint.repository';
 
 @Injectable()
 export class HomepageClarisaEndpointService {
   constructor(
-    @InjectRepository(HomepageClarisaEndpoint)
-    private generalAcronimRepository: Repository<HomepageClarisaEndpoint>,
+    private generalAcronimRepository: HomepageClarisaEndpointRepository,
   ) {}
 
   async findAll(

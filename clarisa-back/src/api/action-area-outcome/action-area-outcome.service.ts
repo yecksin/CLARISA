@@ -6,12 +6,12 @@ import { ActionAreaOutcomeIndicatorRepository } from '../action-area-outcome-ind
 import { ActionAreaOutcomeDto } from './dto/action-area-outcome.dto';
 import { UpdateActionAreaOutcomeDto } from './dto/update-action-area-outcome.dto';
 import { ActionAreaOutcome } from './entities/action-area-outcome.entity';
+import { ActionAreaOutcomeRepository } from './repositories/action-area-outcome.repository';
 
 @Injectable()
 export class ActionAreaOutcomeService {
   constructor(
-    @InjectRepository(ActionAreaOutcome)
-    private actionAreaOutcomesRepository: Repository<ActionAreaOutcome>,
+    private actionAreaOutcomesRepository: ActionAreaOutcomeRepository,
     private actionAreaOutcomeIndicatorRepositort: ActionAreaOutcomeIndicatorRepository,
   ) {}
 

@@ -5,6 +5,7 @@ import { CgiarEntityTypeEnum } from '../../shared/entities/enums/cgiar-entity-ty
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateCgiarEntityDto } from './dto/update-cgiar-entity.dto';
 import { CgiarEntity } from './entities/cgiar-entity.entity';
+import { CgiarEntityRepository } from './repositories/cgiar-entity.repository';
 
 @Injectable()
 export class CgiarEntityService {
@@ -28,10 +29,7 @@ export class CgiarEntityService {
     },
   };
 
-  constructor(
-    @InjectRepository(CgiarEntity)
-    private cgiarEntityRepository: Repository<CgiarEntity>,
-  ) {}
+  constructor(private cgiarEntityRepository: CgiarEntityRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,

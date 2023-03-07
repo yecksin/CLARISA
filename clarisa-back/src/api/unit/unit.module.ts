@@ -4,7 +4,7 @@ import { UnitController } from './unit.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Unit } from './entities/unit.entity';
 import { UnitRepository } from './repositories/unit.repository';
-import { UnitType } from './entities/unit-type';
+import { UnitType } from './entities/unit-type.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Unit, UnitType])],

@@ -6,7 +6,6 @@ import { ActionAreaOutcomeIndicator } from './entities/action-area-outcome-indic
 import { ActionAreaOutcomeIndicatorRepository } from './repositories/action-area-outcome-indicator-repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ActionAreaOutcomeIndicator])],
   controllers: [ActionAreaOutcomeIndicatorController],
   providers: [
     ActionAreaOutcomeIndicatorService,

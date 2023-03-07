@@ -4,12 +4,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FindOptionsOrder, FindOptionsWhere, Repository } from 'typeorm';
 import { Glossary } from './entities/glossary.entity';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
+import { GlossaryRepository } from './repositories/glossary.repository';
 @Injectable()
 export class GlossaryService {
-  constructor(
-    @InjectRepository(Glossary)
-    private glossaryRepository: Repository<Glossary>,
-  ) {}
+  constructor(private glossaryRepository: GlossaryRepository) {}
 
   findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,

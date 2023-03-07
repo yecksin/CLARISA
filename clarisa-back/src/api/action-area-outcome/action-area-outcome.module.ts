@@ -4,10 +4,14 @@ import { ActionAreaOutcomeController } from './action-area-outcome.controller';
 import { ActionAreaOutcome } from './entities/action-area-outcome.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ActionAreaOutcomeIndicatorRepository } from '../action-area-outcome-indicator/repositories/action-area-outcome-indicator-repository';
+import { ActionAreaOutcomeRepository } from './repositories/action-area-outcome.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ActionAreaOutcome])],
   controllers: [ActionAreaOutcomeController],
-  providers: [ActionAreaOutcomeService, ActionAreaOutcomeIndicatorRepository],
+  providers: [
+    ActionAreaOutcomeService,
+    ActionAreaOutcomeRepository,
+    ActionAreaOutcomeIndicatorRepository,
+  ],
 })
 export class ActionAreaOutcomeModule {}

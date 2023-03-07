@@ -3,10 +3,13 @@ import { InnovationReadinessLevelService } from './innovation-readiness-level.se
 import { InnovationReadinessLevelController } from './innovation-readiness-level.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { InnovationReadinessLevel } from './entities/innovation-readiness-level.entity';
+import { InnovationReadinessLevelRepository } from './repositories/innovation-readiness-level.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([InnovationReadinessLevel])],
   controllers: [InnovationReadinessLevelController],
-  providers: [InnovationReadinessLevelService],
+  providers: [
+    InnovationReadinessLevelService,
+    InnovationReadinessLevelRepository,
+  ],
 })
 export class InnovationReadinessLevelModule {}

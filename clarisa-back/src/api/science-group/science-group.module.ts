@@ -6,7 +6,6 @@ import { ScienceGroup } from './entities/science-group.entity';
 import { ScienceGroupRepository } from './repositories/science-group.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ScienceGroup])],
   controllers: [ScienceGroupController],
   providers: [ScienceGroupService, ScienceGroupRepository],
 })

@@ -4,12 +4,12 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateProjectedBenefitWeightDescriptionDto } from './dto/update-projected-benefit-weight-description.dto';
 import { ProjectedBenefitWeightDescription } from './entities/projected-benefit-weight-description.entity';
+import { ProjectedBenefitWeightDescriptionRepository } from './repositories/projected-benefit-weight-description.repository';
 
 @Injectable()
 export class ProjectedBenefitWeightDescriptionService {
   constructor(
-    @InjectRepository(ProjectedBenefitWeightDescription)
-    private projectedBenefitWeightDescriptionRepository: Repository<ProjectedBenefitWeightDescription>,
+    private projectedBenefitWeightDescriptionRepository: ProjectedBenefitWeightDescriptionRepository,
   ) {}
 
   async findAll(

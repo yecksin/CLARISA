@@ -12,7 +12,7 @@ import {
   UseInterceptors,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
-import { SourcesService } from './sources.service';
+import { SourceService } from './source.service';
 import { UpdateSourceDto } from './dto/update-source.dto';
 import { Response } from 'express';
 import { Source } from './entities/source.entity';
@@ -20,8 +20,8 @@ import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
-export class SourcesController {
-  constructor(private readonly sourcesService: SourcesService) {}
+export class SourceController {
+  constructor(private readonly sourcesService: SourceService) {}
 
   @Get()
   async findAll(@Query('show') show: FindAllOptions) {

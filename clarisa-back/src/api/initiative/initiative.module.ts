@@ -8,7 +8,6 @@ import { InitiativeStage } from './entities/initiative-status.entity';
 import { Stage } from './entities/status.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Initiative, InitiativeStage, Stage])],
   controllers: [InitiativeController],
   providers: [InitiativeService, InitiativeRepository],
 })

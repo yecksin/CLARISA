@@ -3,10 +3,13 @@ import { InnovationCharacteristicService } from './innovation-characteristic.ser
 import { InnovationCharacteristicController } from './innovation-characteristic.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { InnovationCharacteristic } from './entities/innovation-characteristic.entity';
+import { InnovationCharacteristicRepository } from './repositories/innovation-characteristic.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([InnovationCharacteristic])],
   controllers: [InnovationCharacteristicController],
-  providers: [InnovationCharacteristicService],
+  providers: [
+    InnovationCharacteristicService,
+    InnovationCharacteristicRepository,
+  ],
 })
 export class InnovationCharacteristicModule {}

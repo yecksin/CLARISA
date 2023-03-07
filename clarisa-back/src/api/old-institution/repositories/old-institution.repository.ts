@@ -7,13 +7,13 @@ import {
   MoreThanOrEqual,
   Repository,
 } from 'typeorm';
-import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
-import { InstitutionTypeDto } from '../institution-type/dto/institution-type.dto';
-import { InstitutionCountryDto } from '../institution/dto/institution-country.dto';
-import { InstitutionSimpleDto } from '../institution/dto/institution-simple.dto';
-import { InstitutionDto } from '../institution/dto/institution.dto';
-import { InstitutionLocation } from '../institution/entities/institution-location.entity';
-import { OldInstitution } from './entities/old-institution.entity';
+import { FindAllOptions } from '../../../shared/entities/enums/find-all-options';
+import { InstitutionTypeDto } from '../../institution-type/dto/institution-type.dto';
+import { InstitutionCountryDto } from '../../institution/dto/institution-country.dto';
+import { InstitutionSimpleDto } from '../../institution/dto/institution-simple.dto';
+import { InstitutionDto } from '../../institution/dto/institution.dto';
+import { InstitutionLocation } from '../../institution/entities/institution-location.entity';
+import { OldInstitution } from '../entities/old-institution.entity';
 
 @Injectable()
 export class OldInstitutionRepository extends Repository<OldInstitution> {

@@ -5,13 +5,11 @@ import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { SourceOption } from '../../shared/entities/enums/source-options';
 import { UpdatePolicyStageDto } from './dto/update-policy-stage.dto';
 import { PolicyStage } from './entities/policy-stage.entity';
+import { PolicyStageRepository } from './repositories/policy-stage.repository';
 
 @Injectable()
 export class PolicyStageService {
-  constructor(
-    @InjectRepository(PolicyStage)
-    private policyStagesRepository: Repository<PolicyStage>,
-  ) {}
+  constructor(private policyStagesRepository: PolicyStageRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,

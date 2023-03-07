@@ -4,13 +4,11 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateSdgIndicatorDto } from './dto/update-sdg-indicator.dto';
 import { SdgIndicator } from './entities/sdg-indicator.entity';
+import { SdgIndicatorRepository } from './repositories/sdg-indicator.repository';
 
 @Injectable()
 export class SdgIndicatorService {
-  constructor(
-    @InjectRepository(SdgIndicator)
-    private sdgIndicatorRepository: Repository<SdgIndicator>,
-  ) {}
+  constructor(private sdgIndicatorRepository: SdgIndicatorRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,

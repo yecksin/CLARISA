@@ -3,10 +3,13 @@ import { ProjectedBenefitWeightingService } from './projected-benefit-weighting.
 import { ProjectedBenefitWeightingController } from './projected-benefit-weighting.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProjectedBenefitWeighting } from './entities/projected-benefit-weighting.entity';
+import { ProjectedBenefitWeightingRepository } from './repositories/projected-benefit-weighting.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ProjectedBenefitWeighting])],
   controllers: [ProjectedBenefitWeightingController],
-  providers: [ProjectedBenefitWeightingService],
+  providers: [
+    ProjectedBenefitWeightingService,
+    ProjectedBenefitWeightingRepository,
+  ],
 })
 export class ProjectedBenefitWeightingModule {}

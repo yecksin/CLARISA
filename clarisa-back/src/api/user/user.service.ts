@@ -4,13 +4,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
+import { UserRepository } from './repositories/user.repository';
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectRepository(User)
-    private usersRepository: Repository<User>,
-  ) {}
+  constructor(private usersRepository: UserRepository) {}
 
   findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,

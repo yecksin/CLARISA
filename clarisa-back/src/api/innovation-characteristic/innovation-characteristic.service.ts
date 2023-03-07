@@ -4,12 +4,12 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateInnovationCharacteristicDto } from './dto/update-innovation-characteristic.dto';
 import { InnovationCharacteristic } from './entities/innovation-characteristic.entity';
+import { InnovationCharacteristicRepository } from './repositories/innovation-characteristic.repository';
 
 @Injectable()
 export class InnovationCharacteristicService {
   constructor(
-    @InjectRepository(InnovationCharacteristic)
-    private innovationCharacteristicsRepository: Repository<InnovationCharacteristic>,
+    private innovationCharacteristicsRepository: InnovationCharacteristicRepository,
   ) {}
 
   async findAll(

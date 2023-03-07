@@ -5,12 +5,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { InstitutionDictionary } from './entities/institution-dictionary.entity';
 import { InstitutionRepository } from '../institution/repositories/institution.repository';
 import { InstitutionLocation } from '../institution/entities/institution-location.entity';
+import { InstitutionDictionaryRepository } from './repositories/institution-dictionary.repository';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([InstitutionDictionary, InstitutionLocation]),
-  ],
   controllers: [InstitutionDictionaryController],
-  providers: [InstitutionDictionaryService, InstitutionRepository],
+  providers: [
+    InstitutionDictionaryService,
+    InstitutionDictionaryRepository,
+    InstitutionRepository,
+  ],
 })
 export class InstitutionDictionaryModule {}

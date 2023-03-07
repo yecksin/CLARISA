@@ -6,7 +6,6 @@ import { ImpactAreaModule } from './impact-area/impact-area.module';
 import { StudyTypeModule } from './study-type/study-type.module';
 import { SdgModule } from './sdg/sdg.module';
 import { SdgTargetModule } from './sdg-target/sdg-target.module';
-import { ImpactAreaIndicatorsModule } from './impact-area-indicators/impact-area-indicators.module';
 import { ProjectedBenefitProbabilityModule } from './projected-benefit-probability/projected-benefit-probability.module';
 import { ProjectedBenefitModule } from './projected-benefit/projected-benefit.module';
 import { ActionAreaOutcomeModule } from './action-area-outcome/action-area-outcome.module';
@@ -14,7 +13,6 @@ import { OutcomeIndicatorModule } from './outcome-indicator/outcome-indicator.mo
 import { ActionAreaOutcomeIndicatorModule } from './action-area-outcome-indicator/action-area-outcome-indicator.module';
 import { CountryModule } from './country/country.module';
 import { GeopositionModule } from './geoposition/geoposition.module';
-import { SourcesModule } from './sources/sources.module';
 import { RegionTypeModule } from './region-type/region-type.module';
 import { RegionModule } from './region/region.module';
 import { DepthDescriptionModule } from './depth-description/depth-description.module';
@@ -60,6 +58,8 @@ import { OldInstitutionModule } from './old-institution/old-institution.module';
 import { GlobalTargetModule } from './global-target/global-target.module';
 import { BeneficiaryModule } from './beneficiary/beneficiary.module';
 import { EndOfInitiativeOutcomeModule } from './end-of-initiative-outcome/end-of-initiative-outcome.module';
+import { ImpactAreaIndicatorModule } from './impact-area-indicator/impact-area-indicator.module';
+import { SourceModule } from './source/source.module';
 
 export const apiRoutes = [
   {
@@ -100,7 +100,7 @@ export const apiRoutes = [
   },
   {
     path: 'impact-area-indicators',
-    module: ImpactAreaIndicatorsModule,
+    module: ImpactAreaIndicatorModule,
   },
   {
     path: 'projected-benefit-probabilities',
@@ -132,7 +132,7 @@ export const apiRoutes = [
   },
   {
     path: 'sources',
-    module: SourcesModule,
+    module: SourceModule,
   },
   {
     path: 'region-types',

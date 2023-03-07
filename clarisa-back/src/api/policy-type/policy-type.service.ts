@@ -6,13 +6,11 @@ import { SourceOption } from '../../shared/entities/enums/source-options';
 import { CreatePolicyTypeDto } from './dto/create-policy-type.dto';
 import { UpdatePolicyTypeDto } from './dto/update-policy-type.dto';
 import { PolicyType } from './entities/policy-type.entity';
+import { PolicyTypeRepository } from './repositories/policy-type.repository';
 
 @Injectable()
 export class PolicyTypeService {
-  constructor(
-    @InjectRepository(PolicyType)
-    private policyTypesRepository: Repository<PolicyType>,
-  ) {}
+  constructor(private policyTypesRepository: PolicyTypeRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,

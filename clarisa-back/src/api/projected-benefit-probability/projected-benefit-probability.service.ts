@@ -4,12 +4,12 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateProjectedBenefitProbabilityDto } from './dto/update-projected-benefit-probability.dto';
 import { ProjectedBenefitProbability } from './entities/projected-benefit-probability.entity';
+import { ProjectedBenefitProbabilityRepository } from './repositories/projected-benefit-probability.repository';
 
 @Injectable()
 export class ProjectedBenefitProbabilityService {
   constructor(
-    @InjectRepository(ProjectedBenefitProbability)
-    private projectedBenefitProbabilitysRepository: Repository<ProjectedBenefitProbability>,
+    private projectedBenefitProbabilitysRepository: ProjectedBenefitProbabilityRepository,
   ) {}
 
   async findAll(

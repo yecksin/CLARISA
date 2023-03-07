@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { UpdateImpactAreaIndicatorDto } from './dto/update-impact-area-indicator.dto';
 import { ImpactAreaIndicator } from './entities/impact-area-indicator.entity';
 import { ImpactAreaIndicatorDto } from './dto/impact-area-indicator.dto';
-import { ImpactAreaIndicatorRepository } from './repositories/impact-area-indicators-repository';
+import { ImpactAreaIndicatorRepository } from './repositories/impact-area-indicator.repository';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Injectable()
-export class ImpactAreaIndicatorsService {
+export class ImpactAreaIndicatorService {
   constructor(
-    private impactAreaIndicatorsRepository: ImpactAreaIndicatorRepository,
+    private impactAreaIndicatorRepository: ImpactAreaIndicatorRepository,
   ) {}
 
   async findAll(
@@ -18,20 +18,20 @@ export class ImpactAreaIndicatorsService {
       throw Error('?!');
     }
 
-    return this.impactAreaIndicatorsRepository.findAllImpactAreaIndicators(
+    return this.impactAreaIndicatorRepository.findAllImpactAreaIndicators(
       option,
     );
   }
 
   async findOne(id: number): Promise<ImpactAreaIndicator> {
-    return await this.impactAreaIndicatorsRepository.findOneBy({
+    return await this.impactAreaIndicatorRepository.findOneBy({
       id,
       is_active: true,
     });
   }
 
   async update(updateImpactaAreaIndicator: UpdateImpactAreaIndicatorDto[]) {
-    return await this.impactAreaIndicatorsRepository.save(
+    return await this.impactAreaIndicatorRepository.save(
       updateImpactaAreaIndicator,
     );
   }

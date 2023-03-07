@@ -5,12 +5,12 @@ import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { SourceOption } from '../../shared/entities/enums/source-options';
 import { UpdateInnovationReadinessLevelDto } from './dto/update-innovation-readiness-level.dto';
 import { InnovationReadinessLevel } from './entities/innovation-readiness-level.entity';
+import { InnovationReadinessLevelRepository } from './repositories/innovation-readiness-level.repository';
 
 @Injectable()
 export class InnovationReadinessLevelService {
   constructor(
-    @InjectRepository(InnovationReadinessLevel)
-    private innovationReadinessLevelRepository: Repository<InnovationReadinessLevel>,
+    private innovationReadinessLevelRepository: InnovationReadinessLevelRepository,
   ) {}
 
   async findAll(

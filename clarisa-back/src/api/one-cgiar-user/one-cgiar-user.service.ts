@@ -4,13 +4,11 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateOneCgiarUserDto } from './dto/update-one-cgiar-user.dto';
 import { OneCgiarUser } from './entities/one-cgiar-user.entity';
+import { OneCgiarUserRepository } from './repositories/one-cgiar-user.repository';
 
 @Injectable()
 export class OneCgiarUserService {
-  constructor(
-    @InjectRepository(OneCgiarUser)
-    private oneCgiarUserRepository: Repository<OneCgiarUser>,
-  ) {}
+  constructor(private oneCgiarUserRepository: OneCgiarUserRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,

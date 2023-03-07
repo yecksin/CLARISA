@@ -6,13 +6,13 @@ import { InstitutionRepository } from '../institution/repositories/institution.r
 import { InstitutionDictionaryDto } from './dto/institution-dictionary.dto';
 import { UpdateInstitutionDictionaryDto } from './dto/update-institution-dictionary.dto';
 import { InstitutionDictionary } from './entities/institution-dictionary.entity';
+import { InstitutionDictionaryRepository } from './repositories/institution-dictionary.repository';
 
 @Injectable()
 export class InstitutionDictionaryService {
   constructor(
     private institutionRepository: InstitutionRepository,
-    @InjectRepository(InstitutionDictionary)
-    private institutionDictionaryRepository: Repository<InstitutionDictionary>,
+    private institutionDictionaryRepository: InstitutionDictionaryRepository,
   ) {}
 
   async findAll(

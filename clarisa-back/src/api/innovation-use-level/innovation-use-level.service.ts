@@ -4,12 +4,12 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateInnovationUseLevelDto } from './dto/update-innovation-use-level.dto';
 import { InnovationUseLevel } from './entities/innovation-use-level.entity';
+import { InnovationUseLevelRepository } from './repositories/innovation-use-level.repository';
 
 @Injectable()
 export class InnovationUseLevelService {
   constructor(
-    @InjectRepository(InnovationUseLevel)
-    private innovationUseLevelRepository: Repository<InnovationUseLevel>,
+    private innovationUseLevelRepository: InnovationUseLevelRepository,
   ) {}
 
   async findAll(

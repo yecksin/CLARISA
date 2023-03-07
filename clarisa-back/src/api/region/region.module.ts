@@ -6,7 +6,6 @@ import { Region } from './entities/region.entity';
 import { RegionRepository } from './repositories/region.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Region])],
   controllers: [RegionController],
   providers: [RegionService, RegionRepository],
 })

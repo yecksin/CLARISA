@@ -5,7 +5,7 @@ import { InstitutionDto } from '../institution/dto/institution.dto';
 import { CreateOldInstitutionDto } from './dto/create-old-institution.dto';
 import { UpdateOldInstitutionDto } from './dto/update-old-institution.dto';
 import { OldInstitution } from './entities/old-institution.entity';
-import { OldInstitutionRepository } from './old-institution.repository';
+import { OldInstitutionRepository } from './repositories/old-institution.repository';
 
 @Injectable()
 export class OldInstitutionService {

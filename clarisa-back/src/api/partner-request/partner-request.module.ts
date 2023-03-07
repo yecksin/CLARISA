@@ -14,15 +14,6 @@ import { MailUtil } from 'src/shared/utils/mailer.util';
 import { InstitutionTypeRepository } from '../institution-type/repositories/institution-type.repository';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([
-      PartnerRequest,
-      InstitutionType,
-      InstitutionLocation,
-      Mis,
-      User,
-    ]),
-  ],
   controllers: [PartnerRequestController],
   providers: [
     PartnerRequestService,
@@ -30,7 +21,7 @@ import { InstitutionTypeRepository } from '../institution-type/repositories/inst
     CountryRepository,
     InstitutionRepository,
     MailUtil,
-    InstitutionTypeRepository
+    InstitutionTypeRepository,
   ],
 })
 export class PartnerRequestModule {}

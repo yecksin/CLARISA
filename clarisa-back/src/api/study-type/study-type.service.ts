@@ -4,13 +4,11 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateStudyTypeDto } from './dto/update-study-type.dto';
 import { StudyType } from './entities/study-type.entity';
+import { StudyTypeRepository } from './repositories/study-type.repository';
 
 @Injectable()
 export class StudyTypeService {
-  constructor(
-    @InjectRepository(StudyType)
-    private studyTypesRepository: Repository<StudyType>,
-  ) {}
+  constructor(private studyTypesRepository: StudyTypeRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,

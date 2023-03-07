@@ -3,10 +3,13 @@ import { TechnologyDevelopmentStageService } from './technology-development-stag
 import { TechnologyDevelopmentStageController } from './technology-development-stage.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TechnologyDevelopmentStage } from './entities/technology-development-stage.entity';
+import { TechnologyDevelopmentStageRepository } from './repositories/technology-development-stage.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([TechnologyDevelopmentStage])],
   controllers: [TechnologyDevelopmentStageController],
-  providers: [TechnologyDevelopmentStageService],
+  providers: [
+    TechnologyDevelopmentStageService,
+    TechnologyDevelopmentStageRepository,
+  ],
 })
 export class TechnologyDevelopmentStageModule {}

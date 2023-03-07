@@ -4,12 +4,12 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateTechnologyDevelopmentStageDto } from './dto/update-technology-development-stage.dto';
 import { TechnologyDevelopmentStage } from './entities/technology-development-stage.entity';
+import { TechnologyDevelopmentStageRepository } from './repositories/technology-development-stage.repository';
 
 @Injectable()
 export class TechnologyDevelopmentStageService {
   constructor(
-    @InjectRepository(TechnologyDevelopmentStage)
-    private technologyDevelopmentStagesRepository: Repository<TechnologyDevelopmentStage>,
+    private technologyDevelopmentStagesRepository: TechnologyDevelopmentStageRepository,
   ) {}
 
   async findAll(

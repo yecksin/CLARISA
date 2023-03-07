@@ -21,6 +21,7 @@ import { InstitutionLocation } from '../entities/institution-location.entity';
 import { Institution } from '../entities/institution.entity';
 import { InstitutionType } from '../../institution-type/entities/institution-type.entity';
 import { Country } from '../../country/entities/country.entity';
+import { InstitutionLocationRepository } from './institution-location.repository';
 
 @Injectable()
 export class InstitutionRepository extends Repository<Institution> {
@@ -33,8 +34,7 @@ export class InstitutionRepository extends Repository<Institution> {
 
   constructor(
     private dataSource: DataSource,
-    @InjectRepository(InstitutionLocation)
-    private institutionLocationRepository: Repository<InstitutionLocation>,
+    private institutionLocationRepository: InstitutionLocationRepository,
   ) {
     super(Institution, dataSource.createEntityManager());
   }
@@ -286,10 +286,10 @@ export class InstitutionRepository extends Repository<Institution> {
     countryAndInstitution: number,
     id_institution: number,
     isHQ: boolean,
-    createBy: number
+    createBy: number,
   ) {
     let institutionLocation: InstitutionLocation = new InstitutionLocation();
-    
+
     institutionLocation.country_id = countryAndInstitution;
     institutionLocation.is_headquater = isHQ;
     institutionLocation.institution_id = id_institution;
@@ -316,7 +316,7 @@ export class InstitutionRepository extends Repository<Institution> {
       BulkInstitutions.country_id,
       institution.id,
       true,
-      createBy
+      createBy,
     );
 
     return institution;

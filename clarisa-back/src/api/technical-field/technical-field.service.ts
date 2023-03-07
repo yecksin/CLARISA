@@ -4,13 +4,11 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateTechnicalFieldDto } from './dto/update-technical-field.dto';
 import { TechnicalField } from './entities/technical-field.entity';
+import { TechnicalFieldRepository } from './repositories/technical-field.repository';
 
 @Injectable()
 export class TechnicalFieldService {
-  constructor(
-    @InjectRepository(TechnicalField)
-    private technicalFieldsRepository: Repository<TechnicalField>,
-  ) {}
+  constructor(private technicalFieldsRepository: TechnicalFieldRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,

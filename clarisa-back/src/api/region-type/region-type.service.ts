@@ -4,13 +4,11 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateRegionTypeDto } from './dto/update-region-type.dto';
 import { RegionType } from './entities/region-type.entity';
+import { RegionTypeRepository } from './repositories/region-type.repository';
 
 @Injectable()
 export class RegionTypeService {
-  constructor(
-    @InjectRepository(RegionType)
-    private regionTypesRepository: Repository<RegionType>,
-  ) {}
+  constructor(private regionTypesRepository: RegionTypeRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,

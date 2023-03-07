@@ -6,7 +6,6 @@ import { InstitutionType } from './entities/institution-type.entity';
 import { InstitutionTypeRepository } from './repositories/institution-type.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([InstitutionType])],
   controllers: [InstitutionTypeController],
   providers: [InstitutionTypeService, InstitutionTypeRepository],
 })

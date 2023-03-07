@@ -9,13 +9,11 @@ import { ImpactAreaModule } from './impact-area/impact-area.module';
 import { StudyTypeModule } from './study-type/study-type.module';
 import { SdgModule } from './sdg/sdg.module';
 import { SdgTargetModule } from './sdg-target/sdg-target.module';
-import { ImpactAreaIndicatorsModule } from './impact-area-indicators/impact-area-indicators.module';
 import { ProjectedBenefitProbabilityModule } from './projected-benefit-probability/projected-benefit-probability.module';
 import { ProjectedBenefitModule } from './projected-benefit/projected-benefit.module';
 import { ActionAreaOutcomeModule } from './action-area-outcome/action-area-outcome.module';
 import { OutcomeIndicatorModule } from './outcome-indicator/outcome-indicator.module';
 import { ActionAreaOutcomeIndicatorModule } from './action-area-outcome-indicator/action-area-outcome-indicator.module';
-import { SourcesModule } from './sources/sources.module';
 import { GeopositionModule } from './geoposition/geoposition.module';
 import { RegionTypeModule } from './region-type/region-type.module';
 import { RegionModule } from './region/region.module';
@@ -64,6 +62,8 @@ import { OldInstitutionModule } from './old-institution/old-institution.module';
 import { GlobalTargetModule } from './global-target/global-target.module';
 import { BeneficiaryModule } from './beneficiary/beneficiary.module';
 import { EndOfInitiativeOutcomeModule } from './end-of-initiative-outcome/end-of-initiative-outcome.module';
+import { ImpactAreaIndicatorModule } from './impact-area-indicator/impact-area-indicator.module';
+import { SourceModule } from './source/source.module';
 
 @Module({
   controllers: [ApiController],
@@ -78,13 +78,13 @@ import { EndOfInitiativeOutcomeModule } from './end-of-initiative-outcome/end-of
     StudyTypeModule,
     SdgModule,
     SdgTargetModule,
-    ImpactAreaIndicatorsModule,
+    ImpactAreaIndicatorModule,
     ProjectedBenefitProbabilityModule,
     ProjectedBenefitModule,
     ActionAreaOutcomeModule,
     OutcomeIndicatorModule,
     ActionAreaOutcomeIndicatorModule,
-    SourcesModule,
+    SourceModule,
     CountryModule,
     GeopositionModule,
     RegionTypeModule,

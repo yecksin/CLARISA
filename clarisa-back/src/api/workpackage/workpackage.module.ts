@@ -6,7 +6,6 @@ import { Workpackage } from './entities/workpackage.entity';
 import { WorkpackageRepository } from './repositories/workpackage.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Workpackage])],
   controllers: [WorkpackageController],
   providers: [WorkpackageService, WorkpackageRepository],
 })

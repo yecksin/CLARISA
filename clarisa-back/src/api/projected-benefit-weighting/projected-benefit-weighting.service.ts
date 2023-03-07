@@ -4,12 +4,12 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateProjectedBenefitWeightingDto } from './dto/update-projected-benefit-weighting.dto';
 import { ProjectedBenefitWeighting } from './entities/projected-benefit-weighting.entity';
+import { ProjectedBenefitWeightingRepository } from './repositories/projected-benefit-weighting.repository';
 
 @Injectable()
 export class ProjectedBenefitWeightingService {
   constructor(
-    @InjectRepository(ProjectedBenefitWeighting)
-    private ProjectedBenefitWeightingRepository: Repository<ProjectedBenefitWeighting>,
+    private ProjectedBenefitWeightingRepository: ProjectedBenefitWeightingRepository,
   ) {}
 
   async findAll(

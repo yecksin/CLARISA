@@ -5,7 +5,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 @Entity('geographic_scopes')
 export class GeographicScope extends AuditableEntity {
   @Expose({ name: 'code' })
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

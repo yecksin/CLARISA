@@ -3,7 +3,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 
 @Entity('innovation_use_levels')
 export class InnovationUseLevel extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

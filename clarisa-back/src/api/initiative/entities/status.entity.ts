@@ -3,7 +3,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 
 @Entity('submission_tool_stages')
 export class Stage extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

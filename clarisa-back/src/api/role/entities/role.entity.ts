@@ -1,10 +1,17 @@
-import { User } from 'src/api/user/entities/user.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  OneToMany,
+} from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { UserRole } from '../../user/entities/user-role.entity';
+import { User } from '../../user/entities/user.entity';
 
 @Entity('roles')
 export class Role extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()
@@ -19,6 +26,6 @@ export class Role extends AuditableEntity {
   @Column()
   mis_id: number;
 
-  @ManyToMany(() => User, (user) => user.roles)
-  users: User[];
+  @OneToMany(() => UserRole, (ur) => ur.role)
+  userRoles: UserRole[];
 }

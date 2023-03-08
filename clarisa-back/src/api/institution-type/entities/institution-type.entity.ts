@@ -15,7 +15,7 @@ import { PartnerRequest } from '../../partner-request/entities/partner-request.e
 @Entity('institution_types')
 export class InstitutionType extends AuditableEntity {
   @Expose({ name: 'code' })
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

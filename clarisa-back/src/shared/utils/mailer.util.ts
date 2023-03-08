@@ -6,9 +6,9 @@ import { Injectable, Logger } from '@nestjs/common';
 import 'dotenv/config';
 import Mail from 'nodemailer/lib/mailer';
 import Handlebars from 'handlebars';
-import { PartnerRequest } from 'src/api/partner-request/entities/partner-request.entity';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 import { Profile } from '../entities/enums/profiles';
+import { PartnerRequest } from '../../api/partner-request/entities/partner-request.entity';
 
 @Injectable()
 export class MailUtil {

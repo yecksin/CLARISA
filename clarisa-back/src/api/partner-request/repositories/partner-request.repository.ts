@@ -28,10 +28,10 @@ import { PartnerRequest } from '../entities/partner-request.entity';
 import { BulkPartnerRequestDto } from '../dto/create-partner-dto';
 import { InstitutionType } from '../../institution-type/entities/institution-type.entity';
 import { CreateInstitutionBulkDto } from '../../institution/dto/institution-bulk.dto';
-import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { share } from 'rxjs';
-import { CountryRepository } from 'src/api/country/repositories/country.repository';
-import { InstitutionTypeRepository } from 'src/api/institution-type/repositories/institution-type.repository';
+import { CountryRepository } from '../../country/repositories/country.repository';
+import { InstitutionTypeRepository } from '../../institution-type/repositories/institution-type.repository';
+import { FindAllOptions } from '../../../shared/entities/enums/find-all-options';
 
 @Injectable()
 export class PartnerRequestRepository extends Repository<PartnerRequest> {

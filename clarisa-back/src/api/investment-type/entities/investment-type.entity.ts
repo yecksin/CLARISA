@@ -3,7 +3,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 
 @Entity('investment_types')
 export class InvestmentType extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

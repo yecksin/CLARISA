@@ -14,7 +14,7 @@ import { Mis } from '../../mis/entities/mis.entity';
 
 @Entity('partner_requests')
 export class PartnerRequest extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

@@ -18,10 +18,11 @@ export const dataSource: DataSource = new DataSource({
   synchronize: false,
   migrationsRun: false,
   logging: false,
-  migrations: [__dirname + '/migrations/*{.ts,.js}'],
+  migrations: [join(__dirname, '/../migrations/**/*{.ts,.js}')],
   migrationsTableName: 'migrations',
   metadataTableName: 'orm_metadata',
   bigNumberStrings: false,
+  charset: 'utf8mb4_0900_ai_ci',
   extra: {
     namedPlaceholders: true,
   },

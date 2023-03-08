@@ -3,7 +3,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 
 @Entity('geopositions')
 export class Geoposition extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

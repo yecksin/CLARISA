@@ -10,7 +10,7 @@ import { AuditableDto } from '../../../shared/entities/dtos/auditable-dto';
 
 @Entity('qa_token_auth')
 export class QaToken {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
   @Column()
   name: string;

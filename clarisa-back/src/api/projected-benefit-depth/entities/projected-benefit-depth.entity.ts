@@ -11,7 +11,7 @@ import { ProjectedBenefit } from '../../projected-benefit/entities/projected-ben
 
 @Entity('projected_benefits_depths')
 export class ProjectedBenefitDepth extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

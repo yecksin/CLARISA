@@ -4,7 +4,7 @@ import { InitiativeStage } from './initiative-status.entity';
 
 @Entity('submission_tool_initiatives')
 export class Initiative extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

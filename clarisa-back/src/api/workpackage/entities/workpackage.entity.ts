@@ -6,7 +6,7 @@ import { WorkpackageRegion } from './workpackage-region.entity';
 
 @Entity('submission_tool_work_packages')
 export class Workpackage extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

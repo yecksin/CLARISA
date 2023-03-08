@@ -13,7 +13,7 @@ import { RegionType } from '../../region-type/entities/region-type.entity';
 
 @Entity('regions')
 export class Region extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

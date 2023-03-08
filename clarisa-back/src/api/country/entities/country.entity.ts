@@ -17,7 +17,7 @@ import { Region } from '../../region/entities/region.entity';
 
 @Entity('countries')
 export class Country extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

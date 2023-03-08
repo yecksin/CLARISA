@@ -4,7 +4,7 @@ import { Country } from '../../country/entities/country.entity';
 
 @Entity('submission_tool_work_package_countries')
 export class WorkpackageCountry extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

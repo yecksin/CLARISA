@@ -5,7 +5,7 @@ import { ProjectedBenefitWeighting } from '../../projected-benefit-weighting/ent
 
 @Entity('projected_benefits_weight_description')
 export class ProjectedBenefitWeightDescription extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   @Expose({ name: 'descriptionID' })
   id: number;
 

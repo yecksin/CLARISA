@@ -6,19 +6,19 @@ import { Account } from '../../account/entities/account.entity';
 
 @Entity('account_types')
 export class AccountType extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'text', nullable: false })
   @Exclude()
   name: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 20, nullable: false })
   @Exclude()
   acronym: string;
 
   @OneToMany(() => Account, (at) => at.account_type)
-  accounts: Promise<Account[]>;
+  accounts: Account[];
 
   @Expose({ name: 'name' })
   get composedName(): string {

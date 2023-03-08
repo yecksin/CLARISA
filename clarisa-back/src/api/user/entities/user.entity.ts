@@ -1,16 +1,18 @@
-import { Role } from 'src/api/role/entities/role.entity';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   ManyToMany,
   JoinTable,
+  OneToMany,
 } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { Role } from '../../role/entities/role.entity';
+import { UserRole } from './user-role.entity';
 
 @Entity('users')
 export class User extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()
@@ -37,9 +39,8 @@ export class User extends AuditableEntity {
   @Column({ type: 'tinyint' })
   agree_terms: boolean;
 
-  @ManyToMany(() => Role, (role) => role.users)
-  @JoinTable()
-  roles: Role[];
+  @OneToMany(() => UserRole, (ur) => ur.user)
+  userRoles: UserRole[];
 
   //meant to be used by the guard
   permissions: string[];

@@ -15,7 +15,7 @@ import { InstitutionLocation } from './institution-location.entity';
 
 @Entity('institutions')
 export class Institution extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

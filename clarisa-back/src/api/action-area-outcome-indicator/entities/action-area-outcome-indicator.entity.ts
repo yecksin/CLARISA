@@ -12,16 +12,16 @@ import { OutcomeIndicator } from '../../outcome-indicator/entities/outcome-indic
 
 @Entity('action_area_outcome_indicators')
 export class ActionAreaOutcomeIndicator extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'bigint', nullable: true })
   action_area_outcome_id: number;
 
-  @Column()
+  @Column({ type: 'bigint', nullable: true })
   outcome_indicator_id: number;
 
-  @Column()
+  @Column({ type: 'bigint', nullable: true })
   action_area_id: number;
 
   //relations

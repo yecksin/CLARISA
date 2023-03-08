@@ -4,7 +4,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 
 @Entity('innovation_types')
 export class InnovationType extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   @Expose({ name: 'code' })
   id: number;
 

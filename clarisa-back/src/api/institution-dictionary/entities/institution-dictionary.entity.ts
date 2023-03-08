@@ -11,7 +11,7 @@ import { Source } from '../../source/entities/source.entity';
 
 @Entity('institution_dictionary')
 export class InstitutionDictionary extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

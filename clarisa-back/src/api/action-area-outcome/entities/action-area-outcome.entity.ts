@@ -4,13 +4,13 @@ import { ActionAreaOutcomeIndicator } from '../../action-area-outcome-indicator/
 
 @Entity('action_area_outcomes')
 export class ActionAreaOutcome extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 20, nullable: true })
   smo_code: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   outcome_statement: string;
 
   @OneToMany(

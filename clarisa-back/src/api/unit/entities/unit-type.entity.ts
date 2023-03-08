@@ -4,7 +4,7 @@ import { Unit } from './unit.entity';
 
 @Entity('unit_types')
 export class UnitType extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

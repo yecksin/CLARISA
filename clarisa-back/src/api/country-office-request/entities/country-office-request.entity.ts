@@ -12,7 +12,7 @@ import { Mis } from '../../mis/entities/mis.entity';
 
 @Entity('country_office_requests')
 export class CountryOfficeRequest extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

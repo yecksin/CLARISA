@@ -11,7 +11,7 @@ import { Sdg } from '../../sdg/entities/sdg.entity';
 
 @Entity('sustainable_development_goal_targets')
 export class SdgTarget extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column('varchar', { length: 5 })

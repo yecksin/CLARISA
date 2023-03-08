@@ -4,7 +4,7 @@ import { InstitutionDictionary } from '../../institution-dictionary/entities/ins
 
 @Entity('sources')
 export class Source extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

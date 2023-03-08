@@ -13,7 +13,7 @@ import { ProjectedBenefitWeighting } from '../../projected-benefit-weighting/ent
 
 @Entity('projected_benefits')
 export class ProjectedBenefit extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

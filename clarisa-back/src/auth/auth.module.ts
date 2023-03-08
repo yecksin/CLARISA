@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { UserModule } from 'src/api/user/user.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
@@ -13,6 +12,7 @@ import { LegacyPasswordEncoder } from './utils/LegacyPasswordEncoder';
 import { env } from 'process';
 import { QaTokenModule } from './qa-token/qa-token.module';
 import 'dotenv/config';
+import { UserModule } from '../api/user/user.module';
 
 @Module({
   controllers: [AuthController],

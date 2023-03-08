@@ -5,7 +5,7 @@ import { ImpactAreaIndicator } from '../../impact-area-indicator/entities/impact
 
 @Entity('impact_areas')
 export class ImpactArea extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

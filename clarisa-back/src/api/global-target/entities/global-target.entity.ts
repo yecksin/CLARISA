@@ -11,7 +11,7 @@ import { ImpactArea } from '../../impact-area/entities/impact-area.entity';
 
 @Entity('global_targets')
 export class GlobalTarget extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   @Expose({ name: 'targetId' })
   id: number;
 

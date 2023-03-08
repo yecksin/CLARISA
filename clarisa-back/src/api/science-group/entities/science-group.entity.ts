@@ -11,7 +11,7 @@ import { Unit } from '../../unit/entities/unit.entity';
 
 @Entity('science_groups')
 export class ScienceGroup extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

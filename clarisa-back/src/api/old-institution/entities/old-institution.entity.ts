@@ -13,7 +13,7 @@ import { InstitutionLocation } from '../../institution/entities/institution-loca
 
 @Entity('old_institutions')
 export class OldInstitution extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

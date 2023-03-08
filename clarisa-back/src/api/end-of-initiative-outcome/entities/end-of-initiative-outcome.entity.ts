@@ -2,7 +2,7 @@ import { Column, PrimaryGeneratedColumn } from 'typeorm';
 import { InitiativeOutcomeDto } from '../dto/initiative-outcomes.dto';
 
 export class EndOfInitiativeOutcome {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   initiativeId: number;
 
   @Column()

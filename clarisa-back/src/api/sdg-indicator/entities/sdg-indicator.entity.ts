@@ -11,7 +11,7 @@ import { SdgTarget } from '../../sdg-target/entities/sdg-target.entity';
 
 @Entity('sustainable_development_goal_indicators')
 export class SdgIndicator extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Column()

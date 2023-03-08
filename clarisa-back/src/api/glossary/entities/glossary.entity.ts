@@ -5,7 +5,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 @Entity('glossary')
 export class Glossary extends AuditableEntity {
   @Exclude({ toPlainOnly: true })
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
   @Exclude({ toPlainOnly: true })

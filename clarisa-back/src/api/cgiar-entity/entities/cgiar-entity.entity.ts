@@ -11,7 +11,7 @@ import { CgiarEntityType } from '../../cgiar-entity-type/entities/cgiar-entity-t
 
 @Entity('global_units')
 export class CgiarEntity extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   @Exclude()
   id: number;
 

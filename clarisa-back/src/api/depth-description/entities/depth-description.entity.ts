@@ -5,7 +5,7 @@ import { ProjectedBenefitDepth } from '../../projected-benefit-depth/entities/pr
 
 @Entity('depths_description')
 export class DepthDescription extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   @Expose({ name: 'depthScaleId' })
   id: number;
 

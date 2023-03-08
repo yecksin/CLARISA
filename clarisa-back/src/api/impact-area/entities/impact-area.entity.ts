@@ -1,7 +1,7 @@
 import { Expose } from 'class-transformer';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
-import { ImpactAreaIndicator } from '../../impact-area-indicators/entities/impact-area-indicator.entity';
+import { ImpactAreaIndicator } from '../../impact-area-indicator/entities/impact-area-indicator.entity';
 
 @Entity('impact_areas')
 export class ImpactArea extends AuditableEntity {

@@ -10,6 +10,9 @@ import { InstitutionRepository } from '../institution/repositories/institution.r
 import { CountryRepository } from '../country/repositories/country.repository';
 import { CountryOfficeRequestRepository } from './repositories/country-office-request.repository';
 import { InstitutionLocation } from '../institution/entities/institution-location.entity';
+import { MisRepository } from '../mis/repositories/mis.repository';
+import { UserRepository } from '../user/repositories/user.repository';
+import { InstitutionLocationRepository } from '../institution/repositories/institution-location.repository';
 
 @Module({
   controllers: [CountryOfficeRequestController],
@@ -18,6 +21,9 @@ import { InstitutionLocation } from '../institution/entities/institution-locatio
     InstitutionRepository,
     CountryRepository,
     CountryOfficeRequestRepository,
+    MisRepository,
+    UserRepository,
+    InstitutionLocationRepository,
   ],
 })
 export class CountryOfficeRequestModule {}

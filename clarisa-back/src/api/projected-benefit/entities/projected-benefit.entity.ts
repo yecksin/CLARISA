@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
-import { ImpactAreaIndicator } from '../../impact-area-indicators/entities/impact-area-indicator.entity';
+import { ImpactAreaIndicator } from '../../impact-area-indicator/entities/impact-area-indicator.entity';
 import { ProjectedBenefitDepth } from '../../projected-benefit-depth/entities/projected-benefit-depth.entity';
 import { ProjectedBenefitWeighting } from '../../projected-benefit-weighting/entities/projected-benefit-weighting.entity';
 

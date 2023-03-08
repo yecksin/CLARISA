@@ -7,18 +7,31 @@ import {
   Req,
   Res,
   Param,
+  OnModuleInit,
 } from '@nestjs/common';
+import { ModuleRef } from '@nestjs/core/injector';
 import { Request, Response } from 'express';
 import { ApiService } from './api.service';
 import { PartnerRequestDto } from './partner-request/dto/partner-request.dto';
+import { PartnerRequestService } from './partner-request/partner-request.service';
 
 @Controller()
-export class ApiController {
-  constructor(private readonly apiService: ApiService) {}
+export class ApiController implements OnModuleInit {
+  private _partnerRequestService: PartnerRequestService;
+  constructor(
+    private readonly _apiService: ApiService,
+    private moduleRef: ModuleRef,
+  ) {}
+
+  async onModuleInit() {
+    this._partnerRequestService = await this.moduleRef.resolve(
+      PartnerRequestService,
+    );
+  }
 
   @Get()
   findAll() {
-    return this.apiService.findAll();
+    return this._apiService.findAll();
   }
 
   /*

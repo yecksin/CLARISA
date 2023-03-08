@@ -5,12 +5,14 @@ import { HomepageClarisaCategoryEndpointRepository } from './repositories/homepa
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { HomepageClarisaCategoryEndpoint } from './entities/homepage-clarisa-category-endpoint.entity';
 import { HomepageClarisaCategory } from '../homepage-clarisa-category/entities/homepage-clarisa-category.entity';
+import { HomepageClarisaCategoryRepository } from '../homepage-clarisa-category/repositories/homepage-clarisa-category.repository';
 
 @Module({
   controllers: [HomepageClarisaCategoryEndpointController],
   providers: [
     HomepageClarisaCategoryEndpointService,
     HomepageClarisaCategoryEndpointRepository,
+    HomepageClarisaCategoryRepository,
   ],
 })
 export class HomepageClarisaCategoryEndpointModule {}

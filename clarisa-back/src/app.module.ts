@@ -20,6 +20,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { GuardsModule } from './shared/guards/guards.module';
 import { BasicAuthMiddleware } from './shared/guards/basic-auth.middleware';
 import { ApiController } from './api/api.controller';
+import { UserRepository } from './api/user/repositories/user.repository';
 
 @Module({
   imports: [
@@ -37,7 +38,7 @@ import { ApiController } from './api/api.controller';
     GuardsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, UserService],
+  providers: [AppService, UserRepository, UserService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

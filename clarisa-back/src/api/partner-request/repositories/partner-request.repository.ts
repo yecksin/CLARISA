@@ -59,8 +59,8 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     private dataSource: DataSource,
     private institutionRepository: InstitutionRepository,
     private mailUtil: MailUtil,
-    private countryPartner: CountryRepository,
-    private institutionType: InstitutionTypeRepository
+    private countryRepository: CountryRepository,
+    private institutionType: InstitutionTypeRepository,
   ) {
     super(PartnerRequest, dataSource.createEntityManager());
   }
@@ -125,7 +125,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
         break;
     }
 
-    switch(show){
+    switch (show) {
       case FindAllOptions.SHOW_ALL:
         break;
       case FindAllOptions.SHOW_ONLY_ACTIVE:
@@ -289,10 +289,9 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     partialPartnerRequest.category_1 = incomingPartnerRequest.category_1;
     partialPartnerRequest.category_2 = incomingPartnerRequest.category_2;
 
-    
     partialPartnerRequest.is_active = false;
     partialPartnerRequest = await this.save(partialPartnerRequest);
-    partialPartnerRequest.partner_request_id = partialPartnerRequest.id; 
+    partialPartnerRequest.partner_request_id = partialPartnerRequest.id;
     delete partialPartnerRequest.id;
     partialPartnerRequest.is_active = true;
     partialPartnerRequest = await this.save(partialPartnerRequest);
@@ -311,12 +310,12 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     respondPartnerRequestDto: RespondRequestDto,
   ): Promise<PartnerRequestDto> {
     partialPartnerRequest.is_active = false;
-    if(partialPartnerRequest.partner_request_id == null){
+    if (partialPartnerRequest.partner_request_id == null) {
       await this.save(partialPartnerRequest);
       partialPartnerRequest.partner_request_id = partialPartnerRequest.id;
       delete partialPartnerRequest.id;
     }
-    
+
     partialPartnerRequest.external_user_mail =
       respondPartnerRequestDto.externalUserMail;
     partialPartnerRequest.external_user_name =
@@ -326,7 +325,6 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
 
     const accepted = respondPartnerRequestDto.accept;
     partialPartnerRequest.accepted = accepted;
-    
 
     partialPartnerRequest.updated_by = accepted
       ? partialPartnerRequest.accepted_by
@@ -353,7 +351,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     updatePartnerRequest: UpdatePartnerRequestDto,
     partnerRequest: PartnerRequest,
   ): Promise<PartnerRequestDto> {
-    if(partnerRequest.partner_request_id == null){
+    if (partnerRequest.partner_request_id == null) {
       partnerRequest.is_active = false;
       await this.save(partnerRequest);
       partnerRequest.partner_request_id = partnerRequest.id;
@@ -372,15 +370,13 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     partnerRequest.modification_justification =
       updatePartnerRequest.modification_justification;
 
-
     partnerRequest = await this.save(partnerRequest);
 
-    
     partnerRequest = await this.findOne({
       where: { id: partnerRequest.id },
       relations: this.partnerRelations,
     });
-    
+
     return this.fillOutPartnerRequestDto(partnerRequest);
   }
 
@@ -457,11 +453,13 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     let BulkInstitutions: Institution;
     let partnerCreate: any[] = [];
     let today = new Date();
-   
-    countryInstitution = await this.countryPartner.find();
-    institutionTypes = await this.institutionType.find({where:{
-      source_id: 1
-    }});
+
+    countryInstitution = await this.countryRepository.find();
+    institutionTypes = await this.institutionType.find({
+      where: {
+        source_id: 1,
+      },
+    });
     for (let partnerRequestBulkIterator of partnerRequestBulk.listPartnerRequest) {
       let partnerRequests: PartnerRequest = new PartnerRequest();
       partnerRequests.partner_name = partnerRequestBulkIterator.name;
@@ -470,17 +468,22 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       partnerRequests.is_office = false;
       partnerRequests.external_user_mail = partnerRequestBulk.externalUserEmail;
       partnerRequests.external_user_name = partnerRequestBulk.externalUserName;
-      partnerRequests.created_by = partnerRequestBulk.externalUser;  
-      
-      let filterCountry = countryInstitution.filter(country=> country.iso_alpha_2 == partnerRequestBulkIterator.country);
-      let filterType = institutionTypes.filter(typeIntitution => typeIntitution.name == partnerRequestBulkIterator.institution_type)
+      partnerRequests.created_by = partnerRequestBulk.externalUser;
+
+      let filterCountry = countryInstitution.filter(
+        (country) => country.iso_alpha_2 == partnerRequestBulkIterator.country,
+      );
+      let filterType = institutionTypes.filter(
+        (typeIntitution) =>
+          typeIntitution.name == partnerRequestBulkIterator.institution_type,
+      );
       partnerRequests.institution_type_id = filterType[0].id;
       partnerRequests.country_id = filterCountry[0].id;
       partnerRequests.mis_id = partnerRequestBulk.mis;
       partnerRequests.is_active = false;
       partnerRequests = await this.save(partnerRequests);
       partnerRequests.partner_request_id = partnerRequests.id;
-      delete partnerRequests.id
+      delete partnerRequests.id;
       if (partnerRequestBulkIterator.status == 'Accepted') {
         partnerRequests.accepted = true;
         partnerRequests.accepted_by = partnerRequestBulk.accepted;
@@ -488,7 +491,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
         BulkInstitutions =
           await this.institutionRepository.createBulkInstitution(
             partnerRequests,
-            partnerRequestBulk.accepted
+            partnerRequestBulk.accepted,
           );
         partnerRequests.institution_id = BulkInstitutions.id;
       }
@@ -499,15 +502,11 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
           partnerRequestBulkIterator.justification;
         partnerRequests.rejected_date = today;
       }
-      
+
       partnerRequests = await this.save(partnerRequests);
-      
-      
+
       partnerCreate.push(partnerRequests);
     }
     return partnerCreate;
   }
-
-  
 }
-

@@ -6,6 +6,7 @@ import { InstitutionDictionary } from './entities/institution-dictionary.entity'
 import { InstitutionRepository } from '../institution/repositories/institution.repository';
 import { InstitutionLocation } from '../institution/entities/institution-location.entity';
 import { InstitutionDictionaryRepository } from './repositories/institution-dictionary.repository';
+import { InstitutionLocationRepository } from '../institution/repositories/institution-location.repository';
 
 @Module({
   controllers: [InstitutionDictionaryController],
@@ -13,6 +14,7 @@ import { InstitutionDictionaryRepository } from './repositories/institution-dict
     InstitutionDictionaryService,
     InstitutionDictionaryRepository,
     InstitutionRepository,
+    InstitutionLocationRepository,
   ],
 })
 export class InstitutionDictionaryModule {}

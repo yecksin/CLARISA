@@ -20,18 +20,18 @@ import { PartnerRequest } from './entities/partner-request.entity';
 import { PartnerRequestRepository } from './repositories/partner-request.repository';
 import { BulkPartnerRequestDto } from './dto/create-partner-dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
+import { InstitutionTypeRepository } from '../institution-type/repositories/institution-type.repository';
+import { MisRepository } from '../mis/repositories/mis.repository';
+import { UserRepository } from '../user/repositories/user.repository';
 
 @Injectable()
 export class PartnerRequestService {
   constructor(
     private partnerRequestRepository: PartnerRequestRepository,
-    @InjectRepository(InstitutionType)
-    private institutionTypeRepository: Repository<InstitutionType>,
-    @InjectRepository(Mis)
-    private misRepository: Repository<Mis>,
+    private institutionTypeRepository: InstitutionTypeRepository,
+    private misRepository: MisRepository,
     private countryRepository: CountryRepository,
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
+    private userRepository: UserRepository,
   ) {}
 
   async findAll(
@@ -47,7 +47,11 @@ export class PartnerRequestService {
       throw Error('?!');
     }
 
-    return this.partnerRequestRepository.findAllPartnerRequests(status, mis, show);
+    return this.partnerRequestRepository.findAllPartnerRequests(
+      status,
+      mis,
+      show,
+    );
   }
 
   async findOne(id: number): Promise<PartnerRequestDto> {

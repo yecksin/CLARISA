@@ -64,6 +64,7 @@ import { BeneficiaryModule } from './beneficiary/beneficiary.module';
 import { EndOfInitiativeOutcomeModule } from './end-of-initiative-outcome/end-of-initiative-outcome.module';
 import { ImpactAreaIndicatorModule } from './impact-area-indicator/impact-area-indicator.module';
 import { SourceModule } from './source/source.module';
+import { PartnerRequestService } from './partner-request/partner-request.service';
 
 @Module({
   controllers: [ApiController],

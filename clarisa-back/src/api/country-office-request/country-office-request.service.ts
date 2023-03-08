@@ -20,17 +20,17 @@ import { ResponseDto } from '../../shared/entities/dtos/response-dto';
 import { MisOption } from '../../shared/entities/enums/mises-options';
 import { PartnerStatus } from '../../shared/entities/enums/partner-status';
 import { UserData } from '../../shared/interfaces/user-data';
+import { MisRepository } from '../mis/repositories/mis.repository';
+import { UserRepository } from '../user/repositories/user.repository';
 
 @Injectable()
 export class CountryOfficeRequestService {
   constructor(
     private countryOfficeRequestRepository: CountryOfficeRequestRepository,
     private institutionRepository: InstitutionRepository,
-    @InjectRepository(Mis)
-    private misRepository: Repository<Mis>,
+    private misRepository: MisRepository,
     private countryRepository: CountryRepository,
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
+    private userRepository: UserRepository,
   ) {}
 
   async findAll(

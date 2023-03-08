@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { Institution } from '../../institution/entities/institution.entity';
-import { Source } from '../../sources/entities/source.entity';
+import { Source } from '../../source/entities/source.entity';
 
 @Entity('institution_dictionary')
 export class InstitutionDictionary extends AuditableEntity {

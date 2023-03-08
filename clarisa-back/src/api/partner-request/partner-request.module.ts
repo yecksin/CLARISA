@@ -12,6 +12,9 @@ import { InstitutionRepository } from '../institution/repositories/institution.r
 import { InstitutionLocation } from '../institution/entities/institution-location.entity';
 import { MailUtil } from 'src/shared/utils/mailer.util';
 import { InstitutionTypeRepository } from '../institution-type/repositories/institution-type.repository';
+import { MisRepository } from '../mis/repositories/mis.repository';
+import { UserRepository } from '../user/repositories/user.repository';
+import { InstitutionLocationRepository } from '../institution/repositories/institution-location.repository';
 
 @Module({
   controllers: [PartnerRequestController],
@@ -22,6 +25,20 @@ import { InstitutionTypeRepository } from '../institution-type/repositories/inst
     InstitutionRepository,
     MailUtil,
     InstitutionTypeRepository,
+    MisRepository,
+    UserRepository,
+    InstitutionLocationRepository,
+  ],
+  exports: [
+    PartnerRequestService,
+    PartnerRequestRepository,
+    CountryRepository,
+    InstitutionRepository,
+    MailUtil,
+    InstitutionTypeRepository,
+    MisRepository,
+    UserRepository,
+    InstitutionLocationRepository,
   ],
 })
 export class PartnerRequestModule {}

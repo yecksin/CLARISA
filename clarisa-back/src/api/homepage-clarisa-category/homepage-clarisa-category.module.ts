@@ -11,5 +11,6 @@ import { HomepageClarisaCategoryRepository } from './repositories/homepage-clari
     HomepageClarisaCategoryService,
     HomepageClarisaCategoryRepository,
   ],
+  exports: [HomepageClarisaCategoryRepository],
 })
 export class HomepageClarisaCategoryModule {}

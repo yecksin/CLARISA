@@ -8,5 +8,6 @@ import { InstitutionTypeRepository } from './repositories/institution-type.repos
 @Module({
   controllers: [InstitutionTypeController],
   providers: [InstitutionTypeService, InstitutionTypeRepository],
+  exports: [InstitutionTypeRepository],
 })
 export class InstitutionTypeModule {}

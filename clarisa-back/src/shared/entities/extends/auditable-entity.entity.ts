@@ -39,8 +39,8 @@ export abstract class AuditableEntity {
   is_active: boolean;
 
   @Exclude()
-  created_by_object: User;
+  created_by_object: any;
 
   @Exclude()
-  updated_by_object: User;
+  updated_by_object: any;
 }

@@ -21,6 +21,7 @@ import { GuardsModule } from './shared/guards/guards.module';
 import { BasicAuthMiddleware } from './shared/guards/basic-auth.middleware';
 import { ApiController } from './api/api.controller';
 import { UserRepository } from './api/user/repositories/user.repository';
+import { RoleRepository } from './api/role/repositories/role.repository';
 
 @Module({
   imports: [
@@ -38,7 +39,7 @@ import { UserRepository } from './api/user/repositories/user.repository';
     GuardsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, UserRepository, UserService],
+  providers: [AppService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

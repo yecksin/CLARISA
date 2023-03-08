@@ -7,27 +7,31 @@ import {
   Req,
   Res,
   Param,
-  OnModuleInit,
+  Body,
+  UseGuards,
 } from '@nestjs/common';
-import { ModuleRef } from '@nestjs/core/injector';
 import { Request, Response } from 'express';
+import { GetUserData } from '../shared/decorators/user-data.decorator';
+import { ResponseDto } from '../shared/entities/dtos/response-dto';
+import { JwtAuthGuard } from '../shared/guards/jwt-auth.guard';
+import { PermissionGuard } from '../shared/guards/permission.guard';
+import { UserData } from '../shared/interfaces/user-data';
 import { ApiService } from './api.service';
+import { CountryOfficeRequestService } from './country-office-request/country-office-request.service';
+import { CountryOfficeRequestDto } from './country-office-request/dto/country-office-request.dto';
+import { CreateCountryOfficeRequestDto } from './country-office-request/dto/create-country-office-request.dto';
+import { CreatePartnerRequestDto } from './partner-request/dto/create-partner-request.dto';
 import { PartnerRequestDto } from './partner-request/dto/partner-request.dto';
 import { PartnerRequestService } from './partner-request/partner-request.service';
+import { PartnerRequestRepository } from './partner-request/repositories/partner-request.repository';
 
 @Controller()
-export class ApiController implements OnModuleInit {
-  private _partnerRequestService: PartnerRequestService;
+export class ApiController {
   constructor(
+    private _partnerRequestService: PartnerRequestService,
+    private _countryOfficeRequestService: CountryOfficeRequestService,
     private readonly _apiService: ApiService,
-    private moduleRef: ModuleRef,
   ) {}
-
-  async onModuleInit() {
-    this._partnerRequestService = await this.moduleRef.resolve(
-      PartnerRequestService,
-    );
-  }
 
   @Get()
   findAll() {
@@ -165,28 +169,38 @@ export class ApiController implements OnModuleInit {
   }
 
   @Post('/:mis/institutions/institution-requests')
+  @UseGuards(JwtAuthGuard, PermissionGuard)
   institutionRequests(
-    @Req() request: Request,
-    @Res() response: Response,
+    @GetUserData() userData: UserData,
+    @Body() newPartnerRequest: CreatePartnerRequestDto,
     @Param('mis') mis: string,
-  ) {
-    response.redirect(
-      HttpStatus.PERMANENT_REDIRECT,
-      `/api/partner-requests/create?mis=${mis}`,
+  ): Promise<ResponseDto<PartnerRequestDto>> {
+    const userDataMis: UserData & { mis: string } = {
+      ...userData,
+      mis,
+    };
+
+    return this._partnerRequestService.createPartnerRequest(
+      newPartnerRequest,
+      userDataMis,
     );
-    // nothing, we are just going to redirect
   }
 
   @Post('/:mis/institutions/country-office-requests')
+  @UseGuards(JwtAuthGuard, PermissionGuard)
   countryOfficeRequests(
-    @Req() request: Request,
-    @Res() response: Response,
+    @GetUserData() userData: UserData,
+    @Body() newCountryOfficeRequest: CreateCountryOfficeRequestDto,
     @Param('mis') mis: string,
-  ) {
-    response.redirect(
-      HttpStatus.PERMANENT_REDIRECT,
-      `/api/country-office-requests/create?mis=${mis}`,
+  ): Promise<ResponseDto<CountryOfficeRequestDto[]>> {
+    const userDataMis: UserData & { mis: string } = {
+      ...userData,
+      mis,
+    };
+
+    return this._countryOfficeRequestService.createCountryOfficeRequest(
+      newCountryOfficeRequest,
+      userDataMis,
     );
-    // nothing, we are just going to redirect
   }
 }

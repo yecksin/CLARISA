@@ -25,5 +25,14 @@ import { InstitutionLocationRepository } from '../institution/repositories/insti
     UserRepository,
     InstitutionLocationRepository,
   ],
+  exports: [
+    CountryOfficeRequestService,
+    InstitutionRepository,
+    CountryRepository,
+    CountryOfficeRequestRepository,
+    MisRepository,
+    UserRepository,
+    InstitutionLocationRepository,
+  ],
 })
 export class CountryOfficeRequestModule {}

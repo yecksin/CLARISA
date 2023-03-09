@@ -6,6 +6,6 @@ export class BusinessCategory extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   name: string;
 }

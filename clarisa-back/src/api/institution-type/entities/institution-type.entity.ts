@@ -18,34 +18,38 @@ export class InstitutionType extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   name: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   acronym: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   description: string;
 
-  @Column()
+  //relations
+
+  @Column({ type: 'bigint', nullable: false })
   source_id: number;
 
-  @Column()
+  @Column({ type: 'bigint', nullable: true })
   parent_id: number;
 
-  @OneToMany(() => Institution, (i) => i.institution_type_object)
-  institutions: Promise<Institution[]>;
-
-  @OneToMany(() => OldInstitution, (oi) => oi.institution_type_object)
-  old_institutions: Promise<OldInstitution[]>;
-
-  @OneToMany(() => PartnerRequest, (pr) => pr.institution_type_object)
-  partner_requests: PartnerRequest[];
-
-  @OneToMany(() => InstitutionType, (it) => it.parent_object)
-  children: InstitutionType[];
+  //object relations
 
   @ManyToOne(() => InstitutionType, (it) => it.children)
   @JoinColumn({ name: 'parent_id' })
   parent_object: InstitutionType;
+
+  @OneToMany(() => InstitutionType, (it) => it.parent_object)
+  children: InstitutionType[];
+
+  @OneToMany(() => Institution, (i) => i.institution_type_object)
+  institutions: Institution[];
+
+  @OneToMany(() => OldInstitution, (oi) => oi.institution_type_object)
+  old_institutions: OldInstitution[];
+
+  @OneToMany(() => PartnerRequest, (pr) => pr.institution_type_object)
+  partner_requests: PartnerRequest[];
 }

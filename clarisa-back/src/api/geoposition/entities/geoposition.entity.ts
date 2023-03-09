@@ -6,9 +6,9 @@ export class Geoposition extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'double', nullable: false })
   latitude: number;
 
-  @Column()
+  @Column({ type: 'double', nullable: false })
   longitude: number;
 }

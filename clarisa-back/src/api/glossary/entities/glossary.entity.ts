@@ -9,17 +9,17 @@ export class Glossary extends AuditableEntity {
   id: number;
 
   @Exclude({ toPlainOnly: true })
-  @Column()
+  @Column({ type: 'varchar', length: 100, nullable: true })
   applicationName: string;
 
-  @Column()
   @Expose({ name: 'term' })
+  @Column({ type: 'text', nullable: false })
   title: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: false })
   definition: string;
 
   @Exclude({ toPlainOnly: true })
-  @Column({ type: 'tinyint' })
+  @Column({ type: 'tinyint', nullable: false, default: () => '0' })
   show_in_dashboard: boolean;
 }

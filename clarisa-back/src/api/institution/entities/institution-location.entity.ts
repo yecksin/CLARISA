@@ -15,17 +15,21 @@ export class InstitutionLocation extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
-  institution_id: number;
-
-  @Column()
-  country_id: number;
-
-  @Column()
+  @Column({ type: 'tinyint', nullable: false })
   is_headquater: boolean;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   city: string;
+
+  //relations
+
+  @Column({ type: 'bigint', nullable: false })
+  institution_id: number;
+
+  @Column({ type: 'bigint', nullable: false })
+  country_id: number;
+
+  //object relations
 
   @ManyToOne(() => Institution, (i) => i.institution_locations)
   @JoinColumn({ name: 'institution_id' })

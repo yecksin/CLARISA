@@ -7,6 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { CountryOfficeRequest } from '../../country-office-request/entities/country-office-request.entity';
 import { Role } from '../../role/entities/role.entity';
 import { UserRole } from './user-role.entity';
 
@@ -41,6 +42,12 @@ export class User extends AuditableEntity {
 
   @OneToMany(() => UserRole, (ur) => ur.user)
   userRoles: UserRole[];
+
+  @OneToMany(() => CountryOfficeRequest, (cor) => cor.accepted_by_object)
+  country_office_request_accepted_array: CountryOfficeRequest[];
+
+  @OneToMany(() => CountryOfficeRequest, (cor) => cor.rejected_by_object)
+  country_office_request_rejection_array: CountryOfficeRequest[];
 
   //meant to be used by the guard
   permissions: string[];

@@ -20,11 +20,15 @@ export class Account extends AuditableEntity {
   @Column({ type: 'text', nullable: true })
   description: string;
 
+  //relations
+
   @Column({ type: 'bigint', nullable: false })
   account_type_id: number;
 
   @Column({ type: 'bigint', nullable: true })
   parent_id: number;
+
+  //object relations
 
   @ManyToOne(() => AccountType, (a) => a.accounts)
   @JoinColumn({ name: 'account_type_id' })

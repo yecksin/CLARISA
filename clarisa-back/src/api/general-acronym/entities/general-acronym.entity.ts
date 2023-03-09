@@ -8,9 +8,9 @@ export class GeneralAcronym extends AuditableEntity {
   @Expose({ name: 'code' })
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 255, nullable: false })
   acronym: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: false })
   description: string;
 }

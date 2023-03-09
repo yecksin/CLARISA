@@ -2,6 +2,7 @@ import { Exclude } from 'class-transformer';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { ActionAreaOutcomeIndicator } from '../../action-area-outcome-indicator/entities/action-area-outcome-indicator.entity';
+import { InitiativeStage } from '../../initiative/entities/initiative-status.entity';
 
 @Entity('action_areas')
 export class ActionArea extends AuditableEntity {
@@ -18,10 +19,14 @@ export class ActionArea extends AuditableEntity {
   @Column({ type: 'text', nullable: true })
   description: string;
 
-  //relations
+  //relation objects
+
   @OneToMany(
     () => ActionAreaOutcomeIndicator,
     (aaoi) => aaoi.action_area_outcome_object,
   )
   action_area_outcome_indicators: ActionAreaOutcomeIndicator[];
+
+  @OneToMany(() => InitiativeStage, (is) => is.action_area_object)
+  initiative_stage_array: InitiativeStage[];
 }

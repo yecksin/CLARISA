@@ -6,9 +6,9 @@ export class BiParameter extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   parameter_name: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   parameter_value: string;
 }

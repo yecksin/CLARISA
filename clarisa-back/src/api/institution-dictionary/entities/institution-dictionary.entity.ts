@@ -14,17 +14,21 @@ export class InstitutionDictionary extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
-  institution_id: number;
-
-  @Column()
-  source_id: number;
-
-  @Column()
+  @Column({ type: 'text', nullable: true })
   institution_source_id: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   institution_source_name: string;
+
+  //relations
+
+  @Column({ type: 'bigint', nullable: false })
+  institution_id: number;
+
+  @Column({ type: 'bigint', nullable: false })
+  source_id: number;
+
+  //object relations
 
   @ManyToOne(() => Institution, (i) => i.institution_dictionary_entries)
   @JoinColumn({ name: 'institution_id' })

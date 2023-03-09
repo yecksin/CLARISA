@@ -13,6 +13,8 @@ export class ActionAreaOutcome extends AuditableEntity {
   @Column({ type: 'text', nullable: true })
   outcome_statement: string;
 
+  //object relations
+
   @OneToMany(
     () => ActionAreaOutcomeIndicator,
     (aaoi) => aaoi.action_area_outcome_object,

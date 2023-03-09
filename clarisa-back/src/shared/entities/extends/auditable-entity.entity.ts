@@ -1,5 +1,12 @@
 import { Exclude } from 'class-transformer';
-import { Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  JoinColumn,
+  ManyToOne,
+  UpdateDateColumn,
+} from 'typeorm';
+import { User } from '../../../api/user/entities/user.entity';
 
 export abstract class AuditableEntity {
   @Exclude({ toPlainOnly: true })
@@ -8,7 +15,7 @@ export abstract class AuditableEntity {
   created_at: Date;
 
   @Exclude({ toPlainOnly: true })
-  @Column()
+  @Column({ type: 'bigint', nullable: false })
   created_by: number;
 
   @Exclude({ toPlainOnly: true })
@@ -26,15 +33,15 @@ export abstract class AuditableEntity {
   updated_at: Date;
 
   @Exclude({ toPlainOnly: true })
-  @Column()
+  @Column({ type: 'bigint', nullable: false })
   updated_by: number;
 
   @Exclude({ toPlainOnly: true })
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   modification_justification: string;
 
   @Exclude({ toPlainOnly: true })
-  @Column({ type: 'tinyint' })
+  @Column({ type: 'tinyint', nullable: false, default: () => '1' })
   is_active: boolean;
 
   @Exclude()

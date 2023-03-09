@@ -22,7 +22,7 @@ export const dataSource: DataSource = new DataSource({
   migrationsTableName: 'migrations',
   metadataTableName: 'orm_metadata',
   bigNumberStrings: false,
-  charset: 'utf8mb4_0900_ai_ci',
+  //charset: 'utf8mb4_0900_ai_ci',
   extra: {
     namedPlaceholders: true,
   },

@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { CountryRegion } from '../../country/entities/country-region.entity';
 import { Country } from '../../country/entities/country.entity';
 import { RegionType } from '../../region-type/entities/region-type.entity';
 
@@ -39,8 +40,8 @@ export class Region extends AuditableEntity {
   @OneToMany(() => Region, (child) => child.parent_object)
   children: Region[];
 
-  @ManyToMany(() => Country, (country) => country.regions)
-  countries: Country[];
+  @OneToMany(() => CountryRegion, (cr) => cr.region_object)
+  country_region_array: CountryRegion[];
 
   @ManyToOne(() => RegionType, (rt) => rt.regions)
   @JoinColumn({ name: 'region_type_id' })

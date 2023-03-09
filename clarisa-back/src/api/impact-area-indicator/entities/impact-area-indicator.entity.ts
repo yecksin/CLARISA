@@ -13,28 +13,31 @@ export class ImpactAreaIndicator extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 100, nullable: true })
   indicator_statement: string;
 
-  @Column()
-  impact_areas_id: number;
-
-  @Column()
+  @Column({ type: 'int', nullable: true })
   target_year: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 50, nullable: true })
   target_unit: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 50, nullable: true })
   target_value: string;
 
-  @Column()
+  @Column({ type: 'tinyint', nullable: false, default: () => '0' })
   is_aplicable_projected_benefits: boolean;
 
-  @Column()
+  @Column({ type: 'varchar', length: 20, nullable: true })
   smo_code: string;
 
   //relations
+
+  @Column({ type: 'bigint', nullable: true })
+  impact_areas_id: number;
+
+  //object relations
+
   @ManyToOne(() => ImpactArea, (ia) => ia.impact_area_indicators)
   @JoinColumn({ name: 'impact_areas_id' })
   impact_area_object: ImpactArea;

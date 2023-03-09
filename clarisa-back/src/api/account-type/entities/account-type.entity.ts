@@ -17,11 +17,13 @@ export class AccountType extends AuditableEntity {
   @Exclude()
   acronym: string;
 
-  @OneToMany(() => Account, (at) => at.account_type)
-  accounts: Account[];
-
   @Expose({ name: 'name' })
   get composedName(): string {
     return `${this.acronym} ${this.name}`;
   }
+
+  //object relations
+
+  @OneToMany(() => Account, (at) => at.account_type)
+  accounts: Account[];
 }

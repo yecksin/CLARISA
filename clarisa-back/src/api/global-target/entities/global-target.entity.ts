@@ -11,23 +11,26 @@ import { ImpactArea } from '../../impact-area/entities/impact-area.entity';
 
 @Entity('global_targets')
 export class GlobalTarget extends AuditableEntity {
-  @PrimaryGeneratedColumn({ type: 'bigint' })
   @Expose({ name: 'targetId' })
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Expose({ name: 'target' })
+  @Column({ type: 'text', nullable: true })
+  global_target: string;
+
+  //FIXME change this name to impact_area_id when the data is inserted
+  //relations
   @Expose({ name: 'impactAreaId' })
+  @Column({ type: 'bigint', nullable: true })
   impact_areas_id: number;
 
-  @ManyToOne(() => ImpactArea, { eager: true })
-  @JoinColumn({ name: 'impact_areas_id' })
+  //object_relations
+  @Expose({ name: 'impactAreaName' })
   @Transform(({ value }) => {
     return value.name;
   })
-  @Expose({ name: 'impactAreaName' })
+  @ManyToOne(() => ImpactArea, { eager: true })
+  @JoinColumn({ name: 'impact_areas_id' })
   impact_area_name: ImpactArea;
-
-  @Column()
-  @Expose({ name: 'target' })
-  global_target: string;
 }

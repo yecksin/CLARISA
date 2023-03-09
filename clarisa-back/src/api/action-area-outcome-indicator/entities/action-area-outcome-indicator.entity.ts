@@ -15,6 +15,8 @@ export class ActionAreaOutcomeIndicator extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
+  //relations
+
   @Column({ type: 'bigint', nullable: true })
   action_area_outcome_id: number;
 
@@ -24,7 +26,8 @@ export class ActionAreaOutcomeIndicator extends AuditableEntity {
   @Column({ type: 'bigint', nullable: true })
   action_area_id: number;
 
-  //relations
+  //object relations
+
   @ManyToOne(
     () => ActionAreaOutcome,
     (aao) => aao.action_area_outcome_indicators,

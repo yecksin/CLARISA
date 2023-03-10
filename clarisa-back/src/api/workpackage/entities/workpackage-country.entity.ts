@@ -1,17 +1,34 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { Country } from '../../country/entities/country.entity';
+import { Workpackage } from './workpackage.entity';
 
 @Entity('submission_tool_work_package_countries')
 export class WorkpackageCountry extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  //relations
+
+  @Column({ type: 'bigint', nullable: true })
   work_package_id: number;
 
-  @Column()
+  @Column({ type: 'bigint', nullable: true })
   country_id: number;
 
-  country: Country;
+  //object relations
+
+  @ManyToOne(() => Workpackage, (wp) => wp.countries)
+  @JoinColumn({ name: 'work_package_id' })
+  work_package_object: Workpackage;
+
+  @ManyToOne(() => Country, (c) => c.work_package_country_array)
+  @JoinColumn({ name: 'country_id' })
+  country_object: Country;
 }

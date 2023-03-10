@@ -16,20 +16,24 @@ export class OldInstitution extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'text', nullable: false })
   name: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   acronym: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   website_link: string;
 
-  @Column()
+  //relations
+
+  @Column({ type: 'bigint', nullable: false })
   institution_type_id: number;
 
-  @Column()
+  @Column({ type: 'bigint', nullable: true })
   parent_id: number;
+
+  //object relations
 
   @OneToMany(() => InstitutionLocation, (il) => il.old_institution_object)
   institution_locations: InstitutionLocation[];

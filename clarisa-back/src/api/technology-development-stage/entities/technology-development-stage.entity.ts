@@ -7,10 +7,10 @@ export class TechnologyDevelopmentStage extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
-  name: string;
-
-  @Column()
   @Expose({ name: 'officialCode' })
+  @Column({ type: 'text', nullable: true })
   official_code: string;
+
+  @Column({ type: 'text', nullable: true })
+  name: string;
 }

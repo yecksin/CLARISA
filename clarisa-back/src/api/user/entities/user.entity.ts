@@ -5,10 +5,14 @@ import {
   ManyToMany,
   JoinTable,
   OneToMany,
+  Index,
 } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { CountryOfficeRequest } from '../../country-office-request/entities/country-office-request.entity';
+import { Mis } from '../../mis/entities/mis.entity';
+import { PartnerRequest } from '../../partner-request/entities/partner-request.entity';
 import { Role } from '../../role/entities/role.entity';
+import { UserMis } from './user-mis.entity';
 import { UserRole } from './user-role.entity';
 
 @Entity('users')
@@ -16,29 +20,32 @@ export class User extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   first_name: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   last_name: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   username: string;
 
-  @Column()
+  @Index({ unique: true })
+  @Column({ type: 'text', nullable: false })
   email: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   password: string;
 
-  @Column({ type: 'tinyint' })
+  @Column({ type: 'tinyint', nullable: false, default: () => '0' })
   is_cgiar_user: boolean;
 
-  @Column()
+  @Column({ type: 'timestamp', nullable: true })
   last_login: Date;
 
-  @Column({ type: 'tinyint' })
+  @Column({ type: 'tinyint', nullable: true })
   agree_terms: boolean;
+
+  //object relations
 
   @OneToMany(() => UserRole, (ur) => ur.user)
   userRoles: UserRole[];
@@ -48,6 +55,18 @@ export class User extends AuditableEntity {
 
   @OneToMany(() => CountryOfficeRequest, (cor) => cor.rejected_by_object)
   country_office_request_rejection_array: CountryOfficeRequest[];
+
+  @OneToMany(() => Mis, (m) => m.contact_point_object)
+  mis_array: Mis[];
+
+  @OneToMany(() => PartnerRequest, (pr) => pr.accepted_by_object)
+  partner_request_accepted_array: PartnerRequest[];
+
+  @OneToMany(() => PartnerRequest, (pr) => pr.rejected_by_object)
+  partner_request_rejected_array: PartnerRequest[];
+
+  @OneToMany(() => UserMis, (um) => um.user_object)
+  user_mis_array: UserMis[];
 
   //meant to be used by the guard
   permissions: string[];

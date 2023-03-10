@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { Role } from '../../role/entities/role.entity';
 import { User } from './user.entity';
@@ -8,15 +14,20 @@ export class UserRole extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column({ nullable: false })
+  //relations
+
+  @Column({ type: 'bigint', nullable: false })
   user_id: number;
 
-  @Column({ nullable: false })
+  @Column({ type: 'bigint', nullable: false })
   role_id: number;
 
+  //object relations
   @ManyToOne(() => Role, (role) => role.userRoles)
+  @JoinColumn({ name: 'role_id' })
   role: Role;
 
   @ManyToOne(() => User, (user) => user.userRoles)
+  @JoinColumn({ name: 'user_id' })
   user: User;
 }

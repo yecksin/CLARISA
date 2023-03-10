@@ -5,6 +5,8 @@ import { InnovationCharacteristic } from '../../innovation-characteristic/entiti
 import { InnovationReadinessLevel } from '../../innovation-readiness-level/entities/innovation-readiness-level.entity';
 import { InnovationType } from '../../innovation-type/entities/innovation-type.entity';
 import { InstitutionDictionary } from '../../institution-dictionary/entities/institution-dictionary.entity';
+import { PolicyStage } from '../../policy-stage/entities/policy-stage.entity';
+import { PolicyType } from '../../policy-type/entities/policy-type.entity';
 
 @Entity('sources')
 export class Source extends AuditableEntity {
@@ -34,4 +36,10 @@ export class Source extends AuditableEntity {
 
   @OneToMany(() => InnovationType, (it) => it.source_object)
   innovation_type_array: InnovationType[];
+
+  @OneToMany(() => PolicyStage, (ps) => ps.source_object)
+  policy_stage_array: PolicyStage[];
+
+  @OneToMany(() => PolicyType, (pt) => pt.source_object)
+  policy_type_array: PolicyType[];
 }

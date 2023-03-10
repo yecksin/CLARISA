@@ -14,22 +14,26 @@ export class ScienceGroup extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 10, nullable: false })
   financial_code: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   description: string;
 
-  @Column()
+  // relations
+
+  @Column({ type: 'bigint', nullable: true })
   parent_id: number;
+
+  //object relations
 
   @ManyToOne(() => ScienceGroup, (sc) => sc.children)
   @JoinColumn({ name: 'parent_id' })
-  parent: Promise<ScienceGroup>;
+  parent: ScienceGroup;
 
   @OneToMany(() => ScienceGroup, (u) => u.parent)
-  children: Promise<ScienceGroup[]>;
+  children: ScienceGroup[];
 
   @OneToMany(() => Unit, (u) => u.science_group)
-  units: Promise<Unit[]>;
+  units: Unit[];
 }

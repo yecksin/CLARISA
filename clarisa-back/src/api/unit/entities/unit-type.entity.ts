@@ -7,12 +7,14 @@ export class UnitType extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 20, nullable: false })
   acronym: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   description: string;
 
+  //object relations
+
   @OneToMany(() => Unit, (u) => u.unit_type)
-  units: Promise<Unit[]>;
+  units: Unit[];
 }

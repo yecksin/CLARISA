@@ -14,13 +14,16 @@ export class ProjectedBenefitDepth extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  //relations
+
+  @Column({ type: 'bigint', nullable: true })
   projected_benefits_id: number;
 
-  @Column()
+  @Column({ type: 'bigint', nullable: true })
   depth_description_id: number;
 
-  //relations
+  //object relations
+
   @ManyToOne(
     () => ProjectedBenefit,
     (pb) => pb.projected_benefit_weighting_array,

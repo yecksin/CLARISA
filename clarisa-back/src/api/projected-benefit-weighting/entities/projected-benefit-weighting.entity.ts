@@ -14,16 +14,19 @@ export class ProjectedBenefitWeighting extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
-  projected_benefits_id: number;
-
-  @Column()
-  weight_description_id: number;
-
-  @Column()
+  @Column({ type: 'varchar', length: 50, nullable: true })
   weight_value: string;
 
   //relations
+
+  @Column({ type: 'bigint', nullable: true })
+  projected_benefits_id: number;
+
+  @Column({ type: 'bigint', nullable: true })
+  weight_description_id: number;
+
+  //object relations
+
   @ManyToOne(
     () => ProjectedBenefit,
     (pb) => pb.projected_benefit_weighting_array,

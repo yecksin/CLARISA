@@ -7,13 +7,13 @@ export class StudyType extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   name: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   description: string;
 
   @Exclude({ toPlainOnly: true })
-  @Column({ type: 'int', width: 2 })
+  @Column({ type: 'int', nullable: false })
   norder: number;
 }

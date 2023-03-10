@@ -7,13 +7,14 @@ export class OutcomeIndicator extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 20, nullable: true })
   smo_code: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   outcome_indicator_statement: string;
 
-  //relations
+  //object relations
+
   @OneToMany(
     () => ActionAreaOutcomeIndicator,
     (aaoi) => aaoi.action_area_outcome_object,

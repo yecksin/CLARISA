@@ -4,15 +4,15 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 
 @Entity('projected_benefits_probabilites')
 export class ProjectedBenefitProbability extends AuditableEntity {
-  @PrimaryGeneratedColumn({ type: 'bigint' })
   @Expose({ name: 'probabilityID' })
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
   @Expose({ name: 'probabilityName' })
+  @Column({ type: 'text', nullable: true })
   name: string;
 
-  @Column()
   @Expose({ name: 'probabilityDescription' })
+  @Column({ type: 'text', nullable: true })
   description: string;
 }

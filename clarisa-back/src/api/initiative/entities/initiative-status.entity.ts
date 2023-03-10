@@ -3,10 +3,12 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { ActionArea } from '../../action-area/entities/action-area.entity';
+import { Workpackage } from '../../workpackage/entities/workpackage.entity';
 import { Initiative } from './initiative.entity';
 import { Stage } from './status.entity';
 
@@ -45,4 +47,7 @@ export class InitiativeStage extends AuditableEntity {
   @ManyToOne(() => ActionArea, (aa) => aa.initiative_stage_array)
   @JoinColumn({ name: 'action_area_id' })
   action_area_object: ActionArea;
+
+  @OneToMany(() => Workpackage, (w) => w.initiative_stage_object)
+  work_package_array: Workpackage[];
 }

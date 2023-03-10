@@ -66,6 +66,8 @@ import { ImpactAreaIndicatorModule } from './impact-area-indicator/impact-area-i
 import { SourceModule } from './source/source.module';
 import { PartnerRequestService } from './partner-request/partner-request.service';
 import { PartnerRequestRepository } from './partner-request/repositories/partner-request.repository';
+import { PermissionModule } from './permission/permission.module';
+import { QaTokenAuthModule } from './qa-token-auth/qa-token-auth.module';
 
 @Module({
   controllers: [ApiController],
@@ -134,6 +136,8 @@ import { PartnerRequestRepository } from './partner-request/repositories/partner
     PolicyTypeModule,
     BiParameterModule,
     OldInstitutionModule,
+    PermissionModule,
+    QaTokenAuthModule,
   ],
 })
 export class ApiModule {}

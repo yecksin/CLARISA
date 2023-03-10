@@ -7,11 +7,13 @@ export class RegionType extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'text', nullable: false })
   name: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   description: string;
+
+  //object relations
 
   @OneToMany(() => Region, (r) => r.region_type_object)
   regions: Region[];

@@ -9,10 +9,11 @@ export class ProjectedBenefitWeightDescription extends AuditableEntity {
   @Expose({ name: 'descriptionID' })
   id: number;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   description: string;
 
-  //relations
+  //object relations
+
   @OneToMany(
     () => ProjectedBenefitWeighting,
     (pbw) => pbw.weight_description_object,

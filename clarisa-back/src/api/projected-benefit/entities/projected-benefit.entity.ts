@@ -16,13 +16,15 @@ export class ProjectedBenefit extends AuditableEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
-  impact_area_indicator_id: number;
-
-  @Column()
+  @Column({ type: 'text', nullable: true })
   description: string;
 
   //relations
+
+  @Column({ type: 'bigint', nullable: false })
+  impact_area_indicator_id: number;
+
+  //object relations
   @ManyToOne(() => ImpactAreaIndicator)
   @JoinColumn({ name: 'impact_area_indicator_id' })
   impact_area_indicator_object: ImpactAreaIndicator;

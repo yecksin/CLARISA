@@ -5,10 +5,16 @@ import { Role } from './entities/role.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RoleRepository } from './repositories/role.repository';
 import { UserRepository } from '../user/repositories/user.repository';
+import { RolePermissionRepository } from './repositories/role-permission.repository';
 
 @Module({
   controllers: [RoleController],
-  providers: [RoleService, RoleRepository, UserRepository],
+  providers: [
+    RoleService,
+    RoleRepository,
+    UserRepository,
+    RolePermissionRepository,
+  ],
   exports: [RoleRepository],
 })
 export class RoleModule {}

@@ -8,7 +8,7 @@ export class QaTokenAuth {
 
   @Column({
     type: 'datetime',
-    length: 6,
+    width: 6,
     nullable: false,
     default: () => 'CURRENT_TIMESTAMP(6)',
   })
@@ -16,7 +16,7 @@ export class QaTokenAuth {
 
   @Column({
     type: 'datetime',
-    length: 6,
+    width: 6,
     nullable: false,
     default: () => 'CURRENT_TIMESTAMP(6)',
   })

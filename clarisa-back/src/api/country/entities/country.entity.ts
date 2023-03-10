@@ -27,11 +27,11 @@ export class Country extends AuditableEntity {
   name: string;
 
   @Index({ unique: true })
-  @Column({ type: 'text', nullable: false })
+  @Column({ type: 'varchar', length: 64, nullable: false })
   iso_alpha_2: string;
 
   @Index({ unique: true })
-  @Column({ type: 'text', nullable: false })
+  @Column({ type: 'varchar', length: 64, nullable: false })
   iso_alpha_3: string;
 
   @Index({ unique: true })

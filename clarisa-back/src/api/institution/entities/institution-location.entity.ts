@@ -35,10 +35,6 @@ export class InstitutionLocation extends AuditableEntity {
   @JoinColumn({ name: 'institution_id' })
   institution_object: Institution;
 
-  @ManyToOne(() => OldInstitution, (oi) => oi.institution_locations)
-  @JoinColumn({ name: 'institution_id' })
-  old_institution_object: OldInstitution;
-
   @ManyToOne(() => Country, (c) => c.institution_locations)
   @JoinColumn({ name: 'country_id' })
   country_object: Country;

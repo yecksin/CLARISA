@@ -30,7 +30,7 @@ export class User extends AuditableEntity {
   username: string;
 
   @Index({ unique: true })
-  @Column({ type: 'text', nullable: false })
+  @Column({ type: 'varchar', length: 255, nullable: false })
   email: string;
 
   @Column({ type: 'text', nullable: true })
@@ -39,7 +39,7 @@ export class User extends AuditableEntity {
   @Column({ type: 'tinyint', nullable: false, default: () => '0' })
   is_cgiar_user: boolean;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: 'timestamp', width: 6, nullable: true })
   last_login: Date;
 
   @Column({ type: 'tinyint', nullable: true })

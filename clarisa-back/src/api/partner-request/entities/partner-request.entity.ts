@@ -39,10 +39,10 @@ export class PartnerRequest extends AuditableEntity {
   @Column({ type: 'tinyint', nullable: true })
   accepted: boolean;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: 'timestamp', width: 6, nullable: true })
   accepted_date: Date;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: 'timestamp', width: 6, nullable: true })
   rejected_date: Date;
 
   @Column({ type: 'text', nullable: true })

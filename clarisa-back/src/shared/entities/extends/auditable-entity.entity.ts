@@ -11,7 +11,7 @@ import { User } from '../../../api/user/entities/user.entity';
 export abstract class AuditableEntity {
   @Exclude({ toPlainOnly: true })
   @Column()
-  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ type: 'timestamp', nullable: false })
   created_at: Date;
 
   @Exclude({ toPlainOnly: true })
@@ -19,15 +19,8 @@ export abstract class AuditableEntity {
   created_by: number;
 
   @Exclude({ toPlainOnly: true })
-  @Column()
-  @CreateDateColumn({
-    type: 'timestamp',
-    onUpdate: 'CURRENT_TIMESTAMP',
-    nullable: true,
-  })
+  @CreateDateColumn({ type: 'timestamp', nullable: true })
   @UpdateDateColumn({
-    type: 'timestamp',
-    onUpdate: 'CURRENT_TIMESTAMP',
     nullable: true,
   })
   updated_at: Date;

@@ -9,26 +9,20 @@ import {
 } from 'typeorm';
 import { FindAllOptions } from '../../../shared/entities/enums/find-all-options';
 import { InstitutionTypeDto } from '../../institution-type/dto/institution-type.dto';
+import { InstitutionTypeRepository } from '../../institution-type/repositories/institution-type.repository';
 import { InstitutionCountryDto } from '../../institution/dto/institution-country.dto';
 import { InstitutionSimpleDto } from '../../institution/dto/institution-simple.dto';
 import { InstitutionDto } from '../../institution/dto/institution.dto';
 import { InstitutionLocation } from '../../institution/entities/institution-location.entity';
+import { InstitutionLocationRepository } from '../../institution/repositories/institution-location.repository';
 import { OldInstitution } from '../entities/old-institution.entity';
 
 @Injectable()
 export class OldInstitutionRepository extends Repository<OldInstitution> {
-  private readonly institutionRelations: FindOptionsRelations<OldInstitution> =
-    {
-      institution_type_object: true,
-      institution_locations: {
-        country_object: true,
-      },
-    };
-
   constructor(
     private dataSource: DataSource,
-    @InjectRepository(InstitutionLocation)
-    private institutionLocationRepository: Repository<InstitutionLocation>,
+    private institutionLocationRepository: InstitutionLocationRepository,
+    private institutionTypeRepository: InstitutionTypeRepository,
   ) {
     super(OldInstitution, dataSource.createEntityManager());
   }
@@ -59,13 +53,29 @@ export class OldInstitutionRepository extends Repository<OldInstitution> {
       };
     }
 
-    const institution: OldInstitution[] = await this.find({
+    const institutions: OldInstitution[] = await this.find({
       where: whereClause,
-      relations: this.institutionRelations,
     });
 
     await Promise.all(
-      institution.map(async (i) => {
+      institutions.map(async (i) => {
+        i.institution_locations = await this.institutionLocationRepository.find(
+          {
+            where: {
+              is_active: true,
+              institution_id: i.id,
+            },
+            relations: {
+              country_object: true,
+            },
+          },
+        );
+
+        i.institution_type_object =
+          await this.institutionTypeRepository.findOneBy({
+            id: i.institution_type_id,
+          });
+
         const institutionDto: InstitutionDto = this.fillOutInstitutionInfo(
           i,
           option === FindAllOptions.SHOW_ALL,
@@ -94,30 +104,47 @@ export class OldInstitutionRepository extends Repository<OldInstitution> {
         break;
     }
 
-    const institution: OldInstitution[] = await this.find({
+    const institutions: OldInstitution[] = await this.find({
       where: whereClause,
-      relations: this.institutionRelations,
     });
 
-    return institution.map((i) => {
-      const institutionDto: InstitutionSimpleDto = new InstitutionSimpleDto();
+    return await Promise.all(
+      institutions.map(async (i) => {
+        i.institution_locations = await this.institutionLocationRepository.find(
+          {
+            where: {
+              is_active: true,
+              institution_id: i.id,
+            },
+            relations: {
+              country_object: true,
+            },
+          },
+        );
 
-      institutionDto.code = i.id;
-      institutionDto.acronym = i.acronym;
+        i.institution_type_object =
+          await this.institutionTypeRepository.findOneBy({
+            id: i.institution_type_id,
+          });
+        const institutionDto: InstitutionSimpleDto = new InstitutionSimpleDto();
 
-      const hq: InstitutionLocation = i.institution_locations.find(
-        (il) => il.is_headquater,
-      );
-      institutionDto.hqLocation = hq.country_object.name;
+        institutionDto.code = i.id;
+        institutionDto.acronym = i.acronym;
 
-      institutionDto.hqLocationISOalpha2 = hq.country_object.iso_alpha_2;
-      institutionDto.institutionType = i.institution_type_object.name;
-      institutionDto.institutionTypeId = i.institution_type_object.id;
-      institutionDto.name = i.name;
-      institutionDto.websiteLink = i.website_link;
+        const hq: InstitutionLocation = i.institution_locations.find(
+          (il) => il.is_headquater,
+        );
+        institutionDto.hqLocation = hq.country_object.name;
 
-      return institutionDto;
-    });
+        institutionDto.hqLocationISOalpha2 = hq.country_object.iso_alpha_2;
+        institutionDto.institutionType = i.institution_type_object.name;
+        institutionDto.institutionTypeId = i.institution_type_object.id;
+        institutionDto.name = i.name;
+        institutionDto.websiteLink = i.website_link;
+
+        return institutionDto;
+      }),
+    );
   }
 
   private fillOutInstitutionInfo(

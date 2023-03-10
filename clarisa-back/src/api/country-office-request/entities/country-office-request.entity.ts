@@ -19,10 +19,10 @@ export class CountryOfficeRequest extends AuditableEntity {
   @Column({ type: 'text', nullable: false })
   request_source: string;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: 'timestamp', width: 6, nullable: true })
   accepted_date: Date;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: 'timestamp', width: 6, nullable: true })
   rejected_date: Date;
 
   @Column({ type: 'text', nullable: true })

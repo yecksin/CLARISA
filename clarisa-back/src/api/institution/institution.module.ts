@@ -14,5 +14,6 @@ import { InstitutionLocationRepository } from './repositories/institution-locati
     InstitutionRepository,
     InstitutionLocationRepository,
   ],
+  exports: [InstitutionLocationRepository],
 })
 export class InstitutionModule {}

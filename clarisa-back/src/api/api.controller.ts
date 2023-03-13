@@ -46,7 +46,7 @@ export class ApiController {
   }
 
   @Get('allSDG')
-  @Redirect('sdgs', HttpStatus.MOVED_PERMANENTLY)
+  @Redirect('sdgs/legacy', HttpStatus.MOVED_PERMANENTLY)
   getSDGs() {
     // nothing, we are just going to redirect
   }

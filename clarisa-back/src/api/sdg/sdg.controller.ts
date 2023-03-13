@@ -28,6 +28,11 @@ export class SdgController {
     return await this.sdgService.findAll(show);
   }
 
+  @Get('legacy')
+  async findAllLegacy(@Query('show') show: FindAllOptions) {
+    return await this.sdgService.findAll(show, true);
+  }
+
   @Get('get/:id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
     return await this.sdgService.findOne(id);

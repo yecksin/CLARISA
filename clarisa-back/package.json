@@ -23,7 +23,7 @@
     "migration:empty": "cross-var npm run typeorm migration:create ./migrations/$npm_config_name",
     "migration:generate": "cross-var npm run typeorm migration:generate -- ./migrations/$npm_config_name -d ./src/ormconfig.ts",
     "migration:revert": "npm run typeorm migration:revert -- -d ./src/ormconfig.ts",
-    "migration:run": "npm run typeorm migration:run -- -d ./src/ormconfig.ts"
+    "migration:execute": "npm run typeorm migration:run -- -d ./src/ormconfig.ts"
   },
   "dependencies": {
     "@nestjs/axios": "^2.0.0",

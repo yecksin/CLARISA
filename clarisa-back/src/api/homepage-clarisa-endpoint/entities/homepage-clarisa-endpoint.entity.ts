@@ -4,7 +4,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { HomepageClarisaCategoryEndpoint } from '../../homepage-clarisa-category-endpoint/entities/homepage-clarisa-category-endpoint.entity';
 
 @Entity('hp_clarisa_endpoints')
-export class HomepageClarisaEndpoint extends AuditableEntity {
+export class HomepageClarisaEndpoint {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -39,4 +39,9 @@ export class HomepageClarisaEndpoint extends AuditableEntity {
     (hpce) => hpce.endpoint_object,
   )
   category_endpoint_array: HomepageClarisaCategoryEndpoint[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

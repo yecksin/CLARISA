@@ -10,7 +10,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { Unit } from '../../unit/entities/unit.entity';
 
 @Entity('science_groups')
-export class ScienceGroup extends AuditableEntity {
+export class ScienceGroup {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -36,4 +36,9 @@ export class ScienceGroup extends AuditableEntity {
 
   @OneToMany(() => Unit, (u) => u.science_group)
   units: Unit[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

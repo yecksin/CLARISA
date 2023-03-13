@@ -13,7 +13,7 @@ import { UserMis } from '../../user/entities/user-mis.entity';
 import { User } from '../../user/entities/user.entity';
 
 @Entity('mises')
-export class Mis extends AuditableEntity {
+export class Mis {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -43,4 +43,9 @@ export class Mis extends AuditableEntity {
 
   @OneToMany(() => UserMis, (um) => um.mis_object)
   user_mis_array: UserMis[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

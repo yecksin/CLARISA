@@ -11,7 +11,7 @@ import { ScienceGroup } from '../../science-group/entities/science-group.entity'
 import { UnitType } from './unit-type.entity';
 
 @Entity('units')
-export class Unit extends AuditableEntity {
+export class Unit {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -48,4 +48,9 @@ export class Unit extends AuditableEntity {
   @ManyToOne(() => UnitType, (u) => u.units)
   @JoinColumn({ name: 'unit_type_id' })
   unit_type: UnitType;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

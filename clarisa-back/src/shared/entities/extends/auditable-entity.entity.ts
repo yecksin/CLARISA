@@ -8,10 +8,6 @@ export abstract class AuditableEntity {
   created_at: Date;
 
   @Exclude({ toPlainOnly: true })
-  @Column({ type: 'bigint', nullable: false })
-  created_by: number;
-
-  @Exclude({ toPlainOnly: true })
   @CreateDateColumn({ type: 'timestamp', nullable: true })
   @UpdateDateColumn({
     nullable: true,
@@ -19,16 +15,23 @@ export abstract class AuditableEntity {
   updated_at: Date;
 
   @Exclude({ toPlainOnly: true })
+  @Column({ type: 'tinyint', nullable: false, default: () => '1' })
+  is_active: boolean;
+
+  @Exclude({ toPlainOnly: true })
   @Column({ type: 'bigint', nullable: false })
+  created_by: number;
+
+  // FIXME change nullable: false
+  @Exclude({ toPlainOnly: true })
+  @Column({ type: 'bigint', nullable: true })
   updated_by: number;
 
   @Exclude({ toPlainOnly: true })
   @Column({ type: 'text', nullable: true })
   modification_justification: string;
 
-  @Exclude({ toPlainOnly: true })
-  @Column({ type: 'tinyint', nullable: false, default: () => '1' })
-  is_active: boolean;
+  //object "relations"
 
   @Exclude()
   created_by_object: any;

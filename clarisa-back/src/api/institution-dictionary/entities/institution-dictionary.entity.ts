@@ -10,7 +10,7 @@ import { Institution } from '../../institution/entities/institution.entity';
 import { Source } from '../../source/entities/source.entity';
 
 @Entity('institution_dictionary')
-export class InstitutionDictionary extends AuditableEntity {
+export class InstitutionDictionary {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -37,4 +37,9 @@ export class InstitutionDictionary extends AuditableEntity {
   @ManyToOne(() => Source, (s) => s.institution_dictionary_entries)
   @JoinColumn({ name: 'source_id' })
   source_object: Source;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

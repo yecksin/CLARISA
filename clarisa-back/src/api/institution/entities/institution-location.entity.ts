@@ -10,7 +10,7 @@ import { Country } from '../../country/entities/country.entity';
 import { Institution } from './institution.entity';
 
 @Entity('institution_locations')
-export class InstitutionLocation extends AuditableEntity {
+export class InstitutionLocation {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -37,4 +37,9 @@ export class InstitutionLocation extends AuditableEntity {
   @ManyToOne(() => Country, (c) => c.institution_locations)
   @JoinColumn({ name: 'country_id' })
   country_object: Country;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

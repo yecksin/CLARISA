@@ -3,7 +3,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { Region } from '../../region/entities/region.entity';
 
 @Entity('region_types')
-export class RegionType extends AuditableEntity {
+export class RegionType {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -17,4 +17,9 @@ export class RegionType extends AuditableEntity {
 
   @OneToMany(() => Region, (r) => r.region_type_object)
   regions: Region[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

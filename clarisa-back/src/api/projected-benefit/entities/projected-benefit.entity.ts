@@ -12,7 +12,7 @@ import { ProjectedBenefitDepth } from '../../projected-benefit-depth/entities/pr
 import { ProjectedBenefitWeighting } from '../../projected-benefit-weighting/entities/projected-benefit-weighting.entity';
 
 @Entity('projected_benefits')
-export class ProjectedBenefit extends AuditableEntity {
+export class ProjectedBenefit {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -37,4 +37,9 @@ export class ProjectedBenefit extends AuditableEntity {
 
   @OneToMany(() => ProjectedBenefitDepth, (pbd) => pbd.projected_benefit_object)
   projected_benefit_depth_array: ProjectedBenefitDepth[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

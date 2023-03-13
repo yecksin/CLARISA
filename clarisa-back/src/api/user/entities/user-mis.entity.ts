@@ -10,7 +10,7 @@ import { Mis } from '../../mis/entities/mis.entity';
 import { User } from './user.entity';
 
 @Entity('user_mis')
-export class UserMis extends AuditableEntity {
+export class UserMis {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -31,4 +31,9 @@ export class UserMis extends AuditableEntity {
   @ManyToOne(() => Mis, (m) => m.user_mis_array)
   @JoinColumn({ name: 'mis_id' })
   mis_object: Mis;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

@@ -10,7 +10,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { SdgTarget } from '../../sdg-target/entities/sdg-target.entity';
 
 @Entity('sustainable_development_goal_indicators')
-export class SdgIndicator extends AuditableEntity {
+export class SdgIndicator {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -42,4 +42,9 @@ export class SdgIndicator extends AuditableEntity {
   })
   @JoinColumn({ name: 'sdg_target_id' })
   sdg_target_object: SdgTarget;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

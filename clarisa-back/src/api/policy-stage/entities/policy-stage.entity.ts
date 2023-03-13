@@ -9,7 +9,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { Source } from '../../source/entities/source.entity';
 
 @Entity('policy_stages')
-export class PolicyStage extends AuditableEntity {
+export class PolicyStage {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -29,4 +29,9 @@ export class PolicyStage extends AuditableEntity {
   @ManyToOne(() => Source, (s) => s.policy_stage_array)
   @JoinColumn({ name: 'source_id' })
   source_object: Source;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

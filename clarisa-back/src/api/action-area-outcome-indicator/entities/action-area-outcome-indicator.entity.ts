@@ -11,7 +11,7 @@ import { ActionArea } from '../../action-area/entities/action-area.entity';
 import { OutcomeIndicator } from '../../outcome-indicator/entities/outcome-indicator.entity';
 
 @Entity('action_area_outcome_indicators')
-export class ActionAreaOutcomeIndicator extends AuditableEntity {
+export class ActionAreaOutcomeIndicator {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -42,4 +42,9 @@ export class ActionAreaOutcomeIndicator extends AuditableEntity {
   @ManyToOne(() => ActionArea, (aao) => aao.action_area_outcome_indicators)
   @JoinColumn({ name: 'action_area_id' })
   action_area_object: ActionArea;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

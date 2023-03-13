@@ -13,7 +13,7 @@ import { OldInstitution } from '../../old-institution/entities/old-institution.e
 import { PartnerRequest } from '../../partner-request/entities/partner-request.entity';
 
 @Entity('institution_types')
-export class InstitutionType extends AuditableEntity {
+export class InstitutionType {
   @Expose({ name: 'code' })
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
@@ -52,4 +52,9 @@ export class InstitutionType extends AuditableEntity {
 
   @OneToMany(() => PartnerRequest, (pr) => pr.institution_type_object)
   partner_requests: PartnerRequest[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

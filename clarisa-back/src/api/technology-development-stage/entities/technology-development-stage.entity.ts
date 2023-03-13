@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 
 @Entity('technology_development_stages')
-export class TechnologyDevelopmentStage extends AuditableEntity {
+export class TechnologyDevelopmentStage {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -13,4 +13,9 @@ export class TechnologyDevelopmentStage extends AuditableEntity {
 
   @Column({ type: 'text', nullable: true })
   name: string;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

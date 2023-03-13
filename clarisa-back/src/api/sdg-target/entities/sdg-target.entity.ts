@@ -12,7 +12,7 @@ import { SdgIndicator } from '../../sdg-indicator/entities/sdg-indicator.entity'
 import { Sdg } from '../../sdg/entities/sdg.entity';
 
 @Entity('sustainable_development_goal_targets')
-export class SdgTarget extends AuditableEntity {
+export class SdgTarget {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -46,6 +46,12 @@ export class SdgTarget extends AuditableEntity {
   sdg_object: Sdg;
 
   //object relations
+
   @OneToMany(() => SdgIndicator, (sdgi) => sdgi.sdg_target_object)
   sdg_indicator_array: SdgIndicator[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

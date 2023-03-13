@@ -10,7 +10,7 @@ import { ProjectedBenefitWeightDescription } from '../../projected-benefit-weigh
 import { ProjectedBenefit } from '../../projected-benefit/entities/projected-benefit.entity';
 
 @Entity('projected_benefits_weighting')
-export class ProjectedBenefitWeighting extends AuditableEntity {
+export class ProjectedBenefitWeighting {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -40,4 +40,9 @@ export class ProjectedBenefitWeighting extends AuditableEntity {
   )
   @JoinColumn({ name: 'weight_description_id' })
   weight_description_object: ProjectedBenefitWeightDescription;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

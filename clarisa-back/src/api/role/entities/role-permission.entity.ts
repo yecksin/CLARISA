@@ -10,7 +10,7 @@ import { Permission } from '../../permission/entities/permission.entity';
 import { Role } from './role.entity';
 
 @Entity('role_permission')
-export class RolePermission extends AuditableEntity {
+export class RolePermission {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -31,4 +31,9 @@ export class RolePermission extends AuditableEntity {
   @ManyToOne(() => Permission, (p) => p.role_permission_array)
   @JoinColumn({ name: 'permission_id' })
   permission_object: Permission;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

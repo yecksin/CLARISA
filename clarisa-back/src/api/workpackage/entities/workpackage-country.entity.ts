@@ -10,7 +10,7 @@ import { Country } from '../../country/entities/country.entity';
 import { Workpackage } from './workpackage.entity';
 
 @Entity('submission_tool_work_package_countries')
-export class WorkpackageCountry extends AuditableEntity {
+export class WorkpackageCountry {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -31,4 +31,9 @@ export class WorkpackageCountry extends AuditableEntity {
   @ManyToOne(() => Country, (c) => c.work_package_country_array)
   @JoinColumn({ name: 'country_id' })
   country_object: Country;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

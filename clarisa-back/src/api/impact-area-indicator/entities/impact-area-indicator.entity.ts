@@ -9,7 +9,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { ImpactArea } from '../../impact-area/entities/impact-area.entity';
 
 @Entity('impact_area_indicators')
-export class ImpactAreaIndicator extends AuditableEntity {
+export class ImpactAreaIndicator {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -41,4 +41,9 @@ export class ImpactAreaIndicator extends AuditableEntity {
   @ManyToOne(() => ImpactArea, (ia) => ia.impact_area_indicators)
   @JoinColumn({ name: 'impact_areas_id' })
   impact_area_object: ImpactArea;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

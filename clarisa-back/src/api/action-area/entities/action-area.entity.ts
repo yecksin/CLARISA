@@ -5,7 +5,7 @@ import { ActionAreaOutcomeIndicator } from '../../action-area-outcome-indicator/
 import { InitiativeStage } from '../../initiative/entities/initiative-status.entity';
 
 @Entity('action_areas')
-export class ActionArea extends AuditableEntity {
+export class ActionArea {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -29,4 +29,9 @@ export class ActionArea extends AuditableEntity {
 
   @OneToMany(() => InitiativeStage, (is) => is.action_area_object)
   initiative_stage_array: InitiativeStage[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

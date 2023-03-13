@@ -3,7 +3,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { ActionAreaOutcomeIndicator } from '../../action-area-outcome-indicator/entities/action-area-outcome-indicator.entity';
 
 @Entity('action_area_outcomes')
-export class ActionAreaOutcome extends AuditableEntity {
+export class ActionAreaOutcome {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -20,4 +20,9 @@ export class ActionAreaOutcome extends AuditableEntity {
     (aaoi) => aaoi.action_area_outcome_object,
   )
   action_area_outcome_indicators: ActionAreaOutcomeIndicator[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

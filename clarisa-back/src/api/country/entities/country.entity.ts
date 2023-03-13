@@ -16,7 +16,7 @@ import { WorkpackageCountry } from '../../workpackage/entities/workpackage-count
 import { CountryRegion } from './country-region.entity';
 
 @Entity('countries')
-export class Country extends AuditableEntity {
+export class Country {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -60,4 +60,9 @@ export class Country extends AuditableEntity {
 
   @OneToMany(() => WorkpackageCountry, (wpc) => wpc.country_object)
   work_package_country_array: WorkpackageCountry[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

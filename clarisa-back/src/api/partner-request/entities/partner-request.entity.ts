@@ -14,7 +14,7 @@ import { Mis } from '../../mis/entities/mis.entity';
 import { User } from '../../user/entities/user.entity';
 
 @Entity('partner_requests')
-export class PartnerRequest extends AuditableEntity {
+export class PartnerRequest {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -119,4 +119,9 @@ export class PartnerRequest extends AuditableEntity {
   //in theory it should be ONLY one, but you'll never know...
   @OneToMany(() => PartnerRequest, (pr) => pr.parent_object)
   children: PartnerRequest[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

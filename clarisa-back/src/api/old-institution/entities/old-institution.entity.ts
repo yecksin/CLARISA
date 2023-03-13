@@ -4,7 +4,7 @@ import { InstitutionType } from '../../institution-type/entities/institution-typ
 import { InstitutionLocation } from '../../institution/entities/institution-location.entity';
 
 @Entity('old_institutions')
-export class OldInstitution extends AuditableEntity {
+export class OldInstitution {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -25,9 +25,14 @@ export class OldInstitution extends AuditableEntity {
   @Column({ type: 'bigint', nullable: true })
   parent_id: number;
 
-  //object relations
+  //object "relations"
 
   institution_locations: InstitutionLocation[];
 
   institution_type_object: InstitutionType;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

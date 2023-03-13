@@ -10,7 +10,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { ImpactArea } from '../../impact-area/entities/impact-area.entity';
 
 @Entity('global_targets')
-export class GlobalTarget extends AuditableEntity {
+export class GlobalTarget {
   @Expose({ name: 'targetId' })
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
@@ -33,4 +33,9 @@ export class GlobalTarget extends AuditableEntity {
   @ManyToOne(() => ImpactArea, { eager: true })
   @JoinColumn({ name: 'impact_areas_id' })
   impact_area_name: ImpactArea;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

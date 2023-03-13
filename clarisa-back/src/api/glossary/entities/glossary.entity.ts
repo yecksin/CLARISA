@@ -3,7 +3,7 @@ import { Exclude, Expose } from 'class-transformer';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 
 @Entity('glossary')
-export class Glossary extends AuditableEntity {
+export class Glossary {
   @Exclude({ toPlainOnly: true })
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
@@ -22,4 +22,9 @@ export class Glossary extends AuditableEntity {
   @Exclude({ toPlainOnly: true })
   @Column({ type: 'tinyint', nullable: false, default: () => '0' })
   show_in_dashboard: boolean;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

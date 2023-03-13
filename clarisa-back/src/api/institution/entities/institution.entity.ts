@@ -15,7 +15,7 @@ import { PartnerRequest } from '../../partner-request/entities/partner-request.e
 import { InstitutionLocation } from './institution-location.entity';
 
 @Entity('institutions')
-export class Institution extends AuditableEntity {
+export class Institution {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -63,4 +63,9 @@ export class Institution extends AuditableEntity {
 
   @OneToMany(() => CgiarEntity, (ce) => ce.institution_object)
   cgiar_entity_array: CgiarEntity[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

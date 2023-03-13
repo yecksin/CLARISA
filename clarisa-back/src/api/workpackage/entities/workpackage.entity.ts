@@ -12,7 +12,7 @@ import { WorkpackageCountry } from './workpackage-country.entity';
 import { WorkpackageRegion } from './workpackage-region.entity';
 
 @Entity('submission_tool_work_packages')
-export class Workpackage extends AuditableEntity {
+export class Workpackage {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -50,4 +50,9 @@ export class Workpackage extends AuditableEntity {
 
   @OneToMany(() => WorkpackageRegion, (wpr) => wpr.work_package_object)
   regions: WorkpackageRegion[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

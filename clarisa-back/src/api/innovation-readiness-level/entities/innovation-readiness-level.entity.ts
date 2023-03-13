@@ -9,7 +9,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { Source } from '../../source/entities/source.entity';
 
 @Entity('innovation_readiness_levels')
-export class InnovationReadinessLevel extends AuditableEntity {
+export class InnovationReadinessLevel {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -32,4 +32,9 @@ export class InnovationReadinessLevel extends AuditableEntity {
   @ManyToOne(() => Source, (s) => s.innovation_readiness_level_array)
   @JoinColumn({ name: 'source_id' })
   source_object: Source;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

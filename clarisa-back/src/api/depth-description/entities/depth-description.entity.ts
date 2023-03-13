@@ -4,7 +4,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { ProjectedBenefitDepth } from '../../projected-benefit-depth/entities/projected-benefit-depth.entity';
 
 @Entity('depths_description')
-export class DepthDescription extends AuditableEntity {
+export class DepthDescription {
   @Expose({ name: 'depthScaleId' })
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
@@ -13,7 +13,13 @@ export class DepthDescription extends AuditableEntity {
   @Column({ type: 'text', nullable: true })
   name: string;
 
-  //relations
+  //object relations
+
   @OneToMany(() => ProjectedBenefitDepth, (pbd) => pbd.depth_description_object)
   projected_benefit_depth_array: ProjectedBenefitDepth[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

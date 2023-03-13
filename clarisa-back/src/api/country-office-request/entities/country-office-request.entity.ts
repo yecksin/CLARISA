@@ -12,7 +12,7 @@ import { Mis } from '../../mis/entities/mis.entity';
 import { User } from '../../user/entities/user.entity';
 
 @Entity('country_office_requests')
-export class CountryOfficeRequest extends AuditableEntity {
+export class CountryOfficeRequest {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -75,4 +75,9 @@ export class CountryOfficeRequest extends AuditableEntity {
   @ManyToOne(() => User, (u) => u.country_office_request_rejection_array)
   @JoinColumn({ name: 'rejected_by' })
   rejected_by_object: User;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

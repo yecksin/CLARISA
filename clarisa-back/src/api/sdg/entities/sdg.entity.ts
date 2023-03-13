@@ -3,7 +3,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { SdgTarget } from '../../sdg-target/entities/sdg-target.entity';
 
 @Entity('sustainable_development_goals')
-export class Sdg extends AuditableEntity {
+export class Sdg {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -26,6 +26,12 @@ export class Sdg extends AuditableEntity {
   description: string;
 
   //object relations
+
   @OneToMany(() => SdgTarget, (sdgt) => sdgt.sdg_object)
   sdg_target_array: SdgTarget[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

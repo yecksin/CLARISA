@@ -10,7 +10,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { AccountType } from '../../account-type/entities/account-type.entity';
 
 @Entity('accounts')
-export class Account extends AuditableEntity {
+export class Account {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -42,4 +42,9 @@ export class Account extends AuditableEntity {
 
   @OneToMany(() => Account, (a) => a.parent)
   children: Account[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

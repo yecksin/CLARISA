@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 
 @Entity('general_acronyms')
-export class GeneralAcronym extends AuditableEntity {
+export class GeneralAcronym {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   @Expose({ name: 'code' })
   id: number;
@@ -13,4 +13,9 @@ export class GeneralAcronym extends AuditableEntity {
 
   @Column({ type: 'text', nullable: false })
   description: string;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

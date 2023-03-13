@@ -4,7 +4,7 @@ import { UserRole } from '../../user/entities/user-role.entity';
 import { RolePermission } from './role-permission.entity';
 
 @Entity('roles')
-export class Role extends AuditableEntity {
+export class Role {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -24,4 +24,9 @@ export class Role extends AuditableEntity {
 
   @OneToMany(() => RolePermission, (rp) => rp.role_object)
   role_permission_array: RolePermission[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

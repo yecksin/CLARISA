@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 
 @Entity('study_types')
-export class StudyType extends AuditableEntity {
+export class StudyType {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -16,4 +16,9 @@ export class StudyType extends AuditableEntity {
   @Exclude({ toPlainOnly: true })
   @Column({ type: 'int', nullable: false })
   norder: number;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

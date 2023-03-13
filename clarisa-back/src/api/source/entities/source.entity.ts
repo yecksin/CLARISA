@@ -9,7 +9,7 @@ import { PolicyStage } from '../../policy-stage/entities/policy-stage.entity';
 import { PolicyType } from '../../policy-type/entities/policy-type.entity';
 
 @Entity('sources')
-export class Source extends AuditableEntity {
+export class Source {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -42,4 +42,9 @@ export class Source extends AuditableEntity {
 
   @OneToMany(() => PolicyType, (pt) => pt.source_object)
   policy_type_array: PolicyType[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

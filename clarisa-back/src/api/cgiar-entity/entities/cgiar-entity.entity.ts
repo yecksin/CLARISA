@@ -11,7 +11,7 @@ import { CgiarEntityType } from '../../cgiar-entity-type/entities/cgiar-entity-t
 import { Institution } from '../../institution/entities/institution.entity';
 
 @Entity('global_units')
-export class CgiarEntity extends AuditableEntity {
+export class CgiarEntity {
   @Exclude()
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
@@ -52,4 +52,9 @@ export class CgiarEntity extends AuditableEntity {
   @ManyToOne(() => Institution, (i) => i.cgiar_entity_array)
   @JoinColumn({ name: 'institution_id' })
   institution_object: Institution;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

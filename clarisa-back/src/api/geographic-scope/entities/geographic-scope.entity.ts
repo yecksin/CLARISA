@@ -10,7 +10,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { Source } from '../../source/entities/source.entity';
 
 @Entity('geographic_scopes')
-export class GeographicScope extends AuditableEntity {
+export class GeographicScope {
   @Expose({ name: 'code' })
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
@@ -36,4 +36,9 @@ export class GeographicScope extends AuditableEntity {
   @ManyToOne(() => Source, (s) => s.geographic_scope_array)
   @JoinColumn({ name: 'source_id' })
   source_object: Source;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

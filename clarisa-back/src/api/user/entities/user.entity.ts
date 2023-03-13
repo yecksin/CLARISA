@@ -13,7 +13,7 @@ import { UserMis } from './user-mis.entity';
 import { UserRole } from './user-role.entity';
 
 @Entity('users')
-export class User extends AuditableEntity {
+export class User {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -67,4 +67,9 @@ export class User extends AuditableEntity {
 
   //meant to be used by the guard
   permissions: string[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

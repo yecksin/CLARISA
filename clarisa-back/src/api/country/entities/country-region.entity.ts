@@ -10,7 +10,7 @@ import { Region } from '../../region/entities/region.entity';
 import { Country } from './country.entity';
 
 @Entity('country_regions')
-export class CountryRegion extends AuditableEntity {
+export class CountryRegion {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -31,4 +31,9 @@ export class CountryRegion extends AuditableEntity {
   @ManyToOne(() => Region, (r) => r.country_region_array)
   @JoinColumn({ name: 'region_id' })
   region_object: Region;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

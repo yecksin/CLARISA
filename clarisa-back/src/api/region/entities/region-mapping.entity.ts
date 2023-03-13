@@ -9,7 +9,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { Region } from './region.entity';
 
 @Entity('region_mappings')
-export class RegionMapping extends AuditableEntity {
+export class RegionMapping {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -30,4 +30,9 @@ export class RegionMapping extends AuditableEntity {
   @ManyToOne(() => Region, (r) => r.target_region_array)
   @JoinColumn({ name: 'target_region_id' })
   target_region_object: Region;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

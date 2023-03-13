@@ -3,7 +3,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { Unit } from './unit.entity';
 
 @Entity('unit_types')
-export class UnitType extends AuditableEntity {
+export class UnitType {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -17,4 +17,9 @@ export class UnitType extends AuditableEntity {
 
   @OneToMany(() => Unit, (u) => u.unit_type)
   units: Unit[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

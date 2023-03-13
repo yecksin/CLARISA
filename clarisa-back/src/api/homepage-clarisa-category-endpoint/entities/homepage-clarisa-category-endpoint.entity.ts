@@ -10,7 +10,7 @@ import { HomepageClarisaCategory } from '../../homepage-clarisa-category/entitie
 import { HomepageClarisaEndpoint } from '../../homepage-clarisa-endpoint/entities/homepage-clarisa-endpoint.entity';
 
 @Entity('hp_clarisa_category_endpoints')
-export class HomepageClarisaCategoryEndpoint extends AuditableEntity {
+export class HomepageClarisaCategoryEndpoint {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -37,4 +37,9 @@ export class HomepageClarisaCategoryEndpoint extends AuditableEntity {
   )
   @JoinColumn({ name: 'endpoint_id' })
   endpoint_object: HomepageClarisaEndpoint;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

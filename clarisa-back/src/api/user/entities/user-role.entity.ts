@@ -10,7 +10,7 @@ import { Role } from '../../role/entities/role.entity';
 import { User } from './user.entity';
 
 @Entity('user_roles')
-export class UserRole extends AuditableEntity {
+export class UserRole {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -30,4 +30,9 @@ export class UserRole extends AuditableEntity {
   @ManyToOne(() => User, (user) => user.userRoles)
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

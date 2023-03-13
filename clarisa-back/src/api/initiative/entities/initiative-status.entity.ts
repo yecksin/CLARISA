@@ -13,7 +13,7 @@ import { Initiative } from './initiative.entity';
 import { Stage } from './status.entity';
 
 @Entity('submission_tool_initiative_stages')
-export class InitiativeStage extends AuditableEntity {
+export class InitiativeStage {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
@@ -50,4 +50,9 @@ export class InitiativeStage extends AuditableEntity {
 
   @OneToMany(() => Workpackage, (w) => w.initiative_stage_object)
   work_package_array: Workpackage[];
+
+  //auditable fields
+
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

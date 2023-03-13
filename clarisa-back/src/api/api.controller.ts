@@ -7,10 +7,13 @@ import {
   Req,
   Res,
   Param,
+  Query,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { ApiService } from './api.service';
 import { PartnerRequestDto } from './partner-request/dto/partner-request.dto';
+import { SdgService } from './sdg/sdg.service';
+import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 
 @Controller()
 export class ApiController {
@@ -46,8 +49,8 @@ export class ApiController {
   }
 
   @Get('allSDG')
-  @Redirect('sdgs', HttpStatus.MOVED_PERMANENTLY)
-  getSDGs() {
+  async getSDGs(@Query('show') show: FindAllOptions) {
+    
     // nothing, we are just going to redirect
   }
 

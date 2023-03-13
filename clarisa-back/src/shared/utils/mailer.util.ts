@@ -129,7 +129,7 @@ export class MailUtil {
     const isProd: boolean =
       Profile.getfromName(env.APP_PROFILE) == Profile.PROD;
 
-    const subject: string = `${isDev ? 'TEST' : ''} [CLARISA API - ${
+    const subject = `${isDev ? 'TEST' : ''} [CLARISA API - ${
       partnerRequest.mis_object.acronym
     }] Partner verification - ${partnerRequest.partner_name}`;
 
@@ -165,7 +165,7 @@ export class MailUtil {
     )
       .then((hbsTemplate) => {
         const template = Handlebars.compile(hbsTemplate);
-        let compiledTemplate: string = template(partnerRequest);
+        const compiledTemplate: string = template(partnerRequest);
 
         this.sendEmail({
           from: env.SUPPORT_EMAIL, // sender address
@@ -192,7 +192,7 @@ export class MailUtil {
     const isProd: boolean =
       Profile.getfromName(env.APP_PROFILE) == Profile.PROD;
 
-    const subject: string = `${isDev ? 'TEST' : ''} [CLARISA API - ${
+    const subject = `${isDev ? 'TEST' : ''} [CLARISA API - ${
       partnerRequest.mis_object.acronym
     }] ${
       partnerRequest.rejected_by ? 'REJECTED' : 'APPROVED'
@@ -227,7 +227,7 @@ export class MailUtil {
       '../../../assets/email-templates/responded-partner-request.hbs',
     ).then((hbsTemplate) => {
       const template = Handlebars.compile(hbsTemplate);
-      let compiledTemplate: string = template(partnerRequest);
+      const compiledTemplate: string = template(partnerRequest);
 
       this.sendEmail({
         from: env.SUPPORT_EMAIL, // sender address

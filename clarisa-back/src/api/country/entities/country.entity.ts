@@ -3,8 +3,6 @@ import {
   Entity,
   Index,
   JoinColumn,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -14,7 +12,6 @@ import { CountryOfficeRequest } from '../../country-office-request/entities/coun
 import { Geoposition } from '../../geoposition/entities/geoposition.entity';
 import { InstitutionLocation } from '../../institution/entities/institution-location.entity';
 import { PartnerRequest } from '../../partner-request/entities/partner-request.entity';
-import { Region } from '../../region/entities/region.entity';
 import { WorkpackageCountry } from '../../workpackage/entities/workpackage-country.entity';
 import { CountryRegion } from './country-region.entity';
 

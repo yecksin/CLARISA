@@ -1,17 +1,12 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
-import { Repository } from 'typeorm';
 import { RespondRequestDto } from '../../shared/entities/dtos/respond-request.dto';
 import { ResponseDto } from '../../shared/entities/dtos/response-dto';
 import { MisOption } from '../../shared/entities/enums/mises-options';
 import { PartnerStatus } from '../../shared/entities/enums/partner-status';
 import { UserData } from '../../shared/interfaces/user-data';
-import { Country } from '../country/entities/country.entity';
 import { CountryRepository } from '../country/repositories/country.repository';
-import { InstitutionType } from '../institution-type/entities/institution-type.entity';
-import { Mis } from '../mis/entities/mis.entity';
 import { User } from '../user/entities/user.entity';
 import { CreatePartnerRequestDto } from './dto/create-partner-request.dto';
 import { PartnerRequestDto } from './dto/partner-request.dto';
@@ -76,7 +71,7 @@ export class PartnerRequestService {
     );
 
     //Basic validations
-    let validationErrors: string[] = (
+    const validationErrors: string[] = (
       await validate(incomingPartnerRequest)
     ).flatMap((e) => {
       const newLocal = Object.values(e.constraints).map((m) => m);
@@ -177,7 +172,7 @@ export class PartnerRequestService {
     );
 
     //Basic validations
-    let validationErrors: string[] = (
+    const validationErrors: string[] = (
       await validate(respondPartnerRequestDto)
     ).flatMap((e) => {
       const newLocal = Object.values(e.constraints).map((m) => m);
@@ -268,7 +263,7 @@ export class PartnerRequestService {
     updatePartnerRequest.externalUserMail = 'some@mail.com';
 
     //Basic validations
-    let validationErrors: string[] = (
+    const validationErrors: string[] = (
       await validate(updatePartnerRequest)
     ).flatMap((e) => Object.values(e.constraints).map((m) => m));
 

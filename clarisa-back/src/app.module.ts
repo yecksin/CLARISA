@@ -15,13 +15,8 @@ import { IntegrationModule } from './shared/integration/integration.module';
 import { User } from './api/user/entities/user.entity';
 import { dataSource } from './ormconfig';
 import { AuthModule } from './auth/auth.module';
-import { UserService } from './api/user/user.service';
-import { APP_GUARD } from '@nestjs/core';
 import { GuardsModule } from './shared/guards/guards.module';
 import { BasicAuthMiddleware } from './shared/guards/basic-auth.middleware';
-import { ApiController } from './api/api.controller';
-import { UserRepository } from './api/user/repositories/user.repository';
-import { RoleRepository } from './api/role/repositories/role.repository';
 
 @Module({
   imports: [

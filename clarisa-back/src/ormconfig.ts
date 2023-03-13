@@ -1,7 +1,6 @@
 import { DataSource } from 'typeorm';
 import 'dotenv/config';
 import { env } from 'process';
-import { Institution } from './api/institution/entities/institution.entity';
 import { join } from 'path';
 
 export const dataSource: DataSource = new DataSource({

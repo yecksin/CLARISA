@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UpdateGlossaryDto } from './dto/update-glossary.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { FindOptionsOrder, FindOptionsWhere, Repository } from 'typeorm';
+import { FindOptionsOrder, FindOptionsWhere } from 'typeorm';
 import { Glossary } from './entities/glossary.entity';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { GlossaryRepository } from './repositories/glossary.repository';
@@ -11,10 +10,10 @@ export class GlossaryService {
 
   findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
-    onlyDashboard: boolean = false,
+    onlyDashboard = false,
   ): Promise<Glossary[]> {
     let whereClause: FindOptionsWhere<Glossary> = {};
-    let orderClause: FindOptionsOrder<Glossary> = {
+    const orderClause: FindOptionsOrder<Glossary> = {
       title: 'ASC',
     };
 

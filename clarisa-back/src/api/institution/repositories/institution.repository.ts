@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import {
   DataSource,
   FindOptionsRelations,
@@ -13,14 +12,11 @@ import { InstitutionDictionaryDto } from '../../institution-dictionary/dto/insti
 import { InstitutionSourceDto } from '../../institution-dictionary/dto/institution-source.dto';
 import { InstitutionTypeDto } from '../../institution-type/dto/institution-type.dto';
 import { PartnerRequest } from '../../partner-request/entities/partner-request.entity';
-import { CreateInstitutionBulkDto } from '../dto/institution-bulk.dto';
 import { InstitutionCountryDto } from '../dto/institution-country.dto';
 import { InstitutionSimpleDto } from '../dto/institution-simple.dto';
 import { InstitutionDto } from '../dto/institution.dto';
 import { InstitutionLocation } from '../entities/institution-location.entity';
 import { Institution } from '../entities/institution.entity';
-import { InstitutionType } from '../../institution-type/entities/institution-type.entity';
-import { Country } from '../../country/entities/country.entity';
 import { InstitutionLocationRepository } from './institution-location.repository';
 
 @Injectable()
@@ -86,7 +82,6 @@ export class InstitutionRepository extends Repository<Institution> {
   async findAllInstitutionsSimple(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<InstitutionSimpleDto[]> {
-    const institutionDtos: InstitutionSimpleDto[] = [];
     let whereClause: FindOptionsWhere<Institution> = {};
     switch (option) {
       case FindAllOptions.SHOW_ALL:
@@ -128,7 +123,7 @@ export class InstitutionRepository extends Repository<Institution> {
 
   private fillOutInstitutionInfo(
     institution: Institution,
-    showActiveField: boolean = false,
+    showActiveField = false,
   ): InstitutionDto {
     const institutionDto: InstitutionDto = new InstitutionDto();
 
@@ -244,7 +239,7 @@ export class InstitutionRepository extends Repository<Institution> {
     request: CountryOfficeRequest | PartnerRequest,
     isHQ: boolean,
   ): Promise<InstitutionLocation> {
-    let institutionLocation: InstitutionLocation = new InstitutionLocation();
+    const institutionLocation: InstitutionLocation = new InstitutionLocation();
 
     institutionLocation.country_id = request.country_id;
     institutionLocation.created_at = request.accepted_date;
@@ -288,7 +283,7 @@ export class InstitutionRepository extends Repository<Institution> {
     isHQ: boolean,
     createBy: number,
   ) {
-    let institutionLocation: InstitutionLocation = new InstitutionLocation();
+    const institutionLocation: InstitutionLocation = new InstitutionLocation();
 
     institutionLocation.country_id = countryAndInstitution;
     institutionLocation.is_headquater = isHQ;
@@ -302,8 +297,6 @@ export class InstitutionRepository extends Repository<Institution> {
     BulkInstitutions: PartnerRequest,
     createBy: number,
   ) {
-    let institutionType: InstitutionType;
-
     let institution: Institution = new Institution();
     institution.acronym = BulkInstitutions.acronym;
     institution.name = BulkInstitutions.partner_name;

@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateTechnologyDevelopmentStageDto } from './dto/update-technology-development-stage.dto';
 import { TechnologyDevelopmentStage } from './entities/technology-development-stage.entity';

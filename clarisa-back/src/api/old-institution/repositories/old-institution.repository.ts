@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common/decorators';
-import { InjectRepository } from '@nestjs/typeorm';
 import {
   DataSource,
-  FindOptionsRelations,
   FindOptionsWhere,
   MoreThanOrEqual,
   Repository,
@@ -90,7 +88,6 @@ export class OldInstitutionRepository extends Repository<OldInstitution> {
   async findAllInstitutionsSimple(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<InstitutionSimpleDto[]> {
-    const institutionDtos: InstitutionSimpleDto[] = [];
     let whereClause: FindOptionsWhere<OldInstitution> = {};
     switch (option) {
       case FindAllOptions.SHOW_ALL:
@@ -149,7 +146,7 @@ export class OldInstitutionRepository extends Repository<OldInstitution> {
 
   private fillOutInstitutionInfo(
     oldInstitution: OldInstitution,
-    showActiveField: boolean = false,
+    showActiveField = false,
   ): InstitutionDto {
     const institutionDto: InstitutionDto = new InstitutionDto();
 

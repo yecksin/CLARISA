@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { FindOptionsOrder, FindOptionsWhere, In, Repository } from 'typeorm';
+import { FindOptionsOrder, FindOptionsWhere, In } from 'typeorm';
 import { CgiarEntityTypeEnum } from '../../shared/entities/enums/cgiar-entity-types';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateCgiarEntityDto } from './dto/update-cgiar-entity.dto';
@@ -24,7 +23,7 @@ export class CgiarEntityService {
   ];
 
   private readonly whereClause: FindOptionsWhere<CgiarEntity> = {
-    cgiarEntityType: {
+    cgiar_entity_type_object: {
       id: In(this.commonTypes),
     },
   };

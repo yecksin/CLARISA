@@ -27,8 +27,6 @@ import { UpdatePartnerRequestDto } from '../dto/update-partner-request.dto';
 import { PartnerRequest } from '../entities/partner-request.entity';
 import { BulkPartnerRequestDto } from '../dto/create-partner-dto';
 import { InstitutionType } from '../../institution-type/entities/institution-type.entity';
-import { CreateInstitutionBulkDto } from '../../institution/dto/institution-bulk.dto';
-import { share } from 'rxjs';
 import { CountryRepository } from '../../country/repositories/country.repository';
 import { InstitutionTypeRepository } from '../../institution-type/repositories/institution-type.repository';
 import { FindAllOptions } from '../../../shared/entities/enums/find-all-options';
@@ -37,8 +35,10 @@ import { FindAllOptions } from '../../../shared/entities/enums/find-all-options'
 export class PartnerRequestRepository extends Repository<PartnerRequest> {
   private readonly partnerRelations: FindOptionsRelations<PartnerRequest> = {
     country_object: {
-      regions: {
-        parent_object: true,
+      country_region_array: {
+        region_object: {
+          parent_object: true,
+        },
       },
     },
     mis_object: true,
@@ -47,8 +47,10 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       institution_type_object: true,
       institution_locations: {
         country_object: {
-          regions: {
-            parent_object: true,
+          country_region_array: {
+            region_object: {
+              parent_object: true,
+            },
           },
         },
       },
@@ -203,7 +205,9 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     countryDto.isoAlpha3 = country.iso_alpha_3;
     countryDto.name = country.name;
 
-    countryDto.regionDTO = this.fillOutRegionInfo(country.regions);
+    countryDto.regionDTO = this.fillOutRegionInfo(
+      country.country_region_array.map((cr) => cr.region_object),
+    );
 
     return countryDto;
   }
@@ -299,7 +303,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       where: { id: partialPartnerRequest.id },
       relations: this.partnerRelations,
     });
-    let informationEmail: any = await partialPartnerRequest;
+    const informationEmail: any = await partialPartnerRequest;
     this.mailUtil.sendNewPartnerRequestNotification(informationEmail);
 
     return this.fillOutPartnerRequestDto(partialPartnerRequest);
@@ -448,19 +452,20 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
   }
 
   async createPartnerRequestBulk(partnerRequestBulk: BulkPartnerRequestDto) {
-    let institutionTypes: InstitutionType[];
-    let countryInstitution: Country[];
-    let BulkInstitutions: Institution;
-    let partnerCreate: any[] = [];
-    let today = new Date();
+    let bulkInstitutions: Institution;
+    const partnerCreate: any[] = [];
+    const today = new Date();
 
-    countryInstitution = await this.countryRepository.find();
-    institutionTypes = await this.institutionType.find({
-      where: {
-        source_id: 1,
+    const countryInstitution: Country[] = await this.countryRepository.find();
+    const institutionTypes: InstitutionType[] = await this.institutionType.find(
+      {
+        where: {
+          source_id: 1,
+        },
       },
-    });
-    for (let partnerRequestBulkIterator of partnerRequestBulk.listPartnerRequest) {
+    );
+
+    for (const partnerRequestBulkIterator of partnerRequestBulk.listPartnerRequest) {
       let partnerRequests: PartnerRequest = new PartnerRequest();
       partnerRequests.partner_name = partnerRequestBulkIterator.name;
       partnerRequests.acronym = partnerRequestBulkIterator.acronym;
@@ -470,10 +475,10 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       partnerRequests.external_user_name = partnerRequestBulk.externalUserName;
       partnerRequests.created_by = partnerRequestBulk.externalUser;
 
-      let filterCountry = countryInstitution.filter(
+      const filterCountry = countryInstitution.filter(
         (country) => country.iso_alpha_2 == partnerRequestBulkIterator.country,
       );
-      let filterType = institutionTypes.filter(
+      const filterType = institutionTypes.filter(
         (typeIntitution) =>
           typeIntitution.name == partnerRequestBulkIterator.institution_type,
       );
@@ -488,12 +493,12 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
         partnerRequests.accepted = true;
         partnerRequests.accepted_by = partnerRequestBulk.accepted;
         partnerRequests.accepted_date = today;
-        BulkInstitutions =
+        bulkInstitutions =
           await this.institutionRepository.createBulkInstitution(
             partnerRequests,
             partnerRequestBulk.accepted,
           );
-        partnerRequests.institution_id = BulkInstitutions.id;
+        partnerRequests.institution_id = bulkInstitutions.id;
       }
       if (partnerRequestBulkIterator.status == 'Rejected') {
         partnerRequests.accepted = false;

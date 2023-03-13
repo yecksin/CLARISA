@@ -1,16 +1,6 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToMany,
-  OneToMany,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
-import { Mis } from '../../mis/entities/mis.entity';
 import { UserRole } from '../../user/entities/user-role.entity';
-import { User } from '../../user/entities/user.entity';
 import { RolePermission } from './role-permission.entity';
 
 @Entity('roles')

@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
-import { CreatePermissionDto } from './dto/create-permission.dto';
-import { UpdatePermissionDto } from './dto/update-permission.dto';
 import { Permission } from './entities/permission.entity';
 import { PermissionRepository } from './repositories/permission.repository';
 

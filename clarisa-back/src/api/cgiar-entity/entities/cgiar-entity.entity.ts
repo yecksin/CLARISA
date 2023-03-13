@@ -46,7 +46,7 @@ export class CgiarEntity extends AuditableEntity {
     eager: true,
   })
   @JoinColumn({ name: 'global_unit_type_id' })
-  cgiar_entity_object: CgiarEntityType;
+  cgiar_entity_type_object: CgiarEntityType;
 
   @Exclude()
   @ManyToOne(() => Institution, (i) => i.cgiar_entity_array)

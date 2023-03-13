@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateProjectedBenefitWeightingDto } from './dto/update-projected-benefit-weighting.dto';
 import { ProjectedBenefitWeighting } from './entities/projected-benefit-weighting.entity';
@@ -9,7 +7,7 @@ import { ProjectedBenefitWeightingRepository } from './repositories/projected-be
 @Injectable()
 export class ProjectedBenefitWeightingService {
   constructor(
-    private ProjectedBenefitWeightingRepository: ProjectedBenefitWeightingRepository,
+    private projectedBenefitWeightingRepository: ProjectedBenefitWeightingRepository,
   ) {}
 
   async findAll(
@@ -17,10 +15,10 @@ export class ProjectedBenefitWeightingService {
   ): Promise<ProjectedBenefitWeighting[]> {
     switch (option) {
       case FindAllOptions.SHOW_ALL:
-        return await this.ProjectedBenefitWeightingRepository.find();
+        return await this.projectedBenefitWeightingRepository.find();
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
-        return await this.ProjectedBenefitWeightingRepository.find({
+        return await this.projectedBenefitWeightingRepository.find({
           where: {
             is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
           },
@@ -31,7 +29,7 @@ export class ProjectedBenefitWeightingService {
   }
 
   async findOne(id: number): Promise<ProjectedBenefitWeighting> {
-    return await this.ProjectedBenefitWeightingRepository.findOneBy({
+    return await this.projectedBenefitWeightingRepository.findOneBy({
       id,
       is_active: true,
     });
@@ -40,7 +38,7 @@ export class ProjectedBenefitWeightingService {
   async update(
     updateProjectedBenefitWeightingDto: UpdateProjectedBenefitWeightingDto[],
   ) {
-    return await this.ProjectedBenefitWeightingRepository.save(
+    return await this.projectedBenefitWeightingRepository.save(
       updateProjectedBenefitWeightingDto,
     );
   }

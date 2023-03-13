@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
-import { Repository } from 'typeorm';
 import { UpdateEnvironmentalBenefitDto } from './dto/update-environmental-benefit.dto';
 import { EnvironmentalBenefit } from './entities/environmental-benefit.entity';
 import { EnvironmentalBenefitRepository } from './repositories/environmental-benefit.repository';

@@ -3,14 +3,12 @@ import {
   Entity,
   Index,
   JoinColumn,
-  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { CountryRegion } from '../../country/entities/country-region.entity';
-import { Country } from '../../country/entities/country.entity';
 import { RegionType } from '../../region-type/entities/region-type.entity';
 import { WorkpackageRegion } from '../../workpackage/entities/workpackage-region.entity';
 import { RegionMapping } from './region-mapping.entity';

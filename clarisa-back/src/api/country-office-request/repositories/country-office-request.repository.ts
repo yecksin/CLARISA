@@ -30,16 +30,20 @@ export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequ
   private readonly requestRelations: FindOptionsRelations<CountryOfficeRequest> =
     {
       country_object: {
-        regions: {
-          parent_object: true,
+        country_region_array: {
+          region_object: {
+            parent_object: true,
+          },
         },
       },
       institution_object: {
         institution_type_object: true,
         institution_locations: {
           country_object: {
-            regions: {
-              parent_object: true,
+            country_region_array: {
+              region_object: {
+                parent_object: true,
+              },
             },
           },
         },
@@ -69,7 +73,6 @@ export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequ
     const countryOfficeRequestDtos: CountryOfficeRequestDto[] = [];
     let whereClause: FindOptionsWhere<CountryOfficeRequest> = {};
     const incomingMis = MisOption.getfromPath(mis);
-    const incomingStatus = PartnerStatus.getfromPath(status);
 
     switch (mis) {
       case MisOption.ALL.path:
@@ -175,7 +178,9 @@ export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequ
     countryDto.isoAlpha3 = country.iso_alpha_3;
     countryDto.name = country.name;
 
-    countryDto.regionDTO = this.fillOutRegionInfo(country.regions);
+    countryDto.regionDTO = this.fillOutRegionInfo(
+      country.country_region_array.map((cr) => cr.region_object),
+    );
 
     return countryDto;
   }

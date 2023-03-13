@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { FindOptionsWhere, Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { SourceOption } from '../../shared/entities/enums/source-options';
 import { InstitutionTypeFromParentDto } from './dto/institution-type-from-parent.dto';

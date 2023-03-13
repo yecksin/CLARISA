@@ -5,11 +5,13 @@ import { env } from 'process';
 
 @Injectable()
 export class QaService {
-    private httpUrl = env.QA_URL;
-    constructor(protected readonly httpService: HttpService){
-    }
+  private httpUrl = env.QA_URL;
+  constructor(protected readonly httpService: HttpService) {}
 
-    postQaToken(bodyTokenQa: TokenQaDto){
-        return this.httpService.post(`${this.httpUrl}/auth/token-embed`, bodyTokenQa)
-    }
+  postQaToken(bodyTokenQa: TokenQaDto) {
+    return this.httpService.post(
+      `${this.httpUrl}/auth/token-embed`,
+      bodyTokenQa,
+    );
+  }
 }

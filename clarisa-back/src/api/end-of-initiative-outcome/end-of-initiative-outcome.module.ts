@@ -1,19 +1,18 @@
 import { Module } from '@nestjs/common';
 import { EndOfInitiativeOutcomeService } from './end-of-initiative-outcome.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { EndOfInitiativeOutcome } from './entities/end-of-initiative-outcome.entity';
 import { ApiOST } from '../../shared/integration/ost/api.ost';
 import { HttpModule } from '@nestjs/axios';
 import { IntegrationModule } from '../../shared/integration/integration.module';
 import { EndOfInitiativeOutcomeController } from './end-of-initiative-outcome.controller';
+import { EndOfInitiativeOutcomeRepository } from './repositories/end-of-initiative-outcomes.repository';
 
 @Module({
-  imports: [
-    HttpModule,
-    TypeOrmModule.forFeature([EndOfInitiativeOutcome]),
-    IntegrationModule,
-  ],
+  imports: [HttpModule, IntegrationModule],
   controllers: [EndOfInitiativeOutcomeController],
-  providers: [EndOfInitiativeOutcomeService, ApiOST],
+  providers: [
+    EndOfInitiativeOutcomeService,
+    ApiOST,
+    EndOfInitiativeOutcomeRepository,
+  ],
 })
 export class EndOfInitiativeOutcomeModule {}

@@ -10,9 +10,9 @@ import { DBAuth } from './utils/DBAuth';
 import { LDAPAuth } from './utils/LDAPAuth';
 import { LegacyPasswordEncoder } from './utils/LegacyPasswordEncoder';
 import { env } from 'process';
-import { QaTokenModule } from './qa-token/qa-token.module';
 import 'dotenv/config';
 import { UserModule } from '../api/user/user.module';
+import { QaTokenAuthModule } from './qa-token-auth/qa-token-auth.module';
 
 @Module({
   controllers: [AuthController],
@@ -23,7 +23,7 @@ import { UserModule } from '../api/user/user.module';
       secret: env.JWT_SECRET,
       signOptions: { expiresIn: env.JWT_TIME },
     }),
-    QaTokenModule,
+    QaTokenAuthModule,
   ],
   providers: [
     AuthService,

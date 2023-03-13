@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { PolicyStageService } from './policy-stage.service';
 import { PolicyStageController } from './policy-stage.controller';
-import { PolicyStage } from './entities/policy-stage.entity';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { PolicyStageRepository } from './repositories/policy-stage.repository';
 
 @Module({

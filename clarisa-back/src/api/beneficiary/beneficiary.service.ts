@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateBeneficiaryDto } from './dto/update-beneficiary.dto';
 import { Beneficiary } from './entities/beneficiary.entity';

@@ -1,8 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
-import { UpdateInnovationCharacteristicDto } from './dto/update-innovation-characteristic.dto';
 import { InnovationCharacteristic } from './entities/innovation-characteristic.entity';
 import { InnovationCharacteristicRepository } from './repositories/innovation-characteristic.repository';
 
@@ -37,11 +34,11 @@ export class InnovationCharacteristicService {
     });
   }
 
-  async update(
+  /*async update(
     updateUserDtoList: UpdateInnovationCharacteristicDto[],
   ): Promise<InnovationCharacteristic[]> {
     return await this.innovationCharacteristicsRepository.save(
       updateUserDtoList,
     );
-  }
+  }*/
 }

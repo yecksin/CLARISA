@@ -7,7 +7,6 @@ import {
 } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { Mis } from '../../mis/entities/mis.entity';
-import { Role } from '../../role/entities/role.entity';
 import { User } from './user.entity';
 
 @Entity('user_mis')

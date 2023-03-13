@@ -1,13 +1,5 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
-import { InstitutionDictionary } from '../../institution-dictionary/entities/institution-dictionary.entity';
 import { InstitutionType } from '../../institution-type/entities/institution-type.entity';
 import { InstitutionLocation } from '../../institution/entities/institution-location.entity';
 

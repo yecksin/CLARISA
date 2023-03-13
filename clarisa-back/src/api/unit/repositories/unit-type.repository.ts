@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DataSource, FindOptionsWhere, Repository } from 'typeorm';
-import { FindAllOptions } from '../../../shared/entities/enums/find-all-options';
-import { UnitDto } from '../dto/unit.dto';
+import { DataSource, Repository } from 'typeorm';
 import { UnitType } from '../entities/unit-type.entity';
 
 @Injectable()

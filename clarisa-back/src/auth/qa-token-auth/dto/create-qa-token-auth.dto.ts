@@ -1,4 +1,4 @@
-export class CreateQaTokenDto {
+export class CreateQaTokenAuthDto {
   name: string;
   username: string;
   email: string;

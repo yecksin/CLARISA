@@ -1,7 +1,7 @@
-import { Injectable, NestMiddleware, Next, Req, Res } from '@nestjs/common';
-import { ModuleRef, Reflector } from '@nestjs/core';
+import { Injectable, NestMiddleware, Next, Req } from '@nestjs/common';
+import { ModuleRef } from '@nestjs/core';
 import { AuthService } from 'src/auth/auth.service';
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request } from 'express';
 
 @Injectable()
 export class BasicAuthMiddleware implements NestMiddleware {
@@ -9,7 +9,6 @@ export class BasicAuthMiddleware implements NestMiddleware {
 
   async use(
     @Req() request: Request,
-    @Res() response: Response,
     @Next() next: NextFunction,
   ): Promise<void> {
     const authHeader: string = request.headers?.authorization ?? '';
@@ -31,7 +30,7 @@ export class BasicAuthMiddleware implements NestMiddleware {
           }
           return false;
         })
-        .catch((e) => false);
+        .catch(() => false);
     }
     next();
   }

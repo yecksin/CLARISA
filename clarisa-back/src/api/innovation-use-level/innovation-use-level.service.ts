@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateInnovationUseLevelDto } from './dto/update-innovation-use-level.dto';
 import { InnovationUseLevel } from './entities/innovation-use-level.entity';

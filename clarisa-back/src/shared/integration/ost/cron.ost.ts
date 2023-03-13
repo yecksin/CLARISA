@@ -1,4 +1,4 @@
-import { Cron, CronExpression } from '@nestjs/schedule';
+import { Cron } from '@nestjs/schedule';
 import { HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { ApiOST } from './api.ost';
 import { WorkpackageOstDto } from './dto/workpackage.ost.dto';

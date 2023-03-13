@@ -61,7 +61,6 @@ import { EndOfInitiativeOutcomeModule } from './end-of-initiative-outcome/end-of
 import { ImpactAreaIndicatorModule } from './impact-area-indicator/impact-area-indicator.module';
 import { SourceModule } from './source/source.module';
 import { PermissionModule } from './permission/permission.module';
-import { QaTokenAuthModule } from './qa-token-auth/qa-token-auth.module';
 
 export const apiRoutes = [
   {
@@ -315,9 +314,5 @@ export const apiRoutes = [
   {
     path: 'permissions',
     module: PermissionModule,
-  },
-  {
-    path: 'qa-token-auths',
-    module: QaTokenAuthModule,
   },
 ];

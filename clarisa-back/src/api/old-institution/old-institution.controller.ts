@@ -4,8 +4,6 @@ import {
   Body,
   Patch,
   Param,
-  ClassSerializerInterceptor,
-  UseInterceptors,
   Query,
   ParseIntPipe,
   Res,
@@ -13,7 +11,6 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { OldInstitutionService } from './old-institution.service';
-import { CreateOldInstitutionDto } from './dto/create-old-institution.dto';
 import { UpdateOldInstitutionDto } from './dto/update-old-institution.dto';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { OldInstitution } from './entities/old-institution.entity';

@@ -4,13 +4,10 @@ import {
   HttpStatus,
   Redirect,
   Post,
-  Req,
-  Res,
   Param,
   Body,
   UseGuards,
 } from '@nestjs/common';
-import { Request, Response } from 'express';
 import { GetUserData } from '../shared/decorators/user-data.decorator';
 import { ResponseDto } from '../shared/entities/dtos/response-dto';
 import { JwtAuthGuard } from '../shared/guards/jwt-auth.guard';
@@ -23,7 +20,6 @@ import { CreateCountryOfficeRequestDto } from './country-office-request/dto/crea
 import { CreatePartnerRequestDto } from './partner-request/dto/create-partner-request.dto';
 import { PartnerRequestDto } from './partner-request/dto/partner-request.dto';
 import { PartnerRequestService } from './partner-request/partner-request.service';
-import { PartnerRequestRepository } from './partner-request/repositories/partner-request.repository';
 
 @Controller()
 export class ApiController {

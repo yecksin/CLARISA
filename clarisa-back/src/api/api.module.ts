@@ -64,10 +64,7 @@ import { BeneficiaryModule } from './beneficiary/beneficiary.module';
 import { EndOfInitiativeOutcomeModule } from './end-of-initiative-outcome/end-of-initiative-outcome.module';
 import { ImpactAreaIndicatorModule } from './impact-area-indicator/impact-area-indicator.module';
 import { SourceModule } from './source/source.module';
-import { PartnerRequestService } from './partner-request/partner-request.service';
-import { PartnerRequestRepository } from './partner-request/repositories/partner-request.repository';
 import { PermissionModule } from './permission/permission.module';
-import { QaTokenAuthModule } from './qa-token-auth/qa-token-auth.module';
 
 @Module({
   controllers: [ApiController],
@@ -137,7 +134,6 @@ import { QaTokenAuthModule } from './qa-token-auth/qa-token-auth.module';
     BiParameterModule,
     OldInstitutionModule,
     PermissionModule,
-    QaTokenAuthModule,
   ],
 })
 export class ApiModule {}

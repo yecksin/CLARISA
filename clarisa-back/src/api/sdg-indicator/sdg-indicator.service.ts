@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateSdgIndicatorDto } from './dto/update-sdg-indicator.dto';
 import { SdgIndicator } from './entities/sdg-indicator.entity';

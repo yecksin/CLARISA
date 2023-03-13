@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common/decorators';
-import { InjectRepository } from '@nestjs/typeorm';
-import { FindOptionsWhere, Repository } from 'typeorm';
+import { FindOptionsWhere } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateBiParameterDto } from './dto/update-bi-parameter.dto';
 import { BiParameter } from './entities/bi-parameter.entity';
@@ -44,7 +43,6 @@ export class BiParameterService {
   async update(updateBiParameterDto: UpdateBiParameterDto[]) {
     return await this.biParametersRepository.save(updateBiParameterDto);
   }
-
 
   async findAllUnitParametersBi(): Promise<ParametersBiUnit> {
     return await this.biParametersRepository.getFindAllInformation();

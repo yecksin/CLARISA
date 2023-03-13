@@ -7,7 +7,6 @@ import {
 } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { Country } from '../../country/entities/country.entity';
-import { OldInstitution } from '../../old-institution/entities/old-institution.entity';
 import { Institution } from './institution.entity';
 
 @Entity('institution_locations')

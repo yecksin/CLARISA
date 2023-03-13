@@ -1,9 +1,6 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
-import e from 'express';
-import { Repository } from 'typeorm';
 import { Country } from '../country/entities/country.entity';
 import { CountryRepository } from '../country/repositories/country.repository';
 import { Institution } from '../institution/entities/institution.entity';
@@ -73,7 +70,7 @@ export class CountryOfficeRequestService {
     );
 
     //Basic validations
-    let validationErrors: string[] = (
+    const validationErrors: string[] = (
       await validate(incomingCountryOfficeRequest)
     ).flatMap((e) => {
       const newLocal = Object.values(e.constraints).map((m) => m);
@@ -186,7 +183,7 @@ export class CountryOfficeRequestService {
     );
 
     //Basic validations
-    let validationErrors: string[] = (
+    const validationErrors: string[] = (
       await validate(respondCountryOfficeRequestDto)
     ).flatMap((e) => {
       const newLocal = Object.values(e.constraints).map((m) => m);
@@ -270,7 +267,7 @@ export class CountryOfficeRequestService {
     updateCountryOfficeRequest.externalUserMail = 'some@mail.com';
 
     //Basic validations
-    let validationErrors: string[] = (
+    const validationErrors: string[] = (
       await validate(updateCountryOfficeRequest)
     ).flatMap((e) => Object.values(e.constraints).map((m) => m));
 

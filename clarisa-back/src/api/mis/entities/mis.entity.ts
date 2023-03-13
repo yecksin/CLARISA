@@ -9,7 +9,6 @@ import {
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { CountryOfficeRequest } from '../../country-office-request/entities/country-office-request.entity';
 import { PartnerRequest } from '../../partner-request/entities/partner-request.entity';
-import { Role } from '../../role/entities/role.entity';
 import { UserMis } from '../../user/entities/user-mis.entity';
 import { User } from '../../user/entities/user.entity';
 

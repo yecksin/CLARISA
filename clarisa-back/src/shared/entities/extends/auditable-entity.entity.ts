@@ -1,12 +1,5 @@
 import { Exclude } from 'class-transformer';
-import {
-  Column,
-  CreateDateColumn,
-  JoinColumn,
-  ManyToOne,
-  UpdateDateColumn,
-} from 'typeorm';
-import { User } from '../../../api/user/entities/user.entity';
+import { Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 export abstract class AuditableEntity {
   @Exclude({ toPlainOnly: true })

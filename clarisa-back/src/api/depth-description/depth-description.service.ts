@@ -18,7 +18,9 @@ export class DepthDescriptionService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.depthDescriptionRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -29,7 +31,7 @@ export class DepthDescriptionService {
   async findOne(id: number): Promise<DepthDescription> {
     return await this.depthDescriptionRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

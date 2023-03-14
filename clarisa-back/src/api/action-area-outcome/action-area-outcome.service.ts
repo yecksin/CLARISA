@@ -28,7 +28,7 @@ export class ActionAreaOutcomeService {
   async findOne(id: number): Promise<ActionAreaOutcome> {
     return await this.actionAreaOutcomesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

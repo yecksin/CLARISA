@@ -18,7 +18,9 @@ export class SdgService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.sdgsRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -29,7 +31,7 @@ export class SdgService {
   async findOne(id: number): Promise<Sdg> {
     return await this.sdgsRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

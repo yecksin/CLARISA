@@ -137,7 +137,7 @@ export class MailUtil {
     const to: string[] = [];
     const cc: string[] = [
       partnerRequest.external_user_mail ??
-        partnerRequest.created_by_object.email,
+        partnerRequest.auditableFields.created_by_object.email,
     ];
     let bcc: string[] = [];
 
@@ -200,7 +200,7 @@ export class MailUtil {
 
     const to: string[] = [
       partnerRequest.external_user_mail ??
-        partnerRequest.created_by_object.email,
+        partnerRequest.auditableFields.created_by_object.email,
     ];
     const cc: string[] = [];
     let bcc: string[] = [];

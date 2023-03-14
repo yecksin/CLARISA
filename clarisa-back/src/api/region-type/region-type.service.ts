@@ -18,7 +18,9 @@ export class RegionTypeService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.regionTypesRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -29,7 +31,7 @@ export class RegionTypeService {
   async findOne(id: number): Promise<RegionType> {
     return await this.regionTypesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

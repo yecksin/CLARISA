@@ -20,7 +20,9 @@ export class BusinessCategoryService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.businessCategoriesRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -31,7 +33,7 @@ export class BusinessCategoryService {
   async findOne(id: number): Promise<BusinessCategory> {
     return await this.businessCategoriesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

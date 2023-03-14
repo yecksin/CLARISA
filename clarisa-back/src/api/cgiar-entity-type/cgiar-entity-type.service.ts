@@ -35,7 +35,9 @@ export class CgiarEntityTypeService {
         return await this.cgiarEntityTypeRepository.find({
           where: {
             ...this.whereClause,
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -46,7 +48,7 @@ export class CgiarEntityTypeService {
   async findOne(id: number): Promise<CgiarEntityType> {
     return await this.cgiarEntityTypeRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

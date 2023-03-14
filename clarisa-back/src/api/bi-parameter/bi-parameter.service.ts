@@ -23,7 +23,9 @@ export class BiParameterService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
           ...whereClause,
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         return await this.biParametersRepository.find({
           where: whereClause,
@@ -36,7 +38,7 @@ export class BiParameterService {
   async findOne(id: number): Promise<BiParameter> {
     return await this.biParametersRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

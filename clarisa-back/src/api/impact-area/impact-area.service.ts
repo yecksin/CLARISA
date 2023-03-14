@@ -18,7 +18,9 @@ export class ImpactAreaService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.impactAreasRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -29,7 +31,7 @@ export class ImpactAreaService {
   async findOne(id: number): Promise<ImpactArea> {
     return await this.impactAreasRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

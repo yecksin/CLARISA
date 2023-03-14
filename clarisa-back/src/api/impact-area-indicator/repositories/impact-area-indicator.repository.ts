@@ -21,9 +21,13 @@ export class ImpactAreaIndicatorRepository extends Repository<ImpactAreaIndicato
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
-          impact_area_object: {
+          auditableFields: {
             is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
+          impact_area_object: {
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         };
         break;

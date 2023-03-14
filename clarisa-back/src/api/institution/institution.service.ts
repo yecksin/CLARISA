@@ -38,7 +38,7 @@ export class InstitutionService {
   async findOne(id: number): Promise<Institution> {
     return await this.institutionRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

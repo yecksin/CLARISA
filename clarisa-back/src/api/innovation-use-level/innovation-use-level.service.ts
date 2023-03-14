@@ -20,7 +20,9 @@ export class InnovationUseLevelService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.innovationUseLevelRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -31,7 +33,7 @@ export class InnovationUseLevelService {
   async findOne(id: number): Promise<InnovationUseLevel> {
     return await this.innovationUseLevelRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

@@ -39,7 +39,9 @@ export class OldInstitutionRepository extends Repository<OldInstitution> {
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         break;
     }
@@ -47,7 +49,7 @@ export class OldInstitutionRepository extends Repository<OldInstitution> {
     if (from) {
       whereClause = {
         ...whereClause,
-        updated_at: MoreThanOrEqual(new Date(+from)),
+        auditableFields: { updated_at: MoreThanOrEqual(new Date(+from)) },
       };
     }
 
@@ -60,7 +62,7 @@ export class OldInstitutionRepository extends Repository<OldInstitution> {
         i.institution_locations = await this.institutionLocationRepository.find(
           {
             where: {
-              is_active: true,
+              auditableFields: { is_active: true },
               institution_id: i.id,
             },
             relations: {
@@ -96,7 +98,9 @@ export class OldInstitutionRepository extends Repository<OldInstitution> {
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         break;
     }
@@ -110,7 +114,7 @@ export class OldInstitutionRepository extends Repository<OldInstitution> {
         i.institution_locations = await this.institutionLocationRepository.find(
           {
             where: {
-              is_active: true,
+              auditableFields: { is_active: true },
               institution_id: i.id,
             },
             relations: {
@@ -154,9 +158,9 @@ export class OldInstitutionRepository extends Repository<OldInstitution> {
     institutionDto.name = oldInstitution.name;
     institutionDto.acronym = oldInstitution.acronym;
     institutionDto.websiteLink = oldInstitution.website_link;
-    institutionDto.added = oldInstitution.created_at;
+    institutionDto.added = oldInstitution.auditableFields.created_at;
     if (showActiveField) {
-      institutionDto.is_active = oldInstitution.is_active;
+      institutionDto.is_active = oldInstitution.auditableFields.is_active;
     }
 
     institutionDto.countryOfficeDTO = oldInstitution.institution_locations.map(

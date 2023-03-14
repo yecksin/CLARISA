@@ -18,7 +18,9 @@ export class OneCgiarUserService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.oneCgiarUserRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -29,7 +31,7 @@ export class OneCgiarUserService {
   async findOne(id: number): Promise<OneCgiarUser> {
     return await this.oneCgiarUserRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

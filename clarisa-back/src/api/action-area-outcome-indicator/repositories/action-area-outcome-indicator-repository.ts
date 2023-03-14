@@ -23,9 +23,13 @@ export class ActionAreaOutcomeIndicatorRepository extends Repository<ActionAreaO
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
-          action_area_outcome_object: {
+          auditableFields: {
             is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
+          action_area_outcome_object: {
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         };
         break;

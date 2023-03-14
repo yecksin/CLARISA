@@ -4,13 +4,11 @@ import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateGlobalTargetDto } from './dto/update-global-target.dto';
 import { GlobalTarget } from './entities/global-target.entity';
+import { GlobalTargetRepository } from './repositories/global-target.repository';
 
 @Injectable()
 export class GlobalTargetService {
-  constructor(
-    @InjectRepository(GlobalTarget)
-    private GlobalTargetRepository: Repository<GlobalTarget>,
-  ) {}
+  constructor(private GlobalTargetRepository: GlobalTargetRepository) {}
 
   findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
@@ -22,7 +20,9 @@ export class GlobalTargetService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return this.GlobalTargetRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:

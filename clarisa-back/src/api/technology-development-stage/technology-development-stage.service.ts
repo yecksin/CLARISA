@@ -20,7 +20,9 @@ export class TechnologyDevelopmentStageService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.technologyDevelopmentStagesRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -31,7 +33,7 @@ export class TechnologyDevelopmentStageService {
   async findOne(id: number): Promise<TechnologyDevelopmentStage> {
     return await this.technologyDevelopmentStagesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

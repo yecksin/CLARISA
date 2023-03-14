@@ -22,7 +22,7 @@ export class AccountService {
   async findOne(id: number): Promise<Account> {
     return await this.accountRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

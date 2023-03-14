@@ -18,7 +18,9 @@ export class ActionAreaService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.actionAreasRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -29,7 +31,7 @@ export class ActionAreaService {
   async findOne(id: number): Promise<ActionArea> {
     return await this.actionAreasRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

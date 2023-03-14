@@ -44,7 +44,9 @@ export class CgiarEntityService {
         return await this.cgiarEntityRepository.find({
           where: {
             ...this.whereClause,
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
           order: this.orderClause,
         });
@@ -56,7 +58,7 @@ export class CgiarEntityService {
   async findOne(id: number): Promise<CgiarEntity> {
     return await this.cgiarEntityRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

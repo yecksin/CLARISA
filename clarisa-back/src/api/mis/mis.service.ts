@@ -18,7 +18,9 @@ export class MisService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.misRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -29,7 +31,7 @@ export class MisService {
   async findOne(id: number): Promise<Mis> {
     return await this.misRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

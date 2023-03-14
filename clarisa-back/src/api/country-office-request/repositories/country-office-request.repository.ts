@@ -214,7 +214,7 @@ export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequ
     institutionDto.name = institution.name;
     institutionDto.acronym = institution.acronym;
     institutionDto.websiteLink = institution.website_link;
-    institutionDto.added = institution.created_at;
+    institutionDto.added = institution.auditableFields.created_at;
 
     institutionDto.countryOfficeDTO = institution.institution_locations.map(
       (il) => {
@@ -259,8 +259,8 @@ export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequ
         partialCountryOfficeRequest.mis_id =
           partialCountryOfficeRequest.mis_object.id;
 
-        partialCountryOfficeRequest.created_by =
-          partialCountryOfficeRequest.created_by_object.id;
+        partialCountryOfficeRequest.auditableFields.created_by =
+          partialCountryOfficeRequest.auditableFields.created_by_object.id;
 
         partialCountryOfficeRequest = await this.save(
           partialCountryOfficeRequest,
@@ -280,7 +280,7 @@ export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequ
     partialCountryOfficeRequest: CountryOfficeRequest,
     respondCountryOfficeRequestDto: RespondRequestDto,
   ): Promise<CountryOfficeRequestDto> {
-    partialCountryOfficeRequest.is_active = false;
+    partialCountryOfficeRequest.auditableFields.is_active = false;
     partialCountryOfficeRequest.external_user_mail =
       respondCountryOfficeRequestDto.externalUserMail;
     partialCountryOfficeRequest.external_user_name =
@@ -290,11 +290,12 @@ export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequ
 
     const accepted = respondCountryOfficeRequestDto.accept;
 
-    partialCountryOfficeRequest.modification_justification = accepted
-      ? `Accepted on ${partialCountryOfficeRequest.accepted_date.toISOString()}`
-      : respondCountryOfficeRequestDto.rejectJustification;
+    partialCountryOfficeRequest.auditableFields.modification_justification =
+      accepted
+        ? `Accepted on ${partialCountryOfficeRequest.accepted_date.toISOString()}`
+        : respondCountryOfficeRequestDto.rejectJustification;
 
-    partialCountryOfficeRequest.updated_by = accepted
+    partialCountryOfficeRequest.auditableFields.updated_by = accepted
       ? partialCountryOfficeRequest.accepted_by
       : partialCountryOfficeRequest.rejected_by;
 
@@ -314,8 +315,9 @@ export class CountryOfficeRequestRepository extends Repository<CountryOfficeRequ
   ): Promise<CountryOfficeRequestDto> {
     countryOfficeRequest.country_id = countryOfficeRequest.country_object.id;
 
-    countryOfficeRequest.updated_by = countryOfficeRequest.updated_by_object.id;
-    countryOfficeRequest.modification_justification =
+    countryOfficeRequest.auditableFields.updated_by =
+      countryOfficeRequest.auditableFields.updated_by_object.id;
+    countryOfficeRequest.auditableFields.modification_justification =
       updateCountryOfficeRequest.modification_justification;
 
     countryOfficeRequest = await this.save(countryOfficeRequest);

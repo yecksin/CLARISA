@@ -26,7 +26,7 @@ export class InstitutionDictionaryService {
   async findOne(id: number): Promise<InstitutionDictionary> {
     return await this.institutionDictionaryRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

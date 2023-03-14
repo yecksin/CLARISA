@@ -20,7 +20,9 @@ export class ProjectedBenefitWeightingService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.projectedBenefitWeightingRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -31,7 +33,7 @@ export class ProjectedBenefitWeightingService {
   async findOne(id: number): Promise<ProjectedBenefitWeighting> {
     return await this.projectedBenefitWeightingRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

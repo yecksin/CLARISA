@@ -20,7 +20,9 @@ export class OutcomeIndicatorService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.outcomeIndicatorsRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -31,7 +33,7 @@ export class OutcomeIndicatorService {
   async findOne(id: number): Promise<OutcomeIndicator> {
     return await this.outcomeIndicatorsRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

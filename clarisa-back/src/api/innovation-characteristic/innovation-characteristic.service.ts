@@ -19,7 +19,9 @@ export class InnovationCharacteristicService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.innovationCharacteristicsRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -30,7 +32,7 @@ export class InnovationCharacteristicService {
   async findOne(id: number): Promise<InnovationCharacteristic> {
     return await this.innovationCharacteristicsRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

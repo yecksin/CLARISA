@@ -18,7 +18,7 @@ export class PermissionService {
   async findOne(id: number): Promise<Permission> {
     return await this.permissionRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 }

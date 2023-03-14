@@ -42,7 +42,9 @@ export class InnovationTypeService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
           ...whereClause,
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         return await this.innovationTypesRepository.find({
           where: whereClause,
@@ -55,7 +57,7 @@ export class InnovationTypeService {
   async findOne(id: number): Promise<InnovationType> {
     return await this.innovationTypesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

@@ -40,7 +40,9 @@ export class PolicyTypeService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
           ...whereClause,
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         return await this.policyTypesRepository.find({
           where: whereClause,
@@ -53,7 +55,7 @@ export class PolicyTypeService {
   async findOne(id: number): Promise<PolicyType> {
     return await this.policyTypesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

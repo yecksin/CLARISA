@@ -22,7 +22,7 @@ export class CountryService {
   async findOne(id: number): Promise<Country> {
     return await this.countriesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

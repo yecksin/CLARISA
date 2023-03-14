@@ -134,7 +134,9 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
           ...whereClause,
-          is_active: show === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: show === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
     }
 
@@ -171,7 +173,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     partnerRequestDto.externalUserComments = pr.external_user_comments;
     partnerRequestDto.category_1 = pr.category_1;
     partnerRequestDto.category_2 = pr.category_2;
-    partnerRequestDto.created_at = pr.created_at;
+    partnerRequestDto.created_at = pr.auditableFields.created_at;
     partnerRequestDto.countryDTO = this.fillOutCountryInfo(pr.country_object);
 
     partnerRequestDto.institutionTypeDTO = new InstitutionTypeDto();
@@ -241,7 +243,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     institutionDto.name = institution.name;
     institutionDto.acronym = institution.acronym;
     institutionDto.websiteLink = institution.website_link;
-    institutionDto.added = institution.created_at;
+    institutionDto.added = institution.auditableFields.created_at;
 
     institutionDto.countryOfficeDTO = institution.institution_locations.map(
       (il) => {
@@ -287,17 +289,17 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     partialPartnerRequest.country_id = partialPartnerRequest.country_object.id;
     partialPartnerRequest.mis_id = partialPartnerRequest.mis_object.id;
 
-    partialPartnerRequest.created_by =
-      partialPartnerRequest.created_by_object.id;
+    partialPartnerRequest.auditableFields.created_by =
+      partialPartnerRequest.auditableFields.created_by_object.id;
 
     partialPartnerRequest.category_1 = incomingPartnerRequest.category_1;
     partialPartnerRequest.category_2 = incomingPartnerRequest.category_2;
 
-    partialPartnerRequest.is_active = false;
+    partialPartnerRequest.auditableFields.is_active = false;
     partialPartnerRequest = await this.save(partialPartnerRequest);
     partialPartnerRequest.partner_request_id = partialPartnerRequest.id;
     delete partialPartnerRequest.id;
-    partialPartnerRequest.is_active = true;
+    partialPartnerRequest.auditableFields.is_active = true;
     partialPartnerRequest = await this.save(partialPartnerRequest);
     partialPartnerRequest = await this.findOne({
       where: { id: partialPartnerRequest.id },
@@ -313,7 +315,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     partialPartnerRequest: PartnerRequest,
     respondPartnerRequestDto: RespondRequestDto,
   ): Promise<PartnerRequestDto> {
-    partialPartnerRequest.is_active = false;
+    partialPartnerRequest.auditableFields.is_active = false;
     if (partialPartnerRequest.partner_request_id == null) {
       await this.save(partialPartnerRequest);
       partialPartnerRequest.partner_request_id = partialPartnerRequest.id;
@@ -330,7 +332,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     const accepted = respondPartnerRequestDto.accept;
     partialPartnerRequest.accepted = accepted;
 
-    partialPartnerRequest.updated_by = accepted
+    partialPartnerRequest.auditableFields.updated_by = accepted
       ? partialPartnerRequest.accepted_by
       : partialPartnerRequest.rejected_by;
 
@@ -356,12 +358,13 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     partnerRequest: PartnerRequest,
   ): Promise<PartnerRequestDto> {
     if (partnerRequest.partner_request_id == null) {
-      partnerRequest.is_active = false;
+      partnerRequest.auditableFields.is_active = false;
       await this.save(partnerRequest);
       partnerRequest.partner_request_id = partnerRequest.id;
       delete partnerRequest.id;
     }
-    partnerRequest.is_active = true;
+
+    partnerRequest.auditableFields.is_active = true;
     partnerRequest.partner_name = updatePartnerRequest.name;
     partnerRequest.acronym = updatePartnerRequest.acronym;
     partnerRequest.web_page = updatePartnerRequest.websiteLink;
@@ -370,8 +373,9 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     partnerRequest.country_id = partnerRequest.country_object.id;
     partnerRequest.category_1 = updatePartnerRequest.category_1;
     partnerRequest.category_2 = updatePartnerRequest.category_2;
-    partnerRequest.updated_by = partnerRequest.updated_by_object.id;
-    partnerRequest.modification_justification =
+    partnerRequest.auditableFields.updated_by =
+      partnerRequest.auditableFields.updated_by_object.id;
+    partnerRequest.auditableFields.modification_justification =
       updatePartnerRequest.modification_justification;
 
     partnerRequest = await this.save(partnerRequest);
@@ -423,7 +427,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     };
     whereClausePending = {
       ...whereClause,
-      is_active: true,
+      auditableFields: { is_active: true },
     };
     whereClause = {
       ...whereClause,
@@ -473,7 +477,8 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       partnerRequests.is_office = false;
       partnerRequests.external_user_mail = partnerRequestBulk.externalUserEmail;
       partnerRequests.external_user_name = partnerRequestBulk.externalUserName;
-      partnerRequests.created_by = partnerRequestBulk.externalUser;
+      partnerRequests.auditableFields.created_by =
+        partnerRequestBulk.externalUser;
 
       const filterCountry = countryInstitution.filter(
         (country) => country.iso_alpha_2 == partnerRequestBulkIterator.country,
@@ -485,7 +490,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       partnerRequests.institution_type_id = filterType[0].id;
       partnerRequests.country_id = filterCountry[0].id;
       partnerRequests.mis_id = partnerRequestBulk.mis;
-      partnerRequests.is_active = false;
+      partnerRequests.auditableFields.is_active = false;
       partnerRequests = await this.save(partnerRequests);
       partnerRequests.partner_request_id = partnerRequests.id;
       delete partnerRequests.id;

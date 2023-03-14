@@ -153,7 +153,7 @@ export class CountryOfficeRequestService {
 
         newCountryOfficeRequest.institution_object = institution;
         newCountryOfficeRequest.mis_object = mis;
-        newCountryOfficeRequest.created_by_object = createdBy;
+        newCountryOfficeRequest.auditableFields.created_by_object = createdBy;
         newCountryOfficeRequest.country_object = c;
 
         return newCountryOfficeRequest;
@@ -286,7 +286,7 @@ export class CountryOfficeRequestService {
         id: updateCountryOfficeRequest.id,
       });
 
-    countryOfficeRequest.updated_by_object =
+    countryOfficeRequest.auditableFields.updated_by_object =
       await this.userRepository.findOneBy({
         id: updateCountryOfficeRequest.userId,
       });
@@ -302,7 +302,7 @@ export class CountryOfficeRequestService {
       );
     }
 
-    if (!countryOfficeRequest.is_active) {
+    if (!countryOfficeRequest.auditableFields.is_active) {
       validationErrors.push(
         `The country office request is not active. Please check if it has been accepted or rejected`,
       );
@@ -314,7 +314,7 @@ export class CountryOfficeRequestService {
       );
     }
 
-    if (!countryOfficeRequest.updated_by_object) {
+    if (!countryOfficeRequest.auditableFields.updated_by_object) {
       validationErrors.push(
         `An user with id '${updateCountryOfficeRequest.userId}' could not be found`,
       );

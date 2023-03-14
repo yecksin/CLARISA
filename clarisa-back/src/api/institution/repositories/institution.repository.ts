@@ -49,7 +49,9 @@ export class InstitutionRepository extends Repository<Institution> {
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         break;
     }
@@ -57,7 +59,7 @@ export class InstitutionRepository extends Repository<Institution> {
     if (from) {
       whereClause = {
         ...whereClause,
-        updated_at: MoreThanOrEqual(new Date(+from)),
+        auditableFields: { updated_at: MoreThanOrEqual(new Date(+from)) },
       };
     }
 
@@ -90,7 +92,9 @@ export class InstitutionRepository extends Repository<Institution> {
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         break;
     }
@@ -131,9 +135,9 @@ export class InstitutionRepository extends Repository<Institution> {
     institutionDto.name = institution.name;
     institutionDto.acronym = institution.acronym;
     institutionDto.websiteLink = institution.website_link;
-    institutionDto.added = institution.created_at;
+    institutionDto.added = institution.auditableFields.created_at;
     if (showActiveField) {
-      institutionDto.is_active = institution.is_active;
+      institutionDto.is_active = institution.auditableFields.is_active;
     }
 
     institutionDto.countryOfficeDTO = institution.institution_locations.map(
@@ -171,7 +175,9 @@ export class InstitutionRepository extends Repository<Institution> {
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         break;
     }
@@ -242,8 +248,8 @@ export class InstitutionRepository extends Repository<Institution> {
     const institutionLocation: InstitutionLocation = new InstitutionLocation();
 
     institutionLocation.country_id = request.country_id;
-    institutionLocation.created_at = request.accepted_date;
-    institutionLocation.created_by = request.accepted_by;
+    institutionLocation.auditableFields.created_at = request.accepted_date;
+    institutionLocation.auditableFields.created_by = request.accepted_by;
     institutionLocation.institution_id = request.institution_id;
     institutionLocation.is_headquater = isHQ;
 
@@ -256,8 +262,8 @@ export class InstitutionRepository extends Repository<Institution> {
     let institution: Institution = new Institution();
 
     institution.acronym = partnerRequest.acronym;
-    institution.created_at = partnerRequest.accepted_date;
-    institution.created_by = partnerRequest.accepted_by;
+    institution.auditableFields.created_at = partnerRequest.accepted_date;
+    institution.auditableFields.created_by = partnerRequest.accepted_by;
     institution.institution_type_id = partnerRequest.institution_type_id;
     institution.name = partnerRequest.partner_name;
     institution.website_link = partnerRequest.web_page;
@@ -288,7 +294,7 @@ export class InstitutionRepository extends Repository<Institution> {
     institutionLocation.country_id = countryAndInstitution;
     institutionLocation.is_headquater = isHQ;
     institutionLocation.institution_id = id_institution;
-    institutionLocation.created_by = createBy;
+    institutionLocation.auditableFields.created_by = createBy;
 
     return this.institutionLocationRepository.save(institutionLocation);
   }
@@ -303,7 +309,7 @@ export class InstitutionRepository extends Repository<Institution> {
     institution.website_link = BulkInstitutions.web_page;
 
     institution.institution_type_id = BulkInstitutions.institution_type_id;
-    institution.created_by = createBy;
+    institution.auditableFields.created_by = createBy;
     institution = await this.save(institution);
     await this.createInstitutionCountryBulk(
       BulkInstitutions.country_id,

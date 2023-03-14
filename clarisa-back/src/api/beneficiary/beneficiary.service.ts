@@ -18,7 +18,9 @@ export class BeneficiaryService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.beneficiaryRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -29,7 +31,7 @@ export class BeneficiaryService {
   async findOne(id: number): Promise<Beneficiary> {
     return await this.beneficiaryRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

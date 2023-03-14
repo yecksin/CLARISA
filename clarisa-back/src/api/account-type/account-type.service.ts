@@ -18,7 +18,9 @@ export class AccountTypeService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.accountTypesRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -29,7 +31,7 @@ export class AccountTypeService {
   async findOne(id: number): Promise<AccountType> {
     return await this.accountTypesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

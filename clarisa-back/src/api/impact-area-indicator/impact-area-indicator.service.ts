@@ -26,7 +26,7 @@ export class ImpactAreaIndicatorService {
   async findOne(id: number): Promise<ImpactAreaIndicator> {
     return await this.impactAreaIndicatorRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

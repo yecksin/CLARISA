@@ -17,7 +17,9 @@ export class RoleService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return this.rolesRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:

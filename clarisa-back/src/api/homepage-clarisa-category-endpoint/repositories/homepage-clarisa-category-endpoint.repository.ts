@@ -26,7 +26,7 @@ export class HomepageClarisaCategoryEndpointRepository extends Repository<Homepa
       await this.categoryRepository.find({
         where: {
           parent_id: parent_category_id ? parent_category_id : IsNull(),
-          is_active: true,
+          auditableFields: { is_active: true },
         },
       });
 

@@ -104,9 +104,10 @@ export class PartnerRequestService {
       acronym: incomingPartnerRequest.misAcronym,
     });
 
-    newPartnerRequest.created_by_object = await this.userRepository.findOneBy({
-      id: incomingPartnerRequest.userId,
-    });
+    newPartnerRequest.auditableFields.created_by_object =
+      await this.userRepository.findOneBy({
+        id: incomingPartnerRequest.userId,
+      });
 
     if (!newPartnerRequest.institution_type_object) {
       validationErrors.push(
@@ -134,7 +135,7 @@ export class PartnerRequestService {
       );
     }
 
-    if (!newPartnerRequest.created_by_object) {
+    if (!newPartnerRequest.auditableFields.created_by_object) {
       validationErrors.push(
         `An user with the id '${incomingPartnerRequest.userId}' could not be found`,
       );
@@ -204,7 +205,7 @@ export class PartnerRequestService {
         `A partner request with id '${respondPartnerRequestDto.requestId}' could not be found`,
       );
     } else {
-      if (!partnerRequest.is_active) {
+      if (!partnerRequest.auditableFields.is_active) {
         validationErrors.push(
           `The partner request with id '${respondPartnerRequestDto.requestId}' has already been responded`,
         );
@@ -282,9 +283,10 @@ export class PartnerRequestService {
         id: updatePartnerRequest.id,
       });
 
-    partnerRequest.updated_by_object = await this.userRepository.findOneBy({
-      id: updatePartnerRequest.userId,
-    });
+    partnerRequest.auditableFields.updated_by_object =
+      await this.userRepository.findOneBy({
+        id: updatePartnerRequest.userId,
+      });
 
     partnerRequest.country_object = await this.countryRepository.findOneBy({
       iso_alpha_2: updatePartnerRequest.hqCountryIso,
@@ -301,13 +303,13 @@ export class PartnerRequestService {
       );
     }
 
-    if (!partnerRequest.is_active) {
+    if (!partnerRequest.auditableFields.is_active) {
       validationErrors.push(
         `The partner request is not active. Please check if it has been accepted or rejected`,
       );
     }
 
-    if (!partnerRequest.updated_by_object) {
+    if (!partnerRequest.auditableFields.updated_by_object) {
       validationErrors.push(
         `An user with id '${updatePartnerRequest.userId}' could not be found`,
       );

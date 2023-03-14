@@ -20,7 +20,9 @@ export class EnvironmentalBenefitService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.environmentalBenefitsRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -31,7 +33,7 @@ export class EnvironmentalBenefitService {
   async findOne(id: number): Promise<EnvironmentalBenefit> {
     return await this.environmentalBenefitsRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

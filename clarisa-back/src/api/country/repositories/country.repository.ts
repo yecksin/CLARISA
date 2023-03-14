@@ -18,7 +18,9 @@ export class CountryRepository extends Repository<Country> {
       option !== FindAllOptions.SHOW_ALL
         ? {
             where: {
-              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+              auditableFields: {
+                is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+              },
             },
           }
         : undefined,

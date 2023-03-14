@@ -18,7 +18,9 @@ export class GeopositionService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.geopositionsRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -29,7 +31,7 @@ export class GeopositionService {
   async findOne(id: number): Promise<Geoposition> {
     return await this.geopositionsRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

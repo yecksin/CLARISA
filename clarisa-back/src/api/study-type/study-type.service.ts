@@ -18,7 +18,9 @@ export class StudyTypeService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.studyTypesRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -29,7 +31,7 @@ export class StudyTypeService {
   async findOne(id: number): Promise<StudyType> {
     return await this.studyTypesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

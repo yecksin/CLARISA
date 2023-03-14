@@ -11,6 +11,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { Institution } from '../../institution/entities/institution.entity';
 import { OldInstitution } from '../../old-institution/entities/old-institution.entity';
 import { PartnerRequest } from '../../partner-request/entities/partner-request.entity';
+import { Source } from '../../source/entities/source.entity';
 
 @Entity('institution_types')
 export class InstitutionType {
@@ -29,17 +30,21 @@ export class InstitutionType {
 
   //relations
 
-  @Column({ type: 'bigint', nullable: false })
-  source_id: number;
-
   @Column({ type: 'bigint', nullable: true })
   parent_id: number;
+
+  @Column({ type: 'bigint', nullable: false })
+  source_id: number;
 
   //object relations
 
   @ManyToOne(() => InstitutionType, (it) => it.children)
   @JoinColumn({ name: 'parent_id' })
   parent_object: InstitutionType;
+
+  @ManyToOne(() => Source, (s) => s.institution_type_array)
+  @JoinColumn({ name: 'source_id' })
+  source_object: Source;
 
   @OneToMany(() => InstitutionType, (it) => it.parent_object)
   children: InstitutionType[];

@@ -9,20 +9,18 @@ export abstract class AuditableEntity {
 
   @Exclude({ toPlainOnly: true })
   @CreateDateColumn({ type: 'timestamp', nullable: true })
-  @UpdateDateColumn({
-    nullable: true,
-  })
+  @UpdateDateColumn({ type: 'timestamp', nullable: true })
   updated_at: Date;
 
   @Exclude({ toPlainOnly: true })
-  @Column({ type: 'tinyint', nullable: false, default: () => '1' })
+  @Column({ type: 'tinyint', width: 1, nullable: false, default: () => '1' })
   is_active: boolean;
 
   @Exclude({ toPlainOnly: true })
   @Column({ type: 'bigint', nullable: false })
   created_by: number;
 
-  // FIXME change nullable: false
+  // TODO change nullable: false
   @Exclude({ toPlainOnly: true })
   @Column({ type: 'bigint', nullable: true })
   updated_by: number;

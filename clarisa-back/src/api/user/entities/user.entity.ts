@@ -9,6 +9,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { CountryOfficeRequest } from '../../country-office-request/entities/country-office-request.entity';
 import { Mis } from '../../mis/entities/mis.entity';
 import { PartnerRequest } from '../../partner-request/entities/partner-request.entity';
+import { Source } from '../../source/entities/source.entity';
 import { UserMis } from './user-mis.entity';
 import { UserRole } from './user-role.entity';
 
@@ -23,7 +24,8 @@ export class User {
   @Column({ type: 'text', nullable: true })
   last_name: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Index({ unique: true })
+  @Column({ type: 'varchar', length: 255, nullable: false })
   username: string;
 
   @Index({ unique: true })
@@ -64,6 +66,9 @@ export class User {
 
   @OneToMany(() => UserMis, (um) => um.user_object)
   user_mis_array: UserMis[];
+
+  @OneToMany(() => Source, (s) => s.contact_point_object)
+  source_array: Source[];
 
   //meant to be used by the guard
   permissions: string[];

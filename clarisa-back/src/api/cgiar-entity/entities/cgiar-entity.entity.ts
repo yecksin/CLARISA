@@ -32,7 +32,7 @@ export class CgiarEntity {
   financial_code: string;
 
   @Expose({ name: 'institutionId' })
-  @Column({ type: 'bigint', nullable: false })
+  @Column({ type: 'bigint', nullable: true })
   institution_id: number;
 
   @Exclude()

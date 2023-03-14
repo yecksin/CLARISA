@@ -9,6 +9,7 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { DepthDescription } from '../../depth-description/entities/depth-description.entity';
 import { ProjectedBenefit } from '../../projected-benefit/entities/projected-benefit.entity';
 
+//FIXME change name to projected_benefit_depths
 @Entity('projected_benefits_depths')
 export class ProjectedBenefitDepth {
   @PrimaryGeneratedColumn({ type: 'bigint' })
@@ -16,6 +17,7 @@ export class ProjectedBenefitDepth {
 
   //relations
 
+  //FIXME change name to projected_benefit_id
   @Column({ type: 'bigint', nullable: true })
   projected_benefits_id: number;
 

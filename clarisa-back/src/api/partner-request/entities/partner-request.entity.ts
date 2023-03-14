@@ -27,16 +27,16 @@ export class PartnerRequest {
   @Column({ type: 'text', nullable: true })
   web_page: string;
 
-  @Column({ type: 'tinyint', nullable: false, default: () => '0' })
+  @Column({ type: 'tinyint', width: 1, nullable: false, default: () => '0' })
   is_office: boolean;
 
   @Column({ type: 'text', nullable: true })
   request_source: string;
 
-  @Column({ type: 'tinyint', nullable: true })
+  @Column({ type: 'tinyint', width: 1, nullable: true })
   is_modified: boolean;
 
-  @Column({ type: 'tinyint', nullable: true })
+  @Column({ type: 'tinyint', width: 1, nullable: true })
   accepted: boolean;
 
   @Column({ type: 'timestamp', width: 6, nullable: true })

@@ -18,8 +18,7 @@ export class Region {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Index({ unique: true })
-  @Column({ type: 'bigint', nullable: false })
+  @Column({ type: 'bigint', nullable: true })
   iso_numeric: number;
 
   @Column({ type: 'text', nullable: false })
@@ -59,7 +58,7 @@ export class Region {
   target_region_array: RegionMapping[];
 
   @OneToMany(() => WorkpackageRegion, (wpr) => wpr.region_object)
-  work_package_country_array: WorkpackageRegion[];
+  work_package_region_array: WorkpackageRegion[];
 
   //auditable fields
 

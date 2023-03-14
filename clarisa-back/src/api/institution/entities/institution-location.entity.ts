@@ -14,7 +14,7 @@ export class InstitutionLocation {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column({ type: 'tinyint', nullable: false })
+  @Column({ type: 'tinyint', width: 1, nullable: false })
   is_headquater: boolean;
 
   @Column({ type: 'text', nullable: true })

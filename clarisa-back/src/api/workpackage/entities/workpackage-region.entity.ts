@@ -28,8 +28,8 @@ export class WorkpackageRegion {
   @JoinColumn({ name: 'work_package_id' })
   work_package_object: Workpackage;
 
-  @ManyToOne(() => Region, (r) => r.work_package_country_array)
-  @JoinColumn({ name: 'country_id' })
+  @ManyToOne(() => Region, (r) => r.work_package_region_array)
+  @JoinColumn({ name: 'region_id' })
   region_object: Region;
 
   //auditable fields

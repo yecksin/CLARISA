@@ -14,6 +14,9 @@ export class UserMis {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
+  @Column({ type: 'tinyint', width: 1, nullable: false, default: () => '0' })
+  is_contact_point: boolean;
+
   //relations
 
   @Column({ type: 'bigint', nullable: false })

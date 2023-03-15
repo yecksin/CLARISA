@@ -15,6 +15,7 @@ export class Role {
   @Column({ type: 'varchar', length: 50, nullable: false })
   acronym: string;
 
+  @Exclude()
   @Column({ type: 'int', nullable: false })
   order: number;
 

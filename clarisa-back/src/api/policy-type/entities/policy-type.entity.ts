@@ -22,6 +22,7 @@ export class PolicyType {
 
   //relations
 
+  @Exclude()
   @Column({ type: 'bigint', nullable: false })
   source_id: number;
 

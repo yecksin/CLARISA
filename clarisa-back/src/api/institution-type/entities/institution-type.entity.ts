@@ -33,6 +33,7 @@ export class InstitutionType {
   @Column({ type: 'bigint', nullable: true })
   parent_id: number;
 
+  @Exclude()
   @Column({ type: 'bigint', nullable: false })
   source_id: number;
 

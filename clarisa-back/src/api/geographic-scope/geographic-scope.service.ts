@@ -21,11 +21,17 @@ export class GeographicScopeService {
       case SourceOption.ALL.path:
         // do nothing. no extra conditions needed
         break;
-      //case SourceOption.CGIAR.path:
       case SourceOption.LEGACY.path:
         whereClause = {
           ...whereClause,
           source_id: incomingType.source_id,
+        };
+        break;
+      case SourceOption.CGIAR.path:
+        whereClause = {
+          ...whereClause,
+          source_id: SourceOption.LEGACY.source_id,
+          is_one_cgiar: true,
         };
         break;
       default:

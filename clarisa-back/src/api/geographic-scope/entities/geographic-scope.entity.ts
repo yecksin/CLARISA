@@ -25,8 +25,13 @@ export class GeographicScope {
   @Column({ type: 'text', nullable: true })
   definition: string;
 
+  @Exclude()
+  @Column({ type: 'tinyint', width: 1, nullable: false, default: () => '1' })
+  is_one_cgiar: boolean;
+
   //relations
 
+  @Exclude()
   @Column({ type: 'bigint', nullable: false })
   source_id: number;
 

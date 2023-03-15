@@ -40,10 +40,10 @@ export class PartnerRequest {
   @Column({ type: 'tinyint', width: 1, nullable: true })
   accepted: boolean;
 
-  @Column({ type: 'timestamp', width: 6, nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   accepted_date: Date;
 
-  @Column({ type: 'timestamp', width: 6, nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   rejected_date: Date;
 
   @Column({ type: 'text', nullable: true })

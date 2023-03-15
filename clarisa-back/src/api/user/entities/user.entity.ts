@@ -39,7 +39,7 @@ export class User {
   @Column({ type: 'tinyint', nullable: false, default: () => '0' })
   is_cgiar_user: boolean;
 
-  @Column({ type: 'timestamp', width: 6, nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   last_login: Date;
 
   @Column({ type: 'tinyint', nullable: true })

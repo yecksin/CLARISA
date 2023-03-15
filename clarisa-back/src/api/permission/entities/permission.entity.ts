@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { RolePermission } from '../../role/entities/role-permission.entity';
@@ -16,6 +17,7 @@ export class Permission {
 
   //auditable fields
 
+  @Exclude()
   @Column(() => AuditableEntity, { prefix: '' })
   auditableFields: AuditableEntity;
 }

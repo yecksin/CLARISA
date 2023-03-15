@@ -1,4 +1,4 @@
-import { Expose } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { ProjectedBenefitDepth } from '../../projected-benefit-depth/entities/projected-benefit-depth.entity';
@@ -21,6 +21,7 @@ export class DepthDescription {
 
   //auditable fields
 
+  @Exclude()
   @Column(() => AuditableEntity, { prefix: '' })
   auditableFields: AuditableEntity;
 }

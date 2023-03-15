@@ -29,6 +29,7 @@ export class AccountType {
 
   //auditable fields
 
+  @Exclude()
   @Column(() => AuditableEntity, { prefix: '' })
   auditableFields: AuditableEntity;
 }

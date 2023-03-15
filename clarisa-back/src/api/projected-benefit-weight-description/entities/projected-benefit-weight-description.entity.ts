@@ -1,4 +1,4 @@
-import { Expose } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { ProjectedBenefitWeighting } from '../../projected-benefit-weighting/entities/projected-benefit-weighting.entity';
@@ -22,6 +22,7 @@ export class ProjectedBenefitWeightDescription {
 
   //auditable fields
 
+  @Exclude()
   @Column(() => AuditableEntity, { prefix: '' })
   auditableFields: AuditableEntity;
 }

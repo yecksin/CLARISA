@@ -28,6 +28,11 @@ export class SdgTargetController {
     return await this.sdgTargetService.findAll(show);
   }
 
+  @Get('sdg-ipsr')
+  async findAllIpsr(@Query('show') show: FindAllOptions) {
+    return await this.sdgTargetService.findAllIpsr(show);
+  }
+
   @Get('get/:id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
     return await this.sdgTargetService.findOne(id);

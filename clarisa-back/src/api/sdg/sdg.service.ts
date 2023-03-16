@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
+import { LegacySdgDto } from './dto/legacy-sdg.dto';
 import { UpdateSdgDto } from './dto/update-sdg.dto';
 import { Sdg } from './entities/sdg.entity';
 import { AllSdgDto } from './dto/allsdg.dto';
@@ -15,20 +16,39 @@ export class SdgService {
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
-  ): Promise<Sdg[]> {
+    isLegacy: boolean = false,
+  ) {
+    let response: Sdg[];
     switch (option) {
       case FindAllOptions.SHOW_ALL:
-        return await this.sdgsRepository.find();
+        response = await this.sdgsRepository.find();
+        break;
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
-        return await this.sdgsRepository.find({
+        response = await this.sdgsRepository.find({
           where: {
             is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
           },
         });
+        break;
       default:
         throw Error('?!');
     }
+
+    return !isLegacy ? response : this.mapToLegacyResponse(response);
+  }
+
+  mapToLegacyResponse(response: Sdg[]): LegacySdgDto[] {
+    return response.map((r) => {
+      const mappedSdg: LegacySdgDto = new LegacySdgDto();
+
+      mappedSdg.financialCode = r.financial_code;
+      mappedSdg.fullName = r.full_name;
+      mappedSdg.shortName = r.short_name;
+      mappedSdg.usndCode = r.smo_code;
+
+      return mappedSdg;
+    });
   }
 
   async findOne(id: number): Promise<Sdg> {

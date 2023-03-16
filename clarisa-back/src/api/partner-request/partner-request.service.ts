@@ -1,17 +1,12 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
-import { Repository } from 'typeorm';
 import { RespondRequestDto } from '../../shared/entities/dtos/respond-request.dto';
 import { ResponseDto } from '../../shared/entities/dtos/response-dto';
 import { MisOption } from '../../shared/entities/enums/mises-options';
 import { PartnerStatus } from '../../shared/entities/enums/partner-status';
 import { UserData } from '../../shared/interfaces/user-data';
-import { Country } from '../country/entities/country.entity';
 import { CountryRepository } from '../country/repositories/country.repository';
-import { InstitutionType } from '../institution-type/entities/institution-type.entity';
-import { Mis } from '../mis/entities/mis.entity';
 import { User } from '../user/entities/user.entity';
 import { CreatePartnerRequestDto } from './dto/create-partner-request.dto';
 import { PartnerRequestDto } from './dto/partner-request.dto';
@@ -20,18 +15,18 @@ import { PartnerRequest } from './entities/partner-request.entity';
 import { PartnerRequestRepository } from './repositories/partner-request.repository';
 import { BulkPartnerRequestDto } from './dto/create-partner-dto';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
+import { InstitutionTypeRepository } from '../institution-type/repositories/institution-type.repository';
+import { MisRepository } from '../mis/repositories/mis.repository';
+import { UserRepository } from '../user/repositories/user.repository';
 
 @Injectable()
 export class PartnerRequestService {
   constructor(
     private partnerRequestRepository: PartnerRequestRepository,
-    @InjectRepository(InstitutionType)
-    private institutionTypeRepository: Repository<InstitutionType>,
-    @InjectRepository(Mis)
-    private misRepository: Repository<Mis>,
+    private institutionTypeRepository: InstitutionTypeRepository,
+    private misRepository: MisRepository,
     private countryRepository: CountryRepository,
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
+    private userRepository: UserRepository,
   ) {}
 
   async findAll(
@@ -47,7 +42,11 @@ export class PartnerRequestService {
       throw Error('?!');
     }
 
-    return this.partnerRequestRepository.findAllPartnerRequests(status, mis, show);
+    return this.partnerRequestRepository.findAllPartnerRequests(
+      status,
+      mis,
+      show,
+    );
   }
 
   async findOne(id: number): Promise<PartnerRequestDto> {
@@ -72,7 +71,7 @@ export class PartnerRequestService {
     );
 
     //Basic validations
-    let validationErrors: string[] = (
+    const validationErrors: string[] = (
       await validate(incomingPartnerRequest)
     ).flatMap((e) => {
       const newLocal = Object.values(e.constraints).map((m) => m);
@@ -105,9 +104,10 @@ export class PartnerRequestService {
       acronym: incomingPartnerRequest.misAcronym,
     });
 
-    newPartnerRequest.created_by_object = await this.userRepository.findOneBy({
-      id: incomingPartnerRequest.userId,
-    });
+    newPartnerRequest.auditableFields.created_by_object =
+      await this.userRepository.findOneBy({
+        id: incomingPartnerRequest.userId,
+      });
 
     if (!newPartnerRequest.institution_type_object) {
       validationErrors.push(
@@ -135,7 +135,7 @@ export class PartnerRequestService {
       );
     }
 
-    if (!newPartnerRequest.created_by_object) {
+    if (!newPartnerRequest.auditableFields.created_by_object) {
       validationErrors.push(
         `An user with the id '${incomingPartnerRequest.userId}' could not be found`,
       );
@@ -173,7 +173,7 @@ export class PartnerRequestService {
     );
 
     //Basic validations
-    let validationErrors: string[] = (
+    const validationErrors: string[] = (
       await validate(respondPartnerRequestDto)
     ).flatMap((e) => {
       const newLocal = Object.values(e.constraints).map((m) => m);
@@ -205,7 +205,7 @@ export class PartnerRequestService {
         `A partner request with id '${respondPartnerRequestDto.requestId}' could not be found`,
       );
     } else {
-      if (!partnerRequest.is_active) {
+      if (!partnerRequest.auditableFields.is_active) {
         validationErrors.push(
           `The partner request with id '${respondPartnerRequestDto.requestId}' has already been responded`,
         );
@@ -264,7 +264,7 @@ export class PartnerRequestService {
     updatePartnerRequest.externalUserMail = 'some@mail.com';
 
     //Basic validations
-    let validationErrors: string[] = (
+    const validationErrors: string[] = (
       await validate(updatePartnerRequest)
     ).flatMap((e) => Object.values(e.constraints).map((m) => m));
 
@@ -283,9 +283,10 @@ export class PartnerRequestService {
         id: updatePartnerRequest.id,
       });
 
-    partnerRequest.updated_by_object = await this.userRepository.findOneBy({
-      id: updatePartnerRequest.userId,
-    });
+    partnerRequest.auditableFields.updated_by_object =
+      await this.userRepository.findOneBy({
+        id: updatePartnerRequest.userId,
+      });
 
     partnerRequest.country_object = await this.countryRepository.findOneBy({
       iso_alpha_2: updatePartnerRequest.hqCountryIso,
@@ -302,13 +303,13 @@ export class PartnerRequestService {
       );
     }
 
-    if (!partnerRequest.is_active) {
+    if (!partnerRequest.auditableFields.is_active) {
       validationErrors.push(
         `The partner request is not active. Please check if it has been accepted or rejected`,
       );
     }
 
-    if (!partnerRequest.updated_by_object) {
+    if (!partnerRequest.auditableFields.updated_by_object) {
       validationErrors.push(
         `An user with id '${updatePartnerRequest.userId}' could not be found`,
       );

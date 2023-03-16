@@ -1,22 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { UpdateGlossaryDto } from './dto/update-glossary.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { FindOptionsOrder, FindOptionsWhere, Repository } from 'typeorm';
+import { FindOptionsOrder, FindOptionsWhere } from 'typeorm';
 import { Glossary } from './entities/glossary.entity';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
+import { GlossaryRepository } from './repositories/glossary.repository';
 @Injectable()
 export class GlossaryService {
-  constructor(
-    @InjectRepository(Glossary)
-    private glossaryRepository: Repository<Glossary>,
-  ) {}
+  constructor(private glossaryRepository: GlossaryRepository) {}
 
   findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
-    onlyDashboard: boolean = false,
+    onlyDashboard = false,
   ): Promise<Glossary[]> {
     let whereClause: FindOptionsWhere<Glossary> = {};
-    let orderClause: FindOptionsOrder<Glossary> = {
+    const orderClause: FindOptionsOrder<Glossary> = {
       title: 'ASC',
     };
 
@@ -37,7 +34,9 @@ export class GlossaryService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
           ...whereClause,
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         return this.glossaryRepository.find({
           where: whereClause,

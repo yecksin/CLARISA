@@ -1,11 +1,9 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
-  Delete,
   UseInterceptors,
   ClassSerializerInterceptor,
   Query,
@@ -13,12 +11,9 @@ import {
   Res,
   HttpStatus,
   HttpException,
-  UseGuards,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
-import { JwtAuthGuard } from '../../shared/guards/jwt-auth.guard';
-import { PermissionGuard } from '../../shared/guards/permission.guard';
 import { BiParameterService } from './bi-parameter.service';
 import { UpdateBiParameterDto } from './dto/update-bi-parameter.dto';
 import { BiParameter } from './entities/bi-parameter.entity';

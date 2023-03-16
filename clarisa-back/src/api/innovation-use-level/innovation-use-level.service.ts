@@ -1,15 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateInnovationUseLevelDto } from './dto/update-innovation-use-level.dto';
 import { InnovationUseLevel } from './entities/innovation-use-level.entity';
+import { InnovationUseLevelRepository } from './repositories/innovation-use-level.repository';
 
 @Injectable()
 export class InnovationUseLevelService {
   constructor(
-    @InjectRepository(InnovationUseLevel)
-    private innovationUseLevelRepository: Repository<InnovationUseLevel>,
+    private innovationUseLevelRepository: InnovationUseLevelRepository,
   ) {}
 
   async findAll(
@@ -22,7 +20,9 @@ export class InnovationUseLevelService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.innovationUseLevelRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -33,7 +33,7 @@ export class InnovationUseLevelService {
   async findOne(id: number): Promise<InnovationUseLevel> {
     return await this.innovationUseLevelRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

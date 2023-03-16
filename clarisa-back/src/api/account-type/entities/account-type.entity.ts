@@ -5,23 +5,31 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { Account } from '../../account/entities/account.entity';
 
 @Entity('account_types')
-export class AccountType extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+export class AccountType {
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'text', nullable: false })
   @Exclude()
   name: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 20, nullable: false })
   @Exclude()
   acronym: string;
-
-  @OneToMany(() => Account, (at) => at.account_type)
-  accounts: Promise<Account[]>;
 
   @Expose({ name: 'name' })
   get composedName(): string {
     return `${this.acronym} ${this.name}`;
   }
+
+  //object relations
+
+  @OneToMany(() => Account, (at) => at.account_type)
+  accounts: Account[];
+
+  //auditable fields
+
+  @Exclude()
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

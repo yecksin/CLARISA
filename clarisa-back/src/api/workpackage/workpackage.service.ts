@@ -30,7 +30,9 @@ export class WorkpackageService {
   async findOne(id: number): Promise<Workpackage> {
     return await this.workpackageRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: {
+        is_active: true,
+      },
     });
   }
 

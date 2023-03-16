@@ -22,7 +22,7 @@ export class ScienceGroupService {
   async findOne(id: number): Promise<ScienceGroup> {
     return await this.scienceGroupsRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

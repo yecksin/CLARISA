@@ -11,17 +11,12 @@ import {
   Res,
   HttpStatus,
   HttpException,
-  Post,
-  UseGuards,
 } from '@nestjs/common';
 import { InstitutionService } from './institution.service';
 import { UpdateInstitutionDto } from './dto/update-institution.dto';
 import { Response } from 'express';
 import { Institution } from './entities/institution.entity';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
-import { CreateInstitutionBulkDto } from './dto/institution-bulk.dto';
-import { JwtAuthGuard } from '../../shared/guards/jwt-auth.guard';
-import { PermissionGuard } from '../../shared/guards/permission.guard';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)

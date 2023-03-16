@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common/decorators';
-import { InjectRepository } from '@nestjs/typeorm';
-import { FindOptionsWhere, Repository } from 'typeorm';
+import { FindOptionsWhere } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateBiParameterDto } from './dto/update-bi-parameter.dto';
 import { BiParameter } from './entities/bi-parameter.entity';
@@ -24,7 +23,9 @@ export class BiParameterService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
           ...whereClause,
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         return await this.biParametersRepository.find({
           where: whereClause,
@@ -37,14 +38,13 @@ export class BiParameterService {
   async findOne(id: number): Promise<BiParameter> {
     return await this.biParametersRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 
   async update(updateBiParameterDto: UpdateBiParameterDto[]) {
     return await this.biParametersRepository.save(updateBiParameterDto);
   }
-
 
   async findAllUnitParametersBi(): Promise<ParametersBiUnit> {
     return await this.biParametersRepository.getFindAllInformation();

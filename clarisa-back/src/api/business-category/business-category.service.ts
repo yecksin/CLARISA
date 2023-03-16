@@ -1,15 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateBusinessCategoryDto } from './dto/update-business-category.dto';
 import { BusinessCategory } from './entities/business-category.entity';
+import { BusinessCategoryRepository } from './repositories/business-category.repository';
 
 @Injectable()
 export class BusinessCategoryService {
   constructor(
-    @InjectRepository(BusinessCategory)
-    private businessCategoriesRepository: Repository<BusinessCategory>,
+    private businessCategoriesRepository: BusinessCategoryRepository,
   ) {}
 
   async findAll(
@@ -22,7 +20,9 @@ export class BusinessCategoryService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.businessCategoriesRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -33,7 +33,7 @@ export class BusinessCategoryService {
   async findOne(id: number): Promise<BusinessCategory> {
     return await this.businessCategoriesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

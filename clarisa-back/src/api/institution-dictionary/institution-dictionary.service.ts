@@ -1,18 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { InstitutionRepository } from '../institution/repositories/institution.repository';
 import { InstitutionDictionaryDto } from './dto/institution-dictionary.dto';
 import { UpdateInstitutionDictionaryDto } from './dto/update-institution-dictionary.dto';
 import { InstitutionDictionary } from './entities/institution-dictionary.entity';
+import { InstitutionDictionaryRepository } from './repositories/institution-dictionary.repository';
 
 @Injectable()
 export class InstitutionDictionaryService {
   constructor(
     private institutionRepository: InstitutionRepository,
-    @InjectRepository(InstitutionDictionary)
-    private institutionDictionaryRepository: Repository<InstitutionDictionary>,
+    private institutionDictionaryRepository: InstitutionDictionaryRepository,
   ) {}
 
   async findAll(
@@ -28,7 +26,7 @@ export class InstitutionDictionaryService {
   async findOne(id: number): Promise<InstitutionDictionary> {
     return await this.institutionDictionaryRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

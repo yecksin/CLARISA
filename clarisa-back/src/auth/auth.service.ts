@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { User } from 'src/api/user/entities/user.entity';
-import { UserService } from 'src/api/user/user.service';
 import { ModuleRef } from '@nestjs/core';
 import { BaseAuthenticator } from './utils/interface/BaseAuthenticator';
 import { LDAPAuth } from './utils/LDAPAuth';
 import { DBAuth } from './utils/DBAuth';
 import { BaseMessageDTO } from './utils/BaseMessageDTO';
+import { UserService } from '../api/user/user.service';
+import { User } from '../api/user/entities/user.entity';
 
 @Injectable()
 export class AuthService {

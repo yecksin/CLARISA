@@ -1,15 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateHomepageClarisaEndpointDto } from './dto/update-homepage-clarisa-endpoint.dto';
 import { HomepageClarisaEndpoint } from './entities/homepage-clarisa-endpoint.entity';
+import { HomepageClarisaEndpointRepository } from './repositories/homepage-clarisa-endpoint.repository';
 
 @Injectable()
 export class HomepageClarisaEndpointService {
   constructor(
-    @InjectRepository(HomepageClarisaEndpoint)
-    private generalAcronimRepository: Repository<HomepageClarisaEndpoint>,
+    private generalAcronimRepository: HomepageClarisaEndpointRepository,
   ) {}
 
   async findAll(
@@ -22,7 +20,9 @@ export class HomepageClarisaEndpointService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.generalAcronimRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -33,7 +33,7 @@ export class HomepageClarisaEndpointService {
   async findOne(id: number): Promise<HomepageClarisaEndpoint> {
     return await this.generalAcronimRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

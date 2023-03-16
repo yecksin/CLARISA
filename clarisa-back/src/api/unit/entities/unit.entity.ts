@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import {
   Column,
   Entity,
@@ -8,40 +9,50 @@ import {
 } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { ScienceGroup } from '../../science-group/entities/science-group.entity';
-import { UnitType } from './unit-type';
+import { UnitType } from './unit-type.entity';
 
 @Entity('units')
-export class Unit extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+export class Unit {
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 20, nullable: false })
   financial_code: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   description: string;
 
-  @Column()
+  //relations
+
+  @Column({ type: 'bigint', nullable: true })
   parent_id: number;
+
+  @Column({ type: 'bigint', nullable: true })
+  science_group_id: number;
+
+  @Column({ type: 'bigint', nullable: true })
+  unit_type_id: number;
+
+  //object relations
 
   @ManyToOne(() => Unit, (u) => u.children)
   @JoinColumn({ name: 'parent_id' })
-  parent: Promise<Unit>;
+  parent: Unit;
 
   @OneToMany(() => Unit, (u) => u.parent)
-  children: Promise<Unit[]>;
-
-  @Column()
-  science_group_id: number;
+  children: Unit[];
 
   @ManyToOne(() => ScienceGroup, (u) => u.units)
   @JoinColumn({ name: 'science_group_id' })
-  science_group: Promise<ScienceGroup>;
-
-  @Column()
-  unit_type_id: number;
+  science_group: ScienceGroup;
 
   @ManyToOne(() => UnitType, (u) => u.units)
   @JoinColumn({ name: 'unit_type_id' })
-  unit_type: Promise<UnitType>;
+  unit_type: UnitType;
+
+  //auditable fields
+
+  @Exclude()
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

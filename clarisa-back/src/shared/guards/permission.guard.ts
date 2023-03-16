@@ -1,8 +1,8 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { ModuleRef, Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
-import { User } from 'src/api/user/entities/user.entity';
-import { UserService } from 'src/api/user/user.service';
+import { User } from '../../api/user/entities/user.entity';
+import { UserService } from '../../api/user/user.service';
 import { IS_CLARISA_PAGE } from '../decorators/clarisa-page.decorator';
 
 @Injectable()

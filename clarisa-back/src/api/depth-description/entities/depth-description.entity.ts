@@ -1,19 +1,27 @@
-import { Expose } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { ProjectedBenefitDepth } from '../../projected-benefit-depth/entities/projected-benefit-depth.entity';
 
+//TODO change table name to depth_descriptions
 @Entity('depths_description')
-export class DepthDescription extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+export class DepthDescription {
   @Expose({ name: 'depthScaleId' })
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
   @Expose({ name: 'depthScaleName' })
+  @Column({ type: 'text', nullable: true })
   name: string;
 
-  //relations
+  //object relations
+
   @OneToMany(() => ProjectedBenefitDepth, (pbd) => pbd.depth_description_object)
   projected_benefit_depth_array: ProjectedBenefitDepth[];
+
+  //auditable fields
+
+  @Exclude()
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

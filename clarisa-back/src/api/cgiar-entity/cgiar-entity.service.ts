@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { FindOptionsOrder, FindOptionsWhere, In, Repository } from 'typeorm';
+import { FindOptionsOrder, FindOptionsWhere, In } from 'typeorm';
 import { CgiarEntityTypeEnum } from '../../shared/entities/enums/cgiar-entity-types';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateCgiarEntityDto } from './dto/update-cgiar-entity.dto';
 import { CgiarEntity } from './entities/cgiar-entity.entity';
+import { CgiarEntityRepository } from './repositories/cgiar-entity.repository';
 
 @Injectable()
 export class CgiarEntityService {
@@ -23,15 +23,12 @@ export class CgiarEntityService {
   ];
 
   private readonly whereClause: FindOptionsWhere<CgiarEntity> = {
-    cgiarEntityType: {
+    cgiar_entity_type_object: {
       id: In(this.commonTypes),
     },
   };
 
-  constructor(
-    @InjectRepository(CgiarEntity)
-    private cgiarEntityRepository: Repository<CgiarEntity>,
-  ) {}
+  constructor(private cgiarEntityRepository: CgiarEntityRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
@@ -47,7 +44,9 @@ export class CgiarEntityService {
         return await this.cgiarEntityRepository.find({
           where: {
             ...this.whereClause,
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
           order: this.orderClause,
         });
@@ -59,7 +58,7 @@ export class CgiarEntityService {
   async findOne(id: number): Promise<CgiarEntity> {
     return await this.cgiarEntityRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

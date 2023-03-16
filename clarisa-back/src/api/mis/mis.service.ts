@@ -1,16 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateMisDto } from './dto/update-mis.dto';
 import { Mis } from './entities/mis.entity';
+import { MisRepository } from './repositories/mis.repository';
 
 @Injectable()
 export class MisService {
-  constructor(
-    @InjectRepository(Mis)
-    private misRepository: Repository<Mis>,
-  ) {}
+  constructor(private misRepository: MisRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
@@ -22,7 +18,9 @@ export class MisService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.misRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -33,7 +31,7 @@ export class MisService {
   async findOne(id: number): Promise<Mis> {
     return await this.misRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { DataSource, FindOptionsWhere, Repository } from 'typeorm';
 import { FindAllOptions } from '../../../shared/entities/enums/find-all-options';
 import { SourceOption } from '../../../shared/entities/enums/source-options';
-import { ActionAreaOutcomeIndicator } from '../../action-area-outcome-indicator/entities/action-area-outcome-indicator.entity';
 import { InstitutionTypeFromParentDto } from '../dto/institution-type-from-parent.dto';
 import { InstitutionTypeDto } from '../dto/institution-type.dto';
 import { InstitutionType } from '../entities/institution-type.entity';
@@ -28,7 +27,9 @@ export class InstitutionTypeRepository extends Repository<InstitutionType> {
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         break;
     }
@@ -105,7 +106,9 @@ export class InstitutionTypeRepository extends Repository<InstitutionType> {
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         break;
     }

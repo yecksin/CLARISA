@@ -1,21 +1,13 @@
 import {
   Controller,
   Get,
-  Body,
-  Patch,
   Param,
   UseInterceptors,
   ClassSerializerInterceptor,
   Query,
   ParseIntPipe,
-  Res,
-  HttpStatus,
-  HttpException,
 } from '@nestjs/common';
 import { InnovationCharacteristicService } from './innovation-characteristic.service';
-import { UpdateInnovationCharacteristicDto } from './dto/update-innovation-characteristic.dto';
-import { Response } from 'express';
-import { InnovationCharacteristic } from './entities/innovation-characteristic.entity';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 
 @Controller()
@@ -35,7 +27,7 @@ export class InnovationCharacteristicController {
     return await this.innovationCharacteristicService.findOne(id);
   }
 
-  @Patch('update')
+  /*@Patch('update')
   async update(
     @Res() res: Response,
     @Body() updateUserDtoList: UpdateInnovationCharacteristicDto[],
@@ -47,5 +39,5 @@ export class InnovationCharacteristicController {
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
-  }
+  }*/
 }

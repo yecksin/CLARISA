@@ -24,7 +24,7 @@ export class RegionService {
   async findOne(id: number): Promise<Region> {
     return await this.regionsRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

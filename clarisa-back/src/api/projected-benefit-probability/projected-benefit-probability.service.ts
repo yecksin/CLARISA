@@ -1,15 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateProjectedBenefitProbabilityDto } from './dto/update-projected-benefit-probability.dto';
 import { ProjectedBenefitProbability } from './entities/projected-benefit-probability.entity';
+import { ProjectedBenefitProbabilityRepository } from './repositories/projected-benefit-probability.repository';
 
 @Injectable()
 export class ProjectedBenefitProbabilityService {
   constructor(
-    @InjectRepository(ProjectedBenefitProbability)
-    private projectedBenefitProbabilitysRepository: Repository<ProjectedBenefitProbability>,
+    private projectedBenefitProbabilitysRepository: ProjectedBenefitProbabilityRepository,
   ) {}
 
   async findAll(
@@ -22,7 +20,9 @@ export class ProjectedBenefitProbabilityService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.projectedBenefitProbabilitysRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -33,7 +33,7 @@ export class ProjectedBenefitProbabilityService {
   async findOne(id: number): Promise<ProjectedBenefitProbability> {
     return await this.projectedBenefitProbabilitysRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

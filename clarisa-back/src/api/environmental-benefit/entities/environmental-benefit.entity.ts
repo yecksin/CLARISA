@@ -1,11 +1,18 @@
+import { Exclude } from 'class-transformer';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 
 @Entity('environmental_benefits')
-export class EnvironmentalBenefit extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+export class EnvironmentalBenefit {
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   name: string;
+
+  //auditable fields
+
+  @Exclude()
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

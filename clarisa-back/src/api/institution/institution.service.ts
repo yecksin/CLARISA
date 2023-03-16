@@ -5,7 +5,6 @@ import { InstitutionDto } from './dto/institution.dto';
 import { UpdateInstitutionDto } from './dto/update-institution.dto';
 import { Institution } from './entities/institution.entity';
 import { InstitutionRepository } from './repositories/institution.repository';
-import { CreateInstitutionBulkDto } from './dto/institution-bulk.dto';
 
 @Injectable()
 export class InstitutionService {
@@ -39,7 +38,7 @@ export class InstitutionService {
   async findOne(id: number): Promise<Institution> {
     return await this.institutionRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

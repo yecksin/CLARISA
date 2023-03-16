@@ -8,7 +8,6 @@ import { Injectable } from '@nestjs/common';
 import { ProjectedBenefit } from '../entities/projected-benefit.entity';
 import { FindAllOptions } from '../../../shared/entities/enums/find-all-options';
 import { ProjectedBenefitDto } from '../dto/projected-benefit.dto';
-import { ProjectedBenefitDepthModule } from '../../projected-benefit-depth/projected-benefit-depth.module';
 import { DepthDescriptionDto } from '../../depth-description/dto/depth-description.dto';
 import { ProjectedBenefitWeightingDto } from '../../projected-benefit-weighting/dto/projected-benefit-weighting.dto';
 
@@ -43,7 +42,9 @@ export class ProjectedBenefitRepository extends Repository<ProjectedBenefit> {
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         break;
     }

@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { HomepageClarisaEndpointService } from './homepage-clarisa-endpoint.service';
 import { HomepageClarisaEndpointController } from './homepage-clarisa-endpoint.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { HomepageClarisaEndpoint } from './entities/homepage-clarisa-endpoint.entity';
+import { HomepageClarisaEndpointRepository } from './repositories/homepage-clarisa-endpoint.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([HomepageClarisaEndpoint])],
   controllers: [HomepageClarisaEndpointController],
-  providers: [HomepageClarisaEndpointService],
+  providers: [
+    HomepageClarisaEndpointService,
+    HomepageClarisaEndpointRepository,
+  ],
 })
 export class HomepageClarisaEndpointModule {}

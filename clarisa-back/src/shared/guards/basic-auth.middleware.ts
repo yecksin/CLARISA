@@ -1,20 +1,7 @@
-import {
-  Injectable,
-  CanActivate,
-  ExecutionContext,
-  NestMiddleware,
-  Next,
-  Req,
-  Res,
-} from '@nestjs/common';
-import { ModuleRef, Reflector } from '@nestjs/core';
-import { Observable } from 'rxjs';
-import { User } from 'src/api/user/entities/user.entity';
-import { IS_CLARISA_PAGE } from '../decorators/clarisa-page.decorator';
-import Base64 from 'crypto-js/enc-base64';
-import CryptoJS from 'crypto-js/core';
+import { Injectable, NestMiddleware, Next, Req } from '@nestjs/common';
+import { ModuleRef } from '@nestjs/core';
 import { AuthService } from 'src/auth/auth.service';
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request } from 'express';
 
 @Injectable()
 export class BasicAuthMiddleware implements NestMiddleware {
@@ -22,7 +9,6 @@ export class BasicAuthMiddleware implements NestMiddleware {
 
   async use(
     @Req() request: Request,
-    @Res() response: Response,
     @Next() next: NextFunction,
   ): Promise<void> {
     const authHeader: string = request.headers?.authorization ?? '';
@@ -38,13 +24,13 @@ export class BasicAuthMiddleware implements NestMiddleware {
         .then((u) => {
           if (u) {
             return this.authService.login(u).then((l) => {
-              request.headers.authorization = (`Bearer ${l.access_token}`);
+              request.headers.authorization = `Bearer ${l.access_token}`;
               return true;
             });
           }
           return false;
         })
-        .catch((e) => false);
+        .catch(() => false);
     }
     next();
   }

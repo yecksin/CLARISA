@@ -1,18 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { FindOptionsWhere, Repository } from 'typeorm';
+import { FindOptionsWhere } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { SourceOption } from '../../shared/entities/enums/source-options';
-import { CreatePolicyTypeDto } from './dto/create-policy-type.dto';
 import { UpdatePolicyTypeDto } from './dto/update-policy-type.dto';
 import { PolicyType } from './entities/policy-type.entity';
+import { PolicyTypeRepository } from './repositories/policy-type.repository';
 
 @Injectable()
 export class PolicyTypeService {
-  constructor(
-    @InjectRepository(PolicyType)
-    private policyTypesRepository: Repository<PolicyType>,
-  ) {}
+  constructor(private policyTypesRepository: PolicyTypeRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
@@ -44,7 +40,9 @@ export class PolicyTypeService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
           ...whereClause,
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         return await this.policyTypesRepository.find({
           where: whereClause,
@@ -57,7 +55,7 @@ export class PolicyTypeService {
   async findOne(id: number): Promise<PolicyType> {
     return await this.policyTypesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

@@ -2,12 +2,10 @@ import { ActionAreaModule } from './action-area/action-area.module';
 import { RoleModule } from './role/role.module';
 import { UserModule } from './user/user.module';
 import { GlossaryModule } from './glossary/glossary.module';
-import { GlobalTargetsModule } from './global-targets/global-targets.module';
 import { ImpactAreaModule } from './impact-area/impact-area.module';
 import { StudyTypeModule } from './study-type/study-type.module';
 import { SdgModule } from './sdg/sdg.module';
 import { SdgTargetModule } from './sdg-target/sdg-target.module';
-import { ImpactAreaIndicatorsModule } from './impact-area-indicators/impact-area-indicators.module';
 import { ProjectedBenefitProbabilityModule } from './projected-benefit-probability/projected-benefit-probability.module';
 import { ProjectedBenefitModule } from './projected-benefit/projected-benefit.module';
 import { ActionAreaOutcomeModule } from './action-area-outcome/action-area-outcome.module';
@@ -15,7 +13,6 @@ import { OutcomeIndicatorModule } from './outcome-indicator/outcome-indicator.mo
 import { ActionAreaOutcomeIndicatorModule } from './action-area-outcome-indicator/action-area-outcome-indicator.module';
 import { CountryModule } from './country/country.module';
 import { GeopositionModule } from './geoposition/geoposition.module';
-import { SourcesModule } from './sources/sources.module';
 import { RegionTypeModule } from './region-type/region-type.module';
 import { RegionModule } from './region/region.module';
 import { DepthDescriptionModule } from './depth-description/depth-description.module';
@@ -30,7 +27,6 @@ import { CgiarEntityModule } from './cgiar-entity/cgiar-entity.module';
 import { CgiarEntityTypeModule } from './cgiar-entity-type/cgiar-entity-type.module';
 import { SdgIndicatorModule } from './sdg-indicator/sdg-indicator.module';
 import { OneCgiarUserModule } from './one-cgiar-user/one-cgiar-user.module';
-import { BeneficiarieModule } from './beneficiarie/beneficiarie.module';
 import { BusinessCategoryModule } from './business-category/business-category.module';
 import { TechnicalFieldModule } from './technical-field/technical-field.module';
 import { InnovationTypeModule } from './innovation-type/innovation-type.module';
@@ -48,7 +44,6 @@ import { GeographicScopeModule } from './geographic-scope/geographic-scope.modul
 import { HomepageClarisaCategoryModule } from './homepage-clarisa-category/homepage-clarisa-category.module';
 import { HomepageClarisaEndpointModule } from './homepage-clarisa-endpoint/homepage-clarisa-endpoint.module';
 import { HomepageClarisaCategoryEndpointModule } from './homepage-clarisa-category-endpoint/homepage-clarisa-category-endpoint.module';
-import { EndOfInitiativeOutcomesModule } from './end-of-initiative-outcomes/end-of-initiative-outcomes.module';
 import { MisModule } from './mis/mis.module';
 import { InnovationCharacteristicModule } from './innovation-characteristic/innovation-characteristic.module';
 import { PolicyStageModule } from './policy-stage/policy-stage.module';
@@ -60,6 +55,12 @@ import { CountryOfficeRequestModule } from './country-office-request/country-off
 import { PolicyTypeModule } from './policy-type/policy-type.module';
 import { BiParameterModule } from './bi-parameter/bi-parameter.module';
 import { OldInstitutionModule } from './old-institution/old-institution.module';
+import { GlobalTargetModule } from './global-target/global-target.module';
+import { BeneficiaryModule } from './beneficiary/beneficiary.module';
+import { EndOfInitiativeOutcomeModule } from './end-of-initiative-outcome/end-of-initiative-outcome.module';
+import { ImpactAreaIndicatorModule } from './impact-area-indicator/impact-area-indicator.module';
+import { SourceModule } from './source/source.module';
+import { PermissionModule } from './permission/permission.module';
 
 export const apiRoutes = [
   {
@@ -84,7 +85,7 @@ export const apiRoutes = [
   },
   {
     path: 'global-targets',
-    module: GlobalTargetsModule,
+    module: GlobalTargetModule,
   },
   {
     path: 'study-types',
@@ -100,7 +101,7 @@ export const apiRoutes = [
   },
   {
     path: 'impact-area-indicators',
-    module: ImpactAreaIndicatorsModule,
+    module: ImpactAreaIndicatorModule,
   },
   {
     path: 'projected-benefit-probabilities',
@@ -132,7 +133,7 @@ export const apiRoutes = [
   },
   {
     path: 'sources',
-    module: SourcesModule,
+    module: SourceModule,
   },
   {
     path: 'region-types',
@@ -188,7 +189,7 @@ export const apiRoutes = [
   },
   {
     path: 'beneficiaries',
-    module: BeneficiarieModule,
+    module: BeneficiaryModule,
   },
   {
     path: 'sdg-indicators',
@@ -264,7 +265,7 @@ export const apiRoutes = [
   },
   {
     path: 'end-of-initiative-outcomes',
-    module: EndOfInitiativeOutcomesModule,
+    module: EndOfInitiativeOutcomeModule,
   },
   {
     path: 'mises',
@@ -309,5 +310,9 @@ export const apiRoutes = [
   {
     path: 'old-institutions',
     module: OldInstitutionModule,
+  },
+  {
+    path: 'permissions',
+    module: PermissionModule,
   },
 ];

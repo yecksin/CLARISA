@@ -1,15 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateTechnologyDevelopmentStageDto } from './dto/update-technology-development-stage.dto';
 import { TechnologyDevelopmentStage } from './entities/technology-development-stage.entity';
+import { TechnologyDevelopmentStageRepository } from './repositories/technology-development-stage.repository';
 
 @Injectable()
 export class TechnologyDevelopmentStageService {
   constructor(
-    @InjectRepository(TechnologyDevelopmentStage)
-    private technologyDevelopmentStagesRepository: Repository<TechnologyDevelopmentStage>,
+    private technologyDevelopmentStagesRepository: TechnologyDevelopmentStageRepository,
   ) {}
 
   async findAll(
@@ -22,7 +20,9 @@ export class TechnologyDevelopmentStageService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.technologyDevelopmentStagesRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -33,7 +33,7 @@ export class TechnologyDevelopmentStageService {
   async findOne(id: number): Promise<TechnologyDevelopmentStage> {
     return await this.technologyDevelopmentStagesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

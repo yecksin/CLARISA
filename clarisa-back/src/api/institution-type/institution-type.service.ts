@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { FindOptionsWhere, Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { SourceOption } from '../../shared/entities/enums/source-options';
 import { InstitutionTypeFromParentDto } from './dto/institution-type-from-parent.dto';
@@ -52,7 +50,7 @@ export class InstitutionTypeService {
   async findOne(id: number): Promise<InstitutionType> {
     return await this.institutionTypesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

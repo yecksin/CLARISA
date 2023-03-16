@@ -1,15 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateOutcomeIndicatorDto } from './dto/update-outcome-indicator.dto';
 import { OutcomeIndicator } from './entities/outcome-indicator.entity';
+import { OutcomeIndicatorRepository } from './repositories/outcome-indicator.repository';
 
 @Injectable()
 export class OutcomeIndicatorService {
   constructor(
-    @InjectRepository(OutcomeIndicator)
-    private outcomeIndicatorsRepository: Repository<OutcomeIndicator>,
+    private outcomeIndicatorsRepository: OutcomeIndicatorRepository,
   ) {}
 
   async findAll(
@@ -22,7 +20,9 @@ export class OutcomeIndicatorService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.outcomeIndicatorsRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -33,7 +33,7 @@ export class OutcomeIndicatorService {
   async findOne(id: number): Promise<OutcomeIndicator> {
     return await this.outcomeIndicatorsRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

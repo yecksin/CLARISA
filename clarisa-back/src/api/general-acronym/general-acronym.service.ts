@@ -1,16 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateGeneralAcronymDto } from './dto/update-general-acronym.dto';
 import { GeneralAcronym } from './entities/general-acronym.entity';
+import { GeneralAcronymRepository } from './repositories/general-acronym.repository';
 
 @Injectable()
 export class GeneralAcronymService {
-  constructor(
-    @InjectRepository(GeneralAcronym)
-    private generalAcronimRepository: Repository<GeneralAcronym>,
-  ) {}
+  constructor(private generalAcronimRepository: GeneralAcronymRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
@@ -22,7 +18,9 @@ export class GeneralAcronymService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.generalAcronimRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -33,7 +31,7 @@ export class GeneralAcronymService {
   async findOne(id: number): Promise<GeneralAcronym> {
     return await this.generalAcronimRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

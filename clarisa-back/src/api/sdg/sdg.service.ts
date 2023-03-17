@@ -1,17 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { LegacySdgDto } from './dto/legacy-sdg.dto';
 import { UpdateSdgDto } from './dto/update-sdg.dto';
 import { Sdg } from './entities/sdg.entity';
+import { SdgRepository } from './repositories/sdg.repository';
 
 @Injectable()
 export class SdgService {
-  constructor(
-    @InjectRepository(Sdg)
-    private sdgsRepository: Repository<Sdg>,
-  ) {}
+  constructor(private sdgsRepository: SdgRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
@@ -26,7 +22,9 @@ export class SdgService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         response = await this.sdgsRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
         break;
@@ -53,7 +51,7 @@ export class SdgService {
   async findOne(id: number): Promise<Sdg> {
     return await this.sdgsRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

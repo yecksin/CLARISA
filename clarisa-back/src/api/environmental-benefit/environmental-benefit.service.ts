@@ -1,15 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
-import { Repository } from 'typeorm';
 import { UpdateEnvironmentalBenefitDto } from './dto/update-environmental-benefit.dto';
 import { EnvironmentalBenefit } from './entities/environmental-benefit.entity';
+import { EnvironmentalBenefitRepository } from './repositories/environmental-benefit.repository';
 
 @Injectable()
 export class EnvironmentalBenefitService {
   constructor(
-    @InjectRepository(EnvironmentalBenefit)
-    private environmentalBenefitsRepository: Repository<EnvironmentalBenefit>,
+    private environmentalBenefitsRepository: EnvironmentalBenefitRepository,
   ) {}
 
   async findAll(
@@ -22,7 +20,9 @@ export class EnvironmentalBenefitService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.environmentalBenefitsRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -33,7 +33,7 @@ export class EnvironmentalBenefitService {
   async findOne(id: number): Promise<EnvironmentalBenefit> {
     return await this.environmentalBenefitsRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import {
   Column,
   Entity,
@@ -11,73 +12,83 @@ import { Country } from '../../country/entities/country.entity';
 import { InstitutionType } from '../../institution-type/entities/institution-type.entity';
 import { Institution } from '../../institution/entities/institution.entity';
 import { Mis } from '../../mis/entities/mis.entity';
+import { User } from '../../user/entities/user.entity';
 
 @Entity('partner_requests')
-export class PartnerRequest extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+export class PartnerRequest {
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   partner_name: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   acronym: string;
 
-  @Column()
-  institution_type_id: number;
-
-  @Column()
-  country_id: number;
-
-  @Column()
+  @Column({ type: 'text', nullable: true })
   web_page: string;
 
-  @Column()
+  @Column({ type: 'tinyint', width: 1, nullable: false, default: () => '0' })
   is_office: boolean;
 
-  @Column()
-  institution_id: number;
-
-  @Column()
+  @Column({ type: 'text', nullable: true })
   request_source: string;
 
-  @Column()
-  mis_id: number;
-
-  @Column()
-  partner_request_id: number;
-
-  @Column()
+  @Column({ type: 'tinyint', width: 1, nullable: true })
   is_modified: boolean;
 
-  @Column()
+  @Column({ type: 'tinyint', width: 1, nullable: true })
   accepted: boolean;
 
-  @Column()
-  accepted_by: number;
-
-  @Column()
+  @Column({ type: 'timestamp', nullable: true })
   accepted_date: Date;
 
-  @Column()
-  rejected_by: number;
-
-  @Column()
+  @Column({ type: 'timestamp', nullable: true })
   rejected_date: Date;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   reject_justification: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   external_user_mail: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   external_user_name: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   external_user_comments: string;
 
+  @Column({ type: 'text', nullable: true })
+  category_1: string;
+
+  @Column({ type: 'text', nullable: true })
+  category_2: string;
+
   //relations
+
+  @Column({ type: 'bigint', nullable: true })
+  institution_type_id: number;
+
+  @Column({ type: 'bigint', nullable: true })
+  country_id: number;
+
+  @Column({ type: 'bigint', nullable: true })
+  institution_id: number;
+
+  @Column({ type: 'bigint', nullable: false })
+  mis_id: number;
+
+  @Column({ type: 'bigint', nullable: true })
+  accepted_by: number;
+
+  @Column({ type: 'bigint', nullable: true })
+  rejected_by: number;
+
+  @Column({ type: 'bigint', nullable: true })
+  partner_request_id: number;
+
+  //object relations
+
   @ManyToOne(() => InstitutionType, (it) => it.partner_requests)
   @JoinColumn({ name: 'institution_type_id' })
   institution_type_object: InstitutionType;
@@ -94,6 +105,14 @@ export class PartnerRequest extends AuditableEntity {
   @JoinColumn({ name: 'mis_id' })
   mis_object: Mis;
 
+  @ManyToOne(() => User, (u) => u.partner_request_accepted_array)
+  @JoinColumn({ name: 'accepted_by' })
+  accepted_by_object: User;
+
+  @ManyToOne(() => User, (u) => u.partner_request_rejected_array)
+  @JoinColumn({ name: 'rejected_by' })
+  rejected_by_object: User;
+
   @ManyToOne(() => PartnerRequest, (pr) => pr.children)
   @JoinColumn({ name: 'partner_request_id' })
   parent_object: PartnerRequest;
@@ -102,9 +121,9 @@ export class PartnerRequest extends AuditableEntity {
   @OneToMany(() => PartnerRequest, (pr) => pr.parent_object)
   children: PartnerRequest[];
 
-  @Column()
-  category_1: string;
+  //auditable fields
 
-  @Column()
-  category_2: string;
+  @Exclude()
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

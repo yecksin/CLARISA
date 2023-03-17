@@ -1,17 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { FindOptionsWhere, Repository } from 'typeorm';
+import { FindOptionsWhere } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { SourceOption } from '../../shared/entities/enums/source-options';
 import { UpdateGeographicScopeDto } from './dto/update-geographic-scope.dto';
 import { GeographicScope } from './entities/geographic-scope.entity';
+import { GeographicScopeRepository } from './repositories/geographic-scope.repository';
 
 @Injectable()
 export class GeographicScopeService {
-  constructor(
-    @InjectRepository(GeographicScope)
-    private geographicScopesRepository: Repository<GeographicScope>,
-  ) {}
+  constructor(private geographicScopesRepository: GeographicScopeRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
@@ -24,11 +21,17 @@ export class GeographicScopeService {
       case SourceOption.ALL.path:
         // do nothing. no extra conditions needed
         break;
-      //case SourceOption.CGIAR.path:
       case SourceOption.LEGACY.path:
         whereClause = {
           ...whereClause,
           source_id: incomingType.source_id,
+        };
+        break;
+      case SourceOption.CGIAR.path:
+        whereClause = {
+          ...whereClause,
+          source_id: SourceOption.LEGACY.source_id,
+          is_one_cgiar: true,
         };
         break;
       default:
@@ -44,7 +47,9 @@ export class GeographicScopeService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
           ...whereClause,
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         return await this.geographicScopesRepository.find({
           where: whereClause,
@@ -57,7 +62,7 @@ export class GeographicScopeService {
   async findOne(id: number): Promise<GeographicScope> {
     return await this.geographicScopesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

@@ -1,4 +1,4 @@
-import { Expose } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 import {
   Column,
   Entity,
@@ -10,23 +10,42 @@ import { AuditableEntity } from '../../../shared/entities/extends/auditable-enti
 import { SdgTarget } from '../../sdg-target/entities/sdg-target.entity';
 
 @Entity('sustainable_development_goal_indicators')
-export class SdgIndicator extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+export class SdgIndicator {
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  //FIXME change name to unsd_indicator_code
   @Expose({ name: 'unsdIndicatorCode' })
+  @Column({ type: 'text', nullable: false })
   unsd_indicator_codes: string;
 
-  @Column()
+  //FIXME change name to sdg_indicator_code
   @Expose({ name: 'indicatorCode' })
+  @Column({ type: 'text', nullable: false })
   sdg_indicator_codes: string;
 
-  @Column()
   @Expose({ name: 'indicatorName' })
+  @Column({ type: 'text', nullable: false })
   sdg_indicator: string;
 
-  @ManyToOne(() => SdgTarget, { eager: true })
+  //relations
+
+  @Exclude()
+  @Column({ type: 'bigint', nullable: true })
+  sdg_target_id: number;
+
+  //object relations
+
+  @Expose({ name: 'sdg_target_id' })
+  @ManyToOne(() => SdgTarget, (sdgt) => sdgt.sdg_indicator_array, {
+    eager: true,
+  })
   @JoinColumn({ name: 'sdg_target_id' })
-  sdg_target_id: SdgTarget;
+  sdg_target_object: SdgTarget;
+
+  //auditable fields
+
+  @Exclude()
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

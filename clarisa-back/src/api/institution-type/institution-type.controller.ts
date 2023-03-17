@@ -33,6 +33,14 @@ export class InstitutionTypeController {
     return await this.institutionTypeService.findAll(show, type);
   }
 
+  @Get('/simple')
+  async findAllSimple(
+    @Query('show') show: FindAllOptions,
+    @Query('type') type: string,
+  ) {
+    return await this.institutionTypeService.findAllSimple(show, type);
+  }
+
   @Get('/from-parent')
   async findAllFromParentToChildren(
     @Query('show') show: FindAllOptions,

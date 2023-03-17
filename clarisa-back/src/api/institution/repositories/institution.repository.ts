@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import {
   DataSource,
   FindOptionsRelations,
@@ -13,14 +12,12 @@ import { InstitutionDictionaryDto } from '../../institution-dictionary/dto/insti
 import { InstitutionSourceDto } from '../../institution-dictionary/dto/institution-source.dto';
 import { InstitutionTypeDto } from '../../institution-type/dto/institution-type.dto';
 import { PartnerRequest } from '../../partner-request/entities/partner-request.entity';
-import { CreateInstitutionBulkDto } from '../dto/institution-bulk.dto';
 import { InstitutionCountryDto } from '../dto/institution-country.dto';
 import { InstitutionSimpleDto } from '../dto/institution-simple.dto';
 import { InstitutionDto } from '../dto/institution.dto';
 import { InstitutionLocation } from '../entities/institution-location.entity';
 import { Institution } from '../entities/institution.entity';
-import { InstitutionType } from '../../institution-type/entities/institution-type.entity';
-import { Country } from '../../country/entities/country.entity';
+import { InstitutionLocationRepository } from './institution-location.repository';
 
 @Injectable()
 export class InstitutionRepository extends Repository<Institution> {
@@ -33,8 +30,7 @@ export class InstitutionRepository extends Repository<Institution> {
 
   constructor(
     private dataSource: DataSource,
-    @InjectRepository(InstitutionLocation)
-    private institutionLocationRepository: Repository<InstitutionLocation>,
+    private institutionLocationRepository: InstitutionLocationRepository,
   ) {
     super(Institution, dataSource.createEntityManager());
   }
@@ -53,7 +49,9 @@ export class InstitutionRepository extends Repository<Institution> {
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         break;
     }
@@ -61,7 +59,7 @@ export class InstitutionRepository extends Repository<Institution> {
     if (from) {
       whereClause = {
         ...whereClause,
-        updated_at: MoreThanOrEqual(new Date(+from)),
+        auditableFields: { updated_at: MoreThanOrEqual(new Date(+from)) },
       };
     }
 
@@ -86,7 +84,6 @@ export class InstitutionRepository extends Repository<Institution> {
   async findAllInstitutionsSimple(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<InstitutionSimpleDto[]> {
-    const institutionDtos: InstitutionSimpleDto[] = [];
     let whereClause: FindOptionsWhere<Institution> = {};
     switch (option) {
       case FindAllOptions.SHOW_ALL:
@@ -95,7 +92,9 @@ export class InstitutionRepository extends Repository<Institution> {
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         break;
     }
@@ -128,7 +127,7 @@ export class InstitutionRepository extends Repository<Institution> {
 
   private fillOutInstitutionInfo(
     institution: Institution,
-    showActiveField: boolean = false,
+    showActiveField = false,
   ): InstitutionDto {
     const institutionDto: InstitutionDto = new InstitutionDto();
 
@@ -136,9 +135,9 @@ export class InstitutionRepository extends Repository<Institution> {
     institutionDto.name = institution.name;
     institutionDto.acronym = institution.acronym;
     institutionDto.websiteLink = institution.website_link;
-    institutionDto.added = institution.created_at;
+    institutionDto.added = institution.auditableFields.created_at;
     if (showActiveField) {
-      institutionDto.is_active = institution.is_active;
+      institutionDto.is_active = institution.auditableFields.is_active;
     }
 
     institutionDto.countryOfficeDTO = institution.institution_locations.map(
@@ -176,7 +175,9 @@ export class InstitutionRepository extends Repository<Institution> {
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         break;
     }
@@ -244,11 +245,11 @@ export class InstitutionRepository extends Repository<Institution> {
     request: CountryOfficeRequest | PartnerRequest,
     isHQ: boolean,
   ): Promise<InstitutionLocation> {
-    let institutionLocation: InstitutionLocation = new InstitutionLocation();
+    const institutionLocation: InstitutionLocation = new InstitutionLocation();
 
     institutionLocation.country_id = request.country_id;
-    institutionLocation.created_at = request.accepted_date;
-    institutionLocation.created_by = request.accepted_by;
+    institutionLocation.auditableFields.created_at = request.accepted_date;
+    institutionLocation.auditableFields.created_by = request.accepted_by;
     institutionLocation.institution_id = request.institution_id;
     institutionLocation.is_headquater = isHQ;
 
@@ -261,8 +262,8 @@ export class InstitutionRepository extends Repository<Institution> {
     let institution: Institution = new Institution();
 
     institution.acronym = partnerRequest.acronym;
-    institution.created_at = partnerRequest.accepted_date;
-    institution.created_by = partnerRequest.accepted_by;
+    institution.auditableFields.created_at = partnerRequest.accepted_date;
+    institution.auditableFields.created_by = partnerRequest.accepted_by;
     institution.institution_type_id = partnerRequest.institution_type_id;
     institution.name = partnerRequest.partner_name;
     institution.website_link = partnerRequest.web_page;
@@ -286,14 +287,14 @@ export class InstitutionRepository extends Repository<Institution> {
     countryAndInstitution: number,
     id_institution: number,
     isHQ: boolean,
-    createBy: number
+    createBy: number,
   ) {
-    let institutionLocation: InstitutionLocation = new InstitutionLocation();
-    
+    const institutionLocation: InstitutionLocation = new InstitutionLocation();
+
     institutionLocation.country_id = countryAndInstitution;
     institutionLocation.is_headquater = isHQ;
     institutionLocation.institution_id = id_institution;
-    institutionLocation.created_by = createBy;
+    institutionLocation.auditableFields.created_by = createBy;
 
     return this.institutionLocationRepository.save(institutionLocation);
   }
@@ -302,21 +303,19 @@ export class InstitutionRepository extends Repository<Institution> {
     BulkInstitutions: PartnerRequest,
     createBy: number,
   ) {
-    let institutionType: InstitutionType;
-
     let institution: Institution = new Institution();
     institution.acronym = BulkInstitutions.acronym;
     institution.name = BulkInstitutions.partner_name;
     institution.website_link = BulkInstitutions.web_page;
 
     institution.institution_type_id = BulkInstitutions.institution_type_id;
-    institution.created_by = createBy;
+    institution.auditableFields.created_by = createBy;
     institution = await this.save(institution);
     await this.createInstitutionCountryBulk(
       BulkInstitutions.country_id,
       institution.id,
       true,
-      createBy
+      createBy,
     );
 
     return institution;

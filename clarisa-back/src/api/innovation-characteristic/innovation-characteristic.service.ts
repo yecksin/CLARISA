@@ -1,15 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
-import { UpdateInnovationCharacteristicDto } from './dto/update-innovation-characteristic.dto';
 import { InnovationCharacteristic } from './entities/innovation-characteristic.entity';
+import { InnovationCharacteristicRepository } from './repositories/innovation-characteristic.repository';
 
 @Injectable()
 export class InnovationCharacteristicService {
   constructor(
-    @InjectRepository(InnovationCharacteristic)
-    private innovationCharacteristicsRepository: Repository<InnovationCharacteristic>,
+    private innovationCharacteristicsRepository: InnovationCharacteristicRepository,
   ) {}
 
   async findAll(
@@ -22,7 +19,9 @@ export class InnovationCharacteristicService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.innovationCharacteristicsRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -33,15 +32,15 @@ export class InnovationCharacteristicService {
   async findOne(id: number): Promise<InnovationCharacteristic> {
     return await this.innovationCharacteristicsRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 
-  async update(
+  /*async update(
     updateUserDtoList: UpdateInnovationCharacteristicDto[],
   ): Promise<InnovationCharacteristic[]> {
     return await this.innovationCharacteristicsRepository.save(
       updateUserDtoList,
     );
-  }
+  }*/
 }

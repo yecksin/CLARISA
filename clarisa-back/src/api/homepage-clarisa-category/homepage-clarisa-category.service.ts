@@ -1,15 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateHomepageClarisaCategoryDto } from './dto/update-homepage-clarisa-category.dto';
 import { HomepageClarisaCategory } from './entities/homepage-clarisa-category.entity';
+import { HomepageClarisaCategoryRepository } from './repositories/homepage-clarisa-category.repository';
 
 @Injectable()
 export class HomepageClarisaCategoryService {
   constructor(
-    @InjectRepository(HomepageClarisaCategory)
-    private generalAcronimRepository: Repository<HomepageClarisaCategory>,
+    private homepageClarisaCategoryRepository: HomepageClarisaCategoryRepository,
   ) {}
 
   async findAll(
@@ -17,12 +15,14 @@ export class HomepageClarisaCategoryService {
   ): Promise<HomepageClarisaCategory[]> {
     switch (option) {
       case FindAllOptions.SHOW_ALL:
-        return await this.generalAcronimRepository.find();
+        return await this.homepageClarisaCategoryRepository.find();
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
-        return await this.generalAcronimRepository.find({
+        return await this.homepageClarisaCategoryRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -31,15 +31,17 @@ export class HomepageClarisaCategoryService {
   }
 
   async findOne(id: number): Promise<HomepageClarisaCategory> {
-    return await this.generalAcronimRepository.findOneBy({
+    return await this.homepageClarisaCategoryRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 
   async update(
     updateGeneralDtoList: UpdateHomepageClarisaCategoryDto[],
   ): Promise<HomepageClarisaCategory[]> {
-    return await this.generalAcronimRepository.save(updateGeneralDtoList);
+    return await this.homepageClarisaCategoryRepository.save(
+      updateGeneralDtoList,
+    );
   }
 }

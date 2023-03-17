@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import 'dotenv/config';
 import { env } from 'process';
+import { join } from 'path';
 
 export const dataSource: DataSource = new DataSource({
   type: 'mysql',
@@ -10,14 +11,18 @@ export const dataSource: DataSource = new DataSource({
   password: env.DB_PASS,
   database: env.DB_NAME,
   entities: [
-    __dirname + '/api/**/*.entity{.ts,.js}',
-    __dirname + '/auth/**/*.entity{.ts,.js}',
+    join(__dirname, '/api/**/*.entity{.ts,.js}'),
+    join(__dirname, '/auth/**/*.entity{.ts,.js}'),
   ],
   synchronize: false,
   migrationsRun: false,
-  bigNumberStrings: false,
   logging: false,
-  migrations: [__dirname + '/migrations/*{.ts,.js}'],
+  migrations: [join(__dirname, '/../migrations/**/*{.ts,.js}')],
   migrationsTableName: 'migrations',
   metadataTableName: 'orm_metadata',
+  bigNumberStrings: false,
+  //charset: 'utf8mb4_0900_ai_ci',
+  extra: {
+    namedPlaceholders: true,
+  },
 });

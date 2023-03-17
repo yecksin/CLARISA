@@ -22,14 +22,14 @@ export class InitiativeService {
   async findOne(id: number): Promise<Initiative> {
     return await this.initiativesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 
   async findOneByOfficialCode(official_code: string): Promise<Initiative> {
     return await this.initiativesRepository.findOneBy({
       official_code,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

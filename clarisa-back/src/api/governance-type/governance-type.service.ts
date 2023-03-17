@@ -1,16 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateGovernanceTypeDto } from './dto/update-governance-type.dto';
 import { GovernanceType } from './entities/governance-type.entity';
+import { GovernanceTypeRepository } from './repositories/governance-type.repository';
 
 @Injectable()
 export class GovernanceTypeService {
-  constructor(
-    @InjectRepository(GovernanceType)
-    private governanceTypesRepository: Repository<GovernanceType>,
-  ) {}
+  constructor(private governanceTypesRepository: GovernanceTypeRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
@@ -22,7 +18,9 @@ export class GovernanceTypeService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.governanceTypesRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -33,7 +31,7 @@ export class GovernanceTypeService {
   async findOne(id: number): Promise<GovernanceType> {
     return await this.governanceTypesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

@@ -9,7 +9,9 @@ describe('CountryOfficeRequestService', () => {
       providers: [CountryOfficeRequestService],
     }).compile();
 
-    service = module.get<CountryOfficeRequestService>(CountryOfficeRequestService);
+    service = module.get<CountryOfficeRequestService>(
+      CountryOfficeRequestService,
+    );
   });
 
   it('should be defined', () => {

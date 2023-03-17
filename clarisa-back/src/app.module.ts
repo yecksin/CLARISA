@@ -15,11 +15,8 @@ import { IntegrationModule } from './shared/integration/integration.module';
 import { User } from './api/user/entities/user.entity';
 import { dataSource } from './ormconfig';
 import { AuthModule } from './auth/auth.module';
-import { UserService } from './api/user/user.service';
-import { APP_GUARD } from '@nestjs/core';
 import { GuardsModule } from './shared/guards/guards.module';
 import { BasicAuthMiddleware } from './shared/guards/basic-auth.middleware';
-import { ApiController } from './api/api.controller';
 
 @Module({
   imports: [
@@ -37,7 +34,7 @@ import { ApiController } from './api/api.controller';
     GuardsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, UserService],
+  providers: [AppService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

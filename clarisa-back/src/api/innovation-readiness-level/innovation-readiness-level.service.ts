@@ -1,16 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { FindOptionsWhere, Repository } from 'typeorm';
+import { FindOptionsWhere } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { SourceOption } from '../../shared/entities/enums/source-options';
 import { UpdateInnovationReadinessLevelDto } from './dto/update-innovation-readiness-level.dto';
 import { InnovationReadinessLevel } from './entities/innovation-readiness-level.entity';
+import { InnovationReadinessLevelRepository } from './repositories/innovation-readiness-level.repository';
 
 @Injectable()
 export class InnovationReadinessLevelService {
   constructor(
-    @InjectRepository(InnovationReadinessLevel)
-    private innovationReadinessLevelRepository: Repository<InnovationReadinessLevel>,
+    private innovationReadinessLevelRepository: InnovationReadinessLevelRepository,
   ) {}
 
   async findAll(
@@ -45,7 +44,9 @@ export class InnovationReadinessLevelService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
           ...whereClause,
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         return await this.innovationReadinessLevelRepository.find({
           where: whereClause,
@@ -58,7 +59,7 @@ export class InnovationReadinessLevelService {
   async findOne(id: number): Promise<InnovationReadinessLevel> {
     return await this.innovationReadinessLevelRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

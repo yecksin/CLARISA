@@ -22,7 +22,7 @@ export class UnitService {
   async findOne(id: number): Promise<Unit> {
     return await this.unitsRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

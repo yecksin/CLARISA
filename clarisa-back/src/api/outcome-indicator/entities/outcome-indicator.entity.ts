@@ -1,22 +1,30 @@
-import { ActionAreaOutcomeIndicator } from 'src/api/action-area-outcome-indicator/entities/action-area-outcome-indicator.entity';
+import { Exclude } from 'class-transformer';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { ActionAreaOutcomeIndicator } from '../../action-area-outcome-indicator/entities/action-area-outcome-indicator.entity';
 
 @Entity('outcome_indicators')
-export class OutcomeIndicator extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+export class OutcomeIndicator {
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 20, nullable: true })
   smo_code: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   outcome_indicator_statement: string;
 
-  //relations
+  //object relations
+
   @OneToMany(
     () => ActionAreaOutcomeIndicator,
     (aaoi) => aaoi.action_area_outcome_object,
   )
   action_area_outcome_indicators: ActionAreaOutcomeIndicator[];
+
+  //auditable fields
+
+  @Exclude()
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

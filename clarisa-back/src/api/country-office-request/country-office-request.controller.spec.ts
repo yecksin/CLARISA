@@ -11,7 +11,9 @@ describe('CountryOfficeRequestController', () => {
       providers: [CountryOfficeRequestService],
     }).compile();
 
-    controller = module.get<CountryOfficeRequestController>(CountryOfficeRequestController);
+    controller = module.get<CountryOfficeRequestController>(
+      CountryOfficeRequestController,
+    );
   });
 
   it('should be defined', () => {

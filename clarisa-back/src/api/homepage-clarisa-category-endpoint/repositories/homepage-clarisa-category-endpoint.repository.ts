@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, IsNull, Repository } from 'typeorm';
 import { HomepageClarisaCategory } from '../../homepage-clarisa-category/entities/homepage-clarisa-category.entity';
+import { HomepageClarisaCategoryRepository } from '../../homepage-clarisa-category/repositories/homepage-clarisa-category.repository';
 import { CategoryEndpointDto } from '../dto/category-endpoints.dto';
 import { HomepageClarisaCategoryEndpoint } from '../entities/homepage-clarisa-category-endpoint.entity';
 
@@ -9,8 +9,7 @@ import { HomepageClarisaCategoryEndpoint } from '../entities/homepage-clarisa-ca
 export class HomepageClarisaCategoryEndpointRepository extends Repository<HomepageClarisaCategoryEndpoint> {
   constructor(
     private dataSource: DataSource,
-    @InjectRepository(HomepageClarisaCategory)
-    private categoryRepository: Repository<HomepageClarisaCategory>,
+    private categoryRepository: HomepageClarisaCategoryRepository,
   ) {
     super(HomepageClarisaCategoryEndpoint, dataSource.createEntityManager());
     this.categoryRepository = categoryRepository;
@@ -27,7 +26,7 @@ export class HomepageClarisaCategoryEndpointRepository extends Repository<Homepa
       await this.categoryRepository.find({
         where: {
           parent_id: parent_category_id ? parent_category_id : IsNull(),
-          is_active: true,
+          auditableFields: { is_active: true },
         },
       });
 

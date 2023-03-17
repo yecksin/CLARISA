@@ -1,26 +1,39 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Exclude } from 'class-transformer';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { SdgTarget } from '../../sdg-target/entities/sdg-target.entity';
 
 @Entity('sustainable_development_goals')
-export class Sdg extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+export class Sdg {
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'bigint', nullable: true })
   smo_code: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 10, nullable: true })
+  financial_code: string;
+
+  @Column({ type: 'text', nullable: true })
   short_name: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   full_name: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   icon: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   description: string;
 
-  @Column()
-  financial_code: string;
+  //object relations
+
+  @OneToMany(() => SdgTarget, (sdgt) => sdgt.sdg_object)
+  sdg_target_array: SdgTarget[];
+
+  //auditable fields
+
+  @Exclude()
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

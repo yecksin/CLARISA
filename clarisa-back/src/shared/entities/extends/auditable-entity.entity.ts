@@ -1,46 +1,39 @@
 import { Exclude } from 'class-transformer';
-import { User } from 'src/api/user/entities/user.entity';
 import { Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 export abstract class AuditableEntity {
   @Exclude({ toPlainOnly: true })
   @Column()
-  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ type: 'timestamp', nullable: false })
   created_at: Date;
 
   @Exclude({ toPlainOnly: true })
-  @Column()
-  created_by: number;
-
-  @Exclude({ toPlainOnly: true })
-  @Column()
-  @CreateDateColumn({
-    type: 'timestamp',
-    onUpdate: 'CURRENT_TIMESTAMP',
-    nullable: true,
-  })
-  @UpdateDateColumn({
-    type: 'timestamp',
-    onUpdate: 'CURRENT_TIMESTAMP',
-    nullable: true,
-  })
+  @CreateDateColumn({ type: 'timestamp', nullable: true })
+  @UpdateDateColumn({ type: 'timestamp', nullable: true })
   updated_at: Date;
 
   @Exclude({ toPlainOnly: true })
-  @Column()
+  @Column({ type: 'tinyint', width: 1, nullable: false, default: () => '1' })
+  is_active: boolean;
+
+  @Exclude({ toPlainOnly: true })
+  @Column({ type: 'bigint', nullable: false })
+  created_by: number;
+
+  // TODO change nullable: false
+  @Exclude({ toPlainOnly: true })
+  @Column({ type: 'bigint', nullable: true })
   updated_by: number;
 
   @Exclude({ toPlainOnly: true })
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   modification_justification: string;
 
-  @Exclude({ toPlainOnly: true })
-  @Column({ type: 'tinyint' })
-  is_active: boolean;
+  //object "relations"
 
   @Exclude()
-  created_by_object: User;
+  created_by_object: any;
 
   @Exclude()
-  updated_by_object: User;
+  updated_by_object: any;
 }

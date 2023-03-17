@@ -11,7 +11,6 @@ import {
   Body,
   Patch,
 } from '@nestjs/common';
-import { Request } from 'express';
 import { GetUserData } from '../../shared/decorators/user-data.decorator';
 import { RespondRequestDto } from '../../shared/entities/dtos/respond-request.dto';
 import { ResponseDto } from '../../shared/entities/dtos/response-dto';
@@ -34,9 +33,9 @@ export class PartnerRequestController {
   async findAll(
     @Query('status') status: string,
     @Query('source') source: string,
-    @Query('show') show: FindAllOptions
+    @Query('show') show: FindAllOptions,
   ) {
-    return await this.partnerRequestService.findAll(status, source);
+    return await this.partnerRequestService.findAll(status, source, show);
   }
 
   @Get('stadistics')

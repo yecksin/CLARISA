@@ -1,24 +1,31 @@
-import { Expose } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
-import { ImpactAreaIndicator } from '../../impact-area-indicators/entities/impact-area-indicator.entity';
+import { ImpactAreaIndicator } from '../../impact-area-indicator/entities/impact-area-indicator.entity';
 
 @Entity('impact_areas')
-export class ImpactArea extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+export class ImpactArea {
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 100, nullable: true })
   name: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   description: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 10, nullable: true })
   @Expose({ name: 'financialCode' })
   financial_code: string;
 
-  //relations
+  //object relations
+
   @OneToMany(() => ImpactAreaIndicator, (iai) => iai.impact_area_object)
   impact_area_indicators: ImpactAreaIndicator[];
+
+  //auditable fields
+
+  @Exclude()
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

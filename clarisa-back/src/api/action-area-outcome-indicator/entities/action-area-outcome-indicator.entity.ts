@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import {
   Column,
   Entity,
@@ -11,20 +12,23 @@ import { ActionArea } from '../../action-area/entities/action-area.entity';
 import { OutcomeIndicator } from '../../outcome-indicator/entities/outcome-indicator.entity';
 
 @Entity('action_area_outcome_indicators')
-export class ActionAreaOutcomeIndicator extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+export class ActionAreaOutcomeIndicator {
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  //relations
+
+  @Column({ type: 'bigint', nullable: true })
   action_area_outcome_id: number;
 
-  @Column()
+  @Column({ type: 'bigint', nullable: true })
   outcome_indicator_id: number;
 
-  @Column()
+  @Column({ type: 'bigint', nullable: true })
   action_area_id: number;
 
-  //relations
+  //object relations
+
   @ManyToOne(
     () => ActionAreaOutcome,
     (aao) => aao.action_area_outcome_indicators,
@@ -39,4 +43,10 @@ export class ActionAreaOutcomeIndicator extends AuditableEntity {
   @ManyToOne(() => ActionArea, (aao) => aao.action_area_outcome_indicators)
   @JoinColumn({ name: 'action_area_id' })
   action_area_object: ActionArea;
+
+  //auditable fields
+
+  @Exclude()
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

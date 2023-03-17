@@ -2,10 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { InstitutionSimpleDto } from '../institution/dto/institution-simple.dto';
 import { InstitutionDto } from '../institution/dto/institution.dto';
-import { CreateOldInstitutionDto } from './dto/create-old-institution.dto';
 import { UpdateOldInstitutionDto } from './dto/update-old-institution.dto';
 import { OldInstitution } from './entities/old-institution.entity';
-import { OldInstitutionRepository } from './old-institution.repository';
+import { OldInstitutionRepository } from './repositories/old-institution.repository';
 
 @Injectable()
 export class OldInstitutionService {
@@ -39,7 +38,7 @@ export class OldInstitutionService {
   async findOne(id: number): Promise<OldInstitution> {
     return await this.oldInstitutionRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

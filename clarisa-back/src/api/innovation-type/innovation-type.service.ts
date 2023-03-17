@@ -1,17 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { FindOptionsWhere, Repository } from 'typeorm';
+import { FindOptionsWhere } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { SourceOption } from '../../shared/entities/enums/source-options';
 import { UpdateInnovationTypeDto } from './dto/update-innovation-type.dto';
 import { InnovationType } from './entities/innovation-type.entity';
+import { InnovationTypeRepository } from './repositories/innovation-type.repository';
 
 @Injectable()
 export class InnovationTypeService {
-  constructor(
-    @InjectRepository(InnovationType)
-    private innovationTypesRepository: Repository<InnovationType>,
-  ) {}
+  constructor(private innovationTypesRepository: InnovationTypeRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
@@ -45,7 +42,9 @@ export class InnovationTypeService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
           ...whereClause,
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
         return await this.innovationTypesRepository.find({
           where: whereClause,
@@ -58,7 +57,7 @@ export class InnovationTypeService {
   async findOne(id: number): Promise<InnovationType> {
     return await this.innovationTypesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

@@ -1,14 +1,21 @@
+import { Exclude } from 'class-transformer';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 
 @Entity('bi_parameters')
-export class BiParameter extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+export class BiParameter {
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   parameter_name: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   parameter_value: string;
+
+  //auditable fields
+
+  @Exclude()
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

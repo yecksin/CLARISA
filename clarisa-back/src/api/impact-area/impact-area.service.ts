@@ -1,16 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateImpactAreaDto } from './dto/update-impact-area.dto';
 import { ImpactArea } from './entities/impact-area.entity';
+import { ImpactAreaRepository } from './repositories/impact-area.repository';
 
 @Injectable()
 export class ImpactAreaService {
-  constructor(
-    @InjectRepository(ImpactArea)
-    private impactAreasRepository: Repository<ImpactArea>,
-  ) {}
+  constructor(private impactAreasRepository: ImpactAreaRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
@@ -22,7 +18,9 @@ export class ImpactAreaService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.impactAreasRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -33,7 +31,7 @@ export class ImpactAreaService {
   async findOne(id: number): Promise<ImpactArea> {
     return await this.impactAreasRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

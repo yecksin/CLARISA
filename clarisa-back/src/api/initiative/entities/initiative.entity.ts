@@ -1,20 +1,30 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Exclude } from 'class-transformer';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 import { InitiativeStage } from './initiative-status.entity';
 
 @Entity('submission_tool_initiatives')
-export class Initiative extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+export class Initiative {
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   name: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: false })
   short_name: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: false })
   official_code: string;
 
-  initiativeStages: InitiativeStage[];
+  //object relations
+
+  @OneToMany(() => InitiativeStage, (is) => is.initiative_object)
+  initiative_stage_array: InitiativeStage[];
+
+  //auditable fields
+
+  @Exclude()
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

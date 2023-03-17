@@ -1,12 +1,10 @@
 import { Module } from '@nestjs/common';
 import { GeographicScopeService } from './geographic-scope.service';
 import { GeographicScopeController } from './geographic-scope.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { GeographicScope } from './entities/geographic-scope.entity';
+import { GeographicScopeRepository } from './repositories/geographic-scope.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([GeographicScope])],
   controllers: [GeographicScopeController],
-  providers: [GeographicScopeService],
+  providers: [GeographicScopeService, GeographicScopeRepository],
 })
 export class GeographicScopeModule {}

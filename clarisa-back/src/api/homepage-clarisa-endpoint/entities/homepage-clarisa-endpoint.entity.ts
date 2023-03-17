@@ -1,33 +1,48 @@
-import { Transform } from 'class-transformer';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Exclude, Transform } from 'class-transformer';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { HomepageClarisaCategoryEndpoint } from '../../homepage-clarisa-category-endpoint/entities/homepage-clarisa-category-endpoint.entity';
 
 @Entity('hp_clarisa_endpoints')
-export class HomepageClarisaEndpoint extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+export class HomepageClarisaEndpoint {
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   name: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   route: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   http_method: string;
 
-  @Column()
+  @Column({ type: 'text', nullable: true })
   description: string;
 
-  @Column()
+  @Column({ type: 'json', nullable: true })
   @Transform(({ value }) => {
     return value;
   })
   request_json: string;
 
-  @Column()
+  @Column({ type: 'json', nullable: true })
   @Transform(({ value }) => {
     return value;
   })
   response_json: string;
+
+  //object relations
+
+  @OneToMany(
+    () => HomepageClarisaCategoryEndpoint,
+    (hpce) => hpce.endpoint_object,
+  )
+  category_endpoint_array: HomepageClarisaCategoryEndpoint[];
+
+  //auditable fields
+
+  @Exclude()
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

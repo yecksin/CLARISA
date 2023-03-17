@@ -31,7 +31,7 @@ export class ActionAreaOutcomeIndicatorService {
   async findOne(id: number): Promise<ActionAreaOutcomeIndicator> {
     return await this.actionAreaOutcomeIndicatorsRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

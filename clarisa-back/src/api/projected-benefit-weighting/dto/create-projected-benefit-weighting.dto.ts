@@ -1,6 +1,6 @@
-import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
+import { AuditableDto } from '../../../shared/entities/dtos/auditable-dto';
 
-export class CreateProjectedBenefitWeightingDto extends AuditableEntity {
+export class CreateProjectedBenefitWeightingDto extends AuditableDto {
   projected_benefits_id: number;
 
   weight_description_id: number;

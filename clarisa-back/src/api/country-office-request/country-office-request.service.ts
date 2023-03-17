@@ -1,9 +1,6 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
-import e from 'express';
-import { Repository } from 'typeorm';
 import { Country } from '../country/entities/country.entity';
 import { CountryRepository } from '../country/repositories/country.repository';
 import { Institution } from '../institution/entities/institution.entity';
@@ -20,17 +17,17 @@ import { ResponseDto } from '../../shared/entities/dtos/response-dto';
 import { MisOption } from '../../shared/entities/enums/mises-options';
 import { PartnerStatus } from '../../shared/entities/enums/partner-status';
 import { UserData } from '../../shared/interfaces/user-data';
+import { MisRepository } from '../mis/repositories/mis.repository';
+import { UserRepository } from '../user/repositories/user.repository';
 
 @Injectable()
 export class CountryOfficeRequestService {
   constructor(
     private countryOfficeRequestRepository: CountryOfficeRequestRepository,
     private institutionRepository: InstitutionRepository,
-    @InjectRepository(Mis)
-    private misRepository: Repository<Mis>,
+    private misRepository: MisRepository,
     private countryRepository: CountryRepository,
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
+    private userRepository: UserRepository,
   ) {}
 
   async findAll(
@@ -73,7 +70,7 @@ export class CountryOfficeRequestService {
     );
 
     //Basic validations
-    let validationErrors: string[] = (
+    const validationErrors: string[] = (
       await validate(incomingCountryOfficeRequest)
     ).flatMap((e) => {
       const newLocal = Object.values(e.constraints).map((m) => m);
@@ -156,7 +153,7 @@ export class CountryOfficeRequestService {
 
         newCountryOfficeRequest.institution_object = institution;
         newCountryOfficeRequest.mis_object = mis;
-        newCountryOfficeRequest.created_by_object = createdBy;
+        newCountryOfficeRequest.auditableFields.created_by_object = createdBy;
         newCountryOfficeRequest.country_object = c;
 
         return newCountryOfficeRequest;
@@ -186,7 +183,7 @@ export class CountryOfficeRequestService {
     );
 
     //Basic validations
-    let validationErrors: string[] = (
+    const validationErrors: string[] = (
       await validate(respondCountryOfficeRequestDto)
     ).flatMap((e) => {
       const newLocal = Object.values(e.constraints).map((m) => m);
@@ -270,7 +267,7 @@ export class CountryOfficeRequestService {
     updateCountryOfficeRequest.externalUserMail = 'some@mail.com';
 
     //Basic validations
-    let validationErrors: string[] = (
+    const validationErrors: string[] = (
       await validate(updateCountryOfficeRequest)
     ).flatMap((e) => Object.values(e.constraints).map((m) => m));
 
@@ -289,7 +286,7 @@ export class CountryOfficeRequestService {
         id: updateCountryOfficeRequest.id,
       });
 
-    countryOfficeRequest.updated_by_object =
+    countryOfficeRequest.auditableFields.updated_by_object =
       await this.userRepository.findOneBy({
         id: updateCountryOfficeRequest.userId,
       });
@@ -305,7 +302,7 @@ export class CountryOfficeRequestService {
       );
     }
 
-    if (!countryOfficeRequest.is_active) {
+    if (!countryOfficeRequest.auditableFields.is_active) {
       validationErrors.push(
         `The country office request is not active. Please check if it has been accepted or rejected`,
       );
@@ -317,7 +314,7 @@ export class CountryOfficeRequestService {
       );
     }
 
-    if (!countryOfficeRequest.updated_by_object) {
+    if (!countryOfficeRequest.auditableFields.updated_by_object) {
       validationErrors.push(
         `An user with id '${updateCountryOfficeRequest.userId}' could not be found`,
       );

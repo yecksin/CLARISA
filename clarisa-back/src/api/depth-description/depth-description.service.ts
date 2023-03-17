@@ -1,16 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateDepthDescriptionDto } from './dto/update-depth-description.dto';
 import { DepthDescription } from './entities/depth-description.entity';
+import { DepthDescriptionRepository } from './repositories/depth-description.repository';
 
 @Injectable()
 export class DepthDescriptionService {
-  constructor(
-    @InjectRepository(DepthDescription)
-    private depthDescriptionRepository: Repository<DepthDescription>,
-  ) {}
+  constructor(private depthDescriptionRepository: DepthDescriptionRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
@@ -22,7 +18,9 @@ export class DepthDescriptionService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.depthDescriptionRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -33,7 +31,7 @@ export class DepthDescriptionService {
   async findOne(id: number): Promise<DepthDescription> {
     return await this.depthDescriptionRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

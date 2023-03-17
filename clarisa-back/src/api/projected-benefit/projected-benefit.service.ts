@@ -24,7 +24,7 @@ export class ProjectedBenefitService {
   async findOne(id: number): Promise<ProjectedBenefit> {
     return await this.projectedBenefitsRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

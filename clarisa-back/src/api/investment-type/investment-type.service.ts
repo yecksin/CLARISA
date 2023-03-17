@@ -1,16 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateInvestmentTypeDto } from './dto/update-investment-type.dto';
 import { InvestmentType } from './entities/investment-type.entity';
+import { InvestmentTypeRepository } from './repositories/investment-type.repository';
 
 @Injectable()
 export class InvestmentTypeService {
-  constructor(
-    @InjectRepository(InvestmentType)
-    private investmentTypeRepository: Repository<InvestmentType>,
-  ) {}
+  constructor(private investmentTypeRepository: InvestmentTypeRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
@@ -22,7 +18,9 @@ export class InvestmentTypeService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.investmentTypeRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -33,7 +31,7 @@ export class InvestmentTypeService {
   async findOne(id: number): Promise<InvestmentType> {
     return await this.investmentTypeRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

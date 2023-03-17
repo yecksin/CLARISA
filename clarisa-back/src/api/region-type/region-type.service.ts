@@ -1,16 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateRegionTypeDto } from './dto/update-region-type.dto';
 import { RegionType } from './entities/region-type.entity';
+import { RegionTypeRepository } from './repositories/region-type.repository';
 
 @Injectable()
 export class RegionTypeService {
-  constructor(
-    @InjectRepository(RegionType)
-    private regionTypesRepository: Repository<RegionType>,
-  ) {}
+  constructor(private regionTypesRepository: RegionTypeRepository) {}
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
@@ -22,7 +18,9 @@ export class RegionTypeService {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.regionTypesRepository.find({
           where: {
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -33,7 +31,7 @@ export class RegionTypeService {
   async findOne(id: number): Promise<RegionType> {
     return await this.regionTypesRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

@@ -1,9 +1,9 @@
+import { Exclude } from 'class-transformer';
 import {
   Column,
   Entity,
+  Index,
   JoinColumn,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -13,45 +13,42 @@ import { CountryOfficeRequest } from '../../country-office-request/entities/coun
 import { Geoposition } from '../../geoposition/entities/geoposition.entity';
 import { InstitutionLocation } from '../../institution/entities/institution-location.entity';
 import { PartnerRequest } from '../../partner-request/entities/partner-request.entity';
-import { Region } from '../../region/entities/region.entity';
+import { WorkpackageCountry } from '../../workpackage/entities/workpackage-country.entity';
+import { CountryRegion } from './country-region.entity';
 
 @Entity('countries')
-export class Country extends AuditableEntity {
-  @PrimaryGeneratedColumn()
+export class Country {
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column()
+  @Column({ type: 'text', nullable: false })
   name: string;
 
-  @Column()
+  @Index({ unique: true })
+  @Column({ type: 'varchar', length: 64, nullable: false })
   iso_alpha_2: string;
 
-  @Column()
+  @Index({ unique: true })
+  @Column({ type: 'varchar', length: 64, nullable: false })
   iso_alpha_3: string;
 
-  @Column()
+  @Index({ unique: true })
+  @Column({ type: 'bigint', nullable: false })
   iso_numeric: number;
 
-  @Column()
+  //relations
+
+  @Column({ type: 'bigint', nullable: true })
   geoposition_id: number;
+
+  //object relations
 
   @ManyToOne(() => Geoposition)
   @JoinColumn({ name: 'geoposition_id' })
   geoposition_object: Geoposition;
 
-  @ManyToMany(() => Region, (region) => region.countries)
-  @JoinTable({
-    name: 'country_regions',
-    joinColumn: {
-      name: 'country_id',
-      referencedColumnName: 'id',
-    },
-    inverseJoinColumn: {
-      name: 'region_id',
-      referencedColumnName: 'id',
-    },
-  })
-  regions: Region[];
+  @OneToMany(() => CountryRegion, (cr) => cr.country_object)
+  country_region_array: CountryRegion[];
 
   @OneToMany(() => InstitutionLocation, (il) => il.country_object)
   institution_locations: InstitutionLocation[];
@@ -61,4 +58,13 @@ export class Country extends AuditableEntity {
 
   @OneToMany(() => CountryOfficeRequest, (cof) => cof.country_object)
   country_office_requests: CountryOfficeRequest[];
+
+  @OneToMany(() => WorkpackageCountry, (wpc) => wpc.country_object)
+  work_package_country_array: WorkpackageCountry[];
+
+  //auditable fields
+
+  @Exclude()
+  @Column(() => AuditableEntity, { prefix: '' })
+  auditableFields: AuditableEntity;
 }

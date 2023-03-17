@@ -1,17 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { FindOptionsWhere, In, Repository } from 'typeorm';
+import { FindOptionsWhere, In } from 'typeorm';
 import { CgiarEntityTypeEnum } from '../../shared/entities/enums/cgiar-entity-types';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateCgiarEntityTypeDto } from './dto/update-cgiar-entity-type.dto';
 import { CgiarEntityType } from './entities/cgiar-entity-type.entity';
+import { CgiarEntityTypeRepository } from './repositories/cgiar-entity-type.repository';
 
 @Injectable()
 export class CgiarEntityTypeService {
-  constructor(
-    @InjectRepository(CgiarEntityType)
-    private cgiarEntityTypeRepository: Repository<CgiarEntityType>,
-  ) {}
+  constructor(private cgiarEntityTypeRepository: CgiarEntityTypeRepository) {}
 
   private readonly defaultTypes = [
     CgiarEntityTypeEnum.CRP,
@@ -38,7 +35,9 @@ export class CgiarEntityTypeService {
         return await this.cgiarEntityTypeRepository.find({
           where: {
             ...this.whereClause,
-            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            auditableFields: {
+              is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+            },
           },
         });
       default:
@@ -49,7 +48,7 @@ export class CgiarEntityTypeService {
   async findOne(id: number): Promise<CgiarEntityType> {
     return await this.cgiarEntityTypeRepository.findOneBy({
       id,
-      is_active: true,
+      auditableFields: { is_active: true },
     });
   }
 

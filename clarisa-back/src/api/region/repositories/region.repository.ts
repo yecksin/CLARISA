@@ -25,14 +25,18 @@ export class RegionRepository extends Repository<Region> {
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         whereClause = {
           ...whereClause,
-          is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          auditableFields: {
+            is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
+          },
         };
     }
     const regions: Region[] = await this.find({
       where: whereClause,
       relations: {
         parent_object: true,
-        countries: true,
+        country_region_array: {
+          country_object: true,
+        },
         region_type_object: true,
       },
     });
@@ -62,13 +66,13 @@ export class RegionRepository extends Repository<Region> {
         }
 
         if (regionType === RegionTypeEnum.CGIAR_REGION) {
-          regionDto.countries = r.countries.map((c) => {
+          regionDto.countries = r.country_region_array.map((c) => {
             const countryDto: SimpleCountryDto = new SimpleCountryDto();
 
-            countryDto.code = c.iso_numeric;
-            countryDto.isoAlpha2 = c.iso_alpha_2;
-            countryDto.isoAlpha3 = c.iso_alpha_3;
-            countryDto.name = c.name;
+            countryDto.code = c.country_object.iso_numeric;
+            countryDto.isoAlpha2 = c.country_object.iso_alpha_2;
+            countryDto.isoAlpha3 = c.country_object.iso_alpha_3;
+            countryDto.name = c.country_object.name;
 
             return countryDto;
           });

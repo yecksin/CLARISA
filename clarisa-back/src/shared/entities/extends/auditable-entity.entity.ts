@@ -1,7 +1,7 @@
 import { Exclude } from 'class-transformer';
 import { Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
-export abstract class AuditableEntity {
+export class AuditableEntity {
   @Exclude({ toPlainOnly: true })
   @Column()
   @CreateDateColumn({ type: 'timestamp', nullable: false })

@@ -19,6 +19,7 @@ import { PartnerStatus } from '../../shared/entities/enums/partner-status';
 import { UserData } from '../../shared/interfaces/user-data';
 import { MisRepository } from '../mis/repositories/mis.repository';
 import { UserRepository } from '../user/repositories/user.repository';
+import { AuditableEntity } from '../../shared/entities/extends/auditable-entity.entity';
 
 @Injectable()
 export class CountryOfficeRequestService {
@@ -150,6 +151,7 @@ export class CountryOfficeRequestService {
       countries.map(async (c) => {
         const newCountryOfficeRequest: CountryOfficeRequest =
           new CountryOfficeRequest();
+        newCountryOfficeRequest.auditableFields = new AuditableEntity();
 
         newCountryOfficeRequest.institution_object = institution;
         newCountryOfficeRequest.mis_object = mis;

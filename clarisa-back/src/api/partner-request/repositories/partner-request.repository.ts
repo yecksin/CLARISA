@@ -30,6 +30,7 @@ import { InstitutionType } from '../../institution-type/entities/institution-typ
 import { CountryRepository } from '../../country/repositories/country.repository';
 import { InstitutionTypeRepository } from '../../institution-type/repositories/institution-type.repository';
 import { FindAllOptions } from '../../../shared/entities/enums/find-all-options';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 
 @Injectable()
 export class PartnerRequestRepository extends Repository<PartnerRequest> {
@@ -471,6 +472,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
 
     for (const partnerRequestBulkIterator of partnerRequestBulk.listPartnerRequest) {
       let partnerRequests: PartnerRequest = new PartnerRequest();
+      partnerRequests.auditableFields = new AuditableEntity();
       partnerRequests.partner_name = partnerRequestBulkIterator.name;
       partnerRequests.acronym = partnerRequestBulkIterator.acronym;
       partnerRequests.web_page = partnerRequestBulkIterator.website_link;

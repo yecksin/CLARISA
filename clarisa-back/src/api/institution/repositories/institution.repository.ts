@@ -18,6 +18,7 @@ import { InstitutionDto } from '../dto/institution.dto';
 import { InstitutionLocation } from '../entities/institution-location.entity';
 import { Institution } from '../entities/institution.entity';
 import { InstitutionLocationRepository } from './institution-location.repository';
+import { AuditableEntity } from '../../../shared/entities/extends/auditable-entity.entity';
 
 @Injectable()
 export class InstitutionRepository extends Repository<Institution> {
@@ -290,6 +291,7 @@ export class InstitutionRepository extends Repository<Institution> {
     createBy: number,
   ) {
     const institutionLocation: InstitutionLocation = new InstitutionLocation();
+    institutionLocation.auditableFields = new AuditableEntity();
 
     institutionLocation.country_id = countryAndInstitution;
     institutionLocation.is_headquater = isHQ;
@@ -304,6 +306,7 @@ export class InstitutionRepository extends Repository<Institution> {
     createBy: number,
   ) {
     let institution: Institution = new Institution();
+    institution.auditableFields = new AuditableEntity();
     institution.acronym = BulkInstitutions.acronym;
     institution.name = BulkInstitutions.partner_name;
     institution.website_link = BulkInstitutions.web_page;

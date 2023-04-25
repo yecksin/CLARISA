@@ -61,6 +61,9 @@ import { EndOfInitiativeOutcomeModule } from './end-of-initiative-outcome/end-of
 import { ImpactAreaIndicatorModule } from './impact-area-indicator/impact-area-indicator.module';
 import { SourceModule } from './source/source.module';
 import { PermissionModule } from './permission/permission.module';
+import path from 'path';
+import { SecondOrderAdministrativeDivisionModule } from './second-order-administrative-division/second-order-administrative-division.module';
+import { FirstOrderAdministrativeDivisionModule } from './first-order-administrative-division/first-order-administrative-division.module';
 
 export const apiRoutes = [
   {
@@ -315,4 +318,12 @@ export const apiRoutes = [
     path: 'permissions',
     module: PermissionModule,
   },
+  {
+    path: 'first-order-administrative-division',
+    module: FirstOrderAdministrativeDivisionModule
+  },
+  {
+    path: 'second-order-administrative-division',
+    module: SecondOrderAdministrativeDivisionModule
+  }
 ];

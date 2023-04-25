@@ -455,9 +455,11 @@
       [showCurrentPageReport]="true"
       [rowsPerPageOptions]="[10, 25, 50]"
       [globalFilterFields]="findColumns"
-      selectionMode="single"
+      paginatorDropdownAppendTo="body"
+      style="height: 100%;"
       styleClass="p-datatable-gridlines"
       [loading]="loading"
+      
     >
       <ng-template
         pTemplate="caption"

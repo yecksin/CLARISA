@@ -18,6 +18,7 @@ import { FindAllOptions } from 'src/shared/entities/enums/find-all-options';
 import { InstitutionTypeRepository } from '../institution-type/repositories/institution-type.repository';
 import { MisRepository } from '../mis/repositories/mis.repository';
 import { UserRepository } from '../user/repositories/user.repository';
+import { AuditableEntity } from '../../shared/entities/extends/auditable-entity.entity';
 
 @Injectable()
 export class PartnerRequestService {
@@ -89,7 +90,7 @@ export class PartnerRequestService {
 
     //Comprehensive validations
     const newPartnerRequest: PartnerRequest = new PartnerRequest();
-
+    newPartnerRequest.auditableFields = new AuditableEntity();
     newPartnerRequest.institution_type_object =
       await this.institutionTypeRepository.findOne({
         where: { id: incomingPartnerRequest.institutionTypeCode },

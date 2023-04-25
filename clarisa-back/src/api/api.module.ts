@@ -65,6 +65,8 @@ import { EndOfInitiativeOutcomeModule } from './end-of-initiative-outcome/end-of
 import { ImpactAreaIndicatorModule } from './impact-area-indicator/impact-area-indicator.module';
 import { SourceModule } from './source/source.module';
 import { PermissionModule } from './permission/permission.module';
+import { SecondOrderAdministrativeDivisionModule } from './second-order-administrative-division/second-order-administrative-division.module';
+import { FirstOrderAdministrativeDivisionModule } from './first-order-administrative-division/first-order-administrative-division.module';
 
 @Module({
   controllers: [ApiController],
@@ -134,6 +136,8 @@ import { PermissionModule } from './permission/permission.module';
     BiParameterModule,
     OldInstitutionModule,
     PermissionModule,
+    SecondOrderAdministrativeDivisionModule,
+    FirstOrderAdministrativeDivisionModule,
   ],
 })
 export class ApiModule {}

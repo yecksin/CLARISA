@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { FindOptionsOrder, FindOptionsWhere, In } from 'typeorm';
-import { CgiarEntityTypeEnum } from '../../shared/entities/enums/cgiar-entity-types';
+import { CgiarEntityTypeOption } from '../../shared/entities/enums/cgiar-entity-types';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateCgiarEntityDto } from './dto/update-cgiar-entity.dto';
 import { CgiarEntity } from './entities/cgiar-entity.entity';
@@ -15,13 +15,13 @@ export class CgiarEntityService {
   };
 
   private readonly commonTypes = [
-    CgiarEntityTypeEnum.CRP,
-    CgiarEntityTypeEnum.PLATFORM,
-    CgiarEntityTypeEnum.CENTER,
-    CgiarEntityTypeEnum.INITIATIVES,
-    CgiarEntityTypeEnum.OFFICES,
-    CgiarEntityTypeEnum.ONE_CGIAR_PLATFORM,
-  ];
+    CgiarEntityTypeOption.CRP,
+    CgiarEntityTypeOption.PLATFORM,
+    CgiarEntityTypeOption.CENTER,
+    CgiarEntityTypeOption.INITIATIVES,
+    CgiarEntityTypeOption.OFFICES,
+    CgiarEntityTypeOption.ONE_CGIAR_PLATFORM,
+  ].map((cet) => cet.entity_type_id);
 
   private readonly whereClause: FindOptionsWhere<CgiarEntity> = {
     cgiar_entity_type_object: {
@@ -33,18 +33,30 @@ export class CgiarEntityService {
 
   async findAll(
     option: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
+    type?: string,
   ): Promise<CgiarEntity[]> {
+    if (type && !CgiarEntityTypeOption.getfromPath(type)) {
+      throw Error('?!');
+    }
+
+    const typeOption: CgiarEntityTypeOption =
+      CgiarEntityTypeOption.getfromPath(type);
+
     switch (option) {
       case FindAllOptions.SHOW_ALL:
         return await this.cgiarEntityRepository.find({
-          where: this.whereClause,
+          where: typeOption
+            ? { cgiar_entity_type_object: { id: typeOption.entity_type_id } }
+            : this.whereClause,
           order: this.orderClause,
         });
       case FindAllOptions.SHOW_ONLY_ACTIVE:
       case FindAllOptions.SHOW_ONLY_INACTIVE:
         return await this.cgiarEntityRepository.find({
           where: {
-            ...this.whereClause,
+            ...(typeOption
+              ? { cgiar_entity_type_object: { id: typeOption.entity_type_id } }
+              : this.whereClause),
             auditableFields: {
               is_active: option === FindAllOptions.SHOW_ONLY_ACTIVE,
             },

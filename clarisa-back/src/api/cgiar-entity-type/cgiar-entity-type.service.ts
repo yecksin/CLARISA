@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { FindOptionsWhere, In } from 'typeorm';
-import { CgiarEntityTypeEnum } from '../../shared/entities/enums/cgiar-entity-types';
+import { CgiarEntityTypeOption } from '../../shared/entities/enums/cgiar-entity-types';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
 import { UpdateCgiarEntityTypeDto } from './dto/update-cgiar-entity-type.dto';
 import { CgiarEntityType } from './entities/cgiar-entity-type.entity';
@@ -11,12 +11,12 @@ export class CgiarEntityTypeService {
   constructor(private cgiarEntityTypeRepository: CgiarEntityTypeRepository) {}
 
   private readonly defaultTypes = [
-    CgiarEntityTypeEnum.CRP,
-    CgiarEntityTypeEnum.PLATFORM,
-    CgiarEntityTypeEnum.CENTER,
-    CgiarEntityTypeEnum.INITIATIVES,
-    CgiarEntityTypeEnum.ONE_CGIAR_PLATFORM,
-  ];
+    CgiarEntityTypeOption.CRP,
+    CgiarEntityTypeOption.PLATFORM,
+    CgiarEntityTypeOption.CENTER,
+    CgiarEntityTypeOption.INITIATIVES,
+    CgiarEntityTypeOption.ONE_CGIAR_PLATFORM,
+  ].map((cet) => cet.entity_type_id);
 
   private readonly whereClause: FindOptionsWhere<CgiarEntityType> = {
     id: In(this.defaultTypes),

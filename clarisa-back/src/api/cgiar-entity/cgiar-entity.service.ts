@@ -20,6 +20,7 @@ export class CgiarEntityService {
     CgiarEntityTypeEnum.CENTER,
     CgiarEntityTypeEnum.INITIATIVES,
     CgiarEntityTypeEnum.OFFICES,
+    CgiarEntityTypeEnum.ONE_CGIAR_PLATFORM,
   ];
 
   private readonly whereClause: FindOptionsWhere<CgiarEntity> = {

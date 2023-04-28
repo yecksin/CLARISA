@@ -17,6 +17,7 @@ import { UpdateCgiarEntityDto } from './dto/update-cgiar-entity.dto';
 import { Response } from 'express';
 import { CgiarEntity } from './entities/cgiar-entity.entity';
 import { FindAllOptions } from '../../shared/entities/enums/find-all-options';
+import { CgiarEntityTypeOption } from '../../shared/entities/enums/cgiar-entity-types';
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
@@ -24,8 +25,11 @@ export class CgiarEntityController {
   constructor(private readonly cgiarEntityService: CgiarEntityService) {}
 
   @Get()
-  async findAll(@Query('show') show: FindAllOptions) {
-    return await this.cgiarEntityService.findAll(show);
+  async findAll(
+    @Query('show') show: FindAllOptions,
+    @Query('type') type: string,
+  ) {
+    return await this.cgiarEntityService.findAll(show, type);
   }
 
   @Get('get/:id')

@@ -4,6 +4,7 @@ import {
   FindOptionsRelations,
   FindOptionsWhere,
   IsNull,
+  Not,
   Repository,
 } from 'typeorm';
 import { RespondRequestDto } from '../../../shared/entities/dtos/respond-request.dto';
@@ -81,7 +82,9 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
     show: FindAllOptions = FindAllOptions.SHOW_ONLY_ACTIVE,
   ): Promise<PartnerRequestDto[]> {
     const partnerRequestDtos: PartnerRequestDto[] = [];
-    let whereClause: FindOptionsWhere<PartnerRequest> = {};
+    let whereClause: FindOptionsWhere<PartnerRequest> = {
+      partner_request_id: Not(IsNull()),
+    };
     const incomingMis = MisOption.getfromPath(mis);
     const incomingStatus = PartnerStatus.getfromPath(status);
 
@@ -123,7 +126,7 @@ export class PartnerRequestRepository extends Repository<PartnerRequest> {
       case PartnerStatus.REJECTED.path:
         whereClause = {
           ...whereClause,
-          accepted: status === incomingStatus.path,
+          accepted: incomingStatus === PartnerStatus.ACCEPTED,
         };
         break;
     }

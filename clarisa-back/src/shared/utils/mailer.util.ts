@@ -212,10 +212,7 @@ export class MailUtil {
         'g.martinez@cgiar.org',
         's.galvez@cgiar.org',
         'j.cadavid@cgiar.org',
-        'j.m.morales@cgiar.org',
         'h.f.tobon@cgiar.org',
-        'c.castiblanco@cgiar.org',
-        'G.Patarnello@cgiar.org',
       ];
     }
 
@@ -245,23 +242,5 @@ export class MailUtil {
     return this.getTransporterInstance()
       .then((transporter) => transporter.sendMail(options))
       .catch((err) => err);
-  }
-
-  private testing_mail(transporter: nodemailer.Transporter) {
-    // send mail with defined transport object
-    transporter
-      .sendMail({
-        from: env.SUPPORT_EMAIL, // sender address
-        to: 'j.d.munoz@cgiar.org, g.martinez@cgiar.org', // list of receivers
-        subject: 'Hello ✔', // Subject line
-        text: 'Hello world?', // plain text body
-        html: '<b>Hello world?</b>', // html body
-      })
-      .then((info) => {
-        console.log('Message sent: %s', info.messageId);
-        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-      })
-      .catch((err) => console.error(err))
-      .finally(() => transporter.close());
   }
 }
